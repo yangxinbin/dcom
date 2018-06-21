@@ -40,17 +40,17 @@
         android:id="@+id/editText_old"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
         android:background="@null"
         android:textColor="@color/blue"
         android:ems="8"
         android:inputType="textPersonName"
         android:text=""
-        android:layout_alignTop="@+id/imageView6"
+        android:layout_above="@+id/editText_new"
         android:layout_toLeftOf="@+id/imageView_change_exit"
         android:layout_toStartOf="@+id/imageView_change_exit"
-        android:layout_marginTop="34dp" />
+        android:layout_marginBottom="33dp" />
 
     <EditText
         android:id="@+id/editText_new"
@@ -72,7 +72,7 @@
         android:layout_alignBottom="@+id/imageView6"
         android:layout_alignLeft="@+id/editText_new"
         android:layout_alignStart="@+id/editText_new"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="36dp"
         android:background="@null"
         android:textColor="@color/blue"
         android:ems="8"
