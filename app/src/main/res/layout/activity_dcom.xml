@@ -10,20 +10,23 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="33dp"
         app:srcCompat="@drawable/screen" />
 
     <ImageView
         android:id="@+id/event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/event" />
 
@@ -39,8 +42,9 @@
         android:id="@+id/change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_alignRight="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:layout_alignTop="@+id/faq"
         app:srcCompat="@drawable/change" />
 
@@ -48,26 +52,26 @@
         android:id="@+id/scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/faq"
+        android:layout_alignBottom="@+id/rotor"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginBottom="60dp"
         app:srcCompat="@drawable/scan" />
 
     <ImageView
         android:id="@+id/rotor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scan"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/event"
-        android:layout_toRightOf="@+id/event"
+        android:layout_alignStart="@+id/scan"
         app:srcCompat="@drawable/rotor" />
 
     <ImageView
         android:id="@+id/mine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/faq"
-        android:layout_toRightOf="@+id/faq"
+        android:layout_alignEnd="@+id/scan"
+        android:layout_alignRight="@+id/scan"
+        android:layout_alignTop="@+id/rotor"
         app:srcCompat="@drawable/mine" />
 </RelativeLayout>

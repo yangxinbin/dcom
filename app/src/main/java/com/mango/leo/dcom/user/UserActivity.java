@@ -47,6 +47,9 @@ public class UserActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.textView_changepwd:
+                intent = new Intent(this, ChangePwdActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.exit:
 
