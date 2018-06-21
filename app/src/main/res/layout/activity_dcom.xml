@@ -27,8 +27,8 @@
         android:layout_below="@+id/imageView"
         android:layout_toLeftOf="@+id/scan"
         android:layout_toStartOf="@+id/scan"
-        android:layout_marginRight="21dp"
-        android:layout_marginEnd="21dp" />
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp" />
 
     <ImageView
         android:id="@+id/faq"
@@ -42,11 +42,12 @@
         android:id="@+id/change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
+        app:srcCompat="@drawable/change"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_alignTop="@+id/faq"
-        app:srcCompat="@drawable/change" />
+        android:layout_toRightOf="@+id/scan"
+        android:layout_toEndOf="@+id/scan" />
 
     <ImageView
         android:id="@+id/scan"
