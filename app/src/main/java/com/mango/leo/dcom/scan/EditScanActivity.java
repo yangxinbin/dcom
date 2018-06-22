@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.rotor.BasicActivity;
 import com.mango.leo.dcom.zxing.activity.CaptureActivity;
 
 import butterknife.Bind;
@@ -43,6 +44,9 @@ public class EditScanActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.imageView_sure:
+                intent = new Intent(this, BasicActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.imageView_scan:
                 intent = new Intent(this, CaptureActivity.class);
