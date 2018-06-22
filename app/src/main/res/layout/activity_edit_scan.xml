@@ -66,5 +66,5 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 </RelativeLayout>
