@@ -3,10 +3,12 @@ package com.mango.leo.dcom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.style.EasyEditSpan;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.user.UserActivity;
 
 import butterknife.Bind;
@@ -30,7 +32,7 @@ public class DcomActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dcom);
         ButterKnife.bind(this);
@@ -49,6 +51,9 @@ public class DcomActivity extends AppCompatActivity {
             case R.id.scan:
                 break;
             case R.id.rotor:
+                intent = new Intent(this, EditScanActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.mine:
                 intent = new Intent(this, UserActivity.class);
