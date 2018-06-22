@@ -68,6 +68,7 @@ public class UserActivity extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             Intent intent = new Intent(this, DcomActivity.class);
             startActivity(intent);
+            finish();
         }
         return super.onKeyDown(keyCode, event);
     }

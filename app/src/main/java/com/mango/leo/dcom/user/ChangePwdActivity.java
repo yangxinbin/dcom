@@ -53,6 +53,7 @@ public class ChangePwdActivity extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
+            finish();
         }
         return super.onKeyDown(keyCode, event);
     }
