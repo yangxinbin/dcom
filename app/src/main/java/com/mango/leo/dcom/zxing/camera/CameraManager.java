@@ -207,4 +207,11 @@ public class CameraManager {
 		}
 		return null;
 	}
+	/**
+	 * 获取相机的方法
+	 * @return camera
+	 */
+	public Camera getCamera(){
+		return camera;
+	}
 }
