@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DcomActivity"></activity>
+        <activity android:name=".DcomActivity" />
         <activity android:name=".user.UserActivity" />
         <activity android:name=".scan.EditScanActivity" />
         <activity android:name=".user.ChangePwdActivity" />
@@ -37,7 +37,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".rotor.BasicActivity"></activity>
+        <activity android:name=".rotor.BasicActivity" />
+        <activity android:name=".rotor.XunJianActivity"></activity>
     </application>
 
 </manifest>
