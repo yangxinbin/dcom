@@ -22,13 +22,13 @@
         android:id="@+id/event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:srcCompat="@drawable/event"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView"
-        android:layout_toLeftOf="@+id/scan"
-        android:layout_toStartOf="@+id/scan"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="13dp"
+        app:srcCompat="@drawable/event" />
 
     <ImageView
         android:id="@+id/faq"
@@ -42,18 +42,17 @@
         android:id="@+id/change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/change"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/faq"
-        android:layout_toRightOf="@+id/scan"
-        android:layout_toEndOf="@+id/scan" />
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/change" />
 
     <ImageView
         android:id="@+id/scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         app:srcCompat="@drawable/scan"
         android:layout_above="@+id/rotor"
         android:layout_centerHorizontal="true" />
@@ -65,7 +64,7 @@
         android:layout_alignLeft="@+id/scan"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/scan"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/rotor" />
 
     <ImageView
@@ -73,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/scan"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignRight="@+id/scan"
         android:layout_alignTop="@+id/rotor"
         app:srcCompat="@drawable/mine" />
