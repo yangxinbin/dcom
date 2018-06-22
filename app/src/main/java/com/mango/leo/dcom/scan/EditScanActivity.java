@@ -52,6 +52,7 @@ public class EditScanActivity extends AppCompatActivity {
             case R.id.imageView_scan:
                 intent = new Intent(this, CaptureActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

@@ -46,7 +46,7 @@
                 cpv:roundWidth="8dp"
                 cpv:textSize="@dimen/title"
                 cpv:roundProgressColor="@color/red"
-                android:layout_weight="3" />
+                android:layout_weight="4" />
 
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="0dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 style="0"
                 cpv:roundColor="@color/colorCirclebg"
                 cpv:roundWidth="8dp"
@@ -102,7 +102,7 @@
                 android:layout_height="0dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 style="0"
                 cpv:roundColor="@color/colorCirclebg"
                 cpv:roundWidth="8dp"
