@@ -64,6 +64,7 @@
         android:layout_marginBottom="41dp"
         android:background="@null"
         android:ems="10"
+        android:textColor="@color/blue"
         android:gravity="center"
         android:inputType="textPersonName"
         android:text="" />
