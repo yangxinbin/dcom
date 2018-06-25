@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/user_message" />
 
     <ImageView
-        android:id="@+id/exit_x"
+        android:id="@+id/exit_cx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/imageView8"
@@ -47,18 +47,7 @@
                 android:layout_alignParentTop="true"
                 app:srcCompat="@drawable/group" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView_c"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="30dp"
-                android:textSize="@dimen/title"
-                android:text="修改密码"
-                android:id="@+id/textView_changepwd" />
-
             <EditText
-                android:enabled="false"
                 android:id="@+id/editText_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,16 +79,16 @@
                 android:text="" />
 
             <EditText
-                android:enabled="false"
                 android:id="@+id/editText_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/textView_changepwd"
                 android:layout_alignLeft="@+id/editText_group"
                 android:layout_alignStart="@+id/editText_group"
-                android:layout_marginBottom="23dp"
+                android:layout_below="@+id/editText_group"
+                android:layout_marginTop="30dp"
                 android:background="@null"
                 android:ems="8"
+                android:enabled="false"
                 android:inputType="textPersonName"
                 android:text=""
                 android:textColor="@color/blue" />
@@ -109,7 +98,7 @@
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/exit"
+        android:id="@+id/Change_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
