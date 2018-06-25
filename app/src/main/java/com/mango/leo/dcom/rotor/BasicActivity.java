@@ -156,7 +156,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == adapter.getItemCount()
                     && adapter.isShowFooter()) {//加载判断条件 手指离开屏幕 到了footeritem
-                int count = adapter.getItemCount();
+/*                int count = adapter.getItemCount();
                 int i;
                 for (i = count; i < count + 5; i++) {
                     if (mDataAll != null && i >= newSize) {//到最后
@@ -172,7 +172,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                         break;
                     }
                     adapter.addItem(mDataAll.get(i));//addItem里面记得要notifyDataSetChanged 否则第一次加载不会显示数据
-                }
+                }*/
             }
         }
     };
@@ -258,10 +258,6 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                             mData.clear();
                         }
                         refreshRo.setRefreshing(false);
-                        if (mData != null || mDataAll !=null){
-                            mData.clear();
-                            mDataAll.clear();
-                        }
                         loadHistoryLog(rotorBean);//请求刷新
                     }
                 }, 2000);
@@ -274,18 +270,22 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void loadHistoryLog(RotorBean rotorBean) {
+        if (mData != null || mDataAll !=null){
+            mData.clear();
+           // mDataAll.clear();
+        }
         newSize = rotorBean.getLog().size();
         adapter.isShowFooter(true);//不能屏蔽 滑动监听条件，加载使用
         if (mData == null && mDataAll == null) {
-            mDataAll = new ArrayList<RotorBean.LogBean>();
+           // mDataAll = new ArrayList<RotorBean.LogBean>();
             mData = new ArrayList<RotorBean.LogBean>();
         }
-        for (int i = 0; i < 5; i++) {
-            mData.add(mDataAll.get(i));
+        for (int i = 0; i < newSize; i++) {
+            mData.add(rotorBean.getLog().get(i));
         }
-        if ((lastVisibleItem != (newSize - 2)) || (lastVisibleItem != (newSize - 1))) {
+/*        if ((lastVisibleItem != (newSize - 2)) || (lastVisibleItem != (newSize - 1))) {
             adapter.setmDate(mData);//防止加了缓存越界报错
-        }
+        }*/
             adapter.setmDate(mData);//防止加了缓存越界报错
     }
 
