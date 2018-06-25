@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -176,13 +177,14 @@ public class AppUtils {
     public static String GetImageStr(File file) {
         Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);//参数100表示不压缩
         byte[] bytes = bos.toByteArray();
         try {
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.v("rrrrrrrrrr",""+Base64.encodeToString(bytes, Base64.DEFAULT));
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 }

@@ -41,9 +41,10 @@
         android:text="巡检" />
 
     <ImageView
+        android:scaleType="fitXY"
         android:id="@+id/imageView_pic"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"

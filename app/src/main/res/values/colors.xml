@@ -13,5 +13,6 @@
     <color name="green">#13f944</color>
     <color name="bleak">#000000</color>
     <color name="alpwhite">#00ffffff</color>
+    <color name="grayBlack">#252525</color>
 
 </resources>

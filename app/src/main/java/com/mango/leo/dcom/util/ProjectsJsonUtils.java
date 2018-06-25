@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
+import com.mango.leo.dcom.rotor.bean.RotorBean;
 
 
 /**
@@ -42,6 +43,12 @@ public class ProjectsJsonUtils {
         JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
         //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
         UserMessageBean bean = JsonUtils.deserialize(jsonObject, UserMessageBean.class);
+        return bean;
+    }
+    public static RotorBean readJsonUserMessageBeans(String res) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
+        RotorBean bean = JsonUtils.deserialize(jsonObject, RotorBean.class);
         return bean;
     }
 }
