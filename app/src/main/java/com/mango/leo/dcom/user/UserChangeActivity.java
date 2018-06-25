@@ -67,7 +67,7 @@ public class UserChangeActivity extends AppCompatActivity {
         //身份
         editTextName.setText(bean.getRealName());
         editTextGroup.setText(bean.getRoleName());
-        if (bean.getPhone() == null || bean.getPhone() == ""){
+        if (bean.getPhone() == null || bean.getPhone().equals("")){
             editTextPhone.setText("88888888");
         }else {
             editTextPhone.setText(bean.getPhone());
