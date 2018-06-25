@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.util.CircleProgressBar;
 
@@ -17,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BasicActivity extends AppCompatActivity {
+public class BasicActivity extends BaseActivity {
 
 
     @Bind(R.id.circle_bar0)

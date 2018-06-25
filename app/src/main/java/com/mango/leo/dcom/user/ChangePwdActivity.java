@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.Urls;
@@ -30,7 +31,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ChangePwdActivity extends AppCompatActivity {
+public class ChangePwdActivity extends BaseActivity {
 
     @Bind(R.id.imageView_change_exit)
     ImageView imageViewChangeExit;

@@ -7,15 +7,18 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.ProjectsJsonUtils;
 import com.mango.leo.dcom.util.Urls;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,7 +37,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class UserChangeActivity extends AppCompatActivity {
+public class UserChangeActivity extends BaseActivity {
 
     @Bind(R.id.exit_cx)
     ImageView exitCx;
@@ -102,7 +105,11 @@ public class UserChangeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (String.valueOf(response.code()).startsWith("2")) {
-                    mHandler.sendEmptyMessage(0);
+                    Message m = mHandler.obtainMessage();
+                    UserMessageBean bean = ProjectsJsonUtils.readJsonUserMessageBeans(response.body().string(), getBaseContext());//data是json字段获得data的值即对象
+                    m.obj = bean;
+                    m.what = 0;
+                    m.sendToTarget();
                 } else {
                     Log.v("yyyyyyyyyy", response.body().string()+"---" + response.code());
                     mHandler.sendEmptyMessage(1);
@@ -129,6 +136,8 @@ public class UserChangeActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case 0:
                         AppUtils.showToast(activity, "修改成功");
+                        UserMessageBean bean = (UserMessageBean) msg.obj;
+                        EventBus.getDefault().postSticky(bean);
                         intent = new Intent(activity, UserActivity.class);
                         startActivity(intent);
                         finish();
@@ -149,5 +158,14 @@ public class UserChangeActivity extends AppCompatActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
         EventBus.getDefault().unregister(this);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

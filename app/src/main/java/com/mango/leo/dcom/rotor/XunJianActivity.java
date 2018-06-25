@@ -9,13 +9,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.scan.EditScanActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class XunJianActivity extends AppCompatActivity {
+public class XunJianActivity extends BaseActivity {
 
     @Bind(R.id.imageView_b)
     ImageView imageViewB;

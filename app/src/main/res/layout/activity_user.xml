@@ -39,6 +39,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:focusable="true"
                 android:id="@+id/imageView_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.style.EasyEditSpan;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.user.UserActivity;
 import com.mango.leo.dcom.zxing.activity.CaptureActivity;
@@ -21,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DcomActivity extends AppCompatActivity {
+public class DcomActivity extends BaseActivity {
 
     @Bind(R.id.event)
     ImageView event;
@@ -79,6 +78,7 @@ public class DcomActivity extends AppCompatActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {

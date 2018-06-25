@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -37,7 +38,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends BaseActivity {
 
     @Bind(R.id.exit_x)
     ImageView exitX;

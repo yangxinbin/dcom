@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -32,7 +33,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     @Bind(R.id.imageView_login_ok)
     ImageView imageViewLoginOk;

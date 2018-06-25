@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.rotor.BasicActivity;
 import com.mango.leo.dcom.zxing.activity.CaptureActivity;
 
@@ -17,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EditScanActivity extends AppCompatActivity {
+public class EditScanActivity extends BaseActivity {
 
     @Bind(R.id.imageView_exit)
     ImageView imageViewExit;
