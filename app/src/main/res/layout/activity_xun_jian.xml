@@ -45,15 +45,17 @@
             android:text="电源线是否正常？"
             android:textSize="@dimen/textSize" />
 
-        <RadioButton
+        <Switch
+            android:thumb="@drawable/switch_plan_thumb_selector"
+            android:track="@drawable/switch_plan_notice_selector"
             android:id="@+id/radioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView8"
             android:layout_alignBottom="@+id/textView8"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="RadioButton" />
+            android:layout_marginRight="30dp"
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/textView10"
@@ -66,15 +68,17 @@
             android:text="网线是否正常？"
             android:textSize="@dimen/textSize" />
 
-        <RadioButton
+        <Switch
+            android:thumb="@drawable/switch_plan_thumb_selector"
+            android:track="@drawable/switch_plan_notice_selector"
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView10"
             android:layout_alignBottom="@+id/textView10"
+            android:layout_marginRight="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="RadioButton" />
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/textView12"
@@ -87,15 +91,16 @@
             android:text="指示器是否正常？"
             android:textSize="@dimen/textSize" />
 
-        <RadioButton
+        <Switch
+            android:thumb="@drawable/switch_plan_thumb_selector"
+            android:track="@drawable/switch_plan_notice_selector"
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView12"
             android:layout_alignBottom="@+id/textView12"
             android:layout_alignLeft="@+id/radioButton2"
-            android:layout_alignStart="@+id/radioButton2"
-            android:text="RadioButton" />
+            android:layout_alignStart="@+id/radioButton2" />
 
         <TextView
             android:id="@+id/textView14"
@@ -110,16 +115,18 @@
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
             android:layout_alignLeft="@+id/textView14"
             android:layout_alignStart="@+id/textView14"
             android:layout_below="@+id/textView14"
             android:layout_marginTop="20dp"
-            android:ems="10"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="请描述巡检内容"
+            android:layout_marginRight="30dp"
             android:inputType="textPersonName"
-            android:lines="5"
-            android:text="Name" />
+            android:lineSpacingExtra="8dp" />
 
         <ImageView
             android:id="@+id/imageView_p"
@@ -138,11 +145,12 @@
             android:layout_alignTop="@+id/imageView_p"
             android:layout_margin="10dp"
             app:srcCompat="@drawable/error" />
+
         <ImageView
-            android:layout_below="@+id/imageView_p"
-            android:src="@drawable/sure"
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView_p"
+            android:layout_margin="20dp"
+            android:src="@drawable/sure" />
     </RelativeLayout>
 </ScrollView>
