@@ -91,6 +91,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     private String TAG = "UserChangeActivity";
     private ImageView imageView_pic;
     private SharedPreferences sharedPreferences;
+    private int newSize;
 
 
     @Override
@@ -103,6 +104,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         initRecycle();
         initHeader();
         initSwipeRefreshLayout();
+        loadHistoryLog(rotorBean);
     }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void userRotorBus(RotorBean bean) {
@@ -154,14 +156,30 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == adapter.getItemCount()
                     && adapter.isShowFooter()) {//加载判断条件 手指离开屏幕 到了footeritem
-                page++;
-                Log.v("zzzzzzzzz", "-------2-------" + page);
-                loadHistoryLog();
-                Log.v("yyyy", "***onScrollStateChanged******");
+                int count = adapter.getItemCount();
+                int i;
+                for (i = count; i < count + 5; i++) {
+                    if (mDataAll != null && i >= newSize) {//到最后
+                        adapter.isShowFooter(false);
+                        noMoreMsg();
+                        break;
+                    }
+                    if (mDataAll == null) {
+                        break;//一开始断网报空指针的情况
+                    }
+                    if (i >= newSize) {//比如一共30条新闻 这个条件当为29时还是可以把30那条新闻加上去的
+                        noMoreMsg();
+                        break;
+                    }
+                    adapter.addItem(mDataAll.get(i));//addItem里面记得要notifyDataSetChanged 否则第一次加载不会显示数据
+                }
             }
         }
     };
-
+    public void noMoreMsg() {
+        adapter.isShowFooter(false);
+        AppUtils.showToast(this, getResources().getString(R.string.no_more));
+    }
     private void initHeader() {
         //渲染header布局
         View header = LayoutInflater.from(this).inflate(R.layout.header, null);
@@ -202,7 +220,6 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView8.setText((CharSequence) rotorBean.getOs());
         Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
 
-
         if (rotorBean.getStatusCpu() != 0){
             circleProgressBar0.setProgress(rotorBean.getStatusCpu());
         }else {
@@ -241,7 +258,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                             mData.clear();
                         }
                         refreshRo.setRefreshing(false);
-                        loadHistoryLog();//请求刷新
+                        //loadHistoryLog();//请求刷新
                     }
                 }, 2000);
             }
@@ -252,7 +269,20 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                 android.R.color.holo_red_light);
     }
 
-    private void loadHistoryLog() {
+    private void loadHistoryLog(RotorBean rotorBean) {
+        newSize = rotorBean.getLog().size();
+        adapter.isShowFooter(true);//不能屏蔽 滑动监听条件，加载使用
+        if (mData == null && mDataAll == null) {
+            mDataAll = new ArrayList<RotorBean.LogBean>();
+            mData = new ArrayList<RotorBean.LogBean>();
+        }
+        for (int i = 0; i < 5; i++) {
+            mData.add(mDataAll.get(i));
+        }
+        if ((lastVisibleItem != (newSize - 2)) || (lastVisibleItem != (newSize - 1))) {
+            adapter.setmDate(mData);//防止加了缓存越界报错
+        }
+            adapter.setmDate(mData);//防止加了缓存越界报错
     }
 
 /*    @OnClick({R.id.imageView_back, R.id.textView_xunjian, R.id.imageView_edit})

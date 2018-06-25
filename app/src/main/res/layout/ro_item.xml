@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="巡检人："
+        android:textSize="@dimen/title" />
+
+    <TextView
+        android:id="@+id/textView_n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView18"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/textView18"
+        android:layout_toRightOf="@+id/textView18"
+        android:text="TextView"
+        android:textSize="@dimen/textSize" />
+
+    <TextView
+        android:id="@+id/textView_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_n"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/imageView11"
+        android:layout_toStartOf="@+id/imageView11"
+        android:text="正常"
+        android:textSize="@dimen/title" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignBottom="@+id/textView_state"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/right" />
+
+    <TextView
+        android:id="@+id/textView_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView18"
+        android:layout_alignStart="@+id/textView18"
+        android:layout_below="@+id/textView_state"
+        android:layout_marginTop="10dp"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/title"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电源线" />
+
+            <TextView
+                android:id="@+id/textView_state1"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textSize"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:text="正常" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/title"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电源线" />
+
+            <TextView
+                android:id="@+id/textView_state2"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textSize"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:text="正常" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/title"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电源线" />
+
+            <TextView
+                android:id="@+id/textView_state3"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textSize"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:text="正常" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:layout_margin="10dp" />
+
+
+</RelativeLayout>

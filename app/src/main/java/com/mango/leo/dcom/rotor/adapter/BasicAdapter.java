@@ -24,7 +24,7 @@ import java.util.List;
 public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private OnRotorClickListener mOnRotorClickListener;//自注册的接口给调用者用于点击逻辑
-    private List<RotorBean> mData;
+    private List<RotorBean.LogBean> mData;
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
     public static final int TYPE_HEADER = 2;
@@ -35,12 +35,13 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
-    public void setmDate(List<RotorBean> data) {
+    public void setmDate(List<RotorBean.LogBean> data) {
         this.mData = data;
         this.notifyDataSetChanged();
     }
-    public void reMove(){
-        List<RotorBean> m = new ArrayList<RotorBean>();
+
+    public void reMove() {
+        List<RotorBean.LogBean> m = new ArrayList<RotorBean.LogBean>();
         this.mData = m;
         this.notifyDataSetChanged();
     }
@@ -52,9 +53,9 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     /**
      * 添加列表项     * @param item
      */
-    public void addItem(RotorBean bean) {
+    public void addItem(RotorBean.LogBean bean) {
         isShowFooter(false);
-        if (mData != null){
+        if (mData != null) {
             mData.add(bean);
             hasMore = true;
 
@@ -65,6 +66,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public BasicAdapter(Context context) {
         this.context = context;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderView != null && viewType == TYPE_HEADER) {//add header
@@ -75,9 +77,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .inflate(R.layout.ro_item, parent, false);
             ItemViewHolder vh = new ItemViewHolder(v);
             return vh;
-        }
-        else
-        {
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.footer, null);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -85,6 +85,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             return new FooterViewHolder(view);
         }
     }
+
     @Override
     public int getItemViewType(int position) {
         // 最后一个item设置为footerView
@@ -100,6 +101,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             return TYPE_ITEM;
         }
     }
+
     public void isShowFooter(boolean showFooter) {
         this.mShowFooter = showFooter;
         this.notifyDataSetChanged();
@@ -113,25 +115,28 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mShowHeader = showHeader;
         this.notifyDataSetChanged();
     }
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_HEADER) return;//add header
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
-//            AllItemBean dm = mData.get(pos);//add header
-//            if (dm == null) {
- //               return;
- //           }
-            /*if (((ItemViewHolder) holder) != null && mData.get(pos).getResponseObject()  != null) {
+
+            if (((ItemViewHolder) holder) != null && mData.get(pos)  != null) {
                 Log.v("yyyyy", "====pos======"+pos%20);//
-                ((ItemViewHolder) holder).z_title.setText(mData.get(pos).getResponseObject().getContent().get(pos%20).getName());
-                ((ItemViewHolder) holder).z_content.setText(mData.get(pos).getResponseObject().getContent().get(pos%20).getSummary());
-                if (mData.get(pos).getResponseObject().getContent().get(pos%20).isRecommended()) {
+                ((ItemViewHolder) holder).t_n.setText(mData.get(pos).getInspectionBy());
+                ((ItemViewHolder) holder).t_s.setText(mData.get(pos).getInspectionBy());
+                ((ItemViewHolder) holder).t_t.setText(mData.get(pos).getInspectionBy());
+                ((ItemViewHolder) holder).t_s1.setText(mData.get(pos).getPowerLineStatus());
+                ((ItemViewHolder) holder).t_s2.setText(mData.get(pos).getNetworkCableStatus());
+                ((ItemViewHolder) holder).t_s3.setText(mData.get(pos).getIndicatorStatus());
+
+               /* if (mData.get(pos).getAttachments() != null) {
                     ((ItemViewHolder) holder).im.setVisibility(View.VISIBLE);
                 }else {
                     ((ItemViewHolder) holder).im.setVisibility(View.GONE);
-                }
-            }*/
+                }*/
+            }
         }/*else {
             //if (mData.size() > 0) {
             // 如果查询数据发现并没有增加时，就显示没有更多数据了
@@ -152,10 +157,12 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             //}
         }*/
     }
+
     private int getRealPosition(RecyclerView.ViewHolder holder) {
         int position = holder.getLayoutPosition();
         return mHeaderView == null ? position : position - 1;
     }
+
     @Override
     public int getItemCount() {
         int isFooter = mShowFooter ? 1 : 0;
@@ -166,9 +173,11 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         return mData.size() + isFooter + isHeader;
     }
+
     public void setOnRotorClickListener(OnRotorClickListener onItemnewsClickListener) {
         this.mOnRotorClickListener = onItemnewsClickListener;
     }
+
     public class FooterViewHolder extends RecyclerView.ViewHolder {
 
         public TextView footTv;
@@ -179,21 +188,27 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public RotorBean getItem(int position) {
+    public RotorBean.LogBean getItem(int position) {
         return mData == null ? null : mData.get(position);
     }
+
     public interface OnRotorClickListener {
         public void onItemClick(View view, int position);
     }
+
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView z_title,z_content,im;
+        public TextView t_n, t_s, t_t, t_s1, t_s2, t_s3;
+
         public ItemViewHolder(View v) {
             super(v);
-            if(v == mHeaderView)
+            if (v == mHeaderView)
                 return;
-          /*  z_title = (TextView) v.findViewById(R.id.tv_Rotorg);
-            z_content = (TextView) v.findViewById(R.id.textView_RotorgC);
-            im = (TextView)v.findViewById(R.id.imageView_flag);*/
+            t_n = (TextView) v.findViewById(R.id.textView_n);
+            t_s = (TextView) v.findViewById(R.id.textView_state);
+            t_t = (TextView) v.findViewById(R.id.textView_time);
+            t_s1 = (TextView) v.findViewById(R.id.textView_state1);
+            t_s2 = (TextView) v.findViewById(R.id.textView_state2);
+            t_s3 = (TextView) v.findViewById(R.id.textView_state3);
             v.setOnClickListener(this);
         }
 
@@ -201,7 +216,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public void onClick(View view) {
             if (mOnRotorClickListener != null) {
                 mOnRotorClickListener.onItemClick(view, this.getLayoutPosition());
-                Log.v("oooooooo","---onb---"+this.getLayoutPosition());
+                Log.v("oooooooo", "---onb---" + this.getLayoutPosition());
             }
         }
     }
