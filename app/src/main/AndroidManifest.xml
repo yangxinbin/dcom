@@ -68,7 +68,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".rotor.BasicActivity" />
-        <activity android:name=".rotor.XunJianActivity" />
+        <activity android:name=".rotor.XunJianActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
         <activity android:name=".user.UserChangeActivity"></activity>
     </application>
 
