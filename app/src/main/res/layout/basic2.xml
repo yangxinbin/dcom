@@ -191,4 +191,14 @@
         android:background="@color/blue"
         android:layout_below="@+id/textView12"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_alignStart="@+id/textView12"
+        android:layout_below="@+id/imageView8"
+        android:text="巡检历史记录"
+        android:textSize="@dimen/title" />
 </RelativeLayout>
