@@ -14,6 +14,8 @@ import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
+import com.mango.leo.dcom.rotor.bean.RotorBean;
+import com.mango.leo.dcom.util.ACache;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
@@ -43,6 +45,7 @@ public class LoginActivity extends BaseActivity {
     EditText editTextPwd;
     private SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
+    private UserMessageBean userBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,19 @@ public class LoginActivity extends BaseActivity {
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         ButterKnife.bind(this);
+        if (sharedPreferences.getString("isok","no").equals("yes")){
+            ACache mCache = ACache.get(this);
+            userBean = ProjectsJsonUtils.readJsonUserMessageBeans(mCache.getAsString("message"));
+            EventBus.getDefault().postSticky(userBean);
+            editor.putString("token", userBean.getToken())
+                    .putString("id", String.valueOf(userBean.getId()))
+                    .putString("tenantId", String.valueOf(userBean.getTenantId()))
+                    .putString("username", String.valueOf(userBean.getUsername()))
+                    .commit();
+            Intent intent = new Intent(this, DcomActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @OnClick(R.id.imageView_login_ok)
@@ -111,6 +127,7 @@ public class LoginActivity extends BaseActivity {
                                 .putString("id", String.valueOf(bean.getId()))
                                 .putString("tenantId", String.valueOf(bean.getTenantId()))
                                 .putString("username", String.valueOf(bean.getUsername()))
+                                .putString("isok", "yes")
                                 .commit();
                         Intent intent = new Intent(activity, DcomActivity.class);
                         startActivity(intent);

@@ -7,25 +7,25 @@
     android:background="@drawable/bg"
     tools:context="com.mango.leo.dcom.user.UserActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/title"
-        android:text="用户修改"
         android:layout_marginTop="40dp"
-        />
+        app:srcCompat="@drawable/user_message" />
 
     <ImageView
         android:id="@+id/exit_cx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/frameLayout"
-        android:layout_alignRight="@+id/frameLayout"
-        android:layout_alignTop="@+id/imageView8"
+        android:layout_alignEnd="@+id/imageView8"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imageView8"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/x" />
 
     <FrameLayout
@@ -105,5 +105,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        app:srcCompat="@drawable/sure" />
+        app:srcCompat="@drawable/change_ok" />
 </RelativeLayout>

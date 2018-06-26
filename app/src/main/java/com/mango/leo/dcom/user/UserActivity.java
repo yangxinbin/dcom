@@ -53,12 +53,14 @@ public class UserActivity extends BaseActivity {
     @Bind(R.id.exit)
     ImageView exit;
     private SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
 
@@ -73,9 +75,9 @@ public class UserActivity extends BaseActivity {
         //身份
         editTextName.setText(bean.getRealName());
         editTextGroup.setText(bean.getRoleName());
-        if (bean.getPhone() == null || bean.getPhone().equals("")){
+        if (bean.getPhone() == null || bean.getPhone().equals("")) {
             editTextPhone.setText("88888888");
-        }else {
+        } else {
             editTextPhone.setText(bean.getPhone());
         }
     }
@@ -144,6 +146,7 @@ public class UserActivity extends BaseActivity {
                 switch (msg.what) {
                     case 0:
                         AppUtils.showToast(activity, "退出成功");
+                        editor.putString("isok", "no").commit();
                         finish();
                         break;
                     case 1:
@@ -163,7 +166,6 @@ public class UserActivity extends BaseActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
         EventBus.getDefault().unregister(this);
-
     }
 
     @Override

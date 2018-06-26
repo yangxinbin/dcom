@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.rotor.bean.RotorBean;
+import com.mango.leo.dcom.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,40 +123,58 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
 
-            if (((ItemViewHolder) holder) != null && mData.get(pos)  != null) {
-                Log.v("yyyyy", "====pos======"+pos%20);//
+            if (((ItemViewHolder) holder) != null && mData.get(pos) != null) {
                 ((ItemViewHolder) holder).t_n.setText(mData.get(pos).getInspectionBy());
-                ((ItemViewHolder) holder).t_s.setText(mData.get(pos).getInspectionBy());
-                ((ItemViewHolder) holder).t_t.setText(mData.get(pos).getInspectionBy());
-                ((ItemViewHolder) holder).t_s1.setText(mData.get(pos).getPowerLineStatus());
-                ((ItemViewHolder) holder).t_s2.setText(mData.get(pos).getNetworkCableStatus());
-                ((ItemViewHolder) holder).t_s3.setText(mData.get(pos).getIndicatorStatus());
+                ((ItemViewHolder) holder).t_t.setText(DateUtil.getDateToString(mData.get(pos).getInspectionOn(), "yyyy-MM-dd HH:mm:ss"));
+                if (mData.get(pos).getPowerLineStatus().equals("normal")) {
+                    ((ItemViewHolder) holder).t_s1.setText("正常");
+                    ((ItemViewHolder) holder).t_s1.setTextColor(context.getResources().getColor(R.color.green));
+                } else {
+                    ((ItemViewHolder) holder).t_s1.setText("异常");
+                    ((ItemViewHolder) holder).t_s1.setTextColor(context.getResources().getColor(R.color.red));
+                }
+                if (mData.get(pos).getNetworkCableStatus().equals("normal")) {
+                    ((ItemViewHolder) holder).t_s2.setText("正常");
+                    ((ItemViewHolder) holder).t_s2.setTextColor(context.getResources().getColor(R.color.green));
+                } else {
+                    ((ItemViewHolder) holder).t_s2.setText("异常");
+                    ((ItemViewHolder) holder).t_s2.setTextColor(context.getResources().getColor(R.color.red));
+                }
+                if (mData.get(pos).getIndicatorStatus().equals("normal")) {
+                    ((ItemViewHolder) holder).t_s3.setText("正常");
+                    ((ItemViewHolder) holder).t_s3.setTextColor(context.getResources().getColor(R.color.green));
+                } else {
+                    ((ItemViewHolder) holder).t_s3.setText("异常");
+                    ((ItemViewHolder) holder).t_s3.setTextColor(context.getResources().getColor(R.color.red));
+                }
+                if (mData.get(pos).getPowerLineStatus().equals("normal") && mData.get(pos).getNetworkCableStatus().equals("normal") && mData.get(pos).getIndicatorStatus().equals("normal")) {
+                    ((ItemViewHolder) holder).t_s.setText("正常");
+                    ((ItemViewHolder) holder).t_s.setTextColor(context.getResources().getColor(R.color.green));
+                } else {
+                    ((ItemViewHolder) holder).t_s.setText("异常");
+                    ((ItemViewHolder) holder).t_s.setTextColor(context.getResources().getColor(R.color.red));
+                }
 
-               /* if (mData.get(pos).getAttachments() != null) {
-                    ((ItemViewHolder) holder).im.setVisibility(View.VISIBLE);
-                }else {
-                    ((ItemViewHolder) holder).im.setVisibility(View.GONE);
-                }*/
             }
-        }/*else {
+        } else {
             //if (mData.size() > 0) {
             // 如果查询数据发现并没有增加时，就显示没有更多数据了
-            ((RotorAdapter.FooterViewHolder) holder).footTv.setText("没有更多数据了");
+            ((BasicAdapter.FooterViewHolder) holder).footTv.setText("没有更多数据了");
 
             // 然后通过延时加载模拟网络请求的时间，在500ms后执行
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     // 隐藏提示条
-                    ((RotorAdapter.FooterViewHolder) holder).footTv.setVisibility(View.INVISIBLE);
+                    ((BasicAdapter.FooterViewHolder) holder).footTv.setVisibility(View.INVISIBLE);
                     // 将fadeTips设置true
                     fadeTips = true;
                     // hasMore设为true是为了让再次拉到底时，会先显示正在加载更多
                     hasMore = true;
                 }
-            }, 5000);
+            }, 3000);
             //}
-        }*/
+        }
     }
 
     private int getRealPosition(RecyclerView.ViewHolder holder) {

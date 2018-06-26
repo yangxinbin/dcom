@@ -96,7 +96,7 @@ public class EditScanActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if (String.valueOf(response.code()).startsWith("2")) {
                     Message m = mHandler.obtainMessage();
-                    RotorBean bean = ProjectsJsonUtils.readJsonUserMessageBeans(response.body().string());//data是json字段获得data的值即对象
+                    RotorBean bean = ProjectsJsonUtils.readJsonRotorBeanBeans(response.body().string());//data是json字段获得data的值即对象
                     m.obj = bean;
                     m.what = 0;
                     m.sendToTarget();

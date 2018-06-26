@@ -135,9 +135,11 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             if (mData.size() <= 0) {
                 return;
             }
-            //Intent intent = new Intent(this, ZhaoShanDetailActivity.class);
-            //intent.putExtra("FavouriteId", adapter.getItem(position).getResponseObject().getContent().get(position%20).getId());
-            //startActivity(intent);
+            Intent intent = new Intent(getBaseContext(), XunJianActivity.class);
+            RotorBean.LogBean logBean = rotorBean.getLog().get(position);
+            EventBus.getDefault().postSticky(logBean);
+            startActivity(intent);
+            finish();
         }
     };
     private int lastVisibleItem;
@@ -275,7 +277,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
            // mDataAll.clear();
         }
         newSize = rotorBean.getLog().size();
-        adapter.isShowFooter(true);//不能屏蔽 滑动监听条件，加载使用
+        //adapter.isShowFooter(true);//不能屏蔽 滑动监听条件，加载使用
         if (mData == null && mDataAll == null) {
            // mDataAll = new ArrayList<RotorBean.LogBean>();
             mData = new ArrayList<RotorBean.LogBean>();

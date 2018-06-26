@@ -10,7 +10,12 @@ import android.widget.ImageView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.scan.EditScanActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +35,15 @@ public class XunJianActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xun_jian);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void userLogBus(RotorBean.LogBean bean) {
+        if (bean == null) {
+            return;
+        }
+
     }
 
     @OnClick({R.id.imageView_b, R.id.imageView_p, R.id.imageView_delete})
@@ -56,5 +70,11 @@ public class XunJianActivity extends BaseActivity {
             finish();
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 }

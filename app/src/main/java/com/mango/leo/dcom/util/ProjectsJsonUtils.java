@@ -45,7 +45,13 @@ public class ProjectsJsonUtils {
         UserMessageBean bean = JsonUtils.deserialize(jsonObject, UserMessageBean.class);
         return bean;
     }
-    public static RotorBean readJsonUserMessageBeans(String res) {
+    public static UserMessageBean readJsonUserMessageBeans(String res) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
+        UserMessageBean bean = JsonUtils.deserialize(jsonObject, UserMessageBean.class);
+        return bean;
+    }
+    public static RotorBean readJsonRotorBeanBeans(String res) {
         JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
         //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
         RotorBean bean = JsonUtils.deserialize(jsonObject, RotorBean.class);
