@@ -16,16 +16,21 @@
 package com.mango.leo.dcom.zxing.activity;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -41,12 +46,23 @@ import android.widget.RelativeLayout;
 import com.google.zxing.Result;
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.scan.EditScanActivity;
+import com.mango.leo.dcom.rotor.BasicActivity;
+import com.mango.leo.dcom.rotor.bean.RotorBean;
+import com.mango.leo.dcom.util.AppUtils;
+import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.ProjectsJsonUtils;
+import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.zxing.camera.CameraManager;
 import com.mango.leo.dcom.zxing.decode.DecodeThread;
 import com.mango.leo.dcom.zxing.utils.BeepManager;
 import com.mango.leo.dcom.zxing.utils.CaptureActivityHandler;
 import com.mango.leo.dcom.zxing.utils.InactivityTimer;
+
+import org.greenrobot.eventbus.EventBus;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -75,6 +91,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     private Camera.Parameters parameter;
     private boolean isOpen = true;
     private Camera camera;
+    private String result;
 
     public Handler getHandler() {
         return handler;
@@ -85,6 +102,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     private boolean isHasSurface = false;
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,7 +112,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_capture);
-
+        sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
@@ -202,13 +221,77 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
 
-        bundle.putInt("width", mCropRect.width());
+/*        bundle.putInt("width", mCropRect.width());
         bundle.putInt("height", mCropRect.height());
-        bundle.putString("result", rawResult.getText());
+        bundle.putString("result", rawResult.getText());*/
+        result = rawResult.getText();
+        Log.v("ssssssss", "--s-" + result);
+        loadBasic();
+        //startActivity(new Intent(CaptureActivity.this, ResultActivity.class).putExtras(bundle));
+    }
+    private void loadBasic() {
+        Map<String, String> mapParams = new HashMap<String, String>();
+        mapParams.put("token", sharedPreferences.getString("token", ""));
+        mapParams.put("userId", sharedPreferences.getString("id", ""));
+        mapParams.put("assetSn", result);
+        HttpUtils.doPost(Urls.HOST_ASSET, mapParams, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mHandler.sendEmptyMessage(1);
+            }
 
-        startActivity(new Intent(CaptureActivity.this, ResultActivity.class).putExtras(bundle));
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (String.valueOf(response.code()).startsWith("2")) {
+                    Message m = mHandler.obtainMessage();
+                    RotorBean bean = ProjectsJsonUtils.readJsonRotorBeanBeans(response.body().string());//data是json字段获得data的值即对象
+                    m.obj = bean;
+                    m.what = 0;
+                    m.sendToTarget();
+                } else {
+                    Log.v("yyyyyyyyyy", response.body().string() + "---" + response.code());
+                    mHandler.sendEmptyMessage(1);
+                }
+            }
+        });
     }
 
+    private final CaptureActivity.MyHandler mHandler = new CaptureActivity.MyHandler(this);
+
+    private class MyHandler extends Handler {
+        private final WeakReference<CaptureActivity> mActivity;
+
+        public MyHandler(CaptureActivity activity) {
+            mActivity = new WeakReference<CaptureActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            CaptureActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 0:
+                        AppUtils.showToast(activity, "请求成功");
+                        RotorBean bean = (RotorBean) msg.obj;
+                        EventBus.getDefault().postSticky(bean);
+                        Intent intent = new Intent(activity, BasicActivity.class);
+                        intent.putExtra("assetSn",result);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 1:
+                        AppUtils.showToast(activity, "请求失败");
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    
     private void initCamera(SurfaceHolder surfaceHolder) {
         if (surfaceHolder == null) {
             throw new IllegalStateException("No SurfaceHolder provided");
@@ -323,7 +406,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         Intent intent;
         switch (view.getId()) {
             case R.id.imageView_edit_scan:
-                intent = new Intent(this, EditScanActivity.class);
+                intent = new Intent(this, CaptureActivity.class);
                 startActivity(intent);
                 finish();
                 break;

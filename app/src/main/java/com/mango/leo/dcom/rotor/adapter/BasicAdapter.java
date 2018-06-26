@@ -172,7 +172,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     // hasMore设为true是为了让再次拉到底时，会先显示正在加载更多
                     hasMore = true;
                 }
-            }, 3000);
+            }, 2000);
             //}
         }
     }
