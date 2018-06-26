@@ -59,6 +59,7 @@ public class DcomActivity extends BaseActivity {
             case R.id.scan:
                 intent = new Intent(this, CaptureActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.rotor:
                 intent = new Intent(this, EditScanActivity.class);
