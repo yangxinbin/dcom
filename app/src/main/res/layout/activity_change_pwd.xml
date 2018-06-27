@@ -32,18 +32,19 @@
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/group6"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        app:srcCompat="@drawable/group6" />
 
     <EditText
         android:id="@+id/editText_old"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText_new"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
+        android:layout_alignTop="@+id/imageView6"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="36dp"
         android:layout_toLeftOf="@+id/imageView_change_exit"
         android:layout_toStartOf="@+id/imageView_change_exit"
         android:background="@null"
@@ -58,9 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText_old"
         android:layout_alignStart="@+id/editText_old"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/editText_old"
         android:background="@null"
         android:ems="8"
+        android:layout_marginTop="30dp"
         android:inputType="textPassword"
         android:text=""
         android:textColor="@color/blue" />
@@ -85,6 +87,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         app:srcCompat="@drawable/change_ok" />
 </RelativeLayout>
