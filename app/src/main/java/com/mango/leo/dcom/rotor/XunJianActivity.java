@@ -95,7 +95,7 @@ public class XunJianActivity extends BaseActivity {
     private Uri imageUri;
     private Uri cropImageUri;
     private static final int OUTPUT_X = 480;
-    private static final int OUTPUT_Y = 480;
+    private static final int OUTPUT_Y = 380;
     private String TAG = "XunJianActivity";
     private String s1 = "true";
     private String s2 = "true";
@@ -327,7 +327,7 @@ public class XunJianActivity extends BaseActivity {
             //相机返回
             case CODE_CAMERA_REQUEST:
                 cropImageUri = Uri.fromFile(fileCropUri);
-                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 //upLoadMap(cropImageUri);
                 break;
             //相册返回
@@ -339,7 +339,7 @@ public class XunJianActivity extends BaseActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         newUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", new File(newUri.getPath()));
                     }
-                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 } else {
                     AppUtils.showToast(this, "设备没有SD卡！");
                 }
@@ -374,7 +374,7 @@ public class XunJianActivity extends BaseActivity {
         final Map<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
         final File finalRealFilePath = realFilePath;
-        Log.v("xxxxxx", "==" + s1 + " " + s2 + " " + s3 + " " + editText.getText().toString() + " " + sharedPreferences.getString("username", ""));
+        Log.v("xxxxxx", cropImageUri+"==" + s1 + " " + s2 + " " + s3 + " " + editText.getText().toString() + " " + sharedPreferences.getString("username", ""));
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -88,7 +88,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     private Uri imageUri;
     private Uri cropImageUri;
     private static final int OUTPUT_X = 480;
-    private static final int OUTPUT_Y = 480;
+    private static final int OUTPUT_Y = 380;
     private String TAG = "BasicActivity";
     private RoundImageView imageView_pic;
     private SharedPreferences sharedPreferences;
@@ -115,6 +115,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     }
     private void loadBasic() {
         Map<String, String> mapParams = new HashMap<String, String>();
+        mapParams.clear();
         mapParams.put("token", sharedPreferences.getString("token", ""));
         mapParams.put("userId", sharedPreferences.getString("id", ""));
         mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
@@ -514,7 +515,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             //相机返回
             case CODE_CAMERA_REQUEST:
                 cropImageUri = Uri.fromFile(fileCropUri);
-                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 //upLoadMap(cropImageUri);
                 break;
             //相册返回
@@ -526,7 +527,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         newUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", new File(newUri.getPath()));
                     }
-                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 } else {
                     AppUtils.showToast(this, "设备没有SD卡！");
                 }

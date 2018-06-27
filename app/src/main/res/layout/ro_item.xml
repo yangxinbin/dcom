@@ -105,13 +105,14 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/title"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="电源线" />
+                android:text="网线"
+                android:textSize="@dimen/title" />
 
             <TextView
                 android:id="@+id/textView_state2"
@@ -132,13 +133,14 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/title"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="电源线" />
+                android:text="指示器"
+                android:textSize="@dimen/title" />
 
             <TextView
                 android:id="@+id/textView_state3"
