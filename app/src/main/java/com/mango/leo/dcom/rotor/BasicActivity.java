@@ -46,6 +46,7 @@ import com.mango.leo.dcom.util.CircleProgressBar;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
+import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 
 import org.greenrobot.eventbus.EventBus;
@@ -89,7 +90,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     private static final int OUTPUT_X = 480;
     private static final int OUTPUT_Y = 480;
     private String TAG = "BasicActivity";
-    private ImageView imageView_pic;
+    private RoundImageView imageView_pic;
     private SharedPreferences sharedPreferences;
     private int newSize;
     private View header;
@@ -167,7 +168,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             if (mData.size() <= 0) {
                 return;
             }
-            Intent intent = new Intent(getBaseContext(), XunJianActivity.class);
+            Intent intent = new Intent(getBaseContext(), XunJianDetailActivity.class);
             RotorBean.LogBean logBean = rotorBean.getLog().get(position);
             EventBus.getDefault().postSticky(logBean);
             startActivity(intent);
@@ -220,7 +221,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         LinearLayout h = (LinearLayout) header.findViewById(R.id.header);
         ImageView imageView_back = (ImageView) header.findViewById(R.id.imageView_back);
         TextView textView_xunjian = (TextView) header.findViewById(R.id.textView_xunjian);
-        imageView_pic = (ImageView) header.findViewById(R.id.imageView_pic);
+        imageView_pic = (RoundImageView) header.findViewById(R.id.imageView_pic);
 
         TextView textView1 = (TextView) header.findViewById(R.id.textView_1);
         TextView textView2 = (TextView) header.findViewById(R.id.textView_2);

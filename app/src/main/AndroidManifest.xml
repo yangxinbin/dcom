@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mango.leo.dcom">
+
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android..READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.pepermissionrmission.INTERNET" />
     <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
@@ -50,8 +55,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".DcomActivity"
-            android:theme="@style/AppThemeD"/>
+
+        <activity
+            android:name=".DcomActivity"
+            android:theme="@style/AppThemeD" />
         <activity android:name=".user.UserActivity" />
         <activity android:name=".scan.EditScanActivity" />
         <activity android:name=".user.ChangePwdActivity" />
@@ -71,10 +78,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".rotor.BasicActivity" />
-        <activity android:name=".rotor.XunJianActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-        <activity android:name=".user.UserChangeActivity"></activity>
+        <activity
+            android:name=".rotor.XunJianActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".user.UserChangeActivity" />
+        <activity
+            android:name=".rotor.XunJianDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
     </application>
 
 </manifest>

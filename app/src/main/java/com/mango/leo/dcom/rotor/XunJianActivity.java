@@ -108,7 +108,6 @@ public class XunJianActivity extends BaseActivity {
         setContentView(R.layout.activity_xun_jian);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
         initSwitch();
     }
 
@@ -156,14 +155,6 @@ public class XunJianActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void userLogBus(RotorBean.LogBean bean) {
-        if (bean == null) {
-            return;
-        }
-
     }
 
     @OnClick({R.id.imageView_b, R.id.imageView_choose, R.id.imageView_delete, R.id.sure})
@@ -395,7 +386,7 @@ public class XunJianActivity extends BaseActivity {
                     mapParams.put("base64", AppUtils.GetImageStr(finalRealFilePath));
                     mapParams.put("imageType", "jpeg");
                 }
-                HttpUtils.doPost(Urls.HOST_SAVEPHOTO, mapParams, new Callback() {
+                HttpUtils.doPost(Urls.HOST_INSPECT, mapParams, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         mHandler.sendEmptyMessage(1);

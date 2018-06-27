@@ -40,7 +40,7 @@
         android:layout_marginTop="38dp"
         android:text="巡检" />
 
-    <ImageView
+    <com.mango.leo.dcom.util.RoundImageView
         android:scaleType="fitXY"
         android:id="@+id/imageView_pic"
         android:layout_width="match_parent"
