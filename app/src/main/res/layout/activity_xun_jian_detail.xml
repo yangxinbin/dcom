@@ -78,7 +78,7 @@
             android:textSize="@dimen/textSize" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText_d"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignLeft="@+id/textView14"
@@ -90,6 +90,7 @@
             android:gravity="top"
             android:enabled="false"
             android:hint=""
+            android:textColor="@color/white"
             android:inputType="textPersonName"
             android:lineSpacingExtra="8dp"
             android:padding="8dp" />
@@ -99,7 +100,7 @@
             android:id="@+id/imageView_p"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/editText_d"
             android:layout_margin="20dp" />
 
         <TextView

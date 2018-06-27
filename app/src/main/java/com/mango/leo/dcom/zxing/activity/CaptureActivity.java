@@ -103,6 +103,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     private boolean isHasSurface = false;
     private SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
+
 
 
     @Override
@@ -113,6 +115,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_capture);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
@@ -276,7 +279,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                         RotorBean bean = (RotorBean) msg.obj;
                         EventBus.getDefault().postSticky(bean);
                         Intent intent = new Intent(activity, BasicActivity.class);
-                        intent.putExtra("assetSn",result);
+                        editor.putString("assetSn", result)
+                                .commit();
                         startActivity(intent);
                         finish();
                         break;

@@ -59,6 +59,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,7 +119,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         mapParams.clear();
         mapParams.put("token", sharedPreferences.getString("token", ""));
         mapParams.put("userId", sharedPreferences.getString("id", ""));
-        mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
+        mapParams.put("assetSn", sharedPreferences.getString("assetSn", ""));
         HttpUtils.doPost(Urls.HOST_ASSET, mapParams, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -171,6 +172,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             }
             Intent intent = new Intent(getBaseContext(), XunJianDetailActivity.class);
             RotorBean.LogBean logBean = rotorBean.getLog().get(position);
+            Log.v("oooooooo", adapter.getItem(position) +"---true---" + position+"   "+logBean.getInspectionRemarks().toString());
             EventBus.getDefault().postSticky(logBean);
             startActivity(intent);
             finish();
@@ -316,6 +318,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
            // mDataAll = new ArrayList<RotorBean.LogBean>();
             mData = new ArrayList<RotorBean.LogBean>();
         }
+        Collections.reverse(rotorBean.getLog());
         for (int i = 0; i < newSize; i++) {
             mData.add(rotorBean.getLog().get(i));
         }
@@ -365,7 +368,6 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.textView_xunjian:
                 intent = new Intent(this, XunJianActivity.class);
-                intent.putExtra("assetSn",getIntent().getStringExtra("assetSn"));
                 startActivity(intent);
                 finish();
                 break;
@@ -553,7 +555,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             public void run() {
                 mapParams.put("token", sharedPreferences.getString("token", ""));
                 mapParams.put("userId", sharedPreferences.getString("id", ""));
-                mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
+                mapParams.put("assetSn", sharedPreferences.getString("assetSn", ""));
                 mapParams.put("base64", AppUtils.GetImageStr(realFilePath));
                 mapParams.put("imageType", "png");
                 HttpUtils.doPost(Urls.HOST_SAVEPHOTO, mapParams, new Callback() {

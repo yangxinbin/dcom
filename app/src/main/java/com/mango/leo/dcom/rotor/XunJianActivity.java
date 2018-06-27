@@ -165,7 +165,6 @@ public class XunJianActivity extends BaseActivity {
             case R.id.imageView_b:
                 intent = new Intent(this, BasicActivity.class);
                 intent.putExtra("refresh","yes");
-                intent.putExtra("assetSn",getIntent().getStringExtra("assetSn"));
                 startActivity(intent);
                 finish();
                 break;
@@ -366,26 +365,26 @@ public class XunJianActivity extends BaseActivity {
             AppUtils.showToast(this,"请上传图片");
             return;
         }
-/*        if (editText == null || editText.getText().toString().startsWith("请描述") || editText.getText().toString().equals("")) {
+        if (editText == null || editText.getText().toString().startsWith("请描述") || editText.getText().toString().equals("")) {
             AppUtils.showToast(this,"请填写巡检说明");
             return;
-        }*/
+        }
         realFilePath = getRealFilePath(this, cropImageUri);
         final Map<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
         final File finalRealFilePath = realFilePath;
-        Log.v("xxxxxx", cropImageUri+"==" + s1 + " " + s2 + " " + s3 + " " + editText.getText().toString() + " " + sharedPreferences.getString("username", ""));
+        Log.v("xxxxxx", sharedPreferences.getString("id", "")+"  "+sharedPreferences.getString("tenantId", "")+"  "+sharedPreferences.getString("assetSn", "")+"  "+editText.getText().toString()+"  " +cropImageUri+"=="+"   "+ finalRealFilePath +"  **  "+ s1 + " " + s2 + " " + s3 + " " + " " + sharedPreferences.getString("username", ""));
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mapParams.put("token", sharedPreferences.getString("token", ""));
                 mapParams.put("userId", sharedPreferences.getString("id", ""));
                 mapParams.put("tenant", sharedPreferences.getString("tenantId", ""));
-                mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
+                mapParams.put("assetSn", sharedPreferences.getString("assetSn", ""));
                 mapParams.put("isIndicatorNormal", s3);
                 mapParams.put("isPowerLineNormal", s1);
                 mapParams.put("isNetworkCableNormal", s2);
-                mapParams.put("inspectionRemarks", ""/*editText.getText().toString()*/);
+                mapParams.put("inspectionRemarks", editText.getText().toString());
                 //mapParams.put("attachments", "");
                 if (finalRealFilePath != null) {
                     mapParams.put("base64", AppUtils.GetImageStr(finalRealFilePath));
@@ -431,7 +430,6 @@ public class XunJianActivity extends BaseActivity {
                         AppUtils.showToast(activity, "巡检保存成功");
                         Intent intent = new Intent(activity, BasicActivity.class);
                         intent.putExtra("refresh","yes");
-                        intent.putExtra("assetSn",getIntent().getStringExtra("assetSn"));
                         startActivity(intent);
                         finish();
                         break;

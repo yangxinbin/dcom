@@ -27,7 +27,7 @@ public class XunJianDetailActivity extends AppCompatActivity {
 
     @Bind(R.id.imageView_b)
     ImageView imageViewB;
-    @Bind(R.id.editText)
+    @Bind(R.id.editText_d)
     EditText editText;
     @Bind(R.id.imageView_p)
     RoundImageView imageViewP;

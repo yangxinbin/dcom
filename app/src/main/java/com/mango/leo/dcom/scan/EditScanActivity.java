@@ -52,12 +52,15 @@ public class EditScanActivity extends BaseActivity {
     @Bind(R.id.editText_xlhao)
     EditText editTextXlhao;
     private SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_scan);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         ButterKnife.bind(this);
     }
 
@@ -127,7 +130,8 @@ public class EditScanActivity extends BaseActivity {
                         RotorBean bean = (RotorBean) msg.obj;
                         EventBus.getDefault().postSticky(bean);
                         Intent intent = new Intent(activity, BasicActivity.class);
-                        intent.putExtra("assetSn",editTextXlhao.getText().toString());
+                        editor.putString("assetSn", editTextXlhao.getText().toString())
+                                .commit();
                         startActivity(intent);
                         finish();
                         break;
