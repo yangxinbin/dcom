@@ -15,6 +15,7 @@ import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.util.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -37,6 +38,7 @@ public class BasicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
     public void setmDate(List<RotorBean.LogBean> data) {
+        Collections.reverse(data);//倒序
         this.mData = data;
         this.notifyDataSetChanged();
     }
