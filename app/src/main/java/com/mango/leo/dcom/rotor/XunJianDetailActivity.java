@@ -89,6 +89,7 @@ public class XunJianDetailActivity extends AppCompatActivity {
     @OnClick(R.id.imageView_b)
     public void onViewClicked() {
         Intent intent = new Intent(this, BasicActivity.class);
+        intent.putExtra("refresh","yes");
         startActivity(intent);
         finish();
     }
@@ -96,6 +97,7 @@ public class XunJianDetailActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             Intent intent = new Intent(this, BasicActivity.class);
+            intent.putExtra("refresh","yes");
             startActivity(intent);
             finish();
         }
