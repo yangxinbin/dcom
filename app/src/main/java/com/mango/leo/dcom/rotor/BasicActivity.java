@@ -292,7 +292,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                             mData.clear();
                         }
                         refreshRo.setRefreshing(false);
-                        loadHistoryLog(rotorBean);//请求刷新
+                        loadBasic();//请求刷新
                     }
                 }, 2000);
             }
