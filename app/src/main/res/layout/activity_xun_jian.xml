@@ -133,11 +133,11 @@
             android:lineSpacingExtra="8dp"
             android:padding="8dp" />
 
-        <ImageView
+        <com.mango.leo.dcom.util.RoundImageView
             android:scaleType="fitXY"
             android:id="@+id/imageView_p"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/editText"
             android:layout_margin="20dp" />
 
@@ -149,7 +149,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/imageView_p"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/error" />
 
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView_p"
             android:layout_margin="20dp"
-            android:src="@drawable/sure" />
+            android:src="@drawable/sure_l" />
 
         <TextView
             android:id="@+id/textView_s1"

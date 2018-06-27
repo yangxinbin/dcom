@@ -39,6 +39,7 @@ import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
+import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,7 +66,7 @@ public class XunJianActivity extends BaseActivity {
     @Bind(R.id.imageView_b)
     ImageView imageViewB;
     @Bind(R.id.imageView_p)
-    ImageView imageViewP;
+    RoundImageView imageViewP;
     @Bind(R.id.imageView_delete)
     ImageView imageViewDelete;
     @Bind(R.id.radioButton1)
@@ -365,6 +366,10 @@ public class XunJianActivity extends BaseActivity {
             AppUtils.showToast(this,"请上传图片");
             return;
         }
+/*        if (editText == null || editText.getText().toString().startsWith("请描述") || editText.getText().toString().equals("")) {
+            AppUtils.showToast(this,"请填写巡检说明");
+            return;
+        }*/
         realFilePath = getRealFilePath(this, cropImageUri);
         final Map<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
@@ -380,8 +385,8 @@ public class XunJianActivity extends BaseActivity {
                 mapParams.put("isIndicatorNormal", s3);
                 mapParams.put("isPowerLineNormal", s1);
                 mapParams.put("isNetworkCableNormal", s2);
-                mapParams.put("inspectionRemarks", editText.getText().toString());
-                mapParams.put("attachments", sharedPreferences.getString("username", ""));
+                mapParams.put("inspectionRemarks", ""/*editText.getText().toString()*/);
+                //mapParams.put("attachments", "");
                 if (finalRealFilePath != null) {
                     mapParams.put("base64", AppUtils.GetImageStr(finalRealFilePath));
                     mapParams.put("imageType", "jpeg");
