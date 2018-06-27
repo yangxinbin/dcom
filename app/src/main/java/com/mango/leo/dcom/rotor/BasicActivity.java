@@ -255,21 +255,21 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView8.setText((CharSequence) rotorBean.getOs());
         Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
 
-        if (rotorBean.getStatusCpu() != 0){
+//        if (rotorBean.getStatusCpu() != 0){
             circleProgressBar0.setProgress(rotorBean.getStatusCpu());
-        }else {
+/*        }else {
             circleProgressBar0.setProgress(0);
-        }
-        if (rotorBean.getStatusRAM() != 0){
+        }*/
+//        if (rotorBean.getStatusRAM() != 0){
             circleProgressBar1.setProgress(rotorBean.getStatusRAM());
-        }else {
+/*        }else {
             circleProgressBar1.setProgress(0);
-        }
-        if (rotorBean.getStatusStorage() != 0){
+        }*/
+//        if (rotorBean.getStatusStorage() != 0){
             circleProgressBar2.setProgress(rotorBean.getStatusStorage());
-        }else {
+/*        }else {
             circleProgressBar2.setProgress(0);
-        }
+        }*/
 
 
         textView_pe.setText(rotorBean.getSupervisor());
