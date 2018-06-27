@@ -50,7 +50,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".DcomActivity" />
+        <activity android:name=".DcomActivity"
+            android:theme="@style/AppThemeD"/>
         <activity android:name=".user.UserActivity" />
         <activity android:name=".scan.EditScanActivity" />
         <activity android:name=".user.ChangePwdActivity" />
