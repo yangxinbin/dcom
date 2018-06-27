@@ -87,11 +87,12 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     private Uri imageUri;
     private Uri cropImageUri;
     private static final int OUTPUT_X = 480;
-    private static final int OUTPUT_Y = 380;
-    private String TAG = "UserChangeActivity";
+    private static final int OUTPUT_Y = 480;
+    private String TAG = "BasicActivity";
     private ImageView imageView_pic;
     private SharedPreferences sharedPreferences;
     private int newSize;
+    private View header;
 
 
     @Override
@@ -100,11 +101,42 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_basic);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
-        initRecycle();
-        initHeader();
-        initSwipeRefreshLayout();
-        loadHistoryLog(rotorBean);
+        if (getIntent().getStringExtra("refresh") != null && getIntent().getStringExtra("refresh").equals("yes")){
+            loadBasic();
+        }else {
+            EventBus.getDefault().register(this);
+            initRecycle();
+            initHeader();
+            initSwipeRefreshLayout();
+            loadHistoryLog(rotorBean);
+        }
+
+    }
+    private void loadBasic() {
+        Map<String, String> mapParams = new HashMap<String, String>();
+        mapParams.put("token", sharedPreferences.getString("token", ""));
+        mapParams.put("userId", sharedPreferences.getString("id", ""));
+        mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
+        HttpUtils.doPost(Urls.HOST_ASSET, mapParams, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+               // mHandler.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (String.valueOf(response.code()).startsWith("2")) {
+                    Message m = mHandler.obtainMessage();
+                    RotorBean bean = ProjectsJsonUtils.readJsonRotorBeanBeans(response.body().string());//data是json字段获得data的值即对象
+                    m.obj = bean;
+                    m.what = 2;
+                    m.sendToTarget();
+                } else {
+                    Log.v("yyyyyyyyyy", response.body().string() + "---" + response.code());
+                   // mHandler.sendEmptyMessage(1);
+                }
+            }
+        });
     }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void userRotorBus(RotorBean bean) {
@@ -184,7 +216,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     }
     private void initHeader() {
         //渲染header布局
-        View header = LayoutInflater.from(this).inflate(R.layout.header, null);
+        header = LayoutInflater.from(this).inflate(R.layout.header, null);
         LinearLayout h = (LinearLayout) header.findViewById(R.id.header);
         ImageView imageView_back = (ImageView) header.findViewById(R.id.imageView_back);
         TextView textView_xunjian = (TextView) header.findViewById(R.id.textView_xunjian);
@@ -331,6 +363,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.textView_xunjian:
                 intent = new Intent(this, XunJianActivity.class);
+                intent.putExtra("assetSn",getIntent().getStringExtra("assetSn"));
                 startActivity(intent);
                 finish();
                 break;
@@ -480,7 +513,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             //相机返回
             case CODE_CAMERA_REQUEST:
                 cropImageUri = Uri.fromFile(fileCropUri);
-                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 //upLoadMap(cropImageUri);
                 break;
             //相册返回
@@ -492,7 +525,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         newUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", new File(newUri.getPath()));
                     }
-                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 3, 2, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                 } else {
                     AppUtils.showToast(this, "设备没有SD卡！");
                 }
@@ -520,7 +553,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                 mapParams.put("userId", sharedPreferences.getString("id", ""));
                 mapParams.put("assetSn", getIntent().getStringExtra("assetSn"));
                 mapParams.put("base64", AppUtils.GetImageStr(realFilePath));
-                mapParams.put("imageType", "jpeg");
+                mapParams.put("imageType", "png");
                 HttpUtils.doPost(Urls.HOST_SAVEPHOTO, mapParams, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -563,6 +596,13 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                         AppUtils.showToast(activity, "图片上传失败");
                         break;
                     case 2:
+                        RotorBean bean = (RotorBean) msg.obj;
+                        rotorBean = bean;
+                        //AppUtils.showToast(activity, "刷新");
+                        initRecycle();
+                        initHeader();
+                        initSwipeRefreshLayout();
+                        loadHistoryLog(rotorBean);
                         break;
                     default:
                         break;
@@ -570,9 +610,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
-    private void showImages(Bitmap bitmap) {
-        imageView_pic.setImageBitmap(bitmap);
-    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -580,7 +618,9 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         EventBus.getDefault().unregister(this);
 
     }
-
+    private void showImages(Bitmap bitmap) {
+        imageView_pic.setImageBitmap(bitmap);
+    }
     /**
      * Try to return the absolute file path from the given Uri
      *

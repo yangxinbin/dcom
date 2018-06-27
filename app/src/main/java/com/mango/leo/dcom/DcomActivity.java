@@ -1,6 +1,8 @@
 package com.mango.leo.dcom;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -51,10 +53,13 @@ public class DcomActivity extends BaseActivity {
         Intent intent;
         switch (view.getId()) {
             case R.id.event:
+                showDailog("DCOM", "敬请期待");
                 break;
             case R.id.faq:
+                showDailog("DCOM", "敬请期待");
                 break;
             case R.id.change:
+                showDailog("DCOM", "敬请期待");
                 break;
             case R.id.scan:
                 intent = new Intent(this, CaptureActivity.class);
@@ -73,7 +78,26 @@ public class DcomActivity extends BaseActivity {
                 break;
         }
     }
-
+    private void showDailog(String s1, final String s2) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setIcon(R.mipmap.ic_launcher)//设置标题的图片
+                .setTitle(s1)//设置对话框的标题
+                .setMessage(s2)//设置对话框的内容
+                //设置对话框的按钮
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
