@@ -23,7 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class XunJianDetailActivity extends AppCompatActivity {
+public class XunJianDetailActivity extends BasicActivity {
 
     @Bind(R.id.imageView_b)
     ImageView imageViewB;
