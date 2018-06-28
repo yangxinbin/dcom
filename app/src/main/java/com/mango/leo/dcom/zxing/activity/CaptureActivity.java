@@ -48,6 +48,7 @@ import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.rotor.BasicActivity;
 import com.mango.leo.dcom.rotor.bean.RotorBean;
+import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
@@ -410,7 +411,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         Intent intent;
         switch (view.getId()) {
             case R.id.imageView_edit_scan:
-                intent = new Intent(this, CaptureActivity.class);
+                intent = new Intent(this, EditScanActivity.class);
                 startActivity(intent);
                 finish();
                 break;
