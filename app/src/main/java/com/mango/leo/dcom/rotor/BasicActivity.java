@@ -296,7 +296,9 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                             mDataAll.clear();//一定要加上否则会报越界异常 不执行代码加载的if判断
                             mData.clear();
                         }
-                        refreshRo.setRefreshing(false);
+                        if (refreshRo != null){
+                            refreshRo.setRefreshing(false);
+                        }
                         loadBasic();//请求刷新
                     }
                 }, 2000);
