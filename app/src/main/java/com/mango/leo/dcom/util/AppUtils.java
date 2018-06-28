@@ -184,7 +184,7 @@ public class AppUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.v("rrrrrrrrrr",""+Base64.encodeToString(bytes, Base64.DEFAULT));
+        //Log.v("rrrrrrrrrr",""+Base64.encodeToString(bytes, Base64.DEFAULT));
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 }
