@@ -128,8 +128,8 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/ly"
             android:gravity="top"
+            android:inputType="textMultiLine"
             android:hint="请描述巡检内容"
-            android:inputType="textPersonName"
             android:lineSpacingExtra="8dp"
             android:padding="8dp" />
 

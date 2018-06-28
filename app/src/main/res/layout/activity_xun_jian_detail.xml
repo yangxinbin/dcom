@@ -91,7 +91,7 @@
             android:enabled="false"
             android:hint=""
             android:textColor="@color/white"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:lineSpacingExtra="8dp"
             android:padding="8dp" />
 

@@ -21,6 +21,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -102,6 +104,7 @@ public class XunJianActivity extends BaseActivity {
     private String s2 = "true";
     private String s3 = "true";
     private SharedPreferences sharedPreferences;
+    private int num = 400;
 
 
     @Override
@@ -111,8 +114,39 @@ public class XunJianActivity extends BaseActivity {
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         initSwitch();
+        //editeNum();//字数无限定
     }
+    private void editeNum() {
+        editText.addTextChangedListener(new TextWatcher() {
+            private CharSequence temp;
+            private int selectionStart;
+            private int selectionEnd;
 
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                temp = charSequence;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int number = num - editable.length();
+                //textViewNum.setText("剩余" + number + "字");
+                selectionStart = editText.getSelectionStart();
+                selectionEnd = editText.getSelectionEnd();
+                if (temp.length() > num) {
+                    editable.delete(selectionStart - 1, selectionEnd);
+                    int tempSelection = selectionEnd;
+                    editText.setText(editable);
+                    editText.setSelection(tempSelection);//设置光标在最后
+                }
+            }
+        });
+    }
     private void initSwitch() {
         radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @SuppressLint("NewApi")
