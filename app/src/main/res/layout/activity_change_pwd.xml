@@ -25,7 +25,7 @@
         android:layout_alignRight="@+id/imageView3"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@drawable/x" />
 
     <ImageView

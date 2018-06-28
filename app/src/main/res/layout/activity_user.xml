@@ -25,7 +25,7 @@
         android:layout_alignRight="@+id/imageView8"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@drawable/x" />
 
     <ImageView
@@ -54,7 +54,7 @@
         android:layout_above="@+id/textView_changepwd"
         android:layout_alignLeft="@+id/textView_changepwd"
         android:layout_alignStart="@+id/textView_changepwd"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:background="@null"
         android:ems="8"
         android:enabled="false"
@@ -84,8 +84,9 @@
         android:layout_alignBottom="@+id/imageView_c"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="27dp"
+        android:textColor="@color/white"
         android:text="修改密码"
-        android:textSize="@dimen/title" />
+        android:textSize="@dimen/textSize" />
 
     <EditText
         android:id="@+id/editText_group"

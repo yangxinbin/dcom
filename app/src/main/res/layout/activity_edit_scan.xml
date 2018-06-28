@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/xlhao" />
 
     <ImageView
@@ -25,7 +25,7 @@
         android:layout_alignRight="@+id/imageView2"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@drawable/x" />
 
     <ImageView
