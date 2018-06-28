@@ -2,7 +2,6 @@ package com.mango.leo.dcom.rotor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.RoundImageView;
@@ -23,7 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class XunJianDetailActivity extends BasicActivity {
+public class XunJianDetailActivity extends BaseActivity {
 
     @Bind(R.id.imageView_b)
     ImageView imageViewB;

@@ -21,6 +21,7 @@ import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.user.UserActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
 import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.zxing.activity.CaptureActivity;
@@ -74,6 +75,10 @@ public class EditScanActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.imageView_sure:
+                if (!NetUtil.isNetConnect(this)) {
+                    AppUtils.showToast(this, "请连接网络");
+                    return;
+                }
                 loadBasic();
                 break;
             case R.id.imageView_scan:

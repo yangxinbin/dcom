@@ -37,6 +37,7 @@ import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
 import com.mango.leo.dcom.util.RoundImageView;
@@ -178,6 +179,10 @@ public class XunJianActivity extends BaseActivity {
                 imageViewP.setVisibility(View.INVISIBLE);
                 break;
             case R.id.sure:
+                if (!NetUtil.isNetConnect(this)) {
+                    AppUtils.showToast(this, "请连接网络");
+                    return;
+                }
                 upLoadLog(cropImageUri);
                 break;
         }

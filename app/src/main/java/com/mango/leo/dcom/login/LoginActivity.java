@@ -18,6 +18,7 @@ import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.util.ACache;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
 import com.mango.leo.dcom.util.Urls;
 
@@ -71,6 +72,10 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.imageView_login_ok)
     public void onViewClicked() {
+        if (!NetUtil.isNetConnect(this)) {
+            AppUtils.showToast(this, "请连接网络");
+            return;
+        }
         loadAuthor();
        /* Intent intent = new Intent(this, DcomActivity.class);
         startActivity(intent);

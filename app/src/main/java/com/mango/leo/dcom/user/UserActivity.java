@@ -19,6 +19,7 @@ import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.ProjectsJsonUtils;
 import com.mango.leo.dcom.util.Urls;
 
@@ -97,6 +98,10 @@ public class UserActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.exit:
+                if (!NetUtil.isNetConnect(this)) {
+                    AppUtils.showToast(this, "请连接网络");
+                    return;
+                }
                 exitLogin();
                 break;
             case R.id.imageView_c:
