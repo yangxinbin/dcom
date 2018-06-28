@@ -256,8 +256,9 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView6.setText(rotorBean.getStorageSize());
         textView7.setText(rotorBean.getUseFor());
         textView8.setText((CharSequence) rotorBean.getOs());
-        Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
-
+        if (rotorBean.getPhoto() != null){
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
+        }
 //        if (rotorBean.getStatusCpu() != 0){
             circleProgressBar0.setProgress(rotorBean.getStatusCpu());
 /*        }else {
