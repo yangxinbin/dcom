@@ -14,5 +14,6 @@
     <color name="bleak">#000000</color>
     <color name="alpwhite">#00ffffff</color>
     <color name="grayBlack">#252525</color>
-
+    <color name="gray">#d9d9d9</color>
+    <color name="bule_item">#255d80</color>
 </resources>

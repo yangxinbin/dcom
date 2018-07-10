@@ -81,7 +81,10 @@
         <activity android:name=".user.UserChangeActivity" />
         <activity
             android:name=".rotor.XunJianDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".event.activity.EventActivity" />
+        <activity android:name=".faq.activity.FaqActivity" />
+        <activity android:name=".change.activity.ChangeActivity"></activity>
     </application>
 
 </manifest>

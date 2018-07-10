@@ -8,12 +8,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.change.activity.ChangeActivity;
+import com.mango.leo.dcom.event.activity.EventActivity;
+import com.mango.leo.dcom.faq.activity.FaqActivity;
 import com.mango.leo.dcom.scan.EditScanActivity;
 import com.mango.leo.dcom.user.UserActivity;
 import com.mango.leo.dcom.zxing.activity.CaptureActivity;
@@ -53,13 +55,22 @@ public class DcomActivity extends BaseActivity {
         Intent intent;
         switch (view.getId()) {
             case R.id.event:
-                showDailog("DCOM", "敬请期待");
+                intent = new Intent(this, EventActivity.class);
+                startActivity(intent);
+                finish();
+                //showDailog("DCOM", "敬请期待");
                 break;
             case R.id.faq:
-                showDailog("DCOM", "敬请期待");
+                intent = new Intent(this, FaqActivity.class);
+                startActivity(intent);
+                finish();
+                //showDailog("DCOM", "敬请期待");
                 break;
             case R.id.change:
-                showDailog("DCOM", "敬请期待");
+                intent = new Intent(this, ChangeActivity.class);
+                startActivity(intent);
+                finish();
+                //showDailog("DCOM", "敬请期待");
                 break;
             case R.id.scan:
                 intent = new Intent(this, CaptureActivity.class);

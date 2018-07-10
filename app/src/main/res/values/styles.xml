@@ -21,5 +21,9 @@
         <item name="android:windowIsTranslucent">true</item>-->
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="TabTextOther" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
 
 </resources>
