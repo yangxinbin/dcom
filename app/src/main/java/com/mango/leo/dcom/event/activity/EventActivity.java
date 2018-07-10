@@ -122,6 +122,9 @@ public class EventActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.imageView_add:
+                intent = new Intent(this, AddEventActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

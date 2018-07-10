@@ -84,7 +84,10 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".event.activity.EventActivity" />
         <activity android:name=".faq.activity.FaqActivity" />
-        <activity android:name=".change.activity.ChangeActivity"></activity>
+        <activity android:name=".change.activity.ChangeActivity" />
+        <activity android:name=".event.activity.AddEventActivity" />
+        <activity android:name=".faq.activity.AddFaqActivity" />
+        <activity android:name=".change.activity.AddChangeActivity"></activity>
     </application>
 
 </manifest>

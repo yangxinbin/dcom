@@ -47,6 +47,7 @@ public class FaqActivity extends AppCompatActivity {
         initDatas();
         init();
     }
+
     private void initDatas() {
         //  mDatas = new ArrayList<String>(Arrays.asList("       我的事件       ", "       全部事件       "));
         mDatas = new ArrayList<String>(Arrays.asList("我的问题", "全部问题"));
@@ -64,7 +65,8 @@ public class FaqActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(1);
         reflex(tabLayout);
     }
-    public void reflex(final TabLayout tabLayout){
+
+    public void reflex(final TabLayout tabLayout) {
         //了解源码得知 线的宽度是根据 tabView的宽度来设置的
         tabLayout.post(new Runnable() {
             @Override
@@ -96,7 +98,7 @@ public class FaqActivity extends AppCompatActivity {
 
                         //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
-                        params.width = width ;
+                        params.width = width;
                         params.leftMargin = dp50;
                         params.rightMargin = dp50;
                         tabView.setLayoutParams(params);
@@ -112,6 +114,7 @@ public class FaqActivity extends AppCompatActivity {
             }
         });
     }
+
     @OnClick({R.id.imageView_back, R.id.imageView_add})
     public void onViewClicked(View view) {
         Intent intent;
@@ -122,6 +125,9 @@ public class FaqActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.imageView_add:
+                intent = new Intent(this, AddFaqActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
