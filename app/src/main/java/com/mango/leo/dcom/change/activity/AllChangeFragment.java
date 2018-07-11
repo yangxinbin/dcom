@@ -18,7 +18,7 @@ class AllChangeFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.all_change, container, false);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.recycle_view, container, false);
         return view;
     }
 }
