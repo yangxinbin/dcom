@@ -1,14 +1,15 @@
-package com.mango.leo.dcom.event.presenter;
+package com.mango.leo.dcom.change.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.mango.leo.dcom.event.bean.EventBean;
-import com.mango.leo.dcom.event.listener.OnEventListener;
-import com.mango.leo.dcom.event.model.EventModel;
-import com.mango.leo.dcom.event.model.EventModelImpl;
-import com.mango.leo.dcom.event.view.EventView;
+import com.mango.leo.dcom.change.bean.ChangeBean;
+import com.mango.leo.dcom.change.listener.OnChangeListener;
+import com.mango.leo.dcom.change.model.ChangeModelImpl;
+import com.mango.leo.dcom.change.model.ChangeModel;
+import com.mango.leo.dcom.change.view.ChangeView;
+import com.mango.leo.dcom.faq.view.FaqView;
 
 import java.util.List;
 
@@ -18,18 +19,18 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by admin on 2018/5/21.
  */
 
-public class EventPresenterImpl implements EventPresenter, OnEventListener {
-    private EventView eventView;
-    private EventModel eventModel;
+public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
+    private ChangeView changeView;
+    private ChangeModel changeModel;
     private SharedPreferences sharedPreferences;
 
-    public EventPresenterImpl(EventView u) {
-        this.eventView = u;
-        this.eventModel = new EventModelImpl();
+    public ChangePresenterImpl(ChangeView u) {
+        this.changeView = u;
+        this.changeModel = new ChangeModelImpl();
     }
 
     @Override
-    public void visitProjects(Context context, int type,EventBean eventBean, int page) {
+    public void visitProjects(Context context, int type, ChangeBean changeBean, int page) {
         sharedPreferences = context.getSharedPreferences("CIFIT", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
@@ -40,22 +41,22 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
             url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 2 + "&page=" + page;
         }
         Log.v("pppppppppppp", "" + url);
-        eventModel.visitProjects(context, type,eventBean,url, this);
+        changeModel.visitProjects(context, type, changeBean,url, this);
     }
 
     @Override
-    public void onSuccess(List<EventBean> list) {
-        eventView.addEventSuccess(list);
+    public void onSuccess(List<ChangeBean> list) {
+        changeView.addChangeSuccess(list);
     }
 
     @Override
     public void onSuccessMes(String msg) {
-        eventView.addEventMes(msg);
+        changeView.addChangeMes(msg);
     }
 
     @Override
     public void onFailure(String msg, Exception e) {
-        eventView.addEventFail(msg);
+        changeView.addChangeFail(msg);
     }
 
     private String getUrl(int type, Context context) {
