@@ -194,23 +194,6 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == adapter.getItemCount()
                     && adapter.isShowFooter()) {//加载判断条件 手指离开屏幕 到了footeritem
-/*                int count = adapter.getItemCount();
-                int i;
-                for (i = count; i < count + 5; i++) {
-                    if (mDataAll != null && i >= newSize) {//到最后
-                        adapter.isShowFooter(false);
-                        noMoreMsg();
-                        break;
-                    }
-                    if (mDataAll == null) {
-                        break;//一开始断网报空指针的情况
-                    }
-                    if (i >= newSize) {//比如一共30条新闻 这个条件当为29时还是可以把30那条新闻加上去的
-                        noMoreMsg();
-                        break;
-                    }
-                    adapter.addItem(mDataAll.get(i));//addItem里面记得要notifyDataSetChanged 否则第一次加载不会显示数据
-                }*/
             }
         }
     };
@@ -256,6 +239,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView6.setText(rotorBean.getStorageSize());
         textView7.setText(rotorBean.getUseFor());
         textView8.setText((CharSequence) rotorBean.getOs());
+        Log.v("---",""+"http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl());
         if (rotorBean.getPhoto() != null){
             Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
         }
@@ -540,7 +524,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
             //裁剪返回
             case CODE_RESULT_REQUEST:
                 Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
-                upLoadMap(getRealFilePath(this,cropImageUri));
+                upLoadMap(getRealFile(this,cropImageUri));
                 //这里上传文件
                 if (bitmap != null) {
                     showImages(bitmap);
@@ -550,8 +534,8 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void upLoadMap(final File realFilePath) {
-        final Map<String, String> mapParams = new HashMap<String, String>();
+    private void upLoadMap(final File file) {
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
         new Thread(new Runnable() {
             @Override
@@ -559,9 +543,9 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
                 mapParams.put("token", sharedPreferences.getString("token", ""));
                 mapParams.put("userId", sharedPreferences.getString("id", ""));
                 mapParams.put("assetSn", sharedPreferences.getString("assetSn", ""));
-                mapParams.put("base64", AppUtils.GetImageStr(realFilePath));
-                mapParams.put("imageType", "png");
-                HttpUtils.doPost(Urls.HOST_SAVEPHOTO, mapParams, new Callback() {
+               // mapParams.put("base64", AppUtils.GetImageStr(realFilePath));
+               // mapParams.put("imageType", "png");
+                HttpUtils.doPostAll(Urls.HOST_SAVEPHOTO, mapParams,file, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         mHandler.sendEmptyMessage(1);
@@ -635,7 +619,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
      * @param uri
      * @return the file path or null
      */
-    public static File getRealFilePath(final Context context, final Uri uri) {
+    public static File getRealFile(final Context context, final Uri uri) {
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;

@@ -179,7 +179,7 @@ public class HttpUtils {
      * @param paramsMap
      * @param callback
      */
-    public static void doPostAll(String url, HashMap<String, String> paramsMap, File[] files, Callback callback) {
+    public static void doPostAll(String url, HashMap<String, String> paramsMap, File f, Callback callback) {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         //设置类型
         builder.setType(MultipartBody.FORM);
@@ -190,23 +190,16 @@ public class HttpUtils {
                 Log.v("doPostAll", key + "^^^^^doPostAll^^paramsMap^^^" + object.toString());
             }
         }
-        if (files != null) {
-            //RequestBody fileBody = null;
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                Log.v("doPostAll", file.getName() + "^^^^^doPostAll^^files^^^");
-                String fileName = file.getName();
-                //fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-                builder.addFormDataPart("file", fileName, RequestBody.create(MediaType.parse("application/octet-stream"), file));
-               /* builder.addPart(Headers.of("Content-Disposition",
-                        "form-data; name=\"" + "mango" + "\"; filename=\"" + fileName + "\""),
-                        fileBody);*/
-            }
+        if (f != null) {
+            Log.v("doPostAll", "^^^^^f^^");
+            builder.addFormDataPart("file",f.getName(),RequestBody.create(MediaType.parse("application/octet-stream"), f));
         }
         //创建RequestBody
         RequestBody body = builder.build();
         Request request = new Request.Builder()
                 .url(url)
+                .header("Content-Type","application/x-www-form-urlencoded")
+                .header("api-key","49ku8919456qwe4534578451kiutrvfg")
                 .post(body)
                 .build();
         Call call = getInstance().newCall(request);

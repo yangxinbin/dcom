@@ -399,7 +399,7 @@ public class XunJianActivity extends BaseActivity {
     }
 
     private void upLoadLog(Uri cropImageUri) {
-        File realFilePath = null;
+        File realFile = null;
         if (cropImageUri == null) {
             AppUtils.showToast(this,"请上传图片");
             return;
@@ -408,11 +408,11 @@ public class XunJianActivity extends BaseActivity {
             AppUtils.showToast(this,"请填写巡检说明");
             return;
         }
-        realFilePath = getRealFilePath(this, cropImageUri);
-        final Map<String, String> mapParams = new HashMap<String, String>();
+        realFile = getRealFile(this, cropImageUri);
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
-        final File finalRealFilePath = realFilePath;
-        Log.v("xxxxxx", sharedPreferences.getString("id", "")+"  "+sharedPreferences.getString("tenantId", "")+"  "+sharedPreferences.getString("assetSn", "")+"  "+editText.getText().toString()+"  " +cropImageUri+"=="+"   "+ finalRealFilePath +"  **  "+ s1 + " " + s2 + " " + s3 + " " + " " + sharedPreferences.getString("username", ""));
+        final File finalRealFile = realFile;
+        Log.v("xxxxxx", sharedPreferences.getString("id", "")+"  "+sharedPreferences.getString("tenantId", "")+"  "+sharedPreferences.getString("assetSn", "")+"  "+editText.getText().toString()+"  " +cropImageUri+"=="+"   "+ finalRealFile +"  **  "+ s1 + " " + s2 + " " + s3 + " " + " " + sharedPreferences.getString("username", ""));
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -425,11 +425,11 @@ public class XunJianActivity extends BaseActivity {
                 mapParams.put("isNetworkCableNormal", s2);
                 mapParams.put("inspectionRemarks", editText.getText().toString());
                 //mapParams.put("attachments", "");
-                if (finalRealFilePath != null) {
-                    mapParams.put("base64", AppUtils.GetImageStr(finalRealFilePath));
-                    mapParams.put("imageType", "jpeg");
+                if (finalRealFile != null) {
+                    //mapParams.put("base64", AppUtils.GetImageStr(finalRealFile));
+                    //mapParams.put("imageType", "jpeg");
                 }
-                HttpUtils.doPost(Urls.HOST_INSPECT, mapParams, new Callback() {
+                HttpUtils.doPostAll(Urls.HOST_INSPECT, mapParams,finalRealFile,new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         mHandler.sendEmptyMessage(1);
@@ -495,7 +495,7 @@ public class XunJianActivity extends BaseActivity {
      * @param uri
      * @return the file path or null
      */
-    public static File getRealFilePath(final Context context, final Uri uri) {
+    public static File getRealFile(final Context context, final Uri uri) {
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;
