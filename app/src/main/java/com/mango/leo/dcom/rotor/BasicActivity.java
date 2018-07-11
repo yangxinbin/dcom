@@ -117,6 +117,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
     private void loadBasic() {
         Map<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
+        Log.v("xxxxxx",sharedPreferences.getString("token", ""));
         mapParams.put("token", sharedPreferences.getString("token", ""));
         mapParams.put("userId", sharedPreferences.getString("id", ""));
         mapParams.put("assetSn", sharedPreferences.getString("assetSn", ""));
@@ -239,9 +240,10 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView6.setText(rotorBean.getStorageSize());
         textView7.setText(rotorBean.getUseFor());
         textView8.setText((CharSequence) rotorBean.getOs());
-        Log.v("---",""+"http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl());
+        Log.v("---",""+"http://192.168.1.120:8080" + rotorBean.getPhoto().getUrl());
         if (rotorBean.getPhoto() != null){
-            Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
+            Glide.with(this).load("http://192.168.1.120:8080" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
+            //Glide.with(this).load("http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
         }
 //        if (rotorBean.getStatusCpu() != 0){
             circleProgressBar0.setProgress(rotorBean.getStatusCpu());
