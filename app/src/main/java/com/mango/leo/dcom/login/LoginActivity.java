@@ -63,6 +63,7 @@ public class LoginActivity extends BaseActivity {
                     .putString("id", String.valueOf(userBean.getId()))
                     .putString("tenantId", String.valueOf(userBean.getTenantId()))
                     .putString("username", String.valueOf(userBean.getUsername()))
+                    .putString("realname", String.valueOf(userBean.getRealName()))
                     .commit();
             Intent intent = new Intent(this, DcomActivity.class);
             startActivity(intent);
