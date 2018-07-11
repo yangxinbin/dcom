@@ -217,6 +217,7 @@
                     android:layout_below="@+id/imageView54"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginBottom="18dp"
                     android:text="完成日期"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSize" />
@@ -256,7 +257,7 @@
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/r" />
                 </LinearLayout>
-                <ImageView
+<!--                <ImageView
                     android:id="@+id/imageView55"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -295,7 +296,7 @@
                     android:hint="问题登记"
                     android:inputType="textPersonName"
                     android:textColorHint="@color/gray"
-                    android:textSize="@dimen/sencond_textSize" />
+                    android:textSize="@dimen/sencond_textSize" />-->
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
