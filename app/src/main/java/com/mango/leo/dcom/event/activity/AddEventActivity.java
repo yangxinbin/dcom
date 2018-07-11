@@ -20,8 +20,12 @@ import com.mango.leo.dcom.event.view.EventView;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
+import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -72,6 +76,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
     Button bSaveCommit;
     private EventPresenter eventPresenter;
     private SharedPreferences sharedPreferences;
+    private CustomDatePicker customDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
         ButterKnife.bind(this);
         eventPresenter = new EventPresenterImpl(this);
         initView();
+        initDatePicker();
         //eventPresenter.visitProjects();
     }
 
@@ -94,7 +100,19 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
         editTextEventFlag.setText(stringBuffer.toString());
         editTextEventPeople.setText(sharedPreferences.getString("realname", ""));
     }
-
+    private void initDatePicker() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        String now = sdf.format(new Date());
+        textViewEventTime.setText(now);
+        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                textViewEventTime.setText(time);
+            }
+        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker.showSpecificTime(true); // 显示时和分
+        customDatePicker.setIsLoop(true); // 允许循环滚动
+    }
     @Override
     public void addEventSuccess(List<ListEventBean> eventBeans) {
 
@@ -120,6 +138,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
                 finish();
                 break;
             case R.id.linearLayout_event_time:
+                // 日期格式为yyyy-MM-dd HH:mm
+                customDatePicker.show(textViewEventTime.getText().toString());
                 break;
             case R.id.linearLayout_event_from:
                 break;
