@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.rotor.bean.RotorBean;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.RoundImageView;
@@ -82,8 +83,10 @@ public class XunJianDetailActivity extends BaseActivity {
         if (bean.getInspectionRemarks() != null){
             editText.setText(bean.getInspectionRemarks().toString());
         }
-        Log.v("dddddddddd",""+"http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl());
-        Glide.with(this).load("http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
+        Log.v("dddddddddd",""+"http://192.168.1.120:8080" + bean.getAttachments().get(0).getUrl());
+        Glide.with(this).load("http://192.168.1.120:8080" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
+        //Glide.with(this).load("http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
+        EventBus.getDefault().removeStickyEvent(RotorBean.LogBean.class);
     }
 
     @OnClick(R.id.imageView_b)
