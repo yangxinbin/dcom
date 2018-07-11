@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -97,7 +97,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView22"
@@ -147,7 +147,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -207,7 +207,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -268,7 +268,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView42"
@@ -313,7 +313,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -330,7 +330,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line"
+                    android:background="@color/blue_line"
                     android:visibility="invisible" />
 
                 <TextView
@@ -371,7 +371,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView24"
@@ -421,7 +421,7 @@
                     android:layout_marginBottom="18dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView25"
@@ -471,7 +471,7 @@
                     android:layout_marginBottom="18dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView45"
@@ -521,7 +521,7 @@
                     android:layout_marginBottom="18dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView95"
@@ -577,7 +577,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -623,7 +623,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -678,7 +678,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -733,7 +733,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -794,7 +794,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -834,7 +834,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -866,7 +866,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -898,7 +898,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -934,7 +934,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
                 <ListView
                     android:layout_marginLeft="8dp"
                     android:id="@+id/list1"
@@ -949,7 +949,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -980,7 +980,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            card_view:cardBackgroundColor="@color/bule_item"
+            card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
@@ -1016,7 +1016,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/bule_line" />
+                    android:background="@color/blue_line" />
                 <ListView
                     android:layout_marginLeft="8dp"
                     android:id="@+id/list2"

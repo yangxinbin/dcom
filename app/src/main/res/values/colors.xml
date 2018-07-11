@@ -15,7 +15,7 @@
     <color name="alpwhite">#00ffffff</color>
     <color name="grayBlack">#252525</color>
     <color name="gray">#d9d9d9</color>
-    <color name="bule_item">#255d80</color>
-    <color name="bule_line">#317eae</color>
+    <color name="blue_item">#255d80</color>
+    <color name="blue_line">#317eae</color>
 
 </resources>

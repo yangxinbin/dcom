@@ -124,7 +124,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
 
-        }else {
+
+        } else {
             // 之所以要设置可见，是因为我在没有更多数据时会隐藏了这个footView
             if (hasMore == true) {
                 // 不隐藏footView提示
@@ -187,15 +188,15 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView z_title, z_content, im;
+        public TextView textView_title, textView_time, textView_stage;
 
         public ItemViewHolder(View v) {
             super(v);
             if (v == mHeaderView)
                 return;
-/*            z_title = (TextView) v.findViewById(R.id.tv_zhaoshang);
-            z_content = (TextView) v.findViewById(R.id.textView_zhaoshangC);
-            im = (TextView) v.findViewById(R.id.imageView_flag);*/
+            textView_title = (TextView) v.findViewById(R.id.textView_title);
+            textView_time = (TextView) v.findViewById(R.id.textView_time);
+            textView_stage = (TextView) v.findViewById(R.id.textView_stage);
             v.setOnClickListener(this);
         }
 
