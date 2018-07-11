@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.event.listener;
 
 import com.mango.leo.dcom.event.bean.EventBean;
+import com.mango.leo.dcom.event.bean.ListEventBean;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface OnEventListener {
-    void onSuccess(List<EventBean> list);
+    void onSuccess(List<ListEventBean> list);
     void onSuccessMes(String msg);
     void onFailure(String msg, Exception e);
 }

@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.event.view;
 
 import com.mango.leo.dcom.event.bean.EventBean;
+import com.mango.leo.dcom.event.bean.ListEventBean;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface EventView {
-    void addEventSuccess(List<EventBean> eventBeans);
+    void addEventSuccess(List<ListEventBean> eventBeans);
     void addEventMes(String s);
     void addEventFail(String e);
 }

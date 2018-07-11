@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.mango.leo.dcom.event.bean.EventBean;
+import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.listener.OnEventListener;
 import com.mango.leo.dcom.event.model.EventModel;
 import com.mango.leo.dcom.event.model.EventModelImpl;
 import com.mango.leo.dcom.event.view.EventView;
+import com.mango.leo.dcom.util.Urls;
 
 import java.util.List;
 
@@ -33,18 +35,17 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
         sharedPreferences = context.getSharedPreferences("CIFIT", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 1 + "&page=" + page;
+            url = getUrl(type, context);
         } else if (type == 1) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 0 + "&page=" + page;
+            url = getUrl(type, context);
         } else if (type == 2) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 2 + "&page=" + page;
         }
         Log.v("pppppppppppp", "" + url);
-        eventModel.visitProjects(context, type,eventBean,url, this);
+        eventModel.visitProjects(context, type,eventBean,url,page, this);
     }
 
     @Override
-    public void onSuccess(List<EventBean> list) {
+    public void onSuccess(List<ListEventBean> list) {
         eventView.addEventSuccess(list);
     }
 
@@ -62,9 +63,10 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
             case 0:
+                sburl.append(Urls.HOST_MYEVENT);
                 break;
             case 1:
-                //sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);
+                sburl.append(Urls.HOST_ALLEVENT);
                 break;
             case 2:
                // sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);//已审核

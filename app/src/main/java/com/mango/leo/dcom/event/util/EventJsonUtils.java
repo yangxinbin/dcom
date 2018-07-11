@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mango.leo.dcom.event.bean.EventBean;
+import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.util.JsonUtils;
 
 import java.util.ArrayList;
@@ -24,14 +25,14 @@ public class EventJsonUtils {
      * @param
      * @return
      */
-    public static List<EventBean> readJsonNewsBeans(String res, String va) {
-        List<EventBean> beans = new ArrayList<EventBean>();
+    public static List<ListEventBean> readJsonEventBeans(String res, String va) {
+        List<ListEventBean> beans = new ArrayList<ListEventBean>();
         try {
             JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
-            JsonObject ob = jsonObject.getAsJsonObject("responseObject");
-            JsonArray jsonArray = ob.getAsJsonArray(va);
+            //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
+            JsonArray jsonArray = jsonObject.getAsJsonArray(va);
             for (int i = 0; i < jsonArray.size(); i++) {
-                EventBean news = JsonUtils.deserialize(jsonObject, EventBean.class);
+                ListEventBean news = JsonUtils.deserialize(jsonObject, ListEventBean.class);
                 beans.add(news);//这里会将所有的json对象转换为bean对象
             }
         } catch (Exception e) {

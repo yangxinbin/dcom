@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.bean.ListEventBean;
+import com.mango.leo.dcom.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private OnZhaoShanClickListener mOnZhaoShanClickListener;//自注册的接口给调用者用于点击逻辑
+    private OnEventClickListener mOnEventClickListener;//自注册的接口给调用者用于点击逻辑
     private List<ListEventBean> mData;
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
@@ -63,6 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void hasMore(Boolean b) {
         this.hasMore = b;
+        this.notifyDataSetChanged();
     }
 
     public EventAdapter(Context context) {
@@ -123,7 +125,16 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (getItemViewType(position) == TYPE_HEADER) return;//add header
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
-
+            if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
+                Log.v("yyyyy", "====pos======" + pos % 20);//
+                ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
+                ((ItemViewHolder) holder).textView_time.setText(DateUtil.getDateToString(mData.get(pos).getList().get(pos % 20).getCreatedOn(),"yyyy-MM-dd HH:mm:ss"));
+                if (mData.get(pos).getList().get(pos % 20).getStage() == 0){
+                    ((ItemViewHolder) holder).textView_stage.setText("未提交");
+                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 1){
+                    ((ItemViewHolder) holder).textView_stage.setText("已提交");
+                }
+            }
 
         } else {
             // 之所以要设置可见，是因为我在没有更多数据时会隐藏了这个footView
@@ -164,8 +175,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mData.size() + isFooter + isHeader;
     }
 
-    public void setOnZhaoShanClickListener(OnZhaoShanClickListener onItemnewsClickListener) {
-        this.mOnZhaoShanClickListener = onItemnewsClickListener;
+    public void setOnEventClickListener(OnEventClickListener onItemnewsClickListener) {
+        this.mOnEventClickListener = onItemnewsClickListener;
     }
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -182,7 +193,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mData == null ? null : mData.get(position);
     }
 
-    public interface OnZhaoShanClickListener {
+    public interface OnEventClickListener {
         public void onItemClick(View view, int position);
     }
 
@@ -202,8 +213,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            if (mOnZhaoShanClickListener != null) {
-                mOnZhaoShanClickListener.onItemClick(view, this.getLayoutPosition());
+            if (mOnEventClickListener != null) {
+                mOnEventClickListener.onItemClick(view, this.getLayoutPosition());
             }
         }
     }

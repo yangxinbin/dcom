@@ -10,5 +10,5 @@ import com.mango.leo.dcom.event.listener.OnEventListener;
  */
 
 public interface EventModel {
-    void visitProjects(Context context, int type, EventBean eventBean,String url, OnEventListener listener);//刷新动作加载新闻数据
+    void visitProjects(Context context, int type, EventBean eventBean,String url,int page, OnEventListener listener);//刷新动作加载新闻数据
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.bean.EventBean;
+import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
 import com.mango.leo.dcom.event.presenter.EventPresenterImpl;
 import com.mango.leo.dcom.event.view.EventView;
@@ -23,7 +24,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
     }
 
     @Override
-    public void addEventSuccess(List<EventBean> eventBeans) {
+    public void addEventSuccess(List<ListEventBean> eventBeans) {
 
     }
 
