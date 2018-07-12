@@ -357,7 +357,7 @@
                     android:background="@null"
                     android:ems="10"
                     android:gravity="right"
-                    android:hint="请输入需要关联的关键字"
+                    android:hint="请输入需要关联的关联字"
                     android:inputType="textPersonName"
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/sencond_textSize" />
@@ -598,7 +598,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="关联配置项"
+                        android:text="关联事件单"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
 
@@ -639,7 +639,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_weight="1"
-                        android:text="关键问题单"
+                        android:text="关联问题单"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
 
@@ -658,7 +658,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:text="请输入需要关联的关键字"
+                            android:text="请输入需要关联的关联字"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/sencond_textSize" />
 
@@ -694,7 +694,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_weight="1"
-                        android:text="关键变更单"
+                        android:text="关联变更单"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
 
@@ -713,7 +713,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:text="请输入需要关联的关键字"
+                            android:text="请输入需要关联的关联字"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/sencond_textSize" />
 
@@ -750,7 +750,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginBottom="18dp"
                         android:layout_weight="1"
-                        android:text="关键配置项"
+                        android:text="关联配置项"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
 
@@ -769,7 +769,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:text="请输入需要关联的关键字"
+                            android:text="请输入需要关联的关联字"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/sencond_textSize" />
 

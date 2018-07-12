@@ -1,18 +1,26 @@
 package com.mango.leo.dcom.event.activity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
 import com.mango.leo.dcom.event.presenter.EventPresenterImpl;
@@ -31,7 +39,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddEventActivity extends AppCompatActivity implements EventView {
+public class AddEventActivity extends AppCompatActivity implements EventView, AdapterView.OnItemClickListener {
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
     @Bind(R.id.editText_event_flag)
@@ -77,6 +85,9 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
     private EventPresenter eventPresenter;
     private SharedPreferences sharedPreferences;
     private CustomDatePicker customDatePicker;
+    private ListAndGirdDownAdapter adapter;
+    private Dialog dialog;
+    private List<String> list1,list2,list3,list4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +98,17 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
         eventPresenter = new EventPresenterImpl(this);
         initView();
         initDatePicker();
+        initDateFromWeb();
         //eventPresenter.visitProjects();
+    }
+
+    private void initDateFromWeb() {
+
     }
 
     private void initView() {
         StringBuffer stringBuffer = new StringBuffer();
-        String s = DateUtil.getDateToString(System.currentTimeMillis(),"yyyyMMddHHmm").substring(2,12);
+        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
         stringBuffer.append(s);
         for (int i = 0; i < 3; i++) {
             stringBuffer.append((char) (Math.random() * 26 + 'A'));
@@ -100,6 +116,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
         editTextEventFlag.setText(stringBuffer.toString());
         editTextEventPeople.setText(sharedPreferences.getString("realname", ""));
     }
+
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
@@ -114,6 +131,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
         customDatePicker.showSpecificTime(true); // 显示时和分
         customDatePicker.setIsLoop(true); // 允许循环滚动
     }
+
     @Override
     public void addEventSuccess(List<ListEventBean> eventBeans) {
 
@@ -144,12 +162,16 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
                 customDatePicker.show("1990-01-01 00:00");
                 break;
             case R.id.linearLayout_event_from:
+                showPopupWindow(this, list1, 1);
                 break;
             case R.id.linearLayout_event_type:
+                showPopupWindow(this, list2, 2);
                 break;
             case R.id.linearLayout_event_level:
+                showPopupWindow(this, list3, 3);
                 break;
             case R.id.linearLayout_event_grave:
+                showPopupWindow(this, list4, 4);
                 break;
             case R.id.imageView_pic:
                 break;
@@ -158,6 +180,45 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
             case R.id.b_save:
                 break;
             case R.id.b_save_commit:
+                break;
+        }
+    }
+
+    private void showPopupWindow(Context context, List<String> listDate, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.listview_default_down, null);
+        //此处可按需求为各控件设置属性
+        ListView listView = view.findViewById(R.id.lv);
+        adapter = new ListAndGirdDownAdapter(context, listDate);
+        listView.setAdapter(adapter);
+        listView.setId(i);
+        listView.setOnItemClickListener(this);
+        dialog = new Dialog(context, R.style.dialog);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        //设置弹出窗口大小
+        window.setLayout(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        //设置显示位置
+        window.setGravity(Gravity.BOTTOM);
+        //设置动画效果
+        window.setWindowAnimations(R.style.AnimBottom);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (adapterView.getId()) {
+            case 1:
+                dialog.dismiss();
+                break;
+            case 2:
+                dialog.dismiss();
+                break;
+            case 3:
+                dialog.dismiss();
+                break;
+            case 4:
+                dialog.dismiss();
                 break;
         }
     }
