@@ -103,11 +103,12 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
-        textViewEventTime.setText(now);
+        //textViewEventTime.setText(now);
         customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 textViewEventTime.setText(time);
+                textViewEventTime.setTextColor(getResources().getColor(R.color.white));
             }
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(true); // 显示时和分
@@ -139,7 +140,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView {
                 break;
             case R.id.linearLayout_event_time:
                 // 日期格式为yyyy-MM-dd HH:mm
-                customDatePicker.show(textViewEventTime.getText().toString());
+                //customDatePicker.show(textViewEventTime.getText().toString());
+                customDatePicker.show("1990-01-01 00:00");
                 break;
             case R.id.linearLayout_event_from:
                 break;
