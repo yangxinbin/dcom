@@ -1,14 +1,28 @@
 package com.mango.leo.dcom.event.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
@@ -33,12 +48,15 @@ import com.mango.leo.dcom.event.view.EventView;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
-import com.mango.leo.dcom.util.JsonMap;
-import com.mango.leo.dcom.util.JsonUtils;
+import com.mango.leo.dcom.util.PhotoUtils;
+import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,13 +107,19 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     @Bind(R.id.editText_description)
     EditText editTextDescription;
     @Bind(R.id.imageView_pic)
-    ImageView imageViewPic;
+    RoundImageView imageViewPic;
     @Bind(R.id.config)
     LinearLayout config;
     @Bind(R.id.b_save)
     Button bSave;
     @Bind(R.id.b_save_commit)
     Button bSaveCommit;
+    @Bind(R.id.imageView_pic_choose)
+    ImageView imageViewPicChoose;
+    @Bind(R.id.imageViewP)
+    ImageView imageViewP;
+    @Bind(R.id.p)
+    RelativeLayout p;
     private EventPresenter eventPresenter;
     private SharedPreferences sharedPreferences;
     private CustomDatePicker customDatePicker;
@@ -104,7 +128,18 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     private List<String> list1, list2, list3, list4;
     private int currentPosition1 = -1, currentPosition2 = -1, currentPosition3 = -1, currentPosition4 = -1;
     private EventBean eventBean;
-
+    private static final int CODE_GALLERY_REQUEST = 0xa0;
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int CODE_RESULT_REQUEST = 0xa2;
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
+    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
+    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
+    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
+    private Uri imageUri;
+    private Uri cropImageUri;
+    private static final int OUTPUT_X = 480;
+    private static final int OUTPUT_Y = 380;
+    private String TAG = "EventActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,7 +236,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
 
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_event_time, R.id.linearLayout_event_from, R.id.linearLayout_event_type, R.id.linearLayout_event_level, R.id.linearLayout_event_grave, R.id.imageView_pic, R.id.config, R.id.b_save, R.id.b_save_commit})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_event_time, R.id.linearLayout_event_from, R.id.linearLayout_event_type, R.id.linearLayout_event_level, R.id.linearLayout_event_grave, R.id.imageView_pic, R.id.config, R.id.b_save, R.id.b_save_commit,R.id.imageView_pic_choose, R.id.imageViewP})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -248,13 +283,21 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 }
                 break;
             case R.id.imageView_pic:
-
+                showTypeDialog();
                 break;
             case R.id.config:
                 break;
             case R.id.b_save:
                 break;
             case R.id.b_save_commit:
+                break;
+            case R.id.imageView_pic_choose:
+                showTypeDialog();
+                break;
+            case R.id.imageViewP:
+                cropImageUri = null;
+                p.setVisibility(View.GONE);
+                imageViewPicChoose.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -312,5 +355,210 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 dialog.dismiss();
                 break;
         }
+    }
+
+    private void showTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        View view = View.inflate(this, R.layout.dialog_select_photo, null);
+        TextView tv_select_gallery = (TextView) view.findViewById(R.id.tv_select_gallery);
+        TextView tv_select_camera = (TextView) view.findViewById(R.id.tv_select_camera);
+        tv_select_gallery.setOnClickListener(new View.OnClickListener() {// 在相册中选取
+            @Override
+            public void onClick(View v) {
+                autoObtainStoragePermission();
+                dialog.dismiss();
+            }
+        });
+        tv_select_camera.setOnClickListener(new View.OnClickListener() {// 调用照相机
+            @Override
+            public void onClick(View v) {
+                autoObtainCameraPermission();
+                dialog.dismiss();
+            }
+        });
+        dialog.setView(view);
+        dialog.show();
+    }
+
+    /**
+     * 动态申请sdcard读写权限
+     */
+    private void autoObtainStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSIONS_REQUEST_CODE);
+            } else {
+                PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+            }
+        } else {
+            PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+        }
+    }
+
+    /**
+     * 申请访问相机权限
+     */
+    private void autoObtainCameraPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                    AppUtils.showToast(this, "您已经拒绝过一次");
+                }
+                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
+            } else {//有权限直接调用系统相机拍照
+                if (hasSdcard()) {
+                    imageUri = Uri.fromFile(fileUri);
+                    //通过FileProvider创建一个content类型的Uri
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        imageUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", fileUri);
+                    }
+                    PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+                } else {
+                    AppUtils.showToast(this, "设备没有SD卡！");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            //调用系统相机申请拍照权限回调
+            case CAMERA_PERMISSIONS_REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (hasSdcard()) {
+                        imageUri = Uri.fromFile(fileUri);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            //通过FileProvider创建一个content类型的Uri
+                            imageUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", fileUri);
+                        }
+                        PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+                    } else {
+                        AppUtils.showToast(this, "设备没有SD卡！");
+                    }
+                } else {
+                    AppUtils.showToast(this, "请允许打开相机！！");
+                }
+                break;
+            }
+            //调用系统相册申请Sdcard权限回调
+            case STORAGE_PERMISSIONS_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+                } else {
+                    AppUtils.showToast(this, "请允许打操作SDCard！！");
+                }
+                break;
+            default:
+        }
+    }
+
+    /**
+     * 检查设备是否存在SDCard的工具方法
+     */
+    public static boolean hasSdcard() {
+        String state = Environment.getExternalStorageState();
+        return state.equals(Environment.MEDIA_MOUNTED);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult: requestCode: " + requestCode + "  resultCode:" + resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            Log.e(TAG, "onActivityResult: resultCode!=RESULT_OK");
+            return;
+        }
+        switch (requestCode) {
+            //相机返回
+            case CODE_CAMERA_REQUEST:
+                cropImageUri = Uri.fromFile(fileCropUri);
+                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                //upLoadMap(cropImageUri);
+                break;
+            //相册返回
+            case CODE_GALLERY_REQUEST:
+                if (hasSdcard()) {
+                    //upLoadMap(cropImageUri);
+                    cropImageUri = Uri.fromFile(fileCropUri);
+                    Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        newUri = FileProvider.getUriForFile(this, "com.mango.leo.dcom", new File(newUri.getPath()));
+                    }
+                    PhotoUtils.cropImageUri(this, newUri, cropImageUri, 4, 3, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                } else {
+                    AppUtils.showToast(this, "设备没有SD卡！");
+                }
+                break;
+            //裁剪返回
+            case CODE_RESULT_REQUEST:
+                Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+                p.setVisibility(View.VISIBLE);
+                imageViewPicChoose.setVisibility(View.GONE);
+                //upLoadLog(cropImageUri);
+                //这里上传文件
+                if (bitmap != null) {
+                    showImages(bitmap);
+                }
+                eventBean.setFile(getRealFile(this, cropImageUri));//设置图片
+                break;
+            default:
+        }
+    }
+
+    private void showImages(Bitmap bitmap) {
+        imageViewPic.setImageBitmap(bitmap);
+    }
+
+    /**
+     * Try to return the absolute file path from the given Uri
+     *
+     * @param context
+     * @param uri
+     * @return the file path or null
+     */
+    public static File getRealFile(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        File f = new File(data);
+        return f;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent(this, EventActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 }

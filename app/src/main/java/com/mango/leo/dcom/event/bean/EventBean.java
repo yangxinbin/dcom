@@ -1,5 +1,6 @@
 package com.mango.leo.dcom.event.bean;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class EventBean {
     private String eventScope;
     private List<String> relatedConfigSNs;
     private String description;
+    private File file;
 
     public String getTag() {
         return tag;
@@ -105,5 +107,13 @@ public class EventBean {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }
