@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +23,25 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
+import com.mango.leo.dcom.event.bean.ConfigBean;
+import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
 import com.mango.leo.dcom.event.presenter.EventPresenterImpl;
+import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.event.view.EventView;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
+import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.JsonMap;
+import com.mango.leo.dcom.util.JsonUtils;
+import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -38,6 +49,9 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class AddEventActivity extends AppCompatActivity implements EventView, AdapterView.OnItemClickListener {
     @Bind(R.id.imageView_back)
@@ -87,7 +101,10 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     private CustomDatePicker customDatePicker;
     private ListAndGirdDownAdapter adapter;
     private Dialog dialog;
-    private List<String> list1,list2,list3,list4;
+    private List<String> list1, list2, list3, list4;
+    private int currentPosition1 = -1, currentPosition2 = -1, currentPosition3 = -1, currentPosition4 = -1;
+    private EventBean eventBean;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +116,47 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         initView();
         initDatePicker();
         initDateFromWeb();
+        eventBean = new EventBean();
         //eventPresenter.visitProjects();
     }
 
     private void initDateFromWeb() {
+        list1 = new ArrayList<>();
+        list2 = new ArrayList<>();
+        list3 = new ArrayList<>();
+        list4 = new ArrayList<>();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpUtils.doGet(Urls.HOST + "/api/common/tenant/config" + "?token=" + sharedPreferences.getString("token", ""), new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.v("ppppppppppp", "__IOException_--");
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        try {
+                            //Log.v("ppppppppppp", "--listC--" +response.body().string());
+                            final List<ConfigBean> listC = EventJsonUtils.readJsonConfigBean(response.body().string(), "content");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.v("ppppppppppp", "--listC--" + listC.size());
+                                }
+                            });
+                        } catch (Exception e) {
+                            //Log.v("ppppppppppp", "__eee_--" + response.body().string());
+                        }
+                    }
+                });
+            }
+        }).start();
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+        list1.add("4");
 
     }
 
@@ -162,18 +216,39 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 customDatePicker.show("1990-01-01 00:00");
                 break;
             case R.id.linearLayout_event_from:
-                showPopupWindow(this, list1, 1);
+                if (list1 != null && list1.size() != 0) {
+                    showPopupWindow(this, list1, 1);
+                    adapter.setCheckItem(currentPosition1);
+                } else {
+                    AppUtils.showToast(this, "配置项为空");
+                }
                 break;
             case R.id.linearLayout_event_type:
-                showPopupWindow(this, list2, 2);
+                if (list2 != null && list2.size() != 0) {
+                    showPopupWindow(this, list2, 2);
+                    adapter.setCheckItem(currentPosition2);
+                } else {
+                    AppUtils.showToast(this, "配置项为空");
+                }
                 break;
             case R.id.linearLayout_event_level:
-                showPopupWindow(this, list3, 3);
+                if (list3 != null && list3.size() != 0) {
+                    showPopupWindow(this, list3, 3);
+                    adapter.setCheckItem(currentPosition3);
+                } else {
+                    AppUtils.showToast(this, "配置项为空");
+                }
                 break;
             case R.id.linearLayout_event_grave:
-                showPopupWindow(this, list4, 4);
+                if (list4 != null && list4.size() != 0) {
+                    showPopupWindow(this, list4, 4);
+                    adapter.setCheckItem(currentPosition4);
+                } else {
+                    AppUtils.showToast(this, "配置项为空");
+                }
                 break;
             case R.id.imageView_pic:
+
                 break;
             case R.id.config:
                 break;
@@ -206,18 +281,34 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         switch (adapterView.getId()) {
             case 1:
+                currentPosition1 = position;
+                textViewEventFrom.setText(list1.get(position));
+                textViewEventFrom.setTextColor(getResources().getColor(R.color.white));
+                eventBean.setOrigin(list1.get(position));
                 dialog.dismiss();
                 break;
             case 2:
+                currentPosition2 = position;
+                textViewEventType.setText(list2.get(position));
+                textViewEventType.setTextColor(getResources().getColor(R.color.white));
+                eventBean.setType(list2.get(position));
                 dialog.dismiss();
                 break;
             case 3:
+                currentPosition3 = position;
+                textViewEventLevel.setText(list3.get(position));
+                textViewEventLevel.setTextColor(getResources().getColor(R.color.white));
+                eventBean.setPriority(list3.get(position));
                 dialog.dismiss();
                 break;
             case 4:
+                currentPosition4 = position;
+                textViewEventGrave.setText(list4.get(position));
+                textViewEventGrave.setTextColor(getResources().getColor(R.color.white));
+                eventBean.setSeverity(list4.get(position));
                 dialog.dismiss();
                 break;
         }

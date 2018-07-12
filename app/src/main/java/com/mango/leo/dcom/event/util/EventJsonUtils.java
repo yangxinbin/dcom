@@ -3,6 +3,7 @@ package com.mango.leo.dcom.event.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.util.JsonUtils;
@@ -27,15 +28,24 @@ public class EventJsonUtils {
      */
     public static List<ListEventBean> readJsonEventBeans(String res, String va) {
         List<ListEventBean> beans = new ArrayList<ListEventBean>();
-        try {
-            JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
-            //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
-            JsonArray jsonArray = jsonObject.getAsJsonArray(va);
-            for (int i = 0; i < jsonArray.size(); i++) {
-                ListEventBean news = JsonUtils.deserialize(jsonObject, ListEventBean.class);
-                beans.add(news);//这里会将所有的json对象转换为bean对象
-            }
-        } catch (Exception e) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
+        JsonArray jsonArray = jsonObject.getAsJsonArray(va);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            ListEventBean news = JsonUtils.deserialize(jsonObject, ListEventBean.class);
+            beans.add(news);//这里会将所有的json对象转换为bean对象
+        }
+        return beans;
+    }
+
+    public static List<ConfigBean> readJsonConfigBean(String res,String va) {
+        List<ConfigBean> beans = new ArrayList<ConfigBean>();
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
+        JsonArray jsonArray = jsonObject.getAsJsonArray(va);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            ConfigBean bean = JsonUtils.deserialize(jsonObject, ConfigBean.class);
+            beans.add(bean);
         }
         return beans;
     }

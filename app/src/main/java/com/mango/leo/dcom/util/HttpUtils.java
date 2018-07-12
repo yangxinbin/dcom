@@ -100,6 +100,8 @@ public class HttpUtils {
      */
     public static void doGet(String url, Callback callback) {
         Request request = new Request.Builder()
+                .header("Content-Type","application/x-www-form-urlencoded")
+                .header("api-key","49ku8919456qwe4534578451kiutrvfg")
                 .url(url)
                 .build();
         Call call = getInstance().newCall(request);

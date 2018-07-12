@@ -83,7 +83,7 @@ public class ListAndGirdDownAdapter extends BaseAdapter {//
                     viewHolder.tv.setTextSize(12);
                     viewHolder.co.setBackgroundResource(R.drawable.button_red);
                 }*/
-                viewHolder.tv.setTextColor(context.getResources().getColor(R.color.red));
+                viewHolder.tv.setTextColor(context.getResources().getColor(R.color.white));
             } else {
 /*                if (flag == 2) {
                     viewHolder.tv.setTextSize(12);
