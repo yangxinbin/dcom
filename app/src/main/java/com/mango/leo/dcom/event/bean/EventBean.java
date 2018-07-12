@@ -116,4 +116,22 @@ public class EventBean {
     public void setFile(File file) {
         this.file = file;
     }
+
+    @Override
+    public String toString() {
+        return "EventBean{" +
+                "tag='" + tag + '\'' +
+                ", title='" + title + '\'' +
+                ", occuredOn='" + occuredOn + '\'' +
+                ", complaintBy='" + complaintBy + '\'' +
+                ", origin='" + origin + '\'' +
+                ", type='" + type + '\'' +
+                ", priority='" + priority + '\'' +
+                ", severity='" + severity + '\'' +
+                ", eventScope='" + eventScope + '\'' +
+                ", relatedConfigSNs=" + relatedConfigSNs +
+                ", description='" + description + '\'' +
+                ", file=" + file +
+                '}';
+    }
 }

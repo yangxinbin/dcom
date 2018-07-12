@@ -32,12 +32,12 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
 
     @Override
     public void visitProjects(Context context, int type,EventBean eventBean, int page) {
-        sharedPreferences = context.getSharedPreferences("CIFIT", MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context);
+            url = getUrl(type, context)+"?token="+sharedPreferences.getString("token", "")+"&pageNum="+page;
         } else if (type == 1) {
-            url = getUrl(type, context);
+            url = getUrl(type, context)+"?token="+sharedPreferences.getString("token", "")+"&pageNum="+page;
         } else if (type == 2) {
         }
         Log.v("pppppppppppp", "" + url);

@@ -87,7 +87,8 @@
         <activity android:name=".change.activity.ChangeActivity" />
         <activity android:name=".event.activity.AddEventActivity" />
         <activity android:name=".faq.activity.AddFaqActivity" />
-        <activity android:name=".change.activity.AddChangeActivity"></activity>
+        <activity android:name=".change.activity.AddChangeActivity" />
+        <activity android:name=".event.activity.ConfigActivity"></activity>
     </application>
 
 </manifest>

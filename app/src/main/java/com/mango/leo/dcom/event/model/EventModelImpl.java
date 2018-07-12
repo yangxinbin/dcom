@@ -32,12 +32,12 @@ public class EventModelImpl implements EventModel {
     public void visitProjects(final Context context, final int type, EventBean eventBean, String url,int page, final OnEventListener listener) {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         if (type == 0) {//我的事件
-            Map<String, String> mapParams = new HashMap<>();
-            mapParams.put("token", sharedPreferences.getString("token", ""));
-            mapParams.put("pageNum", String.valueOf(page));
-            mapParams.put("stage", "1");
+            //Map<String, String> mapParams = new HashMap<>();
+            //mapParams.put("token", sharedPreferences.getString("token", ""));
+            //mapParams.put("pageNum", String.valueOf(page));
+            //mapParams.put("stage", "1");
 
-            HttpUtils.doPost(url, mapParams, new Callback() {
+            HttpUtils.doGet(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     listener.onFailure("FAILURE", e);
@@ -61,7 +61,7 @@ public class EventModelImpl implements EventModel {
             Map<String, String> mapParams = new HashMap<>();
             mapParams.put("token", sharedPreferences.getString("token", ""));
             mapParams.put("pageNum", String.valueOf(page));
-            mapParams.put("stage", "1");
+            //mapParams.put("stage", "1");
 
             HttpUtils.doPost(url, mapParams, new Callback() {
                 @Override
@@ -84,7 +84,70 @@ public class EventModelImpl implements EventModel {
             });
         }
         if (type == 2) {
+            final HashMap<String, String> mapParams = new HashMap<String, String>();
+            mapParams.clear();
+            mapParams.put("token", sharedPreferences.getString("token", ""));
+            mapParams.put("tag", eventBean.getTag());
+            mapParams.put("title", eventBean.getTitle());
+            mapParams.put("complaintBy", eventBean.getComplaintBy());
+            mapParams.put("origin", eventBean.getOrigin());
+            mapParams.put("type", eventBean.getType());
+            mapParams.put("priority", eventBean.getPriority());
+            mapParams.put("severity", eventBean.getSeverity());
+            mapParams.put("eventScope", eventBean.getEventScope());
+            mapParams.put("relatedConfigSNs", "");//待定
+            mapParams.put("description", eventBean.getDescription());
+            mapParams.put("publish", "false");
+            HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.v("doPostAll", "^^^^^onFailure^^^^^");
+                    listener.onFailure("事件保存失败", e);
+                }
 
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (String.valueOf(response.code()).startsWith("2")) {
+                        listener.onSuccessMes("事件保存成功");//异步请求
+                    } else {
+                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
+                        listener.onSuccessMes("事件保存失败");
+                    }
+                }
+            });
+        }
+        if (type == 3) {
+            final HashMap<String, String> mapParams = new HashMap<String, String>();
+            mapParams.clear();
+            mapParams.put("token", sharedPreferences.getString("token", ""));
+            mapParams.put("tag", eventBean.getTag());
+            mapParams.put("title", eventBean.getTitle());
+            mapParams.put("complaintBy", eventBean.getComplaintBy());
+            mapParams.put("origin", eventBean.getOrigin());
+            mapParams.put("type", eventBean.getType());
+            mapParams.put("priority", eventBean.getPriority());
+            mapParams.put("severity", eventBean.getSeverity());
+            mapParams.put("eventScope", eventBean.getEventScope());
+            mapParams.put("relatedConfigSNs", "");//待定
+            mapParams.put("description", eventBean.getDescription());
+            mapParams.put("publish", "true");
+            HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.v("doPostAll", "^^^^^onFailure^^^^^");
+                    listener.onFailure("事件保存失败", e);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (String.valueOf(response.code()).startsWith("2")) {
+                        listener.onSuccessMes("事件保存成功");//异步请求
+                    } else {
+                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
+                        listener.onSuccessMes("事件保存失败");
+                    }
+                }
+            });
         }
     }
 
