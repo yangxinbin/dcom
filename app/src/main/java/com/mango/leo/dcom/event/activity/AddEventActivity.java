@@ -55,11 +55,14 @@ import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -145,13 +148,13 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        eventBean = new EventBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         eventPresenter = new EventPresenterImpl(this);
         initView();
         initDatePicker();
         initDateFromWeb();
-        eventBean = new EventBean();
         //eventPresenter.visitProjects();
     }
 
@@ -173,12 +176,30 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         try {
-                            //Log.v("ppppppppppp", "--listC--" +response.body().string());
                             final List<ConfigBean> listC = EventJsonUtils.readJsonConfigBean(response.body().string(), "content");
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Log.v("ppppppppppp", "--listC--" + listC.size());
+                                    for (int i = 0; i < listC.size(); i++) {
+                                        if (listC.get(i).getContent() != null && listC.get(i).getContent().get(i).getType() != null) {
+                                            if (listC.get(i).getContent().get(i).getType().equals("event_origin")) {
+                                                list1 = toList(listC.get(i).getContent().get(i).getValue());
+                                                continue;
+                                            } else if (listC.get(i).getContent().get(i).getType().toString().equals("event_type")) {
+                                                list2 = toList(listC.get(i).getContent().get(i).getValue());
+                                                continue;
+                                            } else if (listC.get(i).getContent().get(i).getType().equals("event_level")) {
+                                                for (int j = 1; j <= Integer.valueOf(listC.get(i).getContent().get(i).getValue()); j++) {
+                                                    list3.add("级别-" + j);
+                                                }
+                                                continue;
+                                            } else if (listC.get(i).getContent().get(i).getType().equals("event_severity")) {
+                                                list4 = toList(listC.get(i).getContent().get(i).getValue());
+                                                continue;
+                                            }
+                                        }
+                                    }
                                 }
                             });
                         } catch (Exception e) {
@@ -188,11 +209,12 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 });
             }
         }).start();
-        list1.add("1");
-        list1.add("2");
-        list1.add("3");
-        list1.add("4");
+    }
 
+    private List<String> toList(String value) {
+        String[] arg = value.replace("[", "").replace("]", "").replaceAll("\"","").split(",");
+        List<String> lists = Arrays.asList(arg);
+        return lists;
     }
 
     private void initView() {
@@ -203,7 +225,14 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             stringBuffer.append((char) (Math.random() * 26 + 'A'));
         }
         editTextEventFlag.setText(stringBuffer.toString());
+        eventBean.setTag(stringBuffer.toString());
         editTextEventPeople.setText(sharedPreferences.getString("realname", ""));
+        eventBean.setComplaintBy(sharedPreferences.getString("realname", ""));
+        eventBean.setTitle(editTextEventTitle.getText().toString());
+        eventBean.setOccuredOn(textViewEventTime.getText().toString());
+        eventBean.setComplaintBy(editTextEventPeople.getText().toString());
+        eventBean.setEventScope(editTextEventRange.getText().toString());
+        eventBean.setDescription(editTextDescription.getText().toString());
     }
 
     private void initDatePicker() {
@@ -233,10 +262,10 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
 
     @Override
     public void addEventFail(String e) {
-
+        AppUtils.showToast(this, e);
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_event_time, R.id.linearLayout_event_from, R.id.linearLayout_event_type, R.id.linearLayout_event_level, R.id.linearLayout_event_grave, R.id.imageView_pic, R.id.config, R.id.b_save, R.id.b_save_commit,R.id.imageView_pic_choose, R.id.imageViewP})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_event_time, R.id.linearLayout_event_from, R.id.linearLayout_event_type, R.id.linearLayout_event_level, R.id.linearLayout_event_grave, R.id.imageView_pic, R.id.config, R.id.b_save, R.id.b_save_commit, R.id.imageView_pic_choose, R.id.imageViewP})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -286,10 +315,23 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 showTypeDialog();
                 break;
             case R.id.config:
+                intent = new Intent(this, ConfigActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.b_save:
+                initView();
+                Log.v("eeeeeeeee", "-----" + eventBean.toString());
+                if (!"请".equals(editTextEventTitle.getText().toString()) && !"请".equals(textViewEventTime.getText().toString())) {
+                    eventPresenter.visitProjects(this, 2, eventBean, -1);//保存状态2
+                }
                 break;
             case R.id.b_save_commit:
+                initView();
+                Log.v("eeeeeeeee", "-----" + eventBean.toString());
+                if (!"请".equals(editTextEventTitle.getText().toString()) && !"请".equals(textViewEventTime.getText().toString())) {
+                    eventPresenter.visitProjects(this, 3, eventBean, -1);//保存并状态3
+                }
                 break;
             case R.id.imageView_pic_choose:
                 showTypeDialog();
