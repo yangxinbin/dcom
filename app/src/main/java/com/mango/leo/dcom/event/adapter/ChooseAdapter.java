@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
@@ -122,12 +123,7 @@ public class ChooseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (getItemViewType(position) == TYPE_HEADER) return;//add header
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
-/*            if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
-                Log.v("yyyyy", "====pos======" + pos % 20);//
-                ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
-                ((ItemViewHolder) holder).textView_time.setText(DateUtil.getDateToString(mData.get(pos).getList().get(pos % 20).getCreatedOn(), "yyyy-MM-dd HH:mm:ss"));
-            }*/
-
+            ((ItemViewHolder) holder).textView_which.setText(mData.get(pos));
         } else {
             ((ChooseAdapter.FooterViewHolder) holder).footTv.setText("正在加载...");
             mHandler.postDelayed(new Runnable() {
@@ -180,16 +176,16 @@ public class ChooseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView textView_title, textView_time, textView_stage;
+        public TextView textView_which;
+        private LinearLayout l_c;
 
         public ItemViewHolder(View v) {
             super(v);
             if (v == mHeaderView)
                 return;
-            textView_title = (TextView) v.findViewById(R.id.textView_title);
-            textView_time = (TextView) v.findViewById(R.id.textView_time);
-            textView_stage = (TextView) v.findViewById(R.id.textView_stage);
-            v.setOnClickListener(this);
+            textView_which = (TextView) v.findViewById(R.id.textView_which);
+            l_c = (LinearLayout) v.findViewById(R.id.l_c);
+            l_c.setOnClickListener(this);
         }
 
         @Override
