@@ -39,6 +39,7 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
         } else if (type == 1) {
             url = getUrl(type, context)+"?token="+sharedPreferences.getString("token", "")+"&pageNum="+page;
         } else if (type == 2) {
+            url = getUrl(type, context);
         }
         Log.v("pppppppppppp", "" + url);
         eventModel.visitProjects(context, type,eventBean,url,page, this);
@@ -69,7 +70,7 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
                 sburl.append(Urls.HOST_ALLEVENT);
                 break;
             case 2:
-               // sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);//已审核
+                sburl.append(Urls.HOST_CREATEEVENT);//创建
                 break;
         }
         return sburl.toString();

@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+
+import com.google.gson.JsonParser;
+
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -36,6 +39,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ConfigBean;
@@ -153,7 +157,6 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         ButterKnife.bind(this);
         eventPresenter = new EventPresenterImpl(this);
         initView();
-        initDatePicker();
         initDateFromWeb();
         //eventPresenter.visitProjects();
     }
@@ -212,9 +215,11 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     }
 
     private List<String> toList(String value) {
-        String[] arg = value.replace("[", "").replace("]", "").replaceAll("\"","").split(",");
-        List<String> lists = Arrays.asList(arg);
-        return lists;
+        String[] arg = value.replace("[", "").replace("]", "").replaceAll("\"", "").split(",");
+        List<String> list = Arrays.asList(arg);
+/*        GsonJsonParser gson = new GsonJsonParser();
+        List<String> list = (List<String>) gson.parse(value);*/
+        return list;
     }
 
     private void initView() {
@@ -229,7 +234,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         editTextEventPeople.setText(sharedPreferences.getString("realname", ""));
         eventBean.setComplaintBy(sharedPreferences.getString("realname", ""));
         eventBean.setTitle(editTextEventTitle.getText().toString());
-        eventBean.setOccuredOn(textViewEventTime.getText().toString());
+        eventBean.setOccuredOn(String.valueOf(DateUtil.getStringToDate(textViewEventTime.getText().toString(), "yyyy-MM-dd HH:mm")));
         eventBean.setComplaintBy(editTextEventPeople.getText().toString());
         eventBean.setEventScope(editTextEventRange.getText().toString());
         eventBean.setDescription(editTextDescription.getText().toString());
@@ -245,7 +250,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 textViewEventTime.setText(time);
                 textViewEventTime.setTextColor(getResources().getColor(R.color.white));
             }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, "2018-01-01 00:00", "2040-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(true); // 显示时和分
         customDatePicker.setIsLoop(true); // 允许循环滚动
     }
@@ -256,13 +261,28 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     }
 
     @Override
-    public void addEventMes(String s) {
-        AppUtils.showToast(this, s);
+    public void addEventMes(final String s) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getBaseContext(), s);
+                JumpTo();
+            }
+        });
     }
-
+    private void JumpTo() {
+        Intent intent = new Intent(this, EventActivity.class);
+        startActivity(intent);
+        finish();
+    }
     @Override
-    public void addEventFail(String e) {
-        AppUtils.showToast(this, e);
+    public void addEventFail(final String e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getBaseContext(), e);
+            }
+        });
     }
 
     @OnClick({R.id.imageView_back, R.id.linearLayout_event_time, R.id.linearLayout_event_from, R.id.linearLayout_event_type, R.id.linearLayout_event_level, R.id.linearLayout_event_grave, R.id.imageView_pic, R.id.config, R.id.b_save, R.id.b_save_commit, R.id.imageView_pic_choose, R.id.imageViewP})
@@ -277,7 +297,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             case R.id.linearLayout_event_time:
                 // 日期格式为yyyy-MM-dd HH:mm
                 //customDatePicker.show(textViewEventTime.getText().toString());
-                customDatePicker.show("1990-01-01 00:00");
+                initDatePicker();
+                customDatePicker.show(DateUtil.getDateToString(System.currentTimeMillis(), "yyyy-MM-dd HH:mm"));
                 break;
             case R.id.linearLayout_event_from:
                 if (list1 != null && list1.size() != 0) {
@@ -322,15 +343,19 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             case R.id.b_save:
                 initView();
                 Log.v("eeeeeeeee", "-----" + eventBean.toString());
-                if (!"请".equals(editTextEventTitle.getText().toString()) && !"请".equals(textViewEventTime.getText().toString())) {
+                if (!"请".startsWith(editTextEventTitle.getText().toString()) && !"请".startsWith(textViewEventTime.getText().toString())) {
                     eventPresenter.visitProjects(this, 2, eventBean, -1);//保存状态2
+                }else {
+                    AppUtils.showToast(this,"请填写必填项");
                 }
                 break;
             case R.id.b_save_commit:
                 initView();
                 Log.v("eeeeeeeee", "-----" + eventBean.toString());
-                if (!"请".equals(editTextEventTitle.getText().toString()) && !"请".equals(textViewEventTime.getText().toString())) {
+                if (!"请".startsWith(editTextEventTitle.getText().toString()) && !"请".startsWith(textViewEventTime.getText().toString())) {
                     eventPresenter.visitProjects(this, 3, eventBean, -1);//保存并状态3
+                }else {
+                    AppUtils.showToast(this,"请填写必填项");
                 }
                 break;
             case R.id.imageView_pic_choose:
@@ -386,7 +411,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 currentPosition3 = position;
                 textViewEventLevel.setText(list3.get(position));
                 textViewEventLevel.setTextColor(getResources().getColor(R.color.white));
-                eventBean.setPriority(list3.get(position));
+                eventBean.setPriority(position+"");
                 dialog.dismiss();
                 break;
             case 4:

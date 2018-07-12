@@ -89,6 +89,7 @@ public class EventModelImpl implements EventModel {
             mapParams.put("token", sharedPreferences.getString("token", ""));
             mapParams.put("tag", eventBean.getTag());
             mapParams.put("title", eventBean.getTitle());
+            mapParams.put("occuredOn", eventBean.getOccuredOn());
             mapParams.put("complaintBy", eventBean.getComplaintBy());
             mapParams.put("origin", eventBean.getOrigin());
             mapParams.put("type", eventBean.getType());
@@ -96,6 +97,9 @@ public class EventModelImpl implements EventModel {
             mapParams.put("severity", eventBean.getSeverity());
             mapParams.put("eventScope", eventBean.getEventScope());
             mapParams.put("relatedConfigSNs", "");//待定
+            mapParams.put("relatedEventTags", "");//待定
+            mapParams.put("relatedProblemTags", "");//待定
+            mapParams.put("relatedChangeTags", "");//待定
             mapParams.put("description", eventBean.getDescription());
             mapParams.put("publish", "false");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {

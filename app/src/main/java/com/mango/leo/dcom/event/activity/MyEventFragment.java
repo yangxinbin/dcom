@@ -205,12 +205,22 @@ class MyEventFragment extends Fragment implements EventView {
     }
 
     @Override
-    public void addEventMes(String s) {
-        AppUtils.showToast(getActivity(), s);
+    public void addEventMes(final String s) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getActivity(), s);
+            }
+        });
     }
 
     @Override
-    public void addEventFail(String e) {
-
+    public void addEventFail(final String e) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getActivity(), e);
+            }
+        });
     }
 }
