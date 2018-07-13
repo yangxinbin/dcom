@@ -3,6 +3,8 @@ package com.mango.leo.dcom.event.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,6 +34,7 @@ import com.mango.leo.dcom.util.Urls;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -101,41 +104,53 @@ public class ConfigActivity extends AppCompatActivity {
                 HttpUtils.doGet(Urls.HOST + "/api/common/list/tags?type=asset" + "&token=" + sharedPreferences.getString("token", "") + "&prefix=" + s, new Callback() {
                     @Override
                     public void onFailure(Call call, final IOException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AppUtils.showToast(getBaseContext(), "搜索失败:" + e);
-                            }
-                        });
+                        mHandler.sendEmptyMessage(1);
                     }
 
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
                         try {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AppUtils.showToast(getBaseContext(), "搜索成功");
-                                    try {
-                                        //Log.v("sssssss",""+response.body().string());
-                                        adapter.setmDate(toList(response.body().string()));
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                            Message message = mHandler.obtainMessage();
+                            message.obj = response.body().string();
+                            message.what = 0;
+                            message.sendToTarget();
                         } catch (final Exception e) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AppUtils.showToast(getBaseContext(), "搜索失败:" + e);
-                                }
-                            });
+                            mHandler.sendEmptyMessage(1);
                         }
                     }
                 });
             }
         });
+    }
+
+    private final ConfigActivity.MyHandler mHandler = new ConfigActivity.MyHandler(this);
+
+    private class MyHandler extends Handler {
+        private final WeakReference<ConfigActivity> mActivity;
+
+        public MyHandler(ConfigActivity activity) {
+            mActivity = new WeakReference<ConfigActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            ConfigActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 0:
+                        AppUtils.showToast(getBaseContext(), "搜索成功");
+                        String s = (String) msg.obj;
+                        adapter.setmDate(toList(s));
+                        break;
+                    case 1:
+                        AppUtils.showToast(getBaseContext(), "搜索失败:");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     private List<String> toList(String value) {
