@@ -102,7 +102,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_toEndOf="@+id/textView26"
                     android:layout_toRightOf="@+id/textView26"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:layout_alignBottom="@+id/textView31"
                     android:layout_alignLeft="@+id/t_tag"
                     android:layout_alignStart="@+id/t_tag"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -155,7 +155,7 @@
                     android:layout_alignBottom="@+id/textView33"
                     android:layout_alignLeft="@+id/t_t"
                     android:layout_alignStart="@+id/t_t"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -165,7 +165,7 @@
                     android:layout_alignBottom="@+id/textView34"
                     android:layout_alignLeft="@+id/t_p"
                     android:layout_alignStart="@+id/t_p"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -193,10 +193,10 @@
                     android:id="@+id/t_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView41"
-                    android:layout_alignStart="@+id/textView41"
+                    android:layout_alignLeft="@+id/t_c_time"
+                    android:layout_alignStart="@+id/t_c_time"
                     android:layout_below="@+id/imageView22"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -212,13 +212,13 @@
                     android:textSize="@dimen/textSize" />
 
                 <TextView
-                    android:id="@+id/textView41"
+                    android:id="@+id/t_c_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView40"
                     android:layout_alignLeft="@+id/t_time"
                     android:layout_alignStart="@+id/t_time"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -238,9 +238,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/textView42"
                     android:layout_alignBottom="@+id/textView42"
-                    android:layout_alignLeft="@+id/textView41"
-                    android:layout_alignStart="@+id/textView41"
-                    android:text="NULL"
+                    android:layout_alignLeft="@+id/t_c_time"
+                    android:layout_alignStart="@+id/t_c_time"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -261,7 +261,7 @@
                     android:layout_alignBottom="@+id/textView44"
                     android:layout_alignLeft="@+id/t_from"
                     android:layout_alignStart="@+id/t_from"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -282,7 +282,7 @@
                     android:layout_alignBottom="@+id/textView47"
                     android:layout_alignLeft="@+id/t_type"
                     android:layout_alignStart="@+id/t_type"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -304,7 +304,7 @@
                     android:layout_alignBottom="@+id/textView49"
                     android:layout_alignLeft="@+id/t_level"
                     android:layout_alignStart="@+id/t_level"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -325,7 +325,7 @@
                     android:layout_alignLeft="@+id/t_se"
                     android:layout_alignStart="@+id/t_se"
                     android:layout_alignTop="@+id/textView51"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -366,7 +366,7 @@
                     android:layout_alignStart="@+id/textView54"
                     android:layout_below="@+id/textView54"
                     android:layout_marginTop="10dp"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -455,7 +455,7 @@
                     android:layout_below="@+id/textView57"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/white"
-                    android:text="NULL" />
+                    android:text="null" />
 
                 <TextView
                     android:id="@+id/textView59"
@@ -476,7 +476,7 @@
                     android:layout_alignBottom="@+id/textView59"
                     android:layout_alignLeft="@+id/t_task_time"
                     android:layout_alignStart="@+id/t_task_time"
-                    android:text="NULL"
+                    android:text="null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -500,7 +500,7 @@
                     android:layout_toRightOf="@+id/textView61"
                     android:textColor="@color/white"
                     android:layout_marginLeft="8dp"
-                    android:text="NULL" />
+                    android:text="null" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 

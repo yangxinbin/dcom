@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mango.leo.dcom.event.bean.ConfigBean;
+import com.mango.leo.dcom.event.bean.DetailBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.util.JsonUtils;
@@ -48,5 +49,10 @@ public class EventJsonUtils {
             beans.add(bean);
         }
         return beans;
+    }
+    public static DetailBean readDetailBean(String res) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        DetailBean detailBean = JsonUtils.deserialize(jsonObject, DetailBean.class);
+        return detailBean;
     }
 }

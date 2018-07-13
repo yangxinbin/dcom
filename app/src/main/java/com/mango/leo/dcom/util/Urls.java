@@ -17,6 +17,7 @@ public class Urls {
     public static final String MYEVENT = "/api/secure/event/list/my";
     public static final String ALLEVENT = "/api/secure/event/list/all";
     public static final String CREATEEVENT = "/api/secure/event/generate";
+    public static final String QUERY = "/api/secure/event/query";
 
     public static final String HOST_AUTH = HOST + AUTH;
     public static final String HOST_LOGINOUT = HOST + LOGINOUT;
@@ -28,6 +29,8 @@ public class Urls {
     public static final String HOST_MYEVENT = HOST + MYEVENT;
     public static final String HOST_ALLEVENT = HOST + ALLEVENT;
     public static final String HOST_CREATEEVENT = HOST + CREATEEVENT;
+    public static final String HOST_QUERY = HOST + QUERY;
+
 
 
 
