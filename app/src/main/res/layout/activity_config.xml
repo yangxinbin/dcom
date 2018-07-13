@@ -63,11 +63,10 @@
             android:textSize="@dimen/textSize" />
     </LinearLayout>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/choose"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"

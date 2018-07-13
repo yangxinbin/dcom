@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -19,14 +20,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.adapter.ChooseAdapter;
-import com.mango.leo.dcom.event.bean.ListEventBean;
-import com.mango.leo.dcom.event.util.EventJsonUtils;
+import com.mango.leo.dcom.event.adapter.GirdAdapter;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.Urls;
@@ -46,7 +45,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConfigActivity extends AppCompatActivity {
+public class ConfigActivity extends AppCompatActivity{
 
     @Bind(R.id.et_back)
     ImageView etBack;
@@ -57,13 +56,15 @@ public class ConfigActivity extends AppCompatActivity {
     @Bind(R.id.state)
     TextView state;
     @Bind(R.id.choose)
-    GridView choose;
+    RecyclerView choose;
     @Bind(R.id.choose_list)
     RecyclerView chooseList;
     private LinearLayoutManager mLayoutManager;
     private ChooseAdapter adapter;
-    private ArrayList<String> mData, mDataAll;
+    private List<String> mData, mDataAll;
     private SharedPreferences sharedPreferences;
+    private GirdAdapter adapter1;
+    private GridLayoutManager mGridLayoutManager;
 
 
     @Override
@@ -73,11 +74,31 @@ public class ConfigActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         initRecycle();
+        initGird();
         initHeader();
+        initHeaderGird();
         loadAsset("");
         search();
     }
 
+    private void initGird() {
+        choose.removeAllViews();
+        mGridLayoutManager = new GridLayoutManager(this,3);
+        choose.setLayoutManager(mGridLayoutManager);
+        adapter1 = new GirdAdapter(this);
+        adapter1.setOnGirdClickListener(mOnDeleteClickListener);
+        choose.setItemAnimator(new DefaultItemAnimator());//设置默认动画
+        choose.setAdapter(adapter1);
+    }
+    private GirdAdapter.OnGirdClickListener mOnDeleteClickListener = new GirdAdapter.OnGirdClickListener() {
+        @Override
+        public void onItemGirdClick(View view, int position) {
+            position = position - 1; //配对headerView
+            if (mData.size() <= 0) {
+                return;
+            }
+        }
+    };
     private void search() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,9 +143,7 @@ public class ConfigActivity extends AppCompatActivity {
             }
         });
     }
-
     private final ConfigActivity.MyHandler mHandler = new ConfigActivity.MyHandler(this);
-
     private class MyHandler extends Handler {
         private final WeakReference<ConfigActivity> mActivity;
 
@@ -145,6 +164,9 @@ public class ConfigActivity extends AppCompatActivity {
                             adapter.reMove();
                             return;
                         }
+                        mData = new ArrayList<>();
+                        mDataAll = new ArrayList<>();
+                        mData = toList(s);
                         adapter.setmDate(toList(s));
                         break;
                     case 1:
@@ -177,10 +199,12 @@ public class ConfigActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
             position = position - 1; //配对headerView
-            Log.v("oooooooo", adapter.getItem(position) + "---true---" + position);
             if (mData.size() <= 0) {
                 return;
             }
+            //mDataAll.add(adapter.getItem(position));
+            adapter1.addItem(adapter.getItem(position));
+            Log.v("oooooooo", adapter.getItem(position) + "---true---");
 /*            Intent intent = new Intent(getActivity(), ZhaoShanDetailActivity.class);
             intent.putExtra("FavouriteId", adapter.getItem(position).getResponseObject().getContent().get(position%20).getId());
             startActivity(intent);*/
@@ -194,6 +218,14 @@ public class ConfigActivity extends AppCompatActivity {
         layoutParam.setMargins(0, 0, 0, 20);
         h.setLayoutParams(layoutParam);
         adapter.setHeaderView(h);
+    }
+    private void initHeaderGird() {
+        //渲染header布局
+        ConstraintLayout h = new ConstraintLayout(this);
+        ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1.0f));
+        layoutParam.setMargins(0, 0, 0, 20);
+        h.setLayoutParams(layoutParam);
+        adapter1.setHeaderView(h);
     }
 
     private int dp2px(float v) {
