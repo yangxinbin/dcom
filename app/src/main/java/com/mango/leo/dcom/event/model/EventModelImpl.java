@@ -99,7 +99,7 @@ public class EventModelImpl implements EventModel {
             mapParams.put("priority", eventBean.getPriority() != null? eventBean.getPriority():"");
             mapParams.put("severity", eventBean.getSeverity() != null?eventBean.getSeverity():"");
             mapParams.put("eventScope", eventBean.getEventScope() != null?eventBean.getEventScope():"");
-            mapParams.put("relatedConfigSNs", "");//待定
+            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
             mapParams.put("relatedEventTags", "");//待定
             mapParams.put("relatedProblemTags", "");//待定
             mapParams.put("relatedChangeTags", "");//待定
@@ -135,7 +135,10 @@ public class EventModelImpl implements EventModel {
             mapParams.put("priority", eventBean.getPriority());
             mapParams.put("severity", eventBean.getSeverity());
             mapParams.put("eventScope", eventBean.getEventScope());
-            mapParams.put("relatedConfigSNs", "");//待定
+            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
+            mapParams.put("relatedEventTags", "");//待定
+            mapParams.put("relatedProblemTags", "");//待定
+            mapParams.put("relatedChangeTags", "");//待定
             mapParams.put("description", eventBean.getDescription());
             mapParams.put("publish", "true");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
@@ -156,6 +159,20 @@ public class EventModelImpl implements EventModel {
                 }
             });
         }
+    }
+
+    private String listToString(List<String> stringList) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("[\"");
+        for (int i = 0;i<stringList.size();i++){
+            if (i == stringList.size()-1){
+                stringBuffer.append(stringList.get(i)).append("\"");
+                break;
+            }
+            stringBuffer.append(stringList.get(i)).append("\",\"");
+        }
+        stringBuffer.append("]");
+        return stringBuffer.toString();
     }
 
 }

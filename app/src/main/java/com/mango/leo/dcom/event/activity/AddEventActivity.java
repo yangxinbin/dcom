@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.event.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -8,9 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-
-import com.google.gson.JsonParser;
-
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,7 +37,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ConfigBean;
@@ -63,14 +60,12 @@ import com.mango.leo.dcom.util.widget.CustomDatePicker;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -153,6 +148,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     private String TAG = "EventActivity";
     private TagAdapter tagAdapter;
     private ConfigChooseBean bean1 = new ConfigChooseBean();
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +161,6 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         initView();
         initDateFromWeb();
         EventBus.getDefault().register(this);
-        //eventPresenter.visitProjects();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -173,12 +168,13 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         if (bean == null)
             return;
         bean1 = bean;
-        Log.v("ccccc","!!!!!!");
         tagAdapter = new TagAdapter(this);
         flowLayout.setAdapter(tagAdapter);
         tagAdapter.onlyAddAll(bean.getChooses());
         eventBean.setRelatedConfigSNs(bean.getChooses());
-        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        if (flag) {
+            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        }
     }
 
     private void initDateFromWeb() {
@@ -360,9 +356,12 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 showTypeDialog();
                 break;
             case R.id.config:
+                initView();
+                flag = false;
                 intent = new Intent(this, ConfigActivity.class);
-                if (bean1 != null){
-                    Log.v("ccccc","ccc");
+                EventBus.getDefault().postSticky(eventBean);
+                if (bean1 != null) {
+                    Log.v("ccccc", "ccc");
                     EventBus.getDefault().postSticky(bean1);
                 }
                 startActivity(intent);

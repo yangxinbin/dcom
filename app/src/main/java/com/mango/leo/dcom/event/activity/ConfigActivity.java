@@ -27,6 +27,7 @@ import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.adapter.ChooseAdapter;
 import com.mango.leo.dcom.event.adapter.GirdAdapter;
 import com.mango.leo.dcom.event.bean.ConfigChooseBean;
+import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.Urls;
@@ -70,7 +71,6 @@ public class ConfigActivity extends AppCompatActivity {
     private GirdAdapter adapter1;
     private GridLayoutManager mGridLayoutManager;
     private ConfigChooseBean configChooseBean;
-    private ConfigChooseBean bean1;
 
 
     @Override
@@ -87,14 +87,16 @@ public class ConfigActivity extends AppCompatActivity {
         loadAsset("");
         search();
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus(ConfigChooseBean bean) {
         if (bean == null)
             return;
-        Log.v("ccccc","!!??!!");
+        Log.v("ccccc", "!!??!!");
         adapter1.setmDate(bean.getChooses());
         //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
     }
+
     private void initGird() {
         choose.removeAllViews();
         mGridLayoutManager = new GridLayoutManager(getBaseContext(), 2);
