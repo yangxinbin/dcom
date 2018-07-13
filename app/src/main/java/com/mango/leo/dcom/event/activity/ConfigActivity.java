@@ -45,7 +45,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConfigActivity extends AppCompatActivity{
+public class ConfigActivity extends AppCompatActivity {
 
     @Bind(R.id.et_back)
     ImageView etBack;
@@ -76,20 +76,20 @@ public class ConfigActivity extends AppCompatActivity{
         initRecycle();
         initGird();
         initHeader();
-        initHeaderGird();
         loadAsset("");
         search();
     }
 
     private void initGird() {
         choose.removeAllViews();
-        mGridLayoutManager = new GridLayoutManager(this,3);
+        mGridLayoutManager = new GridLayoutManager(getBaseContext(),2);
         choose.setLayoutManager(mGridLayoutManager);
         adapter1 = new GirdAdapter(this);
         adapter1.setOnGirdClickListener(mOnDeleteClickListener);
         choose.setItemAnimator(new DefaultItemAnimator());//设置默认动画
         choose.setAdapter(adapter1);
     }
+
     private GirdAdapter.OnGirdClickListener mOnDeleteClickListener = new GirdAdapter.OnGirdClickListener() {
         @Override
         public void onItemGirdClick(View view, int position) {
@@ -99,6 +99,7 @@ public class ConfigActivity extends AppCompatActivity{
             }
         }
     };
+
     private void search() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,7 +144,9 @@ public class ConfigActivity extends AppCompatActivity{
             }
         });
     }
+
     private final ConfigActivity.MyHandler mHandler = new ConfigActivity.MyHandler(this);
+
     private class MyHandler extends Handler {
         private final WeakReference<ConfigActivity> mActivity;
 
@@ -160,7 +163,7 @@ public class ConfigActivity extends AppCompatActivity{
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
                         String s = (String) msg.obj;
-                        if (s.equals("[]")){
+                        if (s.equals("[]")) {
                             adapter.reMove();
                             return;
                         }
@@ -205,9 +208,6 @@ public class ConfigActivity extends AppCompatActivity{
             //mDataAll.add(adapter.getItem(position));
             adapter1.addItem(adapter.getItem(position));
             Log.v("oooooooo", adapter.getItem(position) + "---true---");
-/*            Intent intent = new Intent(getActivity(), ZhaoShanDetailActivity.class);
-            intent.putExtra("FavouriteId", adapter.getItem(position).getResponseObject().getContent().get(position%20).getId());
-            startActivity(intent);*/
         }
     };
 
@@ -219,14 +219,15 @@ public class ConfigActivity extends AppCompatActivity{
         h.setLayoutParams(layoutParam);
         adapter.setHeaderView(h);
     }
-    private void initHeaderGird() {
+
+/*    private void initHeaderGird() {
         //渲染header布局
         ConstraintLayout h = new ConstraintLayout(this);
         ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1.0f));
         layoutParam.setMargins(0, 0, 0, 20);
         h.setLayoutParams(layoutParam);
         adapter1.setHeaderView(h);
-    }
+    }*/
 
     private int dp2px(float v) {
         DisplayMetrics dm = getResources().getDisplayMetrics();
