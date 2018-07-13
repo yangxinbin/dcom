@@ -91,18 +91,18 @@
                     android:layout_alignLeft="@+id/imageView14"
                     android:layout_alignStart="@+id/imageView14"
                     android:layout_below="@+id/imageView14"
-                    android:textSize="@dimen/textSize"
-                    android:text="事件标签：" />
+                    android:text="事件标签："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView26"
+                    android:layout_marginLeft="8dp"
                     android:layout_toEndOf="@+id/textView26"
                     android:layout_toRightOf="@+id/textView26"
-                    android:layout_marginLeft="8dp"
-                    android:text="TextView"
+                    android:text="NULL"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -113,8 +113,8 @@
                     android:layout_alignStart="@+id/textView26"
                     android:layout_below="@+id/textView26"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="标题：" />
+                    android:text="标题："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_t"
@@ -123,8 +123,8 @@
                     android:layout_alignBottom="@+id/textView31"
                     android:layout_alignLeft="@+id/t_tag"
                     android:layout_alignStart="@+id/t_tag"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView33"
@@ -134,8 +134,8 @@
                     android:layout_alignStart="@+id/textView31"
                     android:layout_below="@+id/textView31"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="报告人：" />
+                    android:text="报告人："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/textView34"
@@ -145,8 +145,8 @@
                     android:layout_alignStart="@+id/textView33"
                     android:layout_below="@+id/textView33"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="发生时间：" />
+                    android:text="发生时间："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_p"
@@ -155,8 +155,8 @@
                     android:layout_alignBottom="@+id/textView33"
                     android:layout_alignLeft="@+id/t_t"
                     android:layout_alignStart="@+id/t_t"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/t_time"
@@ -165,8 +165,8 @@
                     android:layout_alignBottom="@+id/textView34"
                     android:layout_alignLeft="@+id/t_p"
                     android:layout_alignStart="@+id/t_p"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <ImageView
                     android:id="@+id/imageView22"
@@ -177,7 +177,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/blue_line"  />
+                    android:background="@color/blue_line" />
 
                 <TextView
                     android:id="@+id/textView38"
@@ -186,8 +186,8 @@
                     android:layout_alignLeft="@+id/imageView22"
                     android:layout_alignStart="@+id/imageView22"
                     android:layout_below="@+id/imageView22"
-                    android:textSize="@dimen/textSize"
-                    android:text="创建人：" />
+                    android:text="创建人："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_c"
@@ -196,8 +196,8 @@
                     android:layout_alignLeft="@+id/textView41"
                     android:layout_alignStart="@+id/textView41"
                     android:layout_below="@+id/imageView22"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView40"
@@ -205,11 +205,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView38"
                     android:layout_alignStart="@+id/textView38"
-                    android:layout_centerVertical="true"
                     android:layout_below="@+id/textView38"
+                    android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="创建时间：" />
+                    android:text="创建时间："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/textView41"
@@ -218,7 +218,7 @@
                     android:layout_alignBottom="@+id/textView40"
                     android:layout_alignLeft="@+id/t_time"
                     android:layout_alignStart="@+id/t_time"
-                    android:text="TextView"
+                    android:text="NULL"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -229,8 +229,8 @@
                     android:layout_alignStart="@+id/textView40"
                     android:layout_below="@+id/textView40"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="事件来源：" />
+                    android:text="事件来源："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_from"
@@ -240,8 +240,8 @@
                     android:layout_alignBottom="@+id/textView42"
                     android:layout_alignLeft="@+id/textView41"
                     android:layout_alignStart="@+id/textView41"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView44"
@@ -251,8 +251,8 @@
                     android:layout_alignStart="@+id/textView42"
                     android:layout_below="@+id/textView42"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="事件类型：" />
+                    android:text="事件类型："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_type"
@@ -261,8 +261,8 @@
                     android:layout_alignBottom="@+id/textView44"
                     android:layout_alignLeft="@+id/t_from"
                     android:layout_alignStart="@+id/t_from"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView47"
@@ -272,8 +272,8 @@
                     android:layout_alignStart="@+id/textView44"
                     android:layout_below="@+id/textView44"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="事件级别：" />
+                    android:text="事件级别："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_level"
@@ -282,8 +282,8 @@
                     android:layout_alignBottom="@+id/textView47"
                     android:layout_alignLeft="@+id/t_type"
                     android:layout_alignStart="@+id/t_type"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView49"
@@ -293,8 +293,8 @@
                     android:layout_alignStart="@+id/textView47"
                     android:layout_below="@+id/textView47"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="严重性：" />
+                    android:text="严重性："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_se"
@@ -304,8 +304,8 @@
                     android:layout_alignBottom="@+id/textView49"
                     android:layout_alignLeft="@+id/t_level"
                     android:layout_alignStart="@+id/t_level"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView51"
@@ -315,8 +315,8 @@
                     android:layout_alignStart="@+id/textView49"
                     android:layout_below="@+id/textView49"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="影响范围：" />
+                    android:text="影响范围："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_range"
@@ -325,8 +325,8 @@
                     android:layout_alignLeft="@+id/t_se"
                     android:layout_alignStart="@+id/t_se"
                     android:layout_alignTop="@+id/textView51"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView53"
@@ -336,13 +336,14 @@
                     android:layout_alignStart="@+id/textView51"
                     android:layout_below="@+id/textView51"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="关联配置项：" />
+                    android:text="关联配置项："
+                    android:textSize="@dimen/textSize" />
+
                 <com.mango.leo.dcom.util.flowview.FlowTagLayout
-                    android:layout_below="@+id/textView53"
                     android:id="@+id/flow_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="10dp"
+                    android:layout_below="@+id/textView53"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="10dp" />
 
@@ -354,8 +355,8 @@
                     android:layout_alignStart="@+id/flow_layout"
                     android:layout_below="@+id/flow_layout"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="事件描述：" />
+                    android:text="事件描述："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_content"
@@ -365,8 +366,8 @@
                     android:layout_alignStart="@+id/textView54"
                     android:layout_below="@+id/textView54"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:text="TextView" />
+                    android:text="NULL"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView56"
@@ -376,15 +377,16 @@
                     android:layout_alignStart="@+id/t_content"
                     android:layout_below="@+id/t_content"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="已上传文件：" />
+                    android:text="已上传文件："
+                    android:textSize="@dimen/textSize" />
+
                 <com.mango.leo.dcom.util.RoundImageView
-                    android:scaleType="fitXY"
                     android:id="@+id/imageView_p"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="200dp"
                     android:layout_below="@+id/textView56"
-                    android:layout_margin="16dp" />
+                    android:layout_margin="16dp"
+                    android:scaleType="fitXY" />
 
             </RelativeLayout>
 
@@ -394,7 +396,7 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -404,31 +406,104 @@
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/textView0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="18dp"
+                    android:text="事件处理信息"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize" />
+
+
+                <ImageView
+                    android:id="@+id/imageView0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView0"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/blue_line" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView0"
+                    android:layout_alignStart="@+id/imageView0"
+                    android:layout_below="@+id/imageView0"
+                    android:textSize="@dimen/textSize"
+                    android:text="任务描述：" />
+
+                <TextView
+                    android:id="@+id/t_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView57"
+                    android:layout_alignStart="@+id/textView57"
+                    android:layout_below="@+id/textView57"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="NULL" />
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_task"
+                    android:layout_alignStart="@+id/t_task"
+                    android:layout_below="@+id/t_task"
+                    android:layout_marginTop="16dp"
+                    android:textSize="@dimen/textSize"
+                    android:text="分配人：" />
+
+                <TextView
+                    android:id="@+id/textView60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView59"
+                    android:layout_alignBottom="@+id/textView59"
+                    android:layout_alignLeft="@+id/t_task_time"
+                    android:layout_alignStart="@+id/t_task_time"
+                    android:text="NULL"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView59"
+                    android:layout_alignStart="@+id/textView59"
+                    android:layout_below="@+id/textView59"
+                    android:layout_marginTop="16dp"
+                    android:text="分配时间："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_task_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView61"
+                    android:layout_alignBottom="@+id/textView61"
+                    android:layout_toEndOf="@+id/textView61"
+                    android:layout_toRightOf="@+id/textView61"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="8dp"
+                    android:text="NULL" />
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            card_view:cardBackgroundColor="@color/blue_item"
-            card_view:cardCornerRadius="8dp"
-            card_view:contentPadding="8dp"
-            tools:layout_editor_absoluteX="8dp">
 
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
