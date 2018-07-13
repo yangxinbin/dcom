@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.mango.leo.dcom.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import io.reactivex.internal.operators.flowable.FlowableOnErrorReturn;
@@ -31,6 +32,7 @@ public class GirdAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private boolean hasMore = true;
     private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
+
 
     public void setmDate(List<String> data) {
         Log.v("uuuuuuuu", "" + data.size());

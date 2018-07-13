@@ -359,7 +359,6 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 initView();
                 flag = false;
                 intent = new Intent(this, ConfigActivity.class);
-                EventBus.getDefault().postSticky(eventBean);
                 if (bean1 != null) {
                     Log.v("ccccc", "ccc");
                     EventBus.getDefault().postSticky(bean1);

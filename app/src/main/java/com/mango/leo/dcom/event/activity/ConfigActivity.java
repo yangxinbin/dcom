@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -79,6 +80,8 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
+        mData = new ArrayList<>();
+        mDataAll = new ArrayList<>();
         configChooseBean = new ConfigChooseBean();
         initRecycle();
         initGird();
@@ -93,10 +96,16 @@ public class ConfigActivity extends AppCompatActivity {
         if (bean == null)
             return;
         Log.v("ccccc", "!!??!!");
-        adapter1.setmDate(bean.getChooses());
+        adapter1.setmDate(removeDuplicate(bean.getChooses()));
+        mDataAll = removeDuplicate(bean.getChooses());
         //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
     }
-
+    public List<String> removeDuplicate(List list) {
+        HashSet h = new HashSet(list);
+        list.clear();
+        list.addAll(h);
+        return list;
+    }
     private void initGird() {
         choose.removeAllViews();
         mGridLayoutManager = new GridLayoutManager(getBaseContext(), 2);
@@ -181,8 +190,6 @@ public class ConfigActivity extends AppCompatActivity {
                             adapter.reMove();
                             return;
                         }
-                        mData = new ArrayList<>();
-                        mDataAll = new ArrayList<>();
                         mData = toList(s);
                         adapter.setmDate(toList(s));
                         break;
@@ -212,6 +219,7 @@ public class ConfigActivity extends AppCompatActivity {
         chooseList.setAdapter(adapter);
     }
 
+    private boolean flag = true;
     private ChooseAdapter.OnChooseClickListener mOnItemClickListener = new ChooseAdapter.OnChooseClickListener() {
         @Override
         public void onItemClick(View view, int position) {
@@ -219,9 +227,9 @@ public class ConfigActivity extends AppCompatActivity {
             if (mData.size() <= 0) {
                 return;
             }
-            //mDataAll.add(adapter.getItem(position));
-            adapter1.addItem(adapter.getItem(position));
+           // adapter1.addItem(adapter.getItem(position));
             mDataAll.add(adapter.getItem(position));
+            adapter1.setmDate(removeDuplicate(mDataAll));
             Log.v("oooooooo", adapter.getItem(position) + "---true---");
         }
     };
