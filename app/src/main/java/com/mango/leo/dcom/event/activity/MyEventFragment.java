@@ -84,9 +84,9 @@ class MyEventFragment extends Fragment implements EventView {
             if (mData.size() <= 0) {
                 return;
             }
-/*            Intent intent = new Intent(getActivity(), ZhaoShanDetailActivity.class);
-            intent.putExtra("FavouriteId", adapter.getItem(position).getResponseObject().getContent().get(position%20).getId());
-            startActivity(intent);*/
+            Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+            intent.putExtra("id", adapter.getItem(position).getList().get(position%20).getId());
+            startActivity(intent);
         }
     };
     private int lastVisibleItem;

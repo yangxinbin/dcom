@@ -163,15 +163,13 @@ public class EventModelImpl implements EventModel {
 
     private String listToString(List<String> stringList) {
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("[\"");
         for (int i = 0;i<stringList.size();i++){
             if (i == stringList.size()-1){
-                stringBuffer.append(stringList.get(i)).append("\"");
+                stringBuffer.append(stringList.get(i));
                 break;
             }
-            stringBuffer.append(stringList.get(i)).append("\",\"");
+            stringBuffer.append(stringList.get(i)+",");
         }
-        stringBuffer.append("]");
         return stringBuffer.toString();
     }
 

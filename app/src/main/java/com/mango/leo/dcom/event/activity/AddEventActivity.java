@@ -67,6 +67,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -171,12 +172,17 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         tagAdapter = new TagAdapter(this);
         flowLayout.setAdapter(tagAdapter);
         tagAdapter.onlyAddAll(bean.getChooses());
-        eventBean.setRelatedConfigSNs(bean.getChooses());
+        eventBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {
             EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
         }
     }
-
+    public List<String> removeDuplicate(List list) {
+        HashSet h = new HashSet(list);
+        list.clear();
+        list.addAll(h);
+        return list;
+    }
     private void initDateFromWeb() {
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
