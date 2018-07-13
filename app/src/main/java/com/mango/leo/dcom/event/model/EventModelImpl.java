@@ -52,18 +52,18 @@ public class EventModelImpl implements EventModel {
                         listener.onSuccess(beanList);
                         listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
-                        Log.e("yyyyy", "Exception = " + e);
+                        listener.onSuccessMes("请求失败");
                     }
                 }
             });
         }
         if (type == 1) {//全部事件
-            Map<String, String> mapParams = new HashMap<>();
-            mapParams.put("token", sharedPreferences.getString("token", ""));
-            mapParams.put("pageNum", String.valueOf(page));
+            //Map<String, String> mapParams = new HashMap<>();
+            //mapParams.put("token", sharedPreferences.getString("token", ""));
+            //mapParams.put("pageNum", String.valueOf(page));
             //mapParams.put("stage", "1");
 
-            HttpUtils.doPost(url, mapParams, new Callback() {
+            HttpUtils.doGet(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     listener.onFailure("FAILURE", e);
@@ -79,6 +79,7 @@ public class EventModelImpl implements EventModel {
                         listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
                         Log.e("yyyyy", "Exception = " + e);
+                        listener.onSuccessMes("请求失败");
                     }
                 }
             });
