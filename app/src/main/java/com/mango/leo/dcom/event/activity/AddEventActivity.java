@@ -43,6 +43,7 @@ import com.google.gson.Gson;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ConfigBean;
+import com.mango.leo.dcom.event.bean.ConfigChooseBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
@@ -56,9 +57,12 @@ import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
+import com.mango.leo.dcom.util.flowview.TagAdapter;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 
 import java.io.File;
@@ -147,6 +151,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     private static final int OUTPUT_X = 480;
     private static final int OUTPUT_Y = 380;
     private String TAG = "EventActivity";
+    private TagAdapter tagAdapter;
+    private ConfigChooseBean bean1 = new ConfigChooseBean();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +164,21 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
         eventPresenter = new EventPresenterImpl(this);
         initView();
         initDateFromWeb();
+        EventBus.getDefault().register(this);
         //eventPresenter.visitProjects();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus(ConfigChooseBean bean) {
+        if (bean == null)
+            return;
+        bean1 = bean;
+        Log.v("ccccc","!!!!!!");
+        tagAdapter = new TagAdapter(this);
+        flowLayout.setAdapter(tagAdapter);
+        tagAdapter.onlyAddAll(bean.getChooses());
+        eventBean.setRelatedConfigSNs(bean.getChooses());
+        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
     }
 
     private void initDateFromWeb() {
@@ -266,17 +286,19 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             @Override
             public void run() {
                 AppUtils.showToast(getBaseContext(), s);
-                if (s.equals("SUCCESS")){
+                if (s.equals("SUCCESS")) {
                     JumpTo();
                 }
             }
         });
     }
+
     private void JumpTo() {
         Intent intent = new Intent(this, EventActivity.class);
         startActivity(intent);
         finish();
     }
+
     @Override
     public void addEventFail(final String e) {
         runOnUiThread(new Runnable() {
@@ -339,33 +361,37 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 break;
             case R.id.config:
                 intent = new Intent(this, ConfigActivity.class);
+                if (bean1 != null){
+                    Log.v("ccccc","ccc");
+                    EventBus.getDefault().postSticky(bean1);
+                }
                 startActivity(intent);
                 finish();
                 break;
             case R.id.b_save:
                 initView();
-                Log.v("eeeeeeeee", editTextEventTitle.getText().toString()+"==="+cropImageUri+"---"+textViewEventTime.getText()+"-----" + eventBean.toString());
+                Log.v("eeeeeeeee", editTextEventTitle.getText().toString() + "===" + cropImageUri + "---" + textViewEventTime.getText() + "-----" + eventBean.toString());
                 if (!editTextEventTitle.getText().toString().equals("") && !editTextEventTitle.getText().toString().startsWith("请") && !textViewEventTime.getText().toString().startsWith("请")) {
-                    if (cropImageUri == null){
-                        AppUtils.showToast(this,"请上传图片");
+                    if (cropImageUri == null) {
+                        AppUtils.showToast(this, "请上传图片");
                         return;
                     }
                     eventPresenter.visitProjects(this, 2, eventBean, -1);//保存状态2
-                }else {
-                    AppUtils.showToast(this,"请填写必填项");
+                } else {
+                    AppUtils.showToast(this, "请填写必填项");
                 }
                 break;
             case R.id.b_save_commit:
                 initView();
                 Log.v("eeeeeeeee", "-----" + eventBean.toString());
                 if (!editTextEventTitle.getText().toString().equals("") && !editTextEventTitle.getText().toString().startsWith("请") && !textViewEventTime.getText().toString().startsWith("请")) {
-                    if (cropImageUri == null){
-                        AppUtils.showToast(this,"请上传图片");
+                    if (cropImageUri == null) {
+                        AppUtils.showToast(this, "请上传图片");
                         return;
                     }
                     eventPresenter.visitProjects(this, 3, eventBean, -1);//保存并状态3
-                }else {
-                    AppUtils.showToast(this,"请填写必填项");
+                } else {
+                    AppUtils.showToast(this, "请填写必填项");
                 }
                 break;
             case R.id.imageView_pic_choose:
@@ -421,7 +447,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 currentPosition3 = position;
                 textViewEventLevel.setText(list3.get(position));
                 textViewEventLevel.setTextColor(getResources().getColor(R.color.white));
-                eventBean.setPriority(position+"");
+                eventBean.setPriority(position + "");
                 dialog.dismiss();
                 break;
             case 4:

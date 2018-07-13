@@ -26,11 +26,15 @@ import android.widget.TextView;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.adapter.ChooseAdapter;
 import com.mango.leo.dcom.event.adapter.GirdAdapter;
+import com.mango.leo.dcom.event.bean.ConfigChooseBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.Urls;
+import com.mango.leo.dcom.util.flowview.TagAdapter;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -65,6 +69,8 @@ public class ConfigActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private GirdAdapter adapter1;
     private GridLayoutManager mGridLayoutManager;
+    private ConfigChooseBean configChooseBean;
+    private ConfigChooseBean bean1;
 
 
     @Override
@@ -73,16 +79,25 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
+        configChooseBean = new ConfigChooseBean();
         initRecycle();
         initGird();
         initHeader();
+        EventBus.getDefault().register(this);
         loadAsset("");
         search();
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus(ConfigChooseBean bean) {
+        if (bean == null)
+            return;
+        Log.v("ccccc","!!??!!");
+        adapter1.setmDate(bean.getChooses());
+        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+    }
     private void initGird() {
         choose.removeAllViews();
-        mGridLayoutManager = new GridLayoutManager(getBaseContext(),2);
+        mGridLayoutManager = new GridLayoutManager(getBaseContext(), 2);
         choose.setLayoutManager(mGridLayoutManager);
         adapter1 = new GirdAdapter(this);
         adapter1.setOnGirdClickListener(mOnDeleteClickListener);
@@ -93,10 +108,7 @@ public class ConfigActivity extends AppCompatActivity {
     private GirdAdapter.OnGirdClickListener mOnDeleteClickListener = new GirdAdapter.OnGirdClickListener() {
         @Override
         public void onItemGirdClick(View view, int position) {
-            position = position - 1; //配对headerView
-            if (mData.size() <= 0) {
-                return;
-            }
+            adapter1.reMoveItem(position);
         }
     };
 
@@ -207,6 +219,7 @@ public class ConfigActivity extends AppCompatActivity {
             }
             //mDataAll.add(adapter.getItem(position));
             adapter1.addItem(adapter.getItem(position));
+            mDataAll.add(adapter.getItem(position));
             Log.v("oooooooo", adapter.getItem(position) + "---true---");
         }
     };
@@ -248,6 +261,8 @@ public class ConfigActivity extends AppCompatActivity {
                 break;
             case R.id.state:
                 intent = new Intent(this, AddEventActivity.class);
+                configChooseBean.setChooses(adapter1.getmData());
+                EventBus.getDefault().postSticky(configChooseBean);
                 startActivity(intent);
                 finish();
                 break;

@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.util.flowview;
+package com.mango.leo.dcom.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,12 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.util.flowview.OnInitSelectedPosition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by  on 15/10/19.
+ * Created by HanHailong on 15/10/19.
  */
 public class TagAdapter<T> extends BaseAdapter implements OnInitSelectedPosition {
 

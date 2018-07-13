@@ -33,7 +33,7 @@ public class GirdAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
     public void setmDate(List<String> data) {
-        Log.v("ooooooooo", "" + data.size());
+        Log.v("uuuuuuuu", "" + data.size());
         this.mData = data;
         this.notifyDataSetChanged();
     }
@@ -44,6 +44,19 @@ public class GirdAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.notifyDataSetChanged();
     }
 
+    public void reMoveItem(int position) {
+        if (mData != null) {
+            mData.remove(position);
+            for (int i = 0; i < mData.size(); i++) {
+                Log.v("ooooooo", "---addItem--" + mData.get(i));
+            }
+        }
+        this.notifyDataSetChanged();
+    }
+
+    public List<String> getmData() {
+        return mData;
+    }
 
     /**
      * 添加列表项     * @param item
@@ -64,10 +77,10 @@ public class GirdAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_gird, parent, false);
-            ItemViewHolder vh = new ItemViewHolder(v);
-            return vh;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_gird, parent, false);
+        ItemViewHolder vh = new ItemViewHolder(v);
+        return vh;
     }
 
     @Override
@@ -87,7 +100,7 @@ public class GirdAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int getRealPosition(RecyclerView.ViewHolder holder) {
         int position = holder.getLayoutPosition();
-        return  position;
+        return position;
     }
 
     @Override
