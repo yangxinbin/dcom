@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class ChooseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
     public void setmDate(List<String> data) {
+        Log.v("ooooooooo",""+data.size());
         this.mData = data;
         this.notifyDataSetChanged();
     }

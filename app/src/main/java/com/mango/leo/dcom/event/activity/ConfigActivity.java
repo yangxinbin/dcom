@@ -139,8 +139,12 @@ public class ConfigActivity extends AppCompatActivity {
             if (activity != null) {
                 switch (msg.what) {
                     case 0:
-                        AppUtils.showToast(getBaseContext(), "搜索成功");
+                        //AppUtils.showToast(getBaseContext(), "搜索成功");
                         String s = (String) msg.obj;
+                        if (s.equals("[]")){
+                            adapter.reMove();
+                            return;
+                        }
                         adapter.setmDate(toList(s));
                         break;
                     case 1:
