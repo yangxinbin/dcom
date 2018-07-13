@@ -266,7 +266,9 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             @Override
             public void run() {
                 AppUtils.showToast(getBaseContext(), s);
-                JumpTo();
+                if (s.equals("SUCCESS")){
+                    JumpTo();
+                }
             }
         });
     }
@@ -342,8 +344,12 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 break;
             case R.id.b_save:
                 initView();
-                Log.v("eeeeeeeee", "-----" + eventBean.toString());
-                if (!"请".startsWith(editTextEventTitle.getText().toString()) && !"请".startsWith(textViewEventTime.getText().toString())) {
+                Log.v("eeeeeeeee", editTextEventTitle.getText().toString()+"==="+cropImageUri+"---"+textViewEventTime.getText()+"-----" + eventBean.toString());
+                if (!editTextEventTitle.getText().toString().equals("") && !editTextEventTitle.getText().toString().startsWith("请") && !textViewEventTime.getText().toString().startsWith("请")) {
+                    if (cropImageUri == null){
+                        AppUtils.showToast(this,"请上传图片");
+                        return;
+                    }
                     eventPresenter.visitProjects(this, 2, eventBean, -1);//保存状态2
                 }else {
                     AppUtils.showToast(this,"请填写必填项");
@@ -352,7 +358,11 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             case R.id.b_save_commit:
                 initView();
                 Log.v("eeeeeeeee", "-----" + eventBean.toString());
-                if (!"请".startsWith(editTextEventTitle.getText().toString()) && !"请".startsWith(textViewEventTime.getText().toString())) {
+                if (!editTextEventTitle.getText().toString().equals("") && !editTextEventTitle.getText().toString().startsWith("请") && !textViewEventTime.getText().toString().startsWith("请")) {
+                    if (cropImageUri == null){
+                        AppUtils.showToast(this,"请上传图片");
+                        return;
+                    }
                     eventPresenter.visitProjects(this, 3, eventBean, -1);//保存并状态3
                 }else {
                     AppUtils.showToast(this,"请填写必填项");

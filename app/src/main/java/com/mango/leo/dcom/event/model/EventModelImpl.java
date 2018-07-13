@@ -86,21 +86,23 @@ public class EventModelImpl implements EventModel {
         if (type == 2) {
             final HashMap<String, String> mapParams = new HashMap<String, String>();
             mapParams.clear();
+            if (eventBean == null)
+                return;
             mapParams.put("token", sharedPreferences.getString("token", ""));
-            mapParams.put("tag", eventBean.getTag());
-            mapParams.put("title", eventBean.getTitle());
-            mapParams.put("occuredOn", eventBean.getOccuredOn());
-            mapParams.put("complaintBy", eventBean.getComplaintBy());
-            mapParams.put("origin", eventBean.getOrigin());
-            mapParams.put("type", eventBean.getType());
-            mapParams.put("priority", eventBean.getPriority());
-            mapParams.put("severity", eventBean.getSeverity());
-            mapParams.put("eventScope", eventBean.getEventScope());
+            mapParams.put("tag", eventBean.getTag() != null ?eventBean.getTag():"");
+            mapParams.put("title", eventBean.getTitle() != null ? eventBean.getTitle():"");
+            mapParams.put("occuredOn", eventBean.getOccuredOn() != null ? eventBean.getOccuredOn():"");
+            mapParams.put("complaintBy", eventBean.getComplaintBy() != null ? eventBean.getComplaintBy():"");
+            mapParams.put("origin", eventBean.getOrigin() != null ?eventBean.getOrigin():"");
+            mapParams.put("type", eventBean.getType() != null ? eventBean.getType():"");
+            mapParams.put("priority", eventBean.getPriority() != null? eventBean.getPriority():"");
+            mapParams.put("severity", eventBean.getSeverity() != null?eventBean.getSeverity():"");
+            mapParams.put("eventScope", eventBean.getEventScope() != null?eventBean.getEventScope():"");
             mapParams.put("relatedConfigSNs", "");//待定
             mapParams.put("relatedEventTags", "");//待定
             mapParams.put("relatedProblemTags", "");//待定
             mapParams.put("relatedChangeTags", "");//待定
-            mapParams.put("description", eventBean.getDescription());
+            mapParams.put("description", eventBean.getDescription() != null? eventBean.getDescription():"");
             mapParams.put("publish", "false");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
                 @Override
@@ -112,10 +114,10 @@ public class EventModelImpl implements EventModel {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (String.valueOf(response.code()).startsWith("2")) {
-                        listener.onSuccessMes("事件保存成功");//异步请求
+                        listener.onSuccessMes("SUCCESS");//异步请求
                     } else {
                         Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
-                        listener.onSuccessMes("事件保存失败");
+                        listener.onSuccessMes("FAILURE");
                     }
                 }
             });
