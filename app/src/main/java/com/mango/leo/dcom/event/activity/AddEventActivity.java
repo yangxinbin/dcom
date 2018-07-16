@@ -289,7 +289,6 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             public void run() {
                 AppUtils.showToast(getBaseContext(), s);
                 if (s.equals("SUCCESS")) {
-                    EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
                     JumpTo();
                 }
             }

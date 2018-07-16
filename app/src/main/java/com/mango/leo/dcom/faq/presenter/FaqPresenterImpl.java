@@ -9,6 +9,7 @@ import com.mango.leo.dcom.faq.listener.OnFaqListener;
 import com.mango.leo.dcom.faq.model.FaqModel;
 import com.mango.leo.dcom.faq.model.FaqModelImpl;
 import com.mango.leo.dcom.faq.view.FaqView;
+import com.mango.leo.dcom.util.Urls;
 
 import java.util.List;
 
@@ -33,14 +34,16 @@ public class FaqPresenterImpl implements FaqPresenter, OnFaqListener {
         sharedPreferences = context.getSharedPreferences("CIFIT", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 1 + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 1) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 0 + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 2) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 2 + "&page=" + page;
+            url = getUrl(type, context);
+        } else if (type == 3) {
+            url = getUrl(type, context);
         }
         Log.v("pppppppppppp", "" + url);
-        faqModel.visitProjects(context, type, faqBean,url, this);
+        faqModel.visitProjects(context, type, faqBean, url, this);
     }
 
     @Override
@@ -62,12 +65,16 @@ public class FaqPresenterImpl implements FaqPresenter, OnFaqListener {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
             case 0:
+                sburl.append(Urls.HOST_MYPROBLEM);
                 break;
             case 1:
-                //sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);
+                sburl.append(Urls.HOST_ALLPROBLEM);
                 break;
             case 2:
-               // sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);//已审核
+                sburl.append(Urls.HOST_CREATEPROBLEM);//创建
+                break;
+            case 3:
+                sburl.append(Urls.HOST_CREATEPROBLEM);//创建
                 break;
         }
         return sburl.toString();

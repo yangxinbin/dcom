@@ -31,18 +31,20 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
     }
 
     @Override
-    public void visitProjects(Context context, int type,EventBean eventBean, int page) {
+    public void visitProjects(Context context, int type, EventBean eventBean, int page) {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context)+"?token="+sharedPreferences.getString("token", "")+"&pageNum="+page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 1) {
-            url = getUrl(type, context)+"?token="+sharedPreferences.getString("token", "")+"&pageNum="+page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 2) {
+            url = getUrl(type, context);
+        } else if (type == 3) {
             url = getUrl(type, context);
         }
         Log.v("pppppppppppp", "" + url);
-        eventModel.visitProjects(context, type,eventBean,url,page, this);
+        eventModel.visitProjects(context, type, eventBean, url, page, this);
     }
 
     @Override
@@ -70,6 +72,9 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
                 sburl.append(Urls.HOST_ALLEVENT);
                 break;
             case 2:
+                sburl.append(Urls.HOST_CREATEEVENT);//创建
+                break;
+            case 3:
                 sburl.append(Urls.HOST_CREATEEVENT);//创建
                 break;
         }

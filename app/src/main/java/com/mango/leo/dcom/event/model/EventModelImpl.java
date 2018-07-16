@@ -99,7 +99,7 @@ public class EventModelImpl implements EventModel {
             mapParams.put("priority", eventBean.getPriority() != null? eventBean.getPriority():"");
             mapParams.put("severity", eventBean.getSeverity() != null?eventBean.getSeverity():"");
             mapParams.put("eventScope", eventBean.getEventScope() != null?eventBean.getEventScope():"");
-            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
+            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs()!=null&&eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
             mapParams.put("relatedEventTags", "");//待定
             mapParams.put("relatedProblemTags", "");//待定
             mapParams.put("relatedChangeTags", "");//待定
