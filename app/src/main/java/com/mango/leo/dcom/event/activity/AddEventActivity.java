@@ -1,7 +1,6 @@
 package com.mango.leo.dcom.event.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -40,7 +39,7 @@ import android.widget.TextView;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ConfigBean;
-import com.mango.leo.dcom.event.bean.ConfigChooseBean;
+import com.mango.leo.dcom.util.relate.ConfigChooseBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
@@ -55,6 +54,7 @@ import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.flowview.TagAdapter;
+import com.mango.leo.dcom.util.relate.ConfigActivity;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
 import org.greenrobot.eventbus.EventBus;
@@ -365,6 +365,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 initView();
                 flag = false;
                 intent = new Intent(this, ConfigActivity.class);
+                intent.putExtra("config","关联配置项");
                 if (bean1 != null) {
                     Log.v("ccccc", "ccc");
                     EventBus.getDefault().postSticky(bean1);

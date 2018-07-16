@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.event.adapter;
+package com.mango.leo.dcom.util.relate;
 
 import android.content.Context;
 import android.os.Handler;

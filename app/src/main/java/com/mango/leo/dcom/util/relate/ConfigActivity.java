@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.event.activity;
+package com.mango.leo.dcom.util.relate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,14 +24,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.event.adapter.ChooseAdapter;
-import com.mango.leo.dcom.event.adapter.GirdAdapter;
-import com.mango.leo.dcom.event.bean.ConfigChooseBean;
-import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
 import com.mango.leo.dcom.util.Urls;
-import com.mango.leo.dcom.util.flowview.TagAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -65,6 +60,8 @@ public class ConfigActivity extends AppCompatActivity {
     RecyclerView choose;
     @Bind(R.id.choose_list)
     RecyclerView chooseList;
+    @Bind(R.id.tv_config)
+    TextView tvConfig;
     private LinearLayoutManager mLayoutManager;
     private ChooseAdapter adapter;
     private List<String> mData, mDataAll;
@@ -80,6 +77,7 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
+        tvConfig.setText(getIntent().getStringExtra("config"));
         mData = new ArrayList<>();
         mDataAll = new ArrayList<>();
         configChooseBean = new ConfigChooseBean();
@@ -100,12 +98,14 @@ public class ConfigActivity extends AppCompatActivity {
         mDataAll = removeDuplicate(bean.getChooses());
         //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
     }
+
     public List<String> removeDuplicate(List list) {
         HashSet h = new HashSet(list);
         list.clear();
         list.addAll(h);
         return list;
     }
+
     private void initGird() {
         choose.removeAllViews();
         mGridLayoutManager = new GridLayoutManager(getBaseContext(), 2);
@@ -168,7 +168,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
     }
 
-    private final ConfigActivity.MyHandler mHandler = new ConfigActivity.MyHandler(this);
+    private final MyHandler mHandler = new MyHandler(this);
 
     private class MyHandler extends Handler {
         private final WeakReference<ConfigActivity> mActivity;
@@ -227,7 +227,7 @@ public class ConfigActivity extends AppCompatActivity {
             if (mData.size() <= 0) {
                 return;
             }
-           // adapter1.addItem(adapter.getItem(position));
+            // adapter1.addItem(adapter.getItem(position));
             mDataAll.add(adapter.getItem(position));
             adapter1.setmDate(removeDuplicate(mDataAll));
             Log.v("oooooooo", adapter.getItem(position) + "---true---");

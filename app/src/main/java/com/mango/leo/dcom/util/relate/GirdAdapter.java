@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.event.adapter;
+package com.mango.leo.dcom.util.relate;
 
 import android.content.Context;
 import android.os.Handler;
@@ -9,16 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-
-import io.reactivex.internal.operators.flowable.FlowableOnErrorReturn;
 
 /**
  * Created by admin on 2018/5/11.

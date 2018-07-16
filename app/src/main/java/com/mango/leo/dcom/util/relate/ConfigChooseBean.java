@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.event.bean;
+package com.mango.leo.dcom.util.relate;
 
 import java.util.List;
 
