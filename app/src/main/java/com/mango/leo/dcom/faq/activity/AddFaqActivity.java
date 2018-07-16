@@ -127,7 +127,7 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
         tagAdapter.onlyAddAll(bean.getChooses());
         //faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {
-            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+            EventBus.getDefault().removeStickyEvent(EventChooseBean.class);
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -140,7 +140,7 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
         tagAdapter.onlyAddAll(bean.getChooses());
         //faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {
-            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+            EventBus.getDefault().removeStickyEvent(ChangeChooseBean.class);
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -255,6 +255,9 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        EventBus.getDefault().removeStickyEvent(EventChooseBean.class);
+        EventBus.getDefault().removeStickyEvent(ChangeChooseBean.class);
+        EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
         EventBus.getDefault().unregister(this);
     }
 }
