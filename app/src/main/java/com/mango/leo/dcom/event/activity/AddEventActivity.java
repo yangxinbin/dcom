@@ -289,6 +289,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
             public void run() {
                 AppUtils.showToast(getBaseContext(), s);
                 if (s.equals("SUCCESS")) {
+                    EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
                     JumpTo();
                 }
             }
@@ -668,6 +669,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
         EventBus.getDefault().unregister(this);
     }
 }
