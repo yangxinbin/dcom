@@ -363,6 +363,9 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
         Intent intent;
         switch (view.getId()) {
             case R.id.imageView_back:
+                intent = new Intent(this, FaqActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.linearLayout_faq_time:
                 initDatePicker();
