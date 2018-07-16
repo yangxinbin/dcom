@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.event.presenter.EventPresenterImpl;
 import com.mango.leo.dcom.faq.bean.FaqBean;
 import com.mango.leo.dcom.faq.presenter.FaqPresenter;
 import com.mango.leo.dcom.faq.presenter.FaqPresenterImpl;
