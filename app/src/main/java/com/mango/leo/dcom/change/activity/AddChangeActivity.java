@@ -1,7 +1,9 @@
 package com.mango.leo.dcom.change.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +14,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.event.activity.EventActivity;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
+import com.mango.leo.dcom.util.relate.ChangeChooseBean;
+import com.mango.leo.dcom.util.relate.ConfigChooseBean;
+import com.mango.leo.dcom.util.relate.EventChooseBean;
+import com.mango.leo.dcom.util.relate.ProblemChooseBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -81,7 +90,6 @@ public class AddChangeActivity extends AppCompatActivity {
     EditText editTextDescription;
     @Bind(R.id.editText_content)
     EditText editTextContent;
-    ListView list2;
     @Bind(R.id.b_save)
     Button bSave;
     @Bind(R.id.b_save_commit)
@@ -108,8 +116,12 @@ public class AddChangeActivity extends AppCompatActivity {
 
     @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.imageView_back:
+                intent = new Intent(this, ChangeActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.linearLayout_change_time:
                 break;
@@ -138,5 +150,24 @@ public class AddChangeActivity extends AppCompatActivity {
             case R.id.imageViewP:
                 break;
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent(this, ChangeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        EventBus.getDefault().removeStickyEvent(EventChooseBean.class);
+        EventBus.getDefault().removeStickyEvent(ChangeChooseBean.class);
+        EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        EventBus.getDefault().removeStickyEvent(ProblemChooseBean.class);
+        EventBus.getDefault().unregister(this);
     }
 }
