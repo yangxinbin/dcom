@@ -587,6 +587,7 @@
                     android:layout_below="@+id/imageView66"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:gravity="center"
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/textView65"
@@ -599,37 +600,23 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout_faq_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/imageView66"
-                        android:layout_alignRight="@+id/imageView66"
-                        android:layout_below="@+id/imageView46"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView_faq_list"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:text="请输入需要关联的关键字"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/sencond_textSize" />
-
                         <ImageView
                             android:id="@+id/imageView69"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/r" />
-                    </LinearLayout>
                 </LinearLayout>
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_change_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
                 <ImageView
                     android:id="@+id/imageView67"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="18dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="10dp"
@@ -638,6 +625,7 @@
                     android:padding="8dp"
                     android:layout_below="@+id/imageView67"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -647,37 +635,23 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_marginBottom="18dp"
                         android:text="关联配置项"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout_faq_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/imageView66"
-                        android:layout_alignRight="@+id/imageView66"
-                        android:layout_below="@+id/imageView46"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView_faq_item"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:text="请输入需要关联的关键字"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/sencond_textSize" />
 
                         <ImageView
                             android:id="@+id/imageView70"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/r" />
-                    </LinearLayout>
                 </LinearLayout>
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_config_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

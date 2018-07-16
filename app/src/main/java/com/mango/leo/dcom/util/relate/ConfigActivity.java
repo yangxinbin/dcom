@@ -69,6 +69,7 @@ public class ConfigActivity extends AppCompatActivity {
     private GirdAdapter adapter1;
     private GridLayoutManager mGridLayoutManager;
     private ConfigChooseBean configChooseBean;
+    private String what;
 
 
     @Override
@@ -78,6 +79,7 @@ public class ConfigActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         tvConfig.setText(getIntent().getStringExtra("config"));
+        what = getIntent().getStringExtra("what");
         mData = new ArrayList<>();
         mDataAll = new ArrayList<>();
         configChooseBean = new ConfigChooseBean();
@@ -146,7 +148,7 @@ public class ConfigActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                HttpUtils.doGet(Urls.HOST + "/api/common/list/tags?type=asset" + "&token=" + sharedPreferences.getString("token", "") + "&prefix=" + s, new Callback() {
+                HttpUtils.doGet(Urls.HOST + "/api/common/list/tags?type="+what+ "&token=" + sharedPreferences.getString("token", "") + "&prefix=" + s, new Callback() {
                     @Override
                     public void onFailure(Call call, final IOException e) {
                         mHandler.sendEmptyMessage(1);

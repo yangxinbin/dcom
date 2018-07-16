@@ -366,6 +366,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 flag = false;
                 intent = new Intent(this, ConfigActivity.class);
                 intent.putExtra("config","关联配置项");
+                intent.putExtra("what","asset");
                 if (bean1 != null) {
                     Log.v("ccccc", "ccc");
                     EventBus.getDefault().postSticky(bean1);
