@@ -81,13 +81,6 @@ public class AddChangeActivity extends AppCompatActivity {
     EditText editTextDescription;
     @Bind(R.id.editText_content)
     EditText editTextContent;
-    @Bind(R.id.jia1)
-    ImageView jia1;
-    @Bind(R.id.list1)
-    ListView list1;
-    @Bind(R.id.jia2)
-    ImageView jia2;
-    @Bind(R.id.list2)
     ListView list2;
     @Bind(R.id.b_save)
     Button bSave;
@@ -101,6 +94,10 @@ public class AddChangeActivity extends AppCompatActivity {
     ImageView imageViewP;
     @Bind(R.id.p)
     RelativeLayout p;
+    @Bind(R.id.e_method_way)
+    EditText eMethodWay;
+    @Bind(R.id.e_revert)
+    EditText eRevert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +106,7 @@ public class AddChangeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.jia1, R.id.jia2,R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imageView_back:
@@ -133,10 +130,6 @@ public class AddChangeActivity extends AppCompatActivity {
             case R.id.linearLayout_change_changelist:
                 break;
             case R.id.linearLayout_change_item:
-                break;
-            case R.id.jia1:
-                break;
-            case R.id.jia2:
                 break;
             case R.id.imageView_pic_choose:
                 break;
