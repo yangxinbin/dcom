@@ -370,7 +370,7 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                     EventBus.getDefault().postSticky(bean1);
                 }
                 startActivity(intent);
-                finish();
+                //finish();
                 break;
             case R.id.b_save:
                 initView();

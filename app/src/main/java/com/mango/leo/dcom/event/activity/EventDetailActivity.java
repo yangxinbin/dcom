@@ -8,9 +8,11 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.bean.DetailBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
@@ -155,6 +157,10 @@ public class EventDetailActivity extends AppCompatActivity {
         tagAdapter = new TagAdapter(this);
         flowLayout.setAdapter(tagAdapter);
         tagAdapter.onlyAddAll(detailBean.getAssetConfigSNs());
+        if (detailBean.getAttachments() != null && detailBean.getAttachments().get(0) != null){
+            imageViewP.setVisibility(View.VISIBLE);
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + detailBean.getAttachments().get(0).getUrl()).into(imageViewP);
+        }
     }
 
     @OnClick(R.id.imageView_back)

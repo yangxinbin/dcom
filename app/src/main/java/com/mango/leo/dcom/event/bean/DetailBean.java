@@ -15,9 +15,9 @@ public class DetailBean {
      * level : null
      * tag : 1807131743YJK
      * title : yy
-     * origin : ????
-     * type : ????
-     * severity : ??
+     * origin : 服务中心
+     * type : 服务请求
+     * severity : 严重
      * scope : 77
      * contactPerson : null
      * description : gg
@@ -25,9 +25,9 @@ public class DetailBean {
      * assignedDesc : null
      * solutionReviews : null
      * eventCause : null
-     * attachments : null
-     * solutions : null
-     * preMeasures : null
+     * attachments : [{"fileName":"1531475016729","filePath":"/api/1531475016729.jpg","url":"/cdn/dcom/out/api/1531475016729.jpg","createdOn":1531475016729}]
+     * solutions : []
+     * preMeasures : []
      * claimedOn : null
      * createdOn : 1531475017000
      * updatedOn : 1531475017000
@@ -63,9 +63,6 @@ public class DetailBean {
     private Object assignedDesc;
     private Object solutionReviews;
     private Object eventCause;
-    private Object attachments;
-    private Object solutions;
-    private Object preMeasures;
     private Object claimedOn;
     private long createdOn;
     private long updatedOn;
@@ -79,6 +76,9 @@ public class DetailBean {
     private CreatedByBean createdBy;
     private Object reviewedBy;
     private Object solutionBy;
+    private List<AttachmentsBean> attachments;
+    private List<?> solutions;
+    private List<?> preMeasures;
     private List<String> assetConfigSNs;
     private List<?> eventTickets;
     private List<?> problemTickets;
@@ -212,30 +212,6 @@ public class DetailBean {
         this.eventCause = eventCause;
     }
 
-    public Object getAttachments() {
-        return attachments;
-    }
-
-    public void setAttachments(Object attachments) {
-        this.attachments = attachments;
-    }
-
-    public Object getSolutions() {
-        return solutions;
-    }
-
-    public void setSolutions(Object solutions) {
-        this.solutions = solutions;
-    }
-
-    public Object getPreMeasures() {
-        return preMeasures;
-    }
-
-    public void setPreMeasures(Object preMeasures) {
-        this.preMeasures = preMeasures;
-    }
-
     public Object getClaimedOn() {
         return claimedOn;
     }
@@ -338,6 +314,30 @@ public class DetailBean {
 
     public void setSolutionBy(Object solutionBy) {
         this.solutionBy = solutionBy;
+    }
+
+    public List<AttachmentsBean> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<AttachmentsBean> attachments) {
+        this.attachments = attachments;
+    }
+
+    public List<?> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(List<?> solutions) {
+        this.solutions = solutions;
+    }
+
+    public List<?> getPreMeasures() {
+        return preMeasures;
+    }
+
+    public void setPreMeasures(List<?> preMeasures) {
+        this.preMeasures = preMeasures;
     }
 
     public List<String> getAssetConfigSNs() {
@@ -561,6 +561,52 @@ public class DetailBean {
 
         public void setDisplayPicture(Object displayPicture) {
             this.displayPicture = displayPicture;
+        }
+    }
+
+    public static class AttachmentsBean {
+        /**
+         * fileName : 1531475016729
+         * filePath : /api/1531475016729.jpg
+         * url : /cdn/dcom/out/api/1531475016729.jpg
+         * createdOn : 1531475016729
+         */
+
+        private String fileName;
+        private String filePath;
+        private String url;
+        private long createdOn;
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public long getCreatedOn() {
+            return createdOn;
+        }
+
+        public void setCreatedOn(long createdOn) {
+            this.createdOn = createdOn;
         }
     }
 }

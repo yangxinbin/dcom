@@ -381,6 +381,7 @@
                     android:textSize="@dimen/textSize" />
 
                 <com.mango.leo.dcom.util.RoundImageView
+                    android:visibility="gone"
                     android:id="@+id/imageView_p"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
