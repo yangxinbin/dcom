@@ -86,8 +86,8 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void loadDetail(String id) {
-        Log.v("wwwwwwww", "" + Urls.HOST_QUERY + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""));
-        HttpUtils.doGet(Urls.HOST_QUERY + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
+        Log.v("wwwwwwww", "" + Urls.HOST_QUERY_EVENT + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""));
+        HttpUtils.doGet(Urls.HOST_QUERY_EVENT + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 mHandler.sendEmptyMessage(1);
