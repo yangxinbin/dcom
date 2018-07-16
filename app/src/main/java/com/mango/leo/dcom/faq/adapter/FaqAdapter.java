@@ -23,7 +23,7 @@ import java.util.List;
 
 public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private OnEventClickListener mOnEventClickListener;//自注册的接口给调用者用于点击逻辑
+    private OnFaqClickListener mOnFaqClickListener;//自注册的接口给调用者用于点击逻辑
     private List<ListFaqBean> mData;
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
@@ -125,7 +125,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (getItemViewType(position) == TYPE_HEADER) return;//add header
         final int pos = getRealPosition(holder);
         if (holder instanceof ItemViewHolder) {
-/*            if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
+            if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
                 Log.v("yyyyy", "====pos======" + pos % 20);//
                 ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
                 ((ItemViewHolder) holder).textView_time.setText(DateUtil.getDateToString(mData.get(pos).getList().get(pos % 20).getCreatedOn(),"yyyy-MM-dd HH:mm:ss"));
@@ -134,7 +134,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }else if (mData.get(pos).getList().get(pos % 20).getStage() == 1){
                     ((ItemViewHolder) holder).textView_stage.setText("已提交");
                 }
-            }*/
+            }
 
         } else {
             // 之所以要设置可见，是因为我在没有更多数据时会隐藏了这个footView
@@ -175,8 +175,8 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mData.size() + isFooter + isHeader;
     }
 
-    public void setOnEventClickListener(OnEventClickListener onItemnewsClickListener) {
-        this.mOnEventClickListener = onItemnewsClickListener;
+    public void setOnFaqClickListener(OnFaqClickListener onItemnewsClickListener) {
+        this.mOnFaqClickListener = onItemnewsClickListener;
     }
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -193,7 +193,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mData == null ? null : mData.get(position);
     }
 
-    public interface OnEventClickListener {
+    public interface OnFaqClickListener {
         public void onItemClick(View view, int position);
     }
 
@@ -213,8 +213,8 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            if (mOnEventClickListener != null) {
-                mOnEventClickListener.onItemClick(view, this.getLayoutPosition());
+            if (mOnFaqClickListener != null) {
+                mOnFaqClickListener.onItemClick(view, this.getLayoutPosition());
             }
         }
     }

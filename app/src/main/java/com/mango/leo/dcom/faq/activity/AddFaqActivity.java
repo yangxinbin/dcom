@@ -38,7 +38,6 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
-import com.mango.leo.dcom.event.activity.EventActivity;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.faq.bean.FaqBean;
@@ -138,6 +137,12 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
     ImageView imageViewP;
     @Bind(R.id.p)
     RelativeLayout p;
+    @Bind(R.id.textView_eventlist)
+    TextView textViewEventlist;
+    @Bind(R.id.textView_changelist)
+    TextView textViewChangelist;
+    @Bind(R.id.textView_configlist)
+    TextView textViewConfiglist;
     private FaqPresenter faqPresenter;
     private boolean flag;
     private TagAdapter tagAdapter;
@@ -149,7 +154,7 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
     private SharedPreferences sharedPreferences;
     private List<String> list1, list2, list3, list4;
     private int currentPosition1 = -1, currentPosition2 = -1, currentPosition3 = -1, currentPosition4 = -1;
-    private CustomDatePicker customDatePicker_1,customDatePicker_2;
+    private CustomDatePicker customDatePicker_1, customDatePicker_2;
     private ListAndGirdDownAdapter adapter;
     private Dialog dialog;
     private static final int CODE_GALLERY_REQUEST = 0xa0;
@@ -278,11 +283,15 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus1(EventChooseBean bean) {
-        if (bean == null)
-            return;
-        bean_event = bean;
         tagAdapter = new TagAdapter(this);
         flowEventLayout.setAdapter(tagAdapter);
+        if (bean == null || bean.getChooses().size() == 0) {
+            textViewEventlist.setVisibility(View.VISIBLE);
+            tagAdapter.onlyAddAll(bean.getChooses());
+            return;
+        }
+        textViewEventlist.setVisibility(View.GONE);
+        bean_event = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedEventTags(removeDuplicate(bean.getChooses()));
         if (flag) {
@@ -292,11 +301,15 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus2(ChangeChooseBean bean) {
-        if (bean == null)
-            return;
-        bean_change = bean;
         tagAdapter = new TagAdapter(this);
         flowChangeLayout.setAdapter(tagAdapter);
+        if (bean == null || bean.getChooses().size() == 0){
+            textViewChangelist.setVisibility(View.VISIBLE);
+            tagAdapter.onlyAddAll(bean.getChooses());
+            return;
+        }
+        textViewChangelist.setVisibility(View.GONE);
+        bean_change = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedChangeTags(removeDuplicate(bean.getChooses()));
         if (flag) {
@@ -306,11 +319,15 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus3(ConfigChooseBean bean) {
-        if (bean == null)
-            return;
-        bean_config = bean;
         tagAdapter = new TagAdapter(this);
         flowConfigLayout.setAdapter(tagAdapter);
+        if (bean == null || bean.getChooses().size() == 0){
+            textViewConfiglist.setVisibility(View.VISIBLE);
+            tagAdapter.onlyAddAll(bean.getChooses());
+            return;
+        }
+        textViewConfiglist.setVisibility(View.GONE);
+        bean_config = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {
@@ -343,11 +360,13 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
             }
         });
     }
+
     private void JumpTo() {
         Intent intent = new Intent(this, FaqActivity.class);
         startActivity(intent);
         finish();
     }
+
     @Override
     public void addFaqFail(final String e) {
         runOnUiThread(new Runnable() {

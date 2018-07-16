@@ -571,6 +571,14 @@
                         android:text="关联配置项"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
+                    <TextView
+                        android:id="@+id/textView_configlist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请输入需要关联的关键字"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -560,6 +560,14 @@
                         android:text="关联事件单"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
+                    <TextView
+                        android:id="@+id/textView_eventlist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请输入需要关联的关键字"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -601,6 +609,14 @@
                         android:text="关联变更单"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
+                    <TextView
+                        android:id="@+id/textView_changelist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请输入需要关联的关键字"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
 
                         <ImageView
                             android:id="@+id/imageView69"
@@ -641,7 +657,14 @@
                         android:text="关联配置项"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize" />
-
+                    <TextView
+                        android:id="@+id/textView_configlist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请输入需要关联的关键字"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
                         <ImageView
                             android:id="@+id/imageView70"
                             android:layout_width="wrap_content"

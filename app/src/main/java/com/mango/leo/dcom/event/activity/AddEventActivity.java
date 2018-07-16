@@ -39,7 +39,6 @@ import android.widget.TextView;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.event.bean.ConfigBean;
-import com.mango.leo.dcom.util.relate.ConfigChooseBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.presenter.EventPresenter;
@@ -55,6 +54,7 @@ import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.flowview.TagAdapter;
 import com.mango.leo.dcom.util.relate.ConfigActivity;
+import com.mango.leo.dcom.util.relate.ConfigChooseBean;
 import com.mango.leo.dcom.util.widget.CustomDatePicker;
 
 import org.greenrobot.eventbus.EventBus;
@@ -127,6 +127,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
     ImageView imageViewP;
     @Bind(R.id.p)
     RelativeLayout p;
+    @Bind(R.id.textView_configlist)
+    TextView textViewConfiglist;
     private EventPresenter eventPresenter;
     private SharedPreferences sharedPreferences;
     private CustomDatePicker customDatePicker;
@@ -166,23 +168,29 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus(ConfigChooseBean bean) {
-        if (bean == null)
-            return;
-        bean1 = bean;
         tagAdapter = new TagAdapter(this);
         flowLayout.setAdapter(tagAdapter);
+        if (bean == null || bean.getChooses().size() == 0){
+            textViewConfiglist.setVisibility(View.VISIBLE);
+            tagAdapter.onlyAddAll(bean.getChooses());
+            return;
+        }
+        textViewConfiglist.setVisibility(View.GONE);
+        bean1 = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         eventBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {
             EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
         }
     }
+
     public List<String> removeDuplicate(List list) {
         HashSet h = new HashSet(list);
         list.clear();
         list.addAll(h);
         return list;
     }
+
     private void initDateFromWeb() {
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
@@ -365,8 +373,8 @@ public class AddEventActivity extends AppCompatActivity implements EventView, Ad
                 initView();
                 flag = false;
                 intent = new Intent(this, ConfigActivity.class);
-                intent.putExtra("config","关联配置项");
-                intent.putExtra("what","asset");
+                intent.putExtra("config", "关联配置项");
+                intent.putExtra("what", "asset");
                 if (bean1 != null) {
                     Log.v("ccccc", "ccc");
                     EventBus.getDefault().postSticky(bean1);

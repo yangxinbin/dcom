@@ -68,14 +68,14 @@ class MyFaqFragment extends Fragment implements FaqView {
         recycle.setLayoutManager(mLayoutManager);
         recycle.setItemAnimator(new DefaultItemAnimator());//设置默认动画
         adapter = new FaqAdapter(getActivity().getApplicationContext());
-        adapter.setOnEventClickListener(mOnItemClickListener);
+        adapter.setOnFaqClickListener(mOnItemClickListener);
         recycle.addOnScrollListener(mOnScrollListener);
         //recycle.setAdapter(adapter);
         recycle.removeAllViews();
         recycle.setAdapter(adapter);
     }
 
-    private FaqAdapter.OnEventClickListener mOnItemClickListener = new FaqAdapter.OnEventClickListener() {
+    private FaqAdapter.OnFaqClickListener mOnItemClickListener = new FaqAdapter.OnFaqClickListener() {
         @Override
         public void onItemClick(View view, int position) {
 /*            position = position - 1; //配对headerView

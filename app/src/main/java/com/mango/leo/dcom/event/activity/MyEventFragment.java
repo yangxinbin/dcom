@@ -80,12 +80,12 @@ class MyEventFragment extends Fragment implements EventView {
         @Override
         public void onItemClick(View view, int position) {
             position = position - 1; //配对headerView
-            Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position+"==="+adapter.getItem(position).getList().get(position%20).getId());
+            Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position + "===" + adapter.getItem(position).getList().get(position % 20).getId());
             if (mData.size() <= 0) {
                 return;
             }
             Intent intent = new Intent(getActivity(), EventDetailActivity.class);
-            intent.putExtra("id", adapter.getItem(position).getList().get(position%20).getId()+"");
+            intent.putExtra("id", adapter.getItem(position).getList().get(position % 20).getId() + "");
             startActivity(intent);
             //getActivity().finish();
         }

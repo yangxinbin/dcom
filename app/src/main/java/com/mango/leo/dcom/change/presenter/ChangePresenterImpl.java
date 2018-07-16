@@ -31,7 +31,7 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
 
     @Override
     public void visitProjects(Context context, int type, ChangeBean changeBean, int page) {
-        sharedPreferences = context.getSharedPreferences("CIFIT", MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
             url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 1 + "&page=" + page;
