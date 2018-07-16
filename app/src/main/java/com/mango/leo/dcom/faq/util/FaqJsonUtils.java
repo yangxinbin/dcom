@@ -24,12 +24,12 @@ public class FaqJsonUtils {
      * @param
      * @return
      */
-    public static List<ListFaqBean> readListFaqBean(String res) {
+    public static List<ListFaqBean> readListFaqBean(String res, String va) {
         List<ListFaqBean> beans = new ArrayList<ListFaqBean>();
         try {
             JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
             //JsonObject ob = jsonObject.getAsJsonObject("responseObject");
-            JsonArray jsonArray = jsonObject.getAsJsonArray();
+            JsonArray jsonArray = jsonObject.getAsJsonArray(va);
             for (int i = 0; i < jsonArray.size(); i++) {
                 ListFaqBean news = JsonUtils.deserialize(jsonObject, ListFaqBean.class);
                 beans.add(news);//这里会将所有的json对象转换为bean对象
