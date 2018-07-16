@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.event.bean.DetailBean;
+import com.mango.leo.dcom.event.bean.EventDetailBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
@@ -97,9 +97,9 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
-                    DetailBean detailBean = EventJsonUtils.readDetailBean(response.body().string());//data是json字段获得data的值即对象数组
+                    EventDetailBean eventDetailBean = EventJsonUtils.readDetailBean(response.body().string());//data是json字段获得data的值即对象数组
                     Message message = mHandler.obtainMessage();
-                    message.obj = detailBean;
+                    message.obj = eventDetailBean;
                     message.what = 0;
                     message.sendToTarget();
                 } catch (Exception e) {
@@ -126,8 +126,8 @@ public class EventDetailActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
-                        DetailBean detailBean = (DetailBean) msg.obj;
-                        initView(detailBean);
+                        EventDetailBean eventDetailBean = (EventDetailBean) msg.obj;
+                        initView(eventDetailBean);
                         break;
                     case 1:
                         AppUtils.showToast(getBaseContext(), "请求失败");
@@ -139,27 +139,29 @@ public class EventDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void initView(DetailBean detailBean) {
-        if (detailBean == null)
+    private void initView(EventDetailBean eventDetailBean) {
+        if (eventDetailBean == null)
             return;
-        tTag.setText(detailBean.getTag() + "");
-        tT.setText(detailBean.getTitle() + "");
-        tP.setText(detailBean.getCreatedBy().getRealName() + "");
-        tTime.setText(DateUtil.getDateToString(detailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
-        tC.setText(detailBean.getClaimedBy().getRealName() + "");
-        tCTime.setText(DateUtil.getDateToString(detailBean.getCreatedOn(), "yyyy-MM-dd HH:mm:ss") + "");
-        tFrom.setText(detailBean.getOrigin()+"");
-        tType.setText(detailBean.getType()+"");
-        tLevel.setText(detailBean.getLevel()+"");
-        tSe.setText(detailBean.getSeverity()+"");
-        tRange.setText(detailBean.getScope()+"");
-        tContent.setText(detailBean.getDescription()+"");
+        tTag.setText(eventDetailBean.getTag() + "");
+        tT.setText(eventDetailBean.getTitle() + "");
+        tP.setText(eventDetailBean.getCreatedBy().getRealName() + "");
+        tTime.setText(DateUtil.getDateToString(eventDetailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
+        tC.setText(eventDetailBean.getClaimedBy().getRealName() + "");
+        tCTime.setText(DateUtil.getDateToString(eventDetailBean.getCreatedOn(), "yyyy-MM-dd HH:mm:ss") + "");
+        tFrom.setText(eventDetailBean.getOrigin()+"");
+        tType.setText(eventDetailBean.getType()+"");
+        tLevel.setText(eventDetailBean.getLevel()+"");
+        tSe.setText(eventDetailBean.getSeverity()+"");
+        tRange.setText(eventDetailBean.getScope()+"");
+        tContent.setText(eventDetailBean.getDescription()+"");
         tagAdapter = new TagAdapter(this);
         flowLayout.setAdapter(tagAdapter);
-        tagAdapter.onlyAddAll(detailBean.getAssetConfigSNs());
-        if (detailBean.getAttachments() != null && detailBean.getAttachments().get(0) != null){
+        tagAdapter.onlyAddAll(eventDetailBean.getAssetConfigSNs());
+        if (eventDetailBean.getAttachments() != null && eventDetailBean.getAttachments().get(0) != null){
             imageViewP.setVisibility(View.VISIBLE);
-            Glide.with(this).load("http://dcom.hopesen.com.cn" + detailBean.getAttachments().get(0).getUrl()).into(imageViewP);
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + eventDetailBean.getAttachments().get(0).getUrl()).into(imageViewP);
+        }else {
+            imageViewP.setVisibility(View.GONE);
         }
     }
 

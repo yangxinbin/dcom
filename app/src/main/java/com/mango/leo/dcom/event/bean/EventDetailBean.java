@@ -6,7 +6,7 @@ import java.util.List;
  * Created by admin on 2018/7/13.
  */
 
-public class DetailBean {
+public class EventDetailBean {
 
     /**
      * id : 62

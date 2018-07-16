@@ -3,6 +3,8 @@ package com.mango.leo.dcom.faq.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mango.leo.dcom.event.bean.EventDetailBean;
+import com.mango.leo.dcom.faq.bean.FaqDetailBean;
 import com.mango.leo.dcom.faq.bean.ListFaqBean;
 import com.mango.leo.dcom.util.JsonUtils;
 
@@ -37,5 +39,10 @@ public class FaqJsonUtils {
         } catch (Exception e) {
         }
         return beans;
+    }
+    public static FaqDetailBean readDetailBean(String res) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        FaqDetailBean faqDetailBean = JsonUtils.deserialize(jsonObject, FaqDetailBean.class);
+        return faqDetailBean;
     }
 }

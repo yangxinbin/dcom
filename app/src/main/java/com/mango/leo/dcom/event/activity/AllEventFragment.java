@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.event.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -77,13 +78,14 @@ class AllEventFragment extends android.support.v4.app.Fragment implements EventV
         @Override
         public void onItemClick(View view, int position) {
             position = position - 1; //配对headerView
-            Log.v("oooooooo", adapter.getItem(position) + "---true---" + position);
+            Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position + "===" + adapter.getItem(position).getList().get(position % 20).getId());
             if (mData.size() <= 0) {
                 return;
             }
-/*            Intent intent = new Intent(getActivity(), ZhaoShanDetailActivity.class);
-            intent.putExtra("FavouriteId", adapter.getItem(position).getResponseObject().getContent().get(position%20).getId());
-            startActivity(intent);*/
+            Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+            intent.putExtra("id", adapter.getItem(position).getList().get(position % 20).getId() + "");
+            startActivity(intent);
+            //getActivity().finish();
         }
     };
     private int lastVisibleItem;

@@ -91,7 +91,8 @@
         <activity
             android:name=".util.relate.ConfigActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".event.activity.EventDetailActivity"></activity>
+        <activity android:name=".event.activity.EventDetailActivity" />
+        <activity android:name=".faq.activity.FaqDetailActivity"></activity>
     </application>
 
 </manifest>

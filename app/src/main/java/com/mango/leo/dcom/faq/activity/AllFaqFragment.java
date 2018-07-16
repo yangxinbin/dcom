@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.faq.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -78,14 +79,14 @@ class AllFaqFragment extends Fragment implements FaqView {
     private FaqAdapter.OnFaqClickListener mOnItemClickListener = new FaqAdapter.OnFaqClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-/*            position = position - 1; //配对headerView
+            position = position - 1; //配对headerView
             Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position+"==="+adapter.getItem(position).getList().get(position%20).getId());
             if (mData.size() <= 0) {
                 return;
             }
-            Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+            Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
             intent.putExtra("id", adapter.getItem(position).getList().get(position%20).getId()+"");
-            startActivity(intent);*/
+            startActivity(intent);
             //getActivity().finish();
         }
     };
