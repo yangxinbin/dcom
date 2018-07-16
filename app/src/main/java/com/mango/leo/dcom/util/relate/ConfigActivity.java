@@ -70,6 +70,10 @@ public class ConfigActivity extends AppCompatActivity {
     private GridLayoutManager mGridLayoutManager;
     private ConfigChooseBean configChooseBean;
     private String what;
+    private String config;
+    private EventChooseBean eventChooseBean;
+    private ChangeChooseBean changeChooseBean;
+    private ProblemChooseBean problemChooseBean;
 
 
     @Override
@@ -78,10 +82,14 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
-        tvConfig.setText(getIntent().getStringExtra("config"));
+        config = getIntent().getStringExtra("config");
         what = getIntent().getStringExtra("what");
+        tvConfig.setText(config);
         mData = new ArrayList<>();
         mDataAll = new ArrayList<>();
+        eventChooseBean = new EventChooseBean();
+        changeChooseBean = new ChangeChooseBean();
+        problemChooseBean = new ProblemChooseBean();
         configChooseBean = new ConfigChooseBean();
         initRecycle();
         initGird();
@@ -92,12 +100,47 @@ public class ConfigActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void eventBus(ConfigChooseBean bean) {
+    public void eventBus1(EventChooseBean bean) {
         if (bean == null)
             return;
-        Log.v("ccccc", "!!??!!");
-        adapter1.setmDate(removeDuplicate(bean.getChooses()));
-        mDataAll = removeDuplicate(bean.getChooses());
+        Log.v("ccccc", "!!??!!1");
+        if (what.equals("event")){//共用适配器需要判断
+            adapter1.setmDate(removeDuplicate(bean.getChooses()));
+            mDataAll = removeDuplicate(bean.getChooses());
+        }
+        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus2(ProblemChooseBean bean) {
+        if (bean == null)
+            return;
+        Log.v("ccccc", "!!??!!2");
+        if (what.equals("problem")){
+            adapter1.setmDate(removeDuplicate(bean.getChooses()));
+            mDataAll = removeDuplicate(bean.getChooses());
+        }
+        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus3(ChangeChooseBean bean) {
+        if (bean == null)
+            return;
+        Log.v("ccccc", "!!??!!3");
+        if (what.equals("change")){
+            adapter1.setmDate(removeDuplicate(bean.getChooses()));
+            mDataAll = removeDuplicate(bean.getChooses());
+        }
+        //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus4(ConfigChooseBean bean) {
+        if (bean == null)
+            return;
+        Log.v("ccccc", "!!??!!4");
+        if (what.equals("asset")){
+            adapter1.setmDate(removeDuplicate(bean.getChooses()));
+            mDataAll = removeDuplicate(bean.getChooses());
+        }
         //EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
     }
 
@@ -273,8 +316,19 @@ public class ConfigActivity extends AppCompatActivity {
                 break;
             case R.id.state:
                 //intent = new Intent(this, AddEventActivity.class);
-                configChooseBean.setChooses(adapter1.getmData());
-                EventBus.getDefault().postSticky(configChooseBean);
+                if (what.equals("event")){
+                    eventChooseBean.setChooses(adapter1.getmData());
+                    EventBus.getDefault().postSticky(eventChooseBean);
+                }else if (what.equals("problem")){
+                    problemChooseBean.setChooses(adapter1.getmData());
+                    EventBus.getDefault().postSticky(problemChooseBean);
+                }else if (what.equals("change")){
+                    changeChooseBean.setChooses(adapter1.getmData());
+                    EventBus.getDefault().postSticky(changeChooseBean);
+                }else if (what.equals("asset")){
+                    configChooseBean.setChooses(adapter1.getmData());
+                    EventBus.getDefault().postSticky(configChooseBean);
+                }
                 //startActivity(intent);
                 finish();
                 break;

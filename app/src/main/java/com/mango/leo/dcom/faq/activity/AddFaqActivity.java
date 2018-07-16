@@ -1,7 +1,10 @@
 package com.mango.leo.dcom.faq.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,13 +14,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.event.activity.EventActivity;
+import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.faq.bean.FaqBean;
 import com.mango.leo.dcom.faq.presenter.FaqPresenter;
 import com.mango.leo.dcom.faq.presenter.FaqPresenterImpl;
 import com.mango.leo.dcom.faq.view.FaqView;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
+import com.mango.leo.dcom.util.flowview.TagAdapter;
+import com.mango.leo.dcom.util.relate.ChangeChooseBean;
+import com.mango.leo.dcom.util.relate.ConfigActivity;
+import com.mango.leo.dcom.util.relate.ConfigChooseBean;
+import com.mango.leo.dcom.util.relate.EventChooseBean;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -82,16 +97,71 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
     @Bind(R.id.p)
     RelativeLayout p;
     private FaqPresenter faqPresenter;
+    private boolean flag;
+    private TagAdapter tagAdapter;
+    private FaqBean faqBean;
+    private ConfigChooseBean bean1;
+    private EventChooseBean bean_event;
+    private ChangeChooseBean bean_change;
+    private ConfigChooseBean bean_config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_faq);
+        faqBean = new FaqBean();
+
         ButterKnife.bind(this);
         faqPresenter = new FaqPresenterImpl(this);
-        //eventPresenter.visitProjects();
+        EventBus.getDefault().register(this);
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus1(EventChooseBean bean) {
+        if (bean == null)
+            return;
+        bean_event = bean;
+        tagAdapter = new TagAdapter(this);
+        flowEventLayout.setAdapter(tagAdapter);
+        tagAdapter.onlyAddAll(bean.getChooses());
+        //faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
+        if (flag) {
+            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus2(ChangeChooseBean bean) {
+        if (bean == null)
+            return;
+        bean_change = bean;
+        tagAdapter = new TagAdapter(this);
+        flowChangeLayout.setAdapter(tagAdapter);
+        tagAdapter.onlyAddAll(bean.getChooses());
+        //faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
+        if (flag) {
+            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventBus3(ConfigChooseBean bean) {
+        if (bean == null)
+            return;
+        bean_config = bean;
+        tagAdapter = new TagAdapter(this);
+        flowConfigLayout.setAdapter(tagAdapter);
+        tagAdapter.onlyAddAll(bean.getChooses());
+        //faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
+        if (flag) {
+            EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
+        }
+    }
+    public List<String> removeDuplicate(List list) {
+        HashSet h = new HashSet(list);
+        list.clear();
+        list.addAll(h);
+        return list;
+    }
     @Override
     public void addFaqSuccess(List<FaqBean> eventBeans) {
 
@@ -107,8 +177,9 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
 
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_faq_time, R.id.linearLayout_faq_overtime, R.id.linearLayout_faq_from, R.id.linearLayout_faq_type, R.id.linearLayout_faq_level, R.id.linearLayout_faq_system, R.id.l_event, R.id.l_change, R.id.l_config, R.id.b_save, R.id.b_save_commit,R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_faq_time, R.id.linearLayout_faq_overtime, R.id.linearLayout_faq_from, R.id.linearLayout_faq_type, R.id.linearLayout_faq_level, R.id.linearLayout_faq_system, R.id.l_event, R.id.l_change, R.id.l_config, R.id.b_save, R.id.b_save_commit, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.imageView_back:
                 break;
@@ -125,10 +196,37 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
             case R.id.linearLayout_faq_system:
                 break;
             case R.id.l_event:
+                flag = false;
+                intent = new Intent(this, ConfigActivity.class);
+                intent.putExtra("config", "关联事件单");
+                intent.putExtra("what", "event");
+/*                if (bean1 != null) {
+                    Log.v("ccccc", "ccc");
+                    EventBus.getDefault().postSticky(bean1);
+                }*/
+                startActivity(intent);
                 break;
             case R.id.l_change:
+                flag = false;
+                intent = new Intent(this, ConfigActivity.class);
+                intent.putExtra("config", "关联变更单");
+                intent.putExtra("what", "change");
+/*                if (bean1 != null) {
+                    Log.v("ccccc", "ccc");
+                    EventBus.getDefault().postSticky(bean1);
+                }*/
+                startActivity(intent);
                 break;
             case R.id.l_config:
+                flag = false;
+                intent = new Intent(this, ConfigActivity.class);
+                intent.putExtra("config", "关联配置项");
+                intent.putExtra("what", "asset");
+/*                if (bean1 != null) {
+                    Log.v("ccccc", "ccc");
+                    EventBus.getDefault().postSticky(bean1);
+                }*/
+                startActivity(intent);
                 break;
             case R.id.b_save:
                 break;
@@ -143,4 +241,20 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent(this, FaqActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
+    }
 }

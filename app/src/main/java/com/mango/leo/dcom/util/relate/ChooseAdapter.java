@@ -134,7 +134,7 @@ public class ChooseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     // 隐藏提示条
                     ((ChooseAdapter.FooterViewHolder) holder).footTv.setVisibility(View.GONE);
                 }
-            }, 2000);
+            }, 1000);
         }
     }
 
