@@ -50,7 +50,7 @@ public class FaqModelImpl implements FaqModel {
                         //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
                         List<ListFaqBean> beanList = FaqJsonUtils.readListFaqBean(response.body().string(), "list");//data是json字段获得data的值即对象数组
                         listener.onSuccess(beanList);
-                        listener.onSuccessMes("请求成功");
+                        //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
                         Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
                         listener.onSuccessMes("请求失败");
@@ -76,7 +76,7 @@ public class FaqModelImpl implements FaqModel {
                         //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
                         List<ListFaqBean> beanList = FaqJsonUtils.readListFaqBean(response.body().string(), "list");//data是json字段获得data的值即对象数组
                         listener.onSuccess(beanList);
-                        listener.onSuccessMes("请求成功");
+                        //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
                         Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
                         listener.onSuccessMes("请求失败");

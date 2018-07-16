@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.faq.adapter;
+package com.mango.leo.dcom.change.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.faq.bean.ListFaqBean;
+import com.mango.leo.dcom.change.bean.ListChangeBean;
 import com.mango.leo.dcom.util.DateUtil;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ import java.util.List;
  * Created by admin on 2018/5/11.
  */
 
-public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ChangeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private OnFaqClickListener mOnFaqClickListener;//自注册的接口给调用者用于点击逻辑
-    private List<ListFaqBean> mData;
+    private OnChangeClickListener mOnChangeClickListener;//自注册的接口给调用者用于点击逻辑
+    private List<ListChangeBean> mData;
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_FOOTER = 1;
     public static final int TYPE_HEADER = 2;
@@ -35,13 +35,13 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
-    public void setmDate(List<ListFaqBean> data) {
+    public void setmDate(List<ListChangeBean> data) {
         this.mData = data;
         this.notifyDataSetChanged();
     }
 
     public void reMove() {
-        List<ListFaqBean> m = new ArrayList<ListFaqBean>();
+        List<ListChangeBean> m = new ArrayList<ListChangeBean>();
         this.mData = m;
         this.notifyDataSetChanged();
     }
@@ -53,7 +53,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * 添加列表项     * @param item
      */
-    public void addItem(ListFaqBean bean) {
+    public void addItem(ListChangeBean bean) {
         isShowFooter(false);
         if (mData != null) {
             mData.add(bean);
@@ -67,7 +67,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.notifyDataSetChanged();
     }
 
-    public FaqAdapter(Context context) {
+    public ChangeAdapter(Context context) {
         this.context = context;
     }
 
@@ -142,17 +142,17 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 // 不隐藏footView提示
                 Log.v("rrrrrrrrr", "--???--");
                 // 如果查询数据发现增加之后，就显示正在加载更多
-                ((FaqAdapter.FooterViewHolder) holder).footTv.setVisibility(View.VISIBLE);
-                ((FaqAdapter.FooterViewHolder) holder).footTv.setText("正在加载...");
+                ((ChangeAdapter.FooterViewHolder) holder).footTv.setVisibility(View.VISIBLE);
+                ((ChangeAdapter.FooterViewHolder) holder).footTv.setText("正在加载...");
             } else {
                 // 如果查询数据发现并没有增加时，就显示没有更多数据了
-                ((FaqAdapter.FooterViewHolder) holder).footTv.setVisibility(View.VISIBLE);
-                ((FaqAdapter.FooterViewHolder) holder).footTv.setText("没有更多数据了");
+                ((ChangeAdapter.FooterViewHolder) holder).footTv.setVisibility(View.VISIBLE);
+                ((ChangeAdapter.FooterViewHolder) holder).footTv.setText("没有更多数据了");
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         // 隐藏提示条
-                        ((FaqAdapter.FooterViewHolder) holder).footTv.setVisibility(View.INVISIBLE);
+                        ((ChangeAdapter.FooterViewHolder) holder).footTv.setVisibility(View.INVISIBLE);
                     }
                 }, 2000);
             }
@@ -175,8 +175,8 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mData.size() + isFooter + isHeader;
     }
 
-    public void setOnFaqClickListener(OnFaqClickListener onItemnewsClickListener) {
-        this.mOnFaqClickListener = onItemnewsClickListener;
+    public void setOnChangeClickListener(OnChangeClickListener onItemnewsClickListener) {
+        this.mOnChangeClickListener = onItemnewsClickListener;
     }
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -189,11 +189,11 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public ListFaqBean getItem(int position) {
+    public ListChangeBean getItem(int position) {
         return mData == null ? null : mData.get(position);
     }
 
-    public interface OnFaqClickListener {
+    public interface OnChangeClickListener {
         public void onItemClick(View view, int position);
     }
 
@@ -213,8 +213,8 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            if (mOnFaqClickListener != null) {
-                mOnFaqClickListener.onItemClick(view, this.getLayoutPosition());
+            if (mOnChangeClickListener != null) {
+                mOnChangeClickListener.onItemClick(view, this.getLayoutPosition());
             }
         }
     }

@@ -50,7 +50,7 @@ public class EventModelImpl implements EventModel {
                         //response.body().string() 只能用一次  java.lang.IllegalStateException异常, 该异常表示，当前对客户端的响应已经结束，不能在响应已经结束（或说消亡）后再向客户端（实际上是缓冲区）输出任何内容。
                         List<ListEventBean> beanList = EventJsonUtils.readJsonEventBeans(response.body().string(), "list");//data是json字段获得data的值即对象数组
                         listener.onSuccess(beanList);
-                        listener.onSuccessMes("请求成功");
+                        //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
                         listener.onSuccessMes("请求失败");
                     }
@@ -76,7 +76,7 @@ public class EventModelImpl implements EventModel {
                         //response.body().string() 只能用一次  java.lang.IllegalStateException异常, 该异常表示，当前对客户端的响应已经结束，不能在响应已经结束（或说消亡）后再向客户端（实际上是缓冲区）输出任何内容。
                         List<ListEventBean> beanList = EventJsonUtils.readJsonEventBeans(response.body().string(), "list");//data是json字段获得data的值即对象数组
                         listener.onSuccess(beanList);
-                        listener.onSuccessMes("请求成功");
+                        //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
                         Log.e("yyyyy", "Exception = " + e);
                         listener.onSuccessMes("请求失败");

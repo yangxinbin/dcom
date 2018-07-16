@@ -183,6 +183,9 @@ class AllEventFragment extends android.support.v4.app.Fragment implements EventV
                     }
                     Log.v("zzzzzzzzz", "----4---------" + mData.size());
                     adapter.setmDate(mData);
+                    if (mDataAll.size() < 8){
+                        adapter.hasMore(false);
+                    }
                 } else {
                     if (mDataAll != null) {
                         //加载更多

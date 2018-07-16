@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.change.view;
 
 import com.mango.leo.dcom.change.bean.ChangeBean;
+import com.mango.leo.dcom.change.bean.ListChangeBean;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface ChangeView {
-    void addChangeSuccess(List<ChangeBean> changeBeans);
+    void addChangeSuccess(List<ListChangeBean> changeBeans);
     void addChangeMes(String s);
     void addChangeFail(String e);
 }

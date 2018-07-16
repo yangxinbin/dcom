@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.mango.leo.dcom.change.bean.ChangeBean;
+import com.mango.leo.dcom.change.bean.ListChangeBean;
 import com.mango.leo.dcom.change.listener.OnChangeListener;
 import com.mango.leo.dcom.change.model.ChangeModelImpl;
 import com.mango.leo.dcom.change.model.ChangeModel;
 import com.mango.leo.dcom.change.view.ChangeView;
 import com.mango.leo.dcom.faq.view.FaqView;
+import com.mango.leo.dcom.util.Urls;
 
 import java.util.List;
 
@@ -34,18 +36,20 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 1 + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
         } else if (type == 1) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 0 + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
         } else if (type == 2) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&stage=" + 2 + "&page=" + page;
+            url = getUrl(type, context);
+        } else if (type == 3) {
+            url = getUrl(type, context);
         }
         Log.v("pppppppppppp", "" + url);
         changeModel.visitProjects(context, type, changeBean,url, this);
     }
 
     @Override
-    public void onSuccess(List<ChangeBean> list) {
+    public void onSuccess(List<ListChangeBean> list) {
         changeView.addChangeSuccess(list);
     }
 
@@ -63,12 +67,16 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
             case 0:
+                sburl.append(Urls.HOST_MYCHANGE);
                 break;
             case 1:
-                //sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);
+                sburl.append(Urls.HOST_ALLCHANGE);
                 break;
             case 2:
-               // sburl.append(Urls.HOST_PROJECT_BUSSINESSLIST);//已审核
+                sburl.append(Urls.HOST_CREATECHANGE);//创建
+                break;
+            case 3:
+                sburl.append(Urls.HOST_CREATECHANGE);//创建
                 break;
         }
         return sburl.toString();

@@ -152,7 +152,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     @Override
                     public void run() {
                         // 隐藏提示条
-                        ((EventAdapter.FooterViewHolder) holder).footTv.setVisibility(View.GONE);
+                        ((EventAdapter.FooterViewHolder) holder).footTv.setVisibility(View.INVISIBLE);
                     }
                 }, 2000);
             }
