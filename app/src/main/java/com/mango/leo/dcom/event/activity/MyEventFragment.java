@@ -13,10 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.event.adapter.EventAdapter;
 import com.mango.leo.dcom.event.bean.EventBean;
@@ -187,7 +189,7 @@ class MyEventFragment extends Fragment implements EventView {
                     }
                     Log.v("zzzzzzzzz", "----4---------" + mData.size());
                     adapter.setmDate(mData);
-                    if (mDataAll.size() < 8){
+                    if (mDataAll.size() < 8) {
                         adapter.hasMore(false);
                     }
                 } else {
@@ -227,4 +229,27 @@ class MyEventFragment extends Fragment implements EventView {
             }
         });
     }
+
+/*    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button
+                    // 处理fragment的返回事件
+                    Log.v("yyyyy",":onResume:::");
+
+                    Intent intent = new Intent(getActivity(), DcomActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }*/
 }

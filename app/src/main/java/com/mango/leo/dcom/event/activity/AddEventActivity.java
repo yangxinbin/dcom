@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.bean.EventBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
@@ -78,7 +79,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class AddEventActivity extends AppCompatActivity implements EventView, AdapterView.OnItemClickListener {
+public class AddEventActivity extends BaseActivity implements EventView, AdapterView.OnItemClickListener {
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
     @Bind(R.id.editText_event_flag)

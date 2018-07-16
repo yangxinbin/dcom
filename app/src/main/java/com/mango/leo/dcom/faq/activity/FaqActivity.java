@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.util.ViewPageAdapter;
 
 import java.lang.reflect.Field;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
 
 import static com.luck.picture.lib.tools.ScreenUtils.dip2px;
 
-public class FaqActivity extends AppCompatActivity {
+public class FaqActivity extends BaseActivity {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;

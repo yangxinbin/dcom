@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.NetUtil;
 
 
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setActivityState(this);
+        AppUtils.addActivity(this);
         //PublicWay.activityList.add(this); // 把这个界面添加到activityList集合里面
     }
 

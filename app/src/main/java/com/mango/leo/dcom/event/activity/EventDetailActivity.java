@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.event.bean.EventDetailBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
@@ -34,7 +35,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class EventDetailActivity extends AppCompatActivity {
+public class EventDetailActivity extends BaseActivity {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
@@ -175,6 +176,7 @@ public class EventDetailActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.v("yyyyy","d::::");
             Intent intent = new Intent(this, EventActivity.class);
             startActivity(intent);
             finish();

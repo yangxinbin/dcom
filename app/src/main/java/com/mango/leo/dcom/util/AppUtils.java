@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.util;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -21,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -186,5 +189,24 @@ public class AppUtils {
         }
         //Log.v("rrrrrrrrrr",""+Base64.encodeToString(bytes, Base64.DEFAULT));
         return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+    public static List<Activity> activityList = new LinkedList<Activity>();
+    /**
+     * 添加到Activity容器中
+     */
+    public static void addActivity(Activity activity) {
+        if (!activityList.contains(activity)) {
+            activityList.add(activity);
+        }
+    }
+
+    /**
+     * 便利所有Activigty并finish
+     */
+    public static void finishActivity() {
+        for (Activity activity : activityList) {
+            activity.finish();
+        }
+        activityList.clear();
     }
 }

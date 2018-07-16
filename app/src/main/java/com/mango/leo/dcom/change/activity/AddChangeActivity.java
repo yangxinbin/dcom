@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.event.activity.EventActivity;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
@@ -28,7 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddChangeActivity extends AppCompatActivity {
+public class AddChangeActivity extends BaseActivity {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;

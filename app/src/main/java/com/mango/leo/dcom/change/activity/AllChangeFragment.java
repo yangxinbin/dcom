@@ -1,6 +1,7 @@
 package com.mango.leo.dcom.change.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -12,10 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.change.adapter.ChangeAdapter;
 import com.mango.leo.dcom.change.bean.ChangeBean;
@@ -224,4 +227,24 @@ class AllChangeFragment extends Fragment implements ChangeView {
             }
         });
     }
+/*    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button
+                    // 处理fragment的返回事件
+                    Intent intent = new Intent(getActivity(), DcomActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }*/
 }

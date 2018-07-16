@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.faq.bean.FaqBean;
@@ -80,7 +81,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class AddFaqActivity extends AppCompatActivity implements FaqView, AdapterView.OnItemClickListener {
+public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView.OnItemClickListener {
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
     @Bind(R.id.editText_faq_flag)

@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.util.ViewPageAdapter;
 
 import java.lang.reflect.Field;
@@ -27,7 +29,7 @@ import butterknife.OnClick;
 
 import static com.luck.picture.lib.tools.ScreenUtils.dip2px;
 
-public class EventActivity extends AppCompatActivity {
+public class EventActivity extends BaseActivity {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
@@ -132,9 +134,12 @@ public class EventActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.v("yyyyy","eee::::");
+
             Intent intent = new Intent(this, DcomActivity.class);
             startActivity(intent);
             finish();
+            return false;
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.login.LoginActivity;
 import com.mango.leo.dcom.login.bean.UserMessageBean;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -152,7 +153,7 @@ public class UserActivity extends BaseActivity {
                     case 0:
                         AppUtils.showToast(activity, "退出成功");
                         editor.putString("isok", "no").commit();
-                        finish();
+                        exit();
                         break;
                     case 1:
                         AppUtils.showToast(activity, "退出失败");
@@ -165,7 +166,11 @@ public class UserActivity extends BaseActivity {
             }
         }
     }
-
+    private void exit() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        AppUtils.finishActivity();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
