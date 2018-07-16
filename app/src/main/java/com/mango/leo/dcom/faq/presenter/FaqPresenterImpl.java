@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.mango.leo.dcom.faq.bean.FaqBean;
+import com.mango.leo.dcom.faq.bean.ListFaqBean;
 import com.mango.leo.dcom.faq.listener.OnFaqListener;
 import com.mango.leo.dcom.faq.model.FaqModel;
 import com.mango.leo.dcom.faq.model.FaqModelImpl;
@@ -47,7 +48,7 @@ public class FaqPresenterImpl implements FaqPresenter, OnFaqListener {
     }
 
     @Override
-    public void onSuccess(List<FaqBean> list) {
+    public void onSuccess(List<ListFaqBean> list) {
         faqView.addFaqSuccess(list);
     }
 

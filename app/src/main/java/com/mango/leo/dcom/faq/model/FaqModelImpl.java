@@ -7,6 +7,7 @@ import android.util.Log;
 import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.faq.bean.FaqBean;
+import com.mango.leo.dcom.faq.bean.ListFaqBean;
 import com.mango.leo.dcom.faq.listener.OnFaqListener;
 import com.mango.leo.dcom.faq.util.FaqJsonUtils;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -47,10 +48,11 @@ public class FaqModelImpl implements FaqModel {
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
                         //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
-                        //List<ListEventBean> beanList = EventJsonUtils.readJsonEventBeans(response.body().string(), "list");//data是json字段获得data的值即对象数组
-                        //listener.onSuccess(beanList);
+                        List<ListFaqBean> beanList = FaqJsonUtils.readListFaqBean(response.body().string());//data是json字段获得data的值即对象数组
+                        listener.onSuccess(beanList);
                         listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
+                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
                         listener.onSuccessMes("请求失败");
                     }
                 }
@@ -76,7 +78,7 @@ public class FaqModelImpl implements FaqModel {
                         //listener.onSuccess(beanList);
                         listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
-                        Log.e("yyyyy", "Exception = " + e);
+                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
                         listener.onSuccessMes("请求失败");
                     }
                 }

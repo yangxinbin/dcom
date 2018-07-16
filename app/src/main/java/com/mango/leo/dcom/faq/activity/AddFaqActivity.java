@@ -42,6 +42,7 @@ import com.mango.leo.dcom.event.activity.EventActivity;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.faq.bean.FaqBean;
+import com.mango.leo.dcom.faq.bean.ListFaqBean;
 import com.mango.leo.dcom.faq.presenter.FaqPresenter;
 import com.mango.leo.dcom.faq.presenter.FaqPresenterImpl;
 import com.mango.leo.dcom.faq.view.FaqView;
@@ -324,8 +325,9 @@ public class AddFaqActivity extends AppCompatActivity implements FaqView, Adapte
         return list;
     }
 
+
     @Override
-    public void addFaqSuccess(List<FaqBean> eventBeans) {
+    public void addFaqSuccess(List<ListFaqBean> faqBeans) {
 
     }
 
