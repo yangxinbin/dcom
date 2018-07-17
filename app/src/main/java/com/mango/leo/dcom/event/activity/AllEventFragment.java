@@ -144,7 +144,7 @@ class AllEventFragment extends android.support.v4.app.Fragment implements EventV
         //渲染header布局
         ConstraintLayout h = new ConstraintLayout(getActivity());
         ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1.0f));
-        layoutParam.setMargins(0, 0, 0, 20);
+        layoutParam.setMargins(0, 0, 0, 2);
         h.setLayoutParams(layoutParam);
         adapter.setHeaderView(h);
     }

@@ -229,7 +229,7 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
 
         ImageView imageView_edit = (ImageView) header.findViewById(R.id.imageView_edit);
         ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParam.setMargins(0, 0, 0, 20);
+        layoutParam.setMargins(0, 0, 0, 2);
         h.setLayoutParams(layoutParam);
 
         textView1.setText(rotorBean.getName());

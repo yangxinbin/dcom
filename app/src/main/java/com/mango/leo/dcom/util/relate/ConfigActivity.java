@@ -284,7 +284,7 @@ public class ConfigActivity extends BaseActivity {
         //渲染header布局
         ConstraintLayout h = new ConstraintLayout(this);
         ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1.0f));
-        layoutParam.setMargins(0, 0, 0, 20);
+        layoutParam.setMargins(0, 0, 0, 2);
         h.setLayoutParams(layoutParam);
         adapter.setHeaderView(h);
     }
@@ -293,7 +293,7 @@ public class ConfigActivity extends BaseActivity {
         //渲染header布局
         ConstraintLayout h = new ConstraintLayout(this);
         ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1.0f));
-        layoutParam.setMargins(0, 0, 0, 20);
+        layoutParam.setMargins(0, 0, 0, 2);
         h.setLayoutParams(layoutParam);
         adapter1.setHeaderView(h);
     }*/
