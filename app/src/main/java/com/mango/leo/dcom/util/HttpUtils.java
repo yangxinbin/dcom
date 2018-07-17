@@ -100,20 +100,21 @@ public class HttpUtils {
      */
     public static void doGet(String url, Callback callback) {
         Request request = new Request.Builder()
-                .header("Content-Type","application/x-www-form-urlencoded")
-                .header("api-key","49ku8919456qwe4534578451kiutrvfg")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("api-key", "49ku8919456qwe4534578451kiutrvfg")
                 .url(url)
                 .build();
         Call call = getInstance().newCall(request);
         call.enqueue(callback);
     }
+
     /**
      * Get请求
      *
      * @param url
      * @param callback
      */
-    public static void doDelete(String url,Map<String, String> mapParams, Callback callback) {
+    public static void doDelete(String url, Map<String, String> mapParams, Callback callback) {
         FormBody.Builder builder = new FormBody.Builder();
         StringBuffer formatUrl = new StringBuffer();
         formatUrl.append(url);
@@ -151,6 +152,7 @@ public class HttpUtils {
         Call call = getInstance().newCall(request);
         call.enqueue(callback);
     }
+
     /**
      * Post请求发送键值对数据
      *
@@ -163,11 +165,11 @@ public class HttpUtils {
         for (String key : mapParams.keySet()) {
             builder.add(key, mapParams.get(key));
         }
-        Log.v("doPost","---"+url);
+        Log.v("doPost", "---" + url);
         Request request = new Request.Builder()
                 .url(url)
-                .header("Content-Type","application/x-www-form-urlencoded")
-                .header("api-key","49ku8919456qwe4534578451kiutrvfg")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("api-key", "49ku8919456qwe4534578451kiutrvfg")
                 .post(builder.build())
                 .build();
         Call call = getInstance().newCall(request);
@@ -194,14 +196,45 @@ public class HttpUtils {
         }
         if (f != null) {
             Log.v("doPostAll", "^^^^^f^^");
-            builder.addFormDataPart("file",f.getName(),RequestBody.create(MediaType.parse("application/octet-stream"), f));
+            builder.addFormDataPart("file", f.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), f));
         }
         //创建RequestBody
         RequestBody body = builder.build();
         Request request = new Request.Builder()
                 .url(url)
-                .header("Content-Type","application/x-www-form-urlencoded")
-                .header("api-key","49ku8919456qwe4534578451kiutrvfg")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("api-key", "49ku8919456qwe4534578451kiutrvfg")
+                .post(body)
+                .build();
+        Call call = getInstance().newCall(request);
+        call.enqueue(callback);
+    }
+
+    public static void doPostTwoPicture(String url, HashMap<String, String> paramsMap, File f1,File f2, Callback callback) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        //设置类型
+        builder.setType(MultipartBody.FORM);
+        for (String key : paramsMap.keySet()) {
+            Object object = paramsMap.get(key);
+            if (!(object instanceof File) && object != null) {
+                builder.addFormDataPart(key, object.toString());
+                Log.v("doPostAll", key + "^^^^^doPostAll^^paramsMap^^^" + object.toString());
+            }
+        }
+        if (f1 != null) {
+            Log.v("doPostAll", "^^^^^f1^^");
+            builder.addFormDataPart("file", f1.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), f1));
+        }
+        if (f2 != null) {
+            Log.v("doPostAll", "^^^^^f2^^");
+            builder.addFormDataPart("solutionAttachment", f2.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), f2));
+        }
+        //创建RequestBody
+        RequestBody body = builder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("api-key", "49ku8919456qwe4534578451kiutrvfg")
                 .post(body)
                 .build();
         Call call = getInstance().newCall(request);
@@ -214,7 +247,7 @@ public class HttpUtils {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         File f = new File(imgpath);
         if (f != null) {
-            builder.addFormDataPart("file",f.getName(),RequestBody.create(MediaType.parse("application/octet-stream"), f))
+            builder.addFormDataPart("file", f.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), f))
                     .addFormDataPart("token", token);
         }
         MultipartBody requestBody = builder.build();
@@ -276,6 +309,7 @@ public class HttpUtils {
         Call call = getInstance().newCall(request);
         call.enqueue(callback);
     }
+
     public static void doPutRePhone(String url, Map<String, String> mapParams, Callback callback) {//
         FormBody.Builder builder = new FormBody.Builder();
         StringBuffer formatUrl = new StringBuffer();
@@ -315,6 +349,7 @@ public class HttpUtils {
         Call call = getInstance().newCall(request);
         call.enqueue(callback);
     }
+
     public static String formatEncode(String originUrl) {
         if (TextUtils.isEmpty(originUrl)) {
             return "";

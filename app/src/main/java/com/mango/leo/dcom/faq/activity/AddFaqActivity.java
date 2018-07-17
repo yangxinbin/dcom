@@ -148,10 +148,6 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
     private boolean flag;
     private TagAdapter tagAdapter;
     private FaqBean faqBean;
-    private ConfigChooseBean bean1;
-    private EventChooseBean bean_event;
-    private ChangeChooseBean bean_change;
-    private ConfigChooseBean bean_config;
     private SharedPreferences sharedPreferences;
     private List<String> list1, list2, list3, list4;
     private int currentPosition1 = -1, currentPosition2 = -1, currentPosition3 = -1, currentPosition4 = -1;
@@ -292,7 +288,6 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
             return;
         }
         textViewEventlist.setVisibility(View.GONE);
-        bean_event = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedEventTags(removeDuplicate(bean.getChooses()));
         if (flag) {
@@ -310,7 +305,6 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
             return;
         }
         textViewChangelist.setVisibility(View.GONE);
-        bean_change = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedChangeTags(removeDuplicate(bean.getChooses()));
         if (flag) {
@@ -328,7 +322,6 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
             return;
         }
         textViewConfiglist.setVisibility(View.GONE);
-        bean_config = bean;
         tagAdapter.onlyAddAll(bean.getChooses());
         faqBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
         if (flag) {

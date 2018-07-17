@@ -91,19 +91,22 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("token", sharedPreferences.getString("token", ""));
             mapParams.put("tag", changeBean.getTag() != null ? changeBean.getTag() : "");
             mapParams.put("title", changeBean.getTitle() != null ? changeBean.getTitle() : "");
-            mapParams.put("occurredOn", changeBean.getOccurredOn() != null ? changeBean.getOccurredOn() : "");
+            mapParams.put("planningTime", changeBean.getPlanningTime() != null ? changeBean.getPlanningTime() : "");
             mapParams.put("deadline", changeBean.getDeadline() != null ? changeBean.getDeadline() : "");
-            mapParams.put("origin", changeBean.getOrigin() != null ? changeBean.getOrigin() : "");
-            mapParams.put("classification", changeBean.getClassification() != null ? changeBean.getClassification() : "");
-            mapParams.put("priority", changeBean.getPriority() != null ? changeBean.getPriority() : "");
-            mapParams.put("system", changeBean.getSystem() != null ? changeBean.getSystem() : "");
+            mapParams.put("type", changeBean.getType() != null ? changeBean.getType() : "");
+            mapParams.put("impactScope", changeBean.getImpactScope() != null ? changeBean.getImpactScope() : "");
+            mapParams.put("impactLevel", changeBean.getImpactLevel() != null ? changeBean.getImpactLevel() : "");
+            mapParams.put("riskLevel", changeBean.getRiskLevel() != null ? changeBean.getRiskLevel() : "");
             mapParams.put("relatedConfigSNs", changeBean.getRelatedConfigSNs() != null && changeBean.getRelatedConfigSNs().size() != 0 ? listToString(changeBean.getRelatedConfigSNs()) : "");//待定
             mapParams.put("relatedEventTags", changeBean.getRelatedEventTags() != null && changeBean.getRelatedEventTags().size() != 0 ? listToString(changeBean.getRelatedEventTags()) : "");//待定
-            mapParams.put("relatedProblemTags", "");//待定
+            mapParams.put("relatedProblemTags", changeBean.getRelatedProblemTags() != null && changeBean.getRelatedProblemTags().size() != 0 ? listToString(changeBean.getRelatedProblemTags()) : "");//待定
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
-            mapParams.put("description", changeBean.getDescription() != null ? changeBean.getDescription() : "");
+            mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
+            mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
+            mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
+            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
             mapParams.put("publish", "false");
-            HttpUtils.doPostAll(url, mapParams, changeBean.getFile(), new Callback() {
+            HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.v("doPostAll", "^^^^^onFailure^^^^^");
@@ -127,19 +130,22 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("token", sharedPreferences.getString("token", ""));
             mapParams.put("tag", changeBean.getTag() != null ? changeBean.getTag() : "");
             mapParams.put("title", changeBean.getTitle() != null ? changeBean.getTitle() : "");
-            mapParams.put("occurredOn", changeBean.getOccurredOn() != null ? changeBean.getOccurredOn() : "");
+            mapParams.put("planningTime", changeBean.getPlanningTime() != null ? changeBean.getPlanningTime() : "");
             mapParams.put("deadline", changeBean.getDeadline() != null ? changeBean.getDeadline() : "");
-            mapParams.put("origin", changeBean.getOrigin() != null ? changeBean.getOrigin() : "");
-            mapParams.put("classification", changeBean.getClassification() != null ? changeBean.getClassification() : "");
-            mapParams.put("priority", changeBean.getPriority() != null ? changeBean.getPriority() : "");
-            mapParams.put("system", changeBean.getSystem() != null ? changeBean.getSystem() : "");
+            mapParams.put("type", changeBean.getType() != null ? changeBean.getType() : "");
+            mapParams.put("impactScope", changeBean.getImpactScope() != null ? changeBean.getImpactScope() : "");
+            mapParams.put("impactLevel", changeBean.getImpactLevel() != null ? changeBean.getImpactLevel() : "");
+            mapParams.put("riskLevel", changeBean.getRiskLevel() != null ? changeBean.getRiskLevel() : "");
             mapParams.put("relatedConfigSNs", changeBean.getRelatedConfigSNs() != null && changeBean.getRelatedConfigSNs().size() != 0 ? listToString(changeBean.getRelatedConfigSNs()) : "");//待定
             mapParams.put("relatedEventTags", changeBean.getRelatedEventTags() != null && changeBean.getRelatedEventTags().size() != 0 ? listToString(changeBean.getRelatedEventTags()) : "");//待定
-            mapParams.put("relatedProblemTags", "");//待定
+            mapParams.put("relatedProblemTags", changeBean.getRelatedProblemTags() != null && changeBean.getRelatedProblemTags().size() != 0 ? listToString(changeBean.getRelatedProblemTags()) : "");//待定
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
-            mapParams.put("description", changeBean.getDescription() != null ? changeBean.getDescription() : "");
-            mapParams.put("publish", "false");
-            HttpUtils.doPostAll(url, mapParams, changeBean.getFile(), new Callback() {
+            mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
+            mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
+            mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
+            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
+            mapParams.put("publish", "true");
+            HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.v("doPostAll", "^^^^^onFailure^^^^^");

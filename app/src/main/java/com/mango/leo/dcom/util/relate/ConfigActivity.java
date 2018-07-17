@@ -240,7 +240,7 @@ public class ConfigActivity extends BaseActivity {
                         adapter.setmDate(toList(s));
                         break;
                     case 1:
-                        AppUtils.showToast(getBaseContext(), "搜索失败:");
+                        AppUtils.showToast(getBaseContext(), "搜索失败");
                         break;
                     default:
                         break;

@@ -10,17 +10,26 @@ import java.util.List;
 public class ChangeBean {
     private String tag;
     private String title;
-    private String occurredOn;
+    private String planningTime;
     private String deadline;
-    private String origin;
-    private String priority;
-    private String classification;
-    private String system;
+
+    private String oaNumber;
+    private String type;
+    private String impactScope;
+    private String impactLevel;
+    private String riskLevel;
+
     private List<String> relatedEventTags;
+    private List<String> relatedProblemTags;
     private List<String> relatedChangeTags;
     private List<String> relatedConfigSNs;
-    private String description;
+
+    private String cause;
+    private String content;
     private File file;
+    private String solutions;
+    private File solutionAttachment;
+    private String planBSolutions;
 
     public String getTag() {
         return tag;
@@ -38,12 +47,12 @@ public class ChangeBean {
         this.title = title;
     }
 
-    public String getOccurredOn() {
-        return occurredOn;
+    public String getPlanningTime() {
+        return planningTime;
     }
 
-    public void setOccurredOn(String occurredOn) {
-        this.occurredOn = occurredOn;
+    public void setPlanningTime(String planningTime) {
+        this.planningTime = planningTime;
     }
 
     public String getDeadline() {
@@ -54,36 +63,44 @@ public class ChangeBean {
         this.deadline = deadline;
     }
 
-    public String getOrigin() {
-        return origin;
+    public String getOaNumber() {
+        return oaNumber;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setOaNumber(String oaNumber) {
+        this.oaNumber = oaNumber;
     }
 
-    public String getPriority() {
-        return priority;
+    public String getType() {
+        return type;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getClassification() {
-        return classification;
+    public String getImpactScope() {
+        return impactScope;
     }
 
-    public void setClassification(String classification) {
-        this.classification = classification;
+    public void setImpactScope(String impactScope) {
+        this.impactScope = impactScope;
     }
 
-    public String getSystem() {
-        return system;
+    public String getImpactLevel() {
+        return impactLevel;
     }
 
-    public void setSystem(String system) {
-        this.system = system;
+    public void setImpactLevel(String impactLevel) {
+        this.impactLevel = impactLevel;
+    }
+
+    public String getRiskLevel() {
+        return riskLevel;
+    }
+
+    public void setRiskLevel(String riskLevel) {
+        this.riskLevel = riskLevel;
     }
 
     public List<String> getRelatedEventTags() {
@@ -92,6 +109,14 @@ public class ChangeBean {
 
     public void setRelatedEventTags(List<String> relatedEventTags) {
         this.relatedEventTags = relatedEventTags;
+    }
+
+    public List<String> getRelatedProblemTags() {
+        return relatedProblemTags;
+    }
+
+    public void setRelatedProblemTags(List<String> relatedProblemTags) {
+        this.relatedProblemTags = relatedProblemTags;
     }
 
     public List<String> getRelatedChangeTags() {
@@ -110,12 +135,20 @@ public class ChangeBean {
         this.relatedConfigSNs = relatedConfigSNs;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCause() {
+        return cause;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public File getFile() {
@@ -126,22 +159,27 @@ public class ChangeBean {
         this.file = file;
     }
 
-    @Override
-    public String toString() {
-        return "FaqBean{" +
-                "tag='" + tag + '\'' +
-                ", title='" + title + '\'' +
-                ", occurredOn='" + occurredOn + '\'' +
-                ", deadline='" + deadline + '\'' +
-                ", origin='" + origin + '\'' +
-                ", priority='" + priority + '\'' +
-                ", classification='" + classification + '\'' +
-                ", system='" + system + '\'' +
-                ", relatedEventTags=" + relatedEventTags +
-                ", relatedChangeTags=" + relatedChangeTags +
-                ", relatedConfigSNs=" + relatedConfigSNs +
-                ", description='" + description + '\'' +
-                ", file=" + file +
-                '}';
+    public String getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(String solutions) {
+        this.solutions = solutions;
+    }
+
+    public File getSolutionAttachment() {
+        return solutionAttachment;
+    }
+
+    public void setSolutionAttachment(File solutionAttachment) {
+        this.solutionAttachment = solutionAttachment;
+    }
+
+    public String getPlanBSolutions() {
+        return planBSolutions;
+    }
+
+    public void setPlanBSolutions(String planBSolutions) {
+        this.planBSolutions = planBSolutions;
     }
 }
