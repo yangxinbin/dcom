@@ -429,7 +429,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 break;
             case R.id.b_save:
                 initView();
-                Log.v("eeeeeeeee", editTextChangeTitle.getText().toString() + "===" + cropImageUri + "---" + textViewChangeTime.getText() + "-----" + changeBean.toString());
+                Log.v("ppppppppppppppp", "===" + changeBean.toString());
                 if (!editTextChangeTitle.getText().toString().equals("") && !editTextChangeTitle.getText().toString().startsWith("请") && !textViewChangeTime.getText().toString().startsWith("请") && !textViewChangeOvertime.getText().toString().startsWith("请")) {
                     if (cropImageUri == null) {
                         AppUtils.showToast(this, "请上传图片");
@@ -442,7 +442,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 break;
             case R.id.b_save_commit:
                 initView();
-                Log.v("eeeeeeeee", editTextChangeTitle.getText().toString() + "===" + cropImageUri + "---" + textViewChangeTime.getText() + "-----" + changeBean.toString());
+                Log.v("ppppppppppppppp", "===" + changeBean.toString());
                 if (!editTextChangeTitle.getText().toString().equals("") && !editTextChangeTitle.getText().toString().startsWith("请") && !textViewChangeTime.getText().toString().startsWith("请") && !textViewChangeOvertime.getText().toString().startsWith("请")) {
                     if (cropImageUri == null) {
                         AppUtils.showToast(this, "请上传图片");
@@ -838,14 +838,14 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
             }
         }
         File f = new File(data);
-        try {
+/*        try {
             Log.v("ppppppppppppppp", pic+"====" + getFileSize(f));
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         return f;
     }
-    public long getFileSize(File f) throws Exception{
+/*    public long getFileSize(File f) throws Exception{
 
 
         long l = 0;
@@ -863,5 +863,5 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
 
         return l;
 
-    }
+    }*/
 }
