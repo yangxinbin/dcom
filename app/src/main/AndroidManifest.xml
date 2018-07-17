@@ -67,7 +67,13 @@
             android:name=".zxing.activity.ResultActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".rotor.BasicActivity" />
         <activity
             android:name=".rotor.XunJianActivity"
@@ -82,11 +88,6 @@
         <activity android:name=".event.activity.AddEventActivity" />
         <activity android:name=".faq.activity.AddFaqActivity" />
         <activity android:name=".change.activity.AddChangeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".util.relate.ConfigActivity"

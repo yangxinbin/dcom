@@ -9,25 +9,25 @@ import java.util.List;
 public class FaqDetailBean {
 
     /**
-     * id : 34
+     * id : 41
      * tenantId : 42
      * solAvailable : null
      * stage : 1
-     * tag : 186161751YND
-     * title : kk
+     * tag : 18617158OTN
+     * title : yy
      * priority : 1
      * origin : 趋势分析
-     * classification : 防火墙
+     * classification : 数据库
      * system : 高性能计算
-     * description : kk
+     * description : yy
      * anzCause : null
      * anzMethods : null
      * solReasonNotAvailable : null
      * monitorStatus : null
      * status : new
-     * occurredOn : 1531734660000
-     * deadline : 1531734960000
-     * createdOn : 1531734704000
+     * occurredOn : 1531811220000
+     * deadline : 1531811220000
+     * createdOn : 1531811317000
      * anzOn : null
      * solOn : null
      * monitoredOn : null
@@ -37,11 +37,11 @@ public class FaqDetailBean {
      * createdBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * monitoredBy : null
      * solBy : null
-     * attachments : [{"fileName":"1531475016729","filePath":"/api/1531475016729.jpg","url":"/cdn/dcom/out/api/1531475016729.jpg","createdOn":1531475016729}]
-     * eventTickets : ["1807131743YJK","1807160933DVR"]
+     * attachments : [{"fileName":"1531811316937","filePath":"/api/1531811316930.jpg","url":"/cdn/dcom/out/api/1531811316930.jpg","createdOn":1531811316937}]
+     * eventTickets : ["1807160933DVR"]
      * problemTickets : []
      * changeTickets : ["18481528EPX","186101520QJR","18461531VTR"]
-     * assetConfigSNs : ["dsgrdg","UI9090901","UI90909011"]
+     * assetConfigSNs : ["UI9090901","S8989"]
      */
 
     private int id;
@@ -440,10 +440,10 @@ public class FaqDetailBean {
 
     public static class AttachmentsBean {
         /**
-         * fileName : 1531475016729
-         * filePath : /api/1531475016729.jpg
-         * url : /cdn/dcom/out/api/1531475016729.jpg
-         * createdOn : 1531475016729
+         * fileName : 1531811316937
+         * filePath : /api/1531811316930.jpg
+         * url : /cdn/dcom/out/api/1531811316930.jpg
+         * createdOn : 1531811316937
          */
 
         private String fileName;
