@@ -87,10 +87,10 @@ class MyChangeFragment extends Fragment implements ChangeView {
             if (mData.size() <= 0) {
                 return;
             }
-/*            Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+            Intent intent = new Intent(getActivity(), ChangeDetailActivity.class);
             intent.putExtra("id", adapter.getItem(position).getList().get(position % 20).getId() + "");
             startActivity(intent);
-            //getActivity().finish();*/
+            //getActivity().finish();
         }
     };
     private int lastVisibleItem;

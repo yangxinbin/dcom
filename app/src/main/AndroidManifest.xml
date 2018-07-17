@@ -67,9 +67,7 @@
             android:name=".zxing.activity.ResultActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".login.LoginActivity">
-
-        </activity>
+        <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".rotor.BasicActivity" />
         <activity
             android:name=".rotor.XunJianActivity"
@@ -94,7 +92,8 @@
             android:name=".util.relate.ConfigActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".event.activity.EventDetailActivity" />
-        <activity android:name=".faq.activity.FaqDetailActivity"></activity>
+        <activity android:name=".faq.activity.FaqDetailActivity" />
+        <activity android:name=".change.activity.ChangeDetailActivity"></activity>
     </application>
 
 </manifest>

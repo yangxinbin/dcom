@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/manage_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="变更处理"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/back" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            card_view:cardBackgroundColor="@color/blue_item"
+            card_view:cardCornerRadius="8dp"
+            card_view:contentPadding="8dp"
+            tools:layout_editor_absoluteX="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="18dp"
+                    android:text="变更基础信息"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize" />
+
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView21"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/blue_line" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView14"
+                    android:layout_alignStart="@+id/imageView14"
+                    android:layout_below="@+id/imageView14"
+                    android:text="变更标签："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView26"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@+id/textView26"
+                    android:layout_toRightOf="@+id/textView26"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView26"
+                    android:layout_alignStart="@+id/textView26"
+                    android:layout_below="@+id/textView26"
+                    android:layout_marginTop="16dp"
+                    android:text="变更标题："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView31"
+                    android:layout_alignLeft="@+id/t_tag"
+                    android:layout_alignStart="@+id/t_tag"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView31"
+                    android:layout_alignStart="@+id/textView31"
+                    android:layout_below="@+id/textView31"
+                    android:layout_marginTop="16dp"
+                    android:text="计划时间："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView33"
+                    android:layout_alignStart="@+id/textView33"
+                    android:layout_below="@+id/textView33"
+                    android:layout_marginTop="16dp"
+                    android:text="完成时间："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView33"
+                    android:layout_alignLeft="@+id/t_t"
+                    android:layout_alignStart="@+id/t_t"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/t_over_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView34"
+                    android:layout_alignLeft="@+id/t_start_time"
+                    android:layout_alignStart="@+id/t_start_time"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView34"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/blue_line" />
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView22"
+                    android:layout_alignStart="@+id/imageView22"
+                    android:layout_below="@+id/imageView22"
+                    android:text="关联OA系统单号："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView38"
+                    android:layout_centerHorizontal="true"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView38"
+                    android:layout_alignStart="@+id/textView38"
+                    android:layout_below="@+id/textView38"
+                    android:layout_marginTop="16dp"
+                    android:text="变更类型："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView44"
+                    android:layout_toEndOf="@+id/textView42"
+                    android:layout_toRightOf="@+id/textView42"
+                    android:layout_marginLeft="8dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView42"
+                    android:layout_alignStart="@+id/textView42"
+                    android:layout_below="@+id/textView42"
+                    android:layout_marginTop="16dp"
+                    android:text="影响范围："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_range"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView44"
+                    android:layout_alignLeft="@+id/t_type"
+                    android:layout_alignStart="@+id/t_type"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView44"
+                    android:layout_alignStart="@+id/textView44"
+                    android:layout_below="@+id/textView44"
+                    android:layout_marginTop="16dp"
+                    android:text="影响程度："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView47"
+                    android:layout_alignLeft="@+id/t_range"
+                    android:layout_alignStart="@+id/t_range"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView49"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView47"
+                    android:layout_alignStart="@+id/textView47"
+                    android:layout_below="@+id/textView47"
+                    android:layout_marginTop="16dp"
+                    android:text="风险等级："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_risk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView49"
+                    android:layout_alignBottom="@+id/textView49"
+                    android:layout_alignLeft="@+id/t_degree"
+                    android:layout_alignStart="@+id/t_degree"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView49"
+                    android:layout_alignStart="@+id/textView49"
+                    android:layout_below="@+id/textView49"
+                    android:layout_marginTop="16dp"
+                    android:text="关联事件单："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_event_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView53"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/textView553"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/flow_event_layout"
+                    android:layout_alignStart="@+id/flow_event_layout"
+                    android:layout_below="@+id/flow_event_layout"
+                    android:layout_marginTop="16dp"
+                    android:text="关联问题单："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_problem_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView553"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
+                <TextView
+                    android:id="@+id/textView533"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/flow_problem_layout"
+                    android:layout_alignStart="@+id/flow_problem_layout"
+                    android:layout_below="@+id/flow_problem_layout"
+                    android:layout_marginTop="16dp"
+                    android:text="关联变更单："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_change_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView533"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
+                <TextView
+                    android:id="@+id/textView5333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/flow_change_layout"
+                    android:layout_alignStart="@+id/flow_change_layout"
+                    android:layout_below="@+id/flow_change_layout"
+                    android:layout_marginTop="16dp"
+                    android:text="关联配置项："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.flowview.FlowTagLayout
+                    android:id="@+id/flow_config_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView5333"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/flow_config_layout"
+                    android:layout_alignStart="@+id/flow_config_layout"
+                    android:layout_below="@+id/flow_config_layout"
+                    android:layout_marginTop="16dp"
+                    android:text="变更原因："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_check_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView54"
+                    android:layout_alignStart="@+id/textView54"
+                    android:layout_below="@+id/textView54"
+                    android:layout_marginTop="10dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/textView544"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_check_content"
+                    android:layout_alignStart="@+id/t_check_content"
+                    android:layout_below="@+id/t_check_content"
+                    android:layout_marginTop="16dp"
+                    android:text="变更内容："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView544"
+                    android:layout_alignStart="@+id/textView544"
+                    android:layout_below="@+id/textView544"
+                    android:layout_marginTop="10dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_content"
+                    android:layout_alignStart="@+id/t_content"
+                    android:layout_below="@+id/t_content"
+                    android:layout_marginTop="16dp"
+                    android:text="已上传文件："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.RoundImageView
+                    android:visibility="gone"
+                    android:id="@+id/imageView_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/textView56"
+                    android:layout_margin="16dp"
+                    android:scaleType="fitXY" />
+                <TextView
+                    android:id="@+id/textView554"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView56"
+                    android:layout_alignStart="@+id/textView56"
+                    android:layout_below="@+id/imageView_p"
+                    android:layout_marginTop="16dp"
+                    android:text="解决方案："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_solution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView554"
+                    android:layout_alignStart="@+id/textView554"
+                    android:layout_below="@+id/textView554"
+                    android:layout_marginTop="10dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/textView564"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView56"
+                    android:layout_alignStart="@+id/textView56"
+                    android:layout_below="@+id/t_solution"
+                    android:layout_marginTop="16dp"
+                    android:text="回退计划："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_back_solution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView564"
+                    android:layout_alignStart="@+id/textView564"
+                    android:layout_below="@+id/textView564"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            card_view:cardBackgroundColor="@color/blue_item"
+            card_view:cardCornerRadius="8dp"
+            card_view:contentPadding="8dp"
+            tools:layout_editor_absoluteX="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="18dp"
+                    android:text="变更处理信息"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize" />
+
+
+                <ImageView
+                    android:id="@+id/imageView0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView0"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/blue_line" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView0"
+                    android:layout_alignStart="@+id/imageView0"
+                    android:layout_below="@+id/imageView0"
+                    android:text="预审意见："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView57"
+                    android:layout_alignStart="@+id/textView57"
+                    android:layout_below="@+id/textView57"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="null" />
+
+                <TextView
+                    android:id="@+id/textView577"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_check"
+                    android:layout_alignStart="@+id/t_check"
+                    android:layout_below="@+id/t_check"
+                    android:layout_marginTop="10dp"
+                    android:text="复审意见："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_re_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView577"
+                    android:layout_alignStart="@+id/textView577"
+                    android:layout_below="@+id/textView577"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="null" />
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_re_check"
+                    android:layout_alignStart="@+id/t_re_check"
+                    android:layout_below="@+id/t_re_check"
+                    android:layout_marginTop="16dp"
+                    android:text="分析状态："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_check_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView59"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="null"
+                    android:textColor="@color/green" />
+
+                <TextView
+                    android:id="@+id/textView444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView59"
+                    android:layout_alignStart="@+id/textView59"
+                    android:layout_below="@+id/textView59"
+                    android:layout_marginTop="16dp"
+                    android:text="确认说明："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView444"
+                    android:layout_alignStart="@+id/textView444"
+                    android:layout_below="@+id/textView444"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="null" />
+                <TextView
+                    android:id="@+id/textView656"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView444"
+                    android:layout_alignStart="@+id/textView444"
+                    android:layout_below="@+id/t_suggestion"
+                    android:layout_marginTop="16dp"
+                    android:text="已上传文件："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.RoundImageView
+                    android:visibility="gone"
+                    android:id="@+id/imageView_p1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/textView656"
+                    android:layout_margin="16dp"
+                    android:scaleType="fitXY" />
+                <TextView
+                    android:id="@+id/textView4444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_suggestion"
+                    android:layout_alignStart="@+id/t_suggestion"
+                    android:layout_below="@+id/imageView_p1"
+                    android:layout_marginTop="10dp"
+                    android:text="变更总结："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_general"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView4444"
+                    android:layout_alignStart="@+id/textView4444"
+                    android:layout_below="@+id/textView4444"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="18dp"
+                    android:text="null" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>
