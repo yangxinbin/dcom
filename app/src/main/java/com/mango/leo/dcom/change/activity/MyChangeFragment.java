@@ -162,6 +162,7 @@ class MyChangeFragment extends Fragment implements ChangeView {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
     @Override
     public void addChangeSuccess(final List<ListChangeBean> changeBeans) {
         Log.v("zzzzzzzzz", page + "-------3------" + changeBeans.size());
@@ -189,7 +190,7 @@ class MyChangeFragment extends Fragment implements ChangeView {
                     }
                     Log.v("zzzzzzzzz", "----4---------" + mData.size());
                     adapter.setmDate(mData);
-                    if (mDataAll.size() < 8){
+                    if (mDataAll.size() < 8) {
                         adapter.hasMore(false);
                     }
                 } else {
@@ -211,22 +212,24 @@ class MyChangeFragment extends Fragment implements ChangeView {
 
     @Override
     public void addChangeMes(final String s) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AppUtils.showToast(getActivity(), s);
-            }
-        });
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AppUtils.showToast(getActivity(), s);
+                }
+            });
     }
 
     @Override
     public void addChangeFail(final String e) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AppUtils.showToast(getActivity(), e);
-            }
-        });
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AppUtils.showToast(getActivity(), e);
+                }
+            });
     }
 /*    @Override
     public void onResume() {

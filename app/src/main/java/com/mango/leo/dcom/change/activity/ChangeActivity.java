@@ -1,11 +1,14 @@
 package com.mango.leo.dcom.change.activity;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -131,4 +134,17 @@ public class ChangeActivity extends BaseActivity {
                 break;
         }
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.v("yyyyy","eee::::");
+
+            Intent intent = new Intent(this, DcomActivity.class);
+            startActivity(intent);
+            finish();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

@@ -66,6 +66,7 @@ class AllFaqFragment extends Fragment implements FaqView {
         faqPresenter.visitProjects(getActivity(), TYPE, faqBean, page);
         return view;
     }
+
     private void initRecycle() {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recycle.setLayoutManager(mLayoutManager);
@@ -82,12 +83,12 @@ class AllFaqFragment extends Fragment implements FaqView {
         @Override
         public void onItemClick(View view, int position) {
             position = position - 1; //配对headerView
-            Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position+"==="+adapter.getItem(position).getList().get(position%20).getId());
+            Log.v("wwwwwwww", adapter.getItem(position) + "---true---" + position + "===" + adapter.getItem(position).getList().get(position % 20).getId());
             if (mData.size() <= 0) {
                 return;
             }
             Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
-            intent.putExtra("id", adapter.getItem(position).getList().get(position%20).getId()+"");
+            intent.putExtra("id", adapter.getItem(position).getList().get(position % 20).getId() + "");
             startActivity(intent);
             //getActivity().finish();
         }
@@ -155,6 +156,7 @@ class AllFaqFragment extends Fragment implements FaqView {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, dm);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -188,7 +190,7 @@ class AllFaqFragment extends Fragment implements FaqView {
                     }
                     Log.v("zzzzzzzzz", "----4---------" + mData.size());
                     adapter.setmDate(mData);
-                    if (mDataAll.size() < 8){
+                    if (mDataAll.size() < 8) {
                         adapter.hasMore(false);
                     }
                 } else {
@@ -210,22 +212,24 @@ class AllFaqFragment extends Fragment implements FaqView {
 
     @Override
     public void addFaqMes(final String s) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AppUtils.showToast(getActivity(), s);
-            }
-        });
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AppUtils.showToast(getActivity(), s);
+                }
+            });
     }
 
     @Override
     public void addFaqFail(final String e) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AppUtils.showToast(getActivity(), e);
-            }
-        });
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AppUtils.showToast(getActivity(), e);
+                }
+            });
     }
 /*    @Override
     public void onResume() {
