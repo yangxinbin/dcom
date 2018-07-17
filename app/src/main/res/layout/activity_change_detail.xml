@@ -442,12 +442,31 @@
                     android:text="null"
                     android:textColor="@color/white" />
                 <TextView
+                    android:id="@+id/textView6566"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_solution"
+                    android:layout_alignStart="@+id/t_solution"
+                    android:layout_below="@+id/t_solution"
+                    android:layout_marginTop="16dp"
+                    android:text="已上传文件："
+                    android:textSize="@dimen/textSize" />
+
+                <com.mango.leo.dcom.util.RoundImageView
+                    android:visibility="gone"
+                    android:id="@+id/imageView_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/textView6566"
+                    android:layout_margin="16dp"
+                    android:scaleType="fitXY" />
+                <TextView
                     android:id="@+id/textView564"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView56"
                     android:layout_alignStart="@+id/textView56"
-                    android:layout_below="@+id/t_solution"
+                    android:layout_below="@+id/imageView_c"
                     android:layout_marginTop="16dp"
                     android:text="回退计划："
                     android:textSize="@dimen/textSize" />
@@ -563,7 +582,7 @@
                     android:layout_alignStart="@+id/t_re_check"
                     android:layout_below="@+id/t_re_check"
                     android:layout_marginTop="16dp"
-                    android:text="分析状态："
+                    android:text="变更状态："
                     android:textSize="@dimen/textSize" />
 
                 <TextView

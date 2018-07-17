@@ -3,7 +3,9 @@ package com.mango.leo.dcom.change.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mango.leo.dcom.change.bean.ChangeDetailBean;
 import com.mango.leo.dcom.change.bean.ListChangeBean;
+import com.mango.leo.dcom.faq.bean.FaqDetailBean;
 import com.mango.leo.dcom.util.JsonUtils;
 
 import java.util.ArrayList;
@@ -34,5 +36,10 @@ public class ChangeJsonUtils {
             beans.add(news);//这里会将所有的json对象转换为bean对象
         }
         return beans;
+    }
+    public static ChangeDetailBean readDetailBean(String res) {
+        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        ChangeDetailBean changeDetailBean = JsonUtils.deserialize(jsonObject, ChangeDetailBean.class);
+        return changeDetailBean;
     }
 }
