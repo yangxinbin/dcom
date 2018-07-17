@@ -66,6 +66,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -816,7 +817,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
      * @param uri
      * @return the file path or null
      */
-    public static File getRealFile(final Context context, final Uri uri) {
+    public File getRealFile(final Context context, final Uri uri) {
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;
@@ -837,7 +838,30 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
             }
         }
         File f = new File(data);
+        try {
+            Log.v("ppppppppppppppp", pic+"====" + getFileSize(f));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return f;
     }
+    public long getFileSize(File f) throws Exception{
 
+
+        long l = 0;
+        if (f.exists()){
+
+            FileInputStream mFIS = new FileInputStream(f);
+
+            l= mFIS.available();
+
+        } else {
+
+            f.createNewFile();
+
+        }
+
+        return l;
+
+    }
 }

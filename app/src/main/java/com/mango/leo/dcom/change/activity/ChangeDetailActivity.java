@@ -130,8 +130,8 @@ public class ChangeDetailActivity extends AppCompatActivity {
     }
 
     private void loadDetail(String id) {
-        Log.v("wwwwwwww", "" + Urls.HOST_QUERY_CHANGE + "?problemId=" + id + "&token=" + sharedPreferences.getString("token", ""));
-        HttpUtils.doGet(Urls.HOST_QUERY_CHANGE + "?problemId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
+        Log.v("wwwwwwww", "" + Urls.HOST_QUERY_CHANGE + "?changeId=" + id + "&token=" + sharedPreferences.getString("token", ""));
+        HttpUtils.doGet(Urls.HOST_QUERY_CHANGE + "?changeId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 mHandler.sendEmptyMessage(1);
@@ -154,17 +154,17 @@ public class ChangeDetailActivity extends AppCompatActivity {
     }
 
     private void initView(ChangeDetailBean changeDetailBean) {
-/*        if (changeDetailBean == null)
+        if (changeDetailBean == null)
             return;
         tTag.setText(changeDetailBean.getTag() + "");
         tT.setText(changeDetailBean.getTitle() + "");
-        tStartTime.setText(DateUtil.getDateToString(changeDetailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
+        tStartTime.setText(DateUtil.getDateToString(changeDetailBean.getPlanningTime(), "yyyy-MM-dd HH:mm:ss") + "");
         tOverTime.setText(DateUtil.getDateToString(changeDetailBean.getDeadline(), "yyyy-MM-dd HH:mm:ss") + "");
-        tC.setText(changeDetailBean.getCreatedBy().getRealName() + "");
-        tFrom.setText(changeDetailBean.getOrigin() + "");
-        tType.setText(changeDetailBean.getClassification() + "");
-        tState.setText(changeDetailBean.getStage() + "");
-        tPriority.setText(changeDetailBean.getPriority() + "");
+        tC.setText(changeDetailBean.getRelatedOa() + "");
+        tType.setText(changeDetailBean.getChangeType() + "");
+        tRange.setText(changeDetailBean.getImpactScope() + "");
+        tDegree.setText(changeDetailBean.getImpactLevel() + "");
+        tRisk.setText(changeDetailBean.getRiskLevel() + "");
 
         tagAdapter1 = new TagAdapter(this);
         flowEventLayout.setAdapter(tagAdapter1);
@@ -179,14 +179,21 @@ public class ChangeDetailActivity extends AppCompatActivity {
         tagAdapter3.onlyAddAll(changeDetailBean.getAssetConfigSNs());
 
         tagAdapter4 = new TagAdapter(this);
-        flowConfigLayout.setAdapter(tagAdapter4);
-        tagAdapter4.onlyAddAll(changeDetailBean.getAssetConfigSNs());
+        flowProblemLayout.setAdapter(tagAdapter4);
+        tagAdapter4.onlyAddAll(changeDetailBean.getProblemTickets());
 
-        tContent.setText(changeDetailBean.getDescription() + "");
-        if (changeDetailBean.getAttachments() != null && changeDetailBean.getAttachments().get(0) != null) {
+        tCheckContent.setText(changeDetailBean.getCause() + "");
+        tContent.setText(changeDetailBean.getContent() + "");
+        if (changeDetailBean.getContentAttachments() != null && changeDetailBean.getContentAttachments().get(0) != null) {
             imageViewP.setVisibility(View.VISIBLE);
-            Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getAttachments().get(0).getUrl()).into(imageViewP);
-        }*/
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getContentAttachments().get(0).getUrl()).into(imageViewP);
+        }
+        tSolution.setText(changeDetailBean.getSolution()+"");
+        if (changeDetailBean.getSolutionAttachments() != null && changeDetailBean.getSolutionAttachments().get(0) != null) {
+            imageViewP.setVisibility(View.VISIBLE);
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getSolutionAttachments().get(0).getUrl()).into(imageViewP1);
+        }
+        tBackSolution.setText(changeDetailBean.getPlanBReviews()+"");
     }
 
     @OnClick(R.id.imageView_back)
