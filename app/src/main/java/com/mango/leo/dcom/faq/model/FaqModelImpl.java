@@ -150,10 +150,10 @@ public class FaqModelImpl implements FaqModel {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (String.valueOf(response.code()).startsWith("2")) {
-                        listener.onSuccessMes("事件保存成功");//异步请求
+                        listener.onSuccessMes("SUCCESS");//异步请求
                     } else {
                         Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
-                        listener.onSuccessMes("事件保存失败");
+                        listener.onSuccessMes("FAILURE");
                     }
                 }
             });

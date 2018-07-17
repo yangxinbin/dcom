@@ -94,6 +94,7 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("planningTime", changeBean.getPlanningTime() != null ? changeBean.getPlanningTime() : "");
             mapParams.put("deadline", changeBean.getDeadline() != null ? changeBean.getDeadline() : "");
             mapParams.put("type", changeBean.getType() != null ? changeBean.getType() : "");
+            mapParams.put("oaNumber", changeBean.getOaNumber() != null ? changeBean.getOaNumber() : "");
             mapParams.put("impactScope", changeBean.getImpactScope() != null ? changeBean.getImpactScope() : "");
             mapParams.put("impactLevel", changeBean.getImpactLevel() != null ? changeBean.getImpactLevel() : "");
             mapParams.put("riskLevel", changeBean.getRiskLevel() != null ? changeBean.getRiskLevel() : "");
@@ -133,6 +134,7 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("planningTime", changeBean.getPlanningTime() != null ? changeBean.getPlanningTime() : "");
             mapParams.put("deadline", changeBean.getDeadline() != null ? changeBean.getDeadline() : "");
             mapParams.put("type", changeBean.getType() != null ? changeBean.getType() : "");
+            mapParams.put("oaNumber", changeBean.getOaNumber() != null ? changeBean.getOaNumber() : "");
             mapParams.put("impactScope", changeBean.getImpactScope() != null ? changeBean.getImpactScope() : "");
             mapParams.put("impactLevel", changeBean.getImpactLevel() != null ? changeBean.getImpactLevel() : "");
             mapParams.put("riskLevel", changeBean.getRiskLevel() != null ? changeBean.getRiskLevel() : "");
@@ -149,16 +151,16 @@ public class ChangeModelImpl implements ChangeModel {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.v("doPostAll", "^^^^^onFailure^^^^^");
-                    listener.onFailure("事件保存失败", e);
+                    listener.onFailure("变更保存失败", e);
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (String.valueOf(response.code()).startsWith("2")) {
-                        listener.onSuccessMes("事件保存成功");//异步请求
+                        listener.onSuccessMes("SUCCESS");//异步请求
                     } else {
                         Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
-                        listener.onSuccessMes("事件保存失败");
+                        listener.onSuccessMes("FAILURE");
                     }
                 }
             });

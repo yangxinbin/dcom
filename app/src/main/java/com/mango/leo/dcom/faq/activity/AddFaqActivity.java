@@ -474,7 +474,7 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
                         AppUtils.showToast(this, "请上传图片");
                         return;
                     }
-                    faqPresenter.visitProjects(this, 2, faqBean, -1);//保存状态2
+                    faqPresenter.visitProjects(this, 3, faqBean, -1);//保存状态2
                 } else {
                     AppUtils.showToast(this, "请填写必填项");
                 }

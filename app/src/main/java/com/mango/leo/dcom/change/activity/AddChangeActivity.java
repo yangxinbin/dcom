@@ -45,6 +45,7 @@ import com.mango.leo.dcom.change.presenter.ChangePresenterImpl;
 import com.mango.leo.dcom.change.view.ChangeView;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
+import com.mango.leo.dcom.faq.activity.FaqActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -306,7 +307,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         customDatePicker_2.setIsLoop(true); // 允许循环滚动
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -425,6 +426,32 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 p1.setVisibility(View.GONE);
                 imageViewPicChoose1.setVisibility(View.VISIBLE);
                 break;
+            case R.id.b_save:
+                initView();
+                Log.v("eeeeeeeee", editTextChangeTitle.getText().toString() + "===" + cropImageUri + "---" + textViewChangeTime.getText() + "-----" + changeBean.toString());
+                if (!editTextChangeTitle.getText().toString().equals("") && !editTextChangeTitle.getText().toString().startsWith("请") && !textViewChangeTime.getText().toString().startsWith("请") && !textViewChangeOvertime.getText().toString().startsWith("请")) {
+                    if (cropImageUri == null) {
+                        AppUtils.showToast(this, "请上传图片");
+                        return;
+                    }
+                    changePresenter.visitProjects(this, 2, changeBean, -1);//保存状态2
+                } else {
+                    AppUtils.showToast(this, "请填写必填项");
+                }
+                break;
+            case R.id.b_save_commit:
+                initView();
+                Log.v("eeeeeeeee", editTextChangeTitle.getText().toString() + "===" + cropImageUri + "---" + textViewChangeTime.getText() + "-----" + changeBean.toString());
+                if (!editTextChangeTitle.getText().toString().equals("") && !editTextChangeTitle.getText().toString().startsWith("请") && !textViewChangeTime.getText().toString().startsWith("请") && !textViewChangeOvertime.getText().toString().startsWith("请")) {
+                    if (cropImageUri == null) {
+                        AppUtils.showToast(this, "请上传图片");
+                        return;
+                    }
+                    changePresenter.visitProjects(this, 3, changeBean, -1);//保存状态2
+                } else {
+                    AppUtils.showToast(this, "请填写必填项");
+                }
+                break;
         }
     }
 
@@ -448,7 +475,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus2(ProblemChooseBean bean) {
         tagAdapter = new TagAdapter(this);
-        flowChangeLayout.setAdapter(tagAdapter);
+        flowProblemLayout.setAdapter(tagAdapter);
         if (bean == null || bean.getChooses().size() == 0) {
             textViewChangeFaqlist.setVisibility(View.VISIBLE);
             tagAdapter.onlyAddAll(bean.getChooses());
@@ -465,7 +492,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus3(ChangeChooseBean bean) {
         tagAdapter = new TagAdapter(this);
-        flowConfigLayout.setAdapter(tagAdapter);
+        flowChangeLayout.setAdapter(tagAdapter);
         if (bean == null || bean.getChooses().size() == 0) {
             textViewChangeChangelist.setVisibility(View.VISIBLE);
             tagAdapter.onlyAddAll(bean.getChooses());
@@ -551,13 +578,32 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     }
 
     @Override
-    public void addChangeMes(String s) {
+    public void addChangeMes(final String s) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getBaseContext(), s);
+                if (s.equals("SUCCESS")) {
+                    JumpTo();
+                }
+            }
+        });
+    }
 
+    private void JumpTo() {
+        Intent intent = new Intent(this, ChangeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
-    public void addChangeFail(String e) {
-
+    public void addChangeFail(final String e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.showToast(getBaseContext(), e);
+            }
+        });
     }
 
     @Override
@@ -743,7 +789,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                         showImages(imageViewPic, bitmap);
                     }
                     changeBean.setFile(getRealFile(this, cropImageUri));//设置图片
-                    Log.v("ppppppppppppppp","===1="+cropImageUri);
+                    Log.v("ppppppppppppppp", "===1=" + cropImageUri);
                 } else if (pic == 2) {
                     p1.setVisibility(View.VISIBLE);
                     imageViewPicChoose1.setVisibility(View.GONE);
@@ -751,7 +797,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                         showImages(imageViewPic1, bitmap);
                     }
                     changeBean.setSolutionAttachment(getRealFile(this, cropImageUri));//设置图片
-                    Log.v("ppppppppppppppp","===2="+cropImageUri);
+                    Log.v("ppppppppppppppp", "===2=" + cropImageUri);
                 }
 
                 break;
@@ -793,4 +839,5 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         File f = new File(data);
         return f;
     }
+
 }
