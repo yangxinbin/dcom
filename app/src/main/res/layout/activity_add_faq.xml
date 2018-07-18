@@ -578,9 +578,7 @@
                 <com.mango.leo.dcom.util.flowview.FlowTagLayout
                     android:id="@+id/flow_event_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/imageView66"
@@ -627,9 +625,7 @@
                 <com.mango.leo.dcom.util.flowview.FlowTagLayout
                     android:id="@+id/flow_change_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="wrap_content" />
                 <ImageView
                     android:id="@+id/imageView67"
                     android:layout_width="match_parent"
@@ -675,9 +671,7 @@
                     android:id="@+id/flow_config_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginBottom="10dp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
