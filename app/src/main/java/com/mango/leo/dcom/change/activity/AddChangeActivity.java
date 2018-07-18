@@ -19,6 +19,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -38,8 +40,12 @@ import android.widget.TextView;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.adapter.ListAndGirdDownAdapter;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.change.adapter.MethodAdapter;
+import com.mango.leo.dcom.change.adapter.RevertAdapter;
 import com.mango.leo.dcom.change.bean.ChangeBean;
 import com.mango.leo.dcom.change.bean.ListChangeBean;
+import com.mango.leo.dcom.change.bean.MethodBeans;
+import com.mango.leo.dcom.change.bean.RevertBeans;
 import com.mango.leo.dcom.change.presenter.ChangePresenter;
 import com.mango.leo.dcom.change.presenter.ChangePresenterImpl;
 import com.mango.leo.dcom.change.view.ChangeView;
@@ -81,7 +87,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class AddChangeActivity extends BaseActivity implements ChangeView, AdapterView.OnItemClickListener {
+public class AddChangeActivity extends BaseActivity implements ChangeView, AdapterView.OnItemClickListener,RevertAdapter.OnRevertClickListener, MethodAdapter.OnMethodClickListener {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
@@ -194,6 +200,11 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     private static final int OUTPUT_Y = 380;
     private String TAG = "AddChangeActivity";
     private int pic = -1;
+    private MethodBeans methodBean;
+    private LinearLayoutManager mLayoutManager;
+    private MethodAdapter adapter1;
+    private RevertBeans revertBean;
+    private RevertAdapter adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,8 +234,8 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         changeBean.setOaNumber(editTextChangeOa.getText().toString());
         changeBean.setCause(editTextDescription.getText().toString());
         changeBean.setContent(editTextContent.getText().toString());
-        //changeBean.setSolutions(eMethodWay.getText().toString());
-        //changeBean.setPlanBSolutions(eRevert.getText().toString());
+        changeBean.setSolutions(methodBean);
+        changeBean.setPlanBSolutions(revertBean);
     }
 
     private void initDateFromWeb() {
@@ -310,7 +321,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         customDatePicker_2.setIsLoop(true); // 允许循环滚动
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit,R.id.jia_method, R.id.jia_revert})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit, R.id.jia_method, R.id.jia_revert})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -456,17 +467,72 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 }
                 break;
             case R.id.jia_method:
-                //EventBus.getDefault().postSticky(bean4);
+                if (methodBean == null) {
+                    intent = new Intent(this, MethodItemActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                //EventBus.getDefault().postSticky(methodBean);
+                //EventBus.getDefault().removeStickyEvent(MethodBeans.class);
                 intent = new Intent(this, MethodItemActivity.class);
-                //intent.putExtra("position", bean4.size());
+                Log.v("qqqqqqqqq", "adapter1.getItemCount()==" + adapter1.getItemCount());
+                intent.putExtra("position", adapter1.getItemCount());//第一个独立出来
                 startActivity(intent);
-                finish();
+                //finish();
                 break;
             case R.id.jia_revert:
+                if (revertBean == null) {
+                    intent = new Intent(this, RevertItemActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                intent = new Intent(this, RevertItemActivity.class);
+                Log.v("qqqqqqqqq", "adapter2.getItemCount()==" + adapter2.getItemCount());
+                intent.putExtra("position", adapter2.getItemCount());//第一个独立出来
+                startActivity(intent);
+                //finish();
                 break;
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventMethodBeans(MethodBeans bean) {
+        eMethodContent.removeAllViews();
+/*        if (bean != null) {
+            adapter1.removeData();
+            methodBean = bean;
+        }*/
+        methodBean = bean;
+        View item1 = LayoutInflater.from(this).inflate(R.layout.change_carditem, null);
+        eMethodContent.addView(item1);
+        RecyclerView recyclerView = item1.findViewById(R.id.recycle);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setNestedScrollingEnabled(false);//禁止滑动
+        Log.v("qqqqqqqqq", "==" + bean.getMethodItems());
+        adapter1 = new MethodAdapter(this, bean.getMethodItems());
+        recyclerView.setAdapter(adapter1);
+        adapter1.setOnMethodClickListener(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void eventRevertBeans(RevertBeans bean) {
+        eRevert.removeAllViews();
+/*        if (bean != null) {
+            adapter1.removeData();
+            methodBean = bean;
+        }*/
+        revertBean = bean;
+        View item2 = LayoutInflater.from(this).inflate(R.layout.change_carditem, null);
+        eRevert.addView(item2);
+        RecyclerView recyclerView = item2.findViewById(R.id.recycle);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setNestedScrollingEnabled(false);//禁止滑动
+        Log.v("qqqqqqqqq", "==" + bean.getRevertItems());
+        adapter2 = new RevertAdapter(this, bean.getRevertItems());
+        recyclerView.setAdapter(adapter2);
+        adapter2.setOnRevertClickListener(this);
+    }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus1(EventChooseBean bean) {
         tagAdapter = new TagAdapter(this);
@@ -855,6 +921,36 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
             e.printStackTrace();
         }*/
         return f;
+    }
+
+    @Override
+    public void onRevertClickEdit(View view, int position) {
+        //EventBus.getDefault().postSticky(methodBean);
+        Intent intent = new Intent(this, RevertItemActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
+        //finish();
+    }
+
+    @Override
+    public void onRevertClickDelete(View view, int position) {
+        revertBean.getRevertItems().remove(position);
+        EventBus.getDefault().postSticky(revertBean);
+    }
+
+    @Override
+    public void onMethodClickEdit(View view, int position) {
+        //EventBus.getDefault().postSticky(methodBean);
+        Intent intent = new Intent(this, MethodItemActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
+        //finish();
+    }
+
+    @Override
+    public void onMethodClickDelete(View view, int position) {
+        methodBean.getMethodItems().remove(position);
+        EventBus.getDefault().postSticky(methodBean);
     }
 
 /*    public long getFileSize(File f) throws Exception{

@@ -17,7 +17,11 @@ import android.widget.TextView;
 import com.mango.leo.dcom.DcomActivity;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.change.bean.MethodBeans;
+import com.mango.leo.dcom.change.bean.RevertBeans;
 import com.mango.leo.dcom.util.ViewPageAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -128,16 +132,19 @@ public class ChangeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.imageView_add:
+                EventBus.getDefault().removeStickyEvent(MethodBeans.class);
+                EventBus.getDefault().removeStickyEvent(RevertBeans.class);
                 intent = new Intent(this, AddChangeActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Log.v("yyyyy","eee::::");
+            Log.v("yyyyy", "eee::::");
 
             Intent intent = new Intent(this, DcomActivity.class);
             startActivity(intent);

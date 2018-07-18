@@ -14,7 +14,7 @@ import com.mango.leo.dcom.util.NetUtil;
  * Created by Administrator on 2018/5/15 0015.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

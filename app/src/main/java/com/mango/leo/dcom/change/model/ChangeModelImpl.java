@@ -144,8 +144,8 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
-            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
+            //mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
+            //mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
             mapParams.put("publish", "true");
             HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override

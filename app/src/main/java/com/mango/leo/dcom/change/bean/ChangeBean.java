@@ -27,9 +27,9 @@ public class ChangeBean {
     private String cause;
     private String content;
     private File file;
-    private String solutions;
+    private MethodBeans solutions;
     private File solutionAttachment;
-    private String planBSolutions;
+    private RevertBeans planBSolutions;
 
     public String getTag() {
         return tag;
@@ -159,11 +159,11 @@ public class ChangeBean {
         this.file = file;
     }
 
-    public String getSolutions() {
+    public MethodBeans getSolutions() {
         return solutions;
     }
 
-    public void setSolutions(String solutions) {
+    public void setSolutions(MethodBeans solutions) {
         this.solutions = solutions;
     }
 
@@ -175,11 +175,11 @@ public class ChangeBean {
         this.solutionAttachment = solutionAttachment;
     }
 
-    public String getPlanBSolutions() {
+    public RevertBeans getPlanBSolutions() {
         return planBSolutions;
     }
 
-    public void setPlanBSolutions(String planBSolutions) {
+    public void setPlanBSolutions(RevertBeans planBSolutions) {
         this.planBSolutions = planBSolutions;
     }
 

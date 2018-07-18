@@ -31,7 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:text="解决方案"
+            android:text="回退计划"
             android:textSize="@dimen/title"
             android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="20dp"
-        android:text="方案1："
+        android:text="计划1："
         android:textColor="@color/white"
         android:textSize="@dimen/textSize" />
 
@@ -67,7 +67,7 @@
         android:background="@drawable/blue_circle">
 
         <EditText
-            android:id="@+id/et_method"
+            android:id="@+id/et_revert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"

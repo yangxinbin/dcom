@@ -87,7 +87,9 @@
         <activity android:name=".change.activity.ChangeActivity" />
         <activity android:name=".event.activity.AddEventActivity" />
         <activity android:name=".faq.activity.AddFaqActivity" />
-        <activity android:name=".change.activity.AddChangeActivity"></activity>
+        <activity
+            android:name=".change.activity.AddChangeActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".util.relate.ConfigActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -95,6 +97,8 @@
         <activity android:name=".faq.activity.FaqDetailActivity" />
         <activity android:name=".change.activity.ChangeDetailActivity" />
         <activity android:name=".change.activity.MethodItemActivity"></activity>
+        <activity android:name=".change.activity.RevertItemActivity"></activity>
+
     </application>
 
 </manifest>
