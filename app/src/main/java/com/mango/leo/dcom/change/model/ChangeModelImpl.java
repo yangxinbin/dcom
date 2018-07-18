@@ -104,8 +104,8 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
-            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
+            mapParams.put("solutions", /*changeBean.getSolutions() != null ? changeBean.getSolutions() : ""*/"[{\"step\":\"1\",\"detail\":\"内容1\"},{\"step\":\"2\",\"detail\":\"内容2\"}]");
+            mapParams.put("planBSolutions", /*changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : ""*/"[{\"step\":\"1\",\"detail\":\"回退内容1\"},{\"step\":\"2\",\"detail\":\"回退内容2\"}]");
             mapParams.put("publish", "false");
             HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override
@@ -176,6 +176,7 @@ public class ChangeModelImpl implements ChangeModel {
             }
             stringBuffer.append(stringList.get(i) + ",");
         }
+        Log.v("uuuuuuuu","----"+stringBuffer.toString());
         return stringBuffer.toString();
     }
 }

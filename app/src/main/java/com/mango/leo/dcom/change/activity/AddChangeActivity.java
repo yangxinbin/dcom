@@ -45,7 +45,6 @@ import com.mango.leo.dcom.change.presenter.ChangePresenterImpl;
 import com.mango.leo.dcom.change.view.ChangeView;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
-import com.mango.leo.dcom.faq.activity.FaqActivity;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -66,7 +65,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -157,10 +155,6 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     ImageView imageViewP;
     @Bind(R.id.p)
     RelativeLayout p;
-    @Bind(R.id.e_method_way)
-    EditText eMethodWay;
-    @Bind(R.id.e_revert)
-    EditText eRevert;
     @Bind(R.id.imageView_pic_choose1)
     ImageView imageViewPicChoose1;
     @Bind(R.id.imageView_pic1)
@@ -169,6 +163,14 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     ImageView imageViewP1;
     @Bind(R.id.p1)
     RelativeLayout p1;
+    @Bind(R.id.jia_method)
+    ImageView jiaMethod;
+    @Bind(R.id.e_method_content)
+    LinearLayout eMethodContent;
+    @Bind(R.id.jia_revert)
+    ImageView jiaRevert;
+    @Bind(R.id.e_revert)
+    LinearLayout eRevert;
     private ChangeBean changeBean;
     private SharedPreferences sharedPreferences;
     private ChangePresenter changePresenter;
@@ -221,8 +223,8 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         changeBean.setOaNumber(editTextChangeOa.getText().toString());
         changeBean.setCause(editTextDescription.getText().toString());
         changeBean.setContent(editTextContent.getText().toString());
-        changeBean.setSolutions(eMethodWay.getText().toString());
-        changeBean.setPlanBSolutions(eRevert.getText().toString());
+        //changeBean.setSolutions(eMethodWay.getText().toString());
+        //changeBean.setPlanBSolutions(eRevert.getText().toString());
     }
 
     private void initDateFromWeb() {
@@ -308,7 +310,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         customDatePicker_2.setIsLoop(true); // 允许循环滚动
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit,R.id.jia_method, R.id.jia_revert})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -453,6 +455,15 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                     AppUtils.showToast(this, "请填写必填项");
                 }
                 break;
+            case R.id.jia_method:
+                //EventBus.getDefault().postSticky(bean4);
+                intent = new Intent(this, MethodItemActivity.class);
+                //intent.putExtra("position", bean4.size());
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.jia_revert:
+                break;
         }
     }
 
@@ -484,7 +495,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         }
         textViewChangeFaqlist.setVisibility(View.GONE);
         tagAdapter.onlyAddAll(bean.getChooses());
-        changeBean.setRelatedChangeTags(removeDuplicate(bean.getChooses()));
+        changeBean.setRelatedProblemTags(removeDuplicate(bean.getChooses()));
         if (flag) {
             EventBus.getDefault().removeStickyEvent(ChangeChooseBean.class);
         }
@@ -501,7 +512,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         }
         textViewChangeChangelist.setVisibility(View.GONE);
         tagAdapter.onlyAddAll(bean.getChooses());
-        changeBean.setRelatedConfigSNs(removeDuplicate(bean.getChooses()));
+        changeBean.setRelatedChangeTags(removeDuplicate(bean.getChooses()));
         if (flag) {
             EventBus.getDefault().removeStickyEvent(ConfigChooseBean.class);
         }
@@ -845,6 +856,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         }*/
         return f;
     }
+
 /*    public long getFileSize(File f) throws Exception{
 
 

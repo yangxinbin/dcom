@@ -182,4 +182,29 @@ public class ChangeBean {
     public void setPlanBSolutions(String planBSolutions) {
         this.planBSolutions = planBSolutions;
     }
+
+    @Override
+    public String toString() {
+        return "ChangeBean{" +
+                "tag='" + tag + '\'' +
+                ", title='" + title + '\'' +
+                ", planningTime='" + planningTime + '\'' +
+                ", deadline='" + deadline + '\'' +
+                ", oaNumber='" + oaNumber + '\'' +
+                ", type='" + type + '\'' +
+                ", impactScope='" + impactScope + '\'' +
+                ", impactLevel='" + impactLevel + '\'' +
+                ", riskLevel='" + riskLevel + '\'' +
+                ", relatedEventTags=" + relatedEventTags +
+                ", relatedProblemTags=" + relatedProblemTags +
+                ", relatedChangeTags=" + relatedChangeTags +
+                ", relatedConfigSNs=" + relatedConfigSNs +
+                ", cause='" + cause + '\'' +
+                ", content='" + content + '\'' +
+                ", file=" + file +
+                ", solutions='" + solutions + '\'' +
+                ", solutionAttachment=" + solutionAttachment +
+                ", planBSolutions='" + planBSolutions + '\'' +
+                '}';
+    }
 }

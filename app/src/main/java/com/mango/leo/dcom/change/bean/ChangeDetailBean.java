@@ -9,40 +9,40 @@ import java.util.List;
 public class ChangeDetailBean {
 
     /**
-     * id : 17
+     * id : 47
      * tenantId : 42
-     * stage : 1
-     * title : yy
-     * tag : 186171550VZV
-     * relatedOa : 1852
-     * impactScope : 高
+     * stage : 0
+     * title : u的话
+     * tag : 186181124VHC
+     * relatedOa : u发货
+     * impactScope : 中
      * impactLevel : 1
      * changeType : 紧急变更
-     * riskLevel : C
-     * cause : null
-     * content : 哈哈
+     * riskLevel : B
+     * cause : 更好地
+     * content : 更多
      * planBReviews : null
      * expertOpinion : null
      * status : null
-     * contentAttachments : [{"fileName":"1531813824973","filePath":"/api/1531813824967.jpg","url":"/cdn/dcom/out/api/1531813824967.jpg","createdOn":1531813824973}]
-     * solution : null
-     * solutionAttachments : [{"fileName":"1531813824980","filePath":"/api/1531813824974.jpg","url":"/cdn/dcom/out/api/1531813824974.jpg","createdOn":1531813824980}]
-     * planB : null
+     * contentAttachments : [{"fileName":"1531884284855","filePath":"/api/1531884284848.jpg","url":"/cdn/dcom/out/api/1531884284848.jpg","createdOn":1531884284855}]
+     * solution : [{"step":1,"detail":"内容1","state":null,"type":null},{"step":2,"detail":"内容2","state":null,"type":null}]
+     * solutionAttachments : [{"fileName":"1531884284860","filePath":"/api/1531884284855.jpg","url":"/cdn/dcom/out/api/1531884284855.jpg","createdOn":1531884284860}]
+     * planB : [{"step":1,"detail":"回退内容1","state":null,"type":null},{"step":2,"detail":"回退内容2","state":null,"type":null}]
      * review1On : null
      * implementedOn : null
      * review2On : null
      * review3On : null
-     * createdOn : 1531813825000
+     * createdOn : 1531884285000
      * closedOn : null
-     * planningTime : 1531813740000
-     * deadline : 1531813740000
+     * planningTime : 1531884180000
+     * deadline : 1531884180000
      * implementedBy : null
      * closedBy : null
      * createdBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * expertUser : null
      * eventTickets : ["1807131743YJK","1807160933DVR"]
-     * problemTickets : ["1807131743YJK","1807160933DVR"]
-     * changeTickets : ["186161812ARU","18617168KCU","186161824NFW","186161812MYJ"]
+     * problemTickets : ["186161824RHN","18617158OTN","186161824NFW"]
+     * changeTickets : ["186181115QGZ","186181112GKC","186181118BGV","186181112HJO"]
      * assetConfigSNs : ["dsgrdg","UI909090","UI9090901","S8989","UI90909011"]
      */
 
@@ -58,11 +58,9 @@ public class ChangeDetailBean {
     private String riskLevel;
     private String cause;
     private String content;
-    private String planBReviews;
+    private Object planBReviews;
     private Object expertOpinion;
     private Object status;
-    private Object solution;
-    private Object planB;
     private Object review1On;
     private Object implementedOn;
     private Object review2On;
@@ -76,7 +74,9 @@ public class ChangeDetailBean {
     private CreatedByBean createdBy;
     private Object expertUser;
     private List<ContentAttachmentsBean> contentAttachments;
+    private List<SolutionBean> solution;
     private List<SolutionAttachmentsBean> solutionAttachments;
+    private List<PlanBBean> planB;
     private List<String> eventTickets;
     private List<String> problemTickets;
     private List<String> changeTickets;
@@ -178,11 +178,11 @@ public class ChangeDetailBean {
         this.content = content;
     }
 
-    public String getPlanBReviews() {
+    public Object getPlanBReviews() {
         return planBReviews;
     }
 
-    public void setPlanBReviews(String planBReviews) {
+    public void setPlanBReviews(Object planBReviews) {
         this.planBReviews = planBReviews;
     }
 
@@ -200,22 +200,6 @@ public class ChangeDetailBean {
 
     public void setStatus(Object status) {
         this.status = status;
-    }
-
-    public Object getSolution() {
-        return solution;
-    }
-
-    public void setSolution(Object solution) {
-        this.solution = solution;
-    }
-
-    public Object getPlanB() {
-        return planB;
-    }
-
-    public void setPlanB(Object planB) {
-        this.planB = planB;
     }
 
     public Object getReview1On() {
@@ -322,12 +306,28 @@ public class ChangeDetailBean {
         this.contentAttachments = contentAttachments;
     }
 
+    public List<SolutionBean> getSolution() {
+        return solution;
+    }
+
+    public void setSolution(List<SolutionBean> solution) {
+        this.solution = solution;
+    }
+
     public List<SolutionAttachmentsBean> getSolutionAttachments() {
         return solutionAttachments;
     }
 
     public void setSolutionAttachments(List<SolutionAttachmentsBean> solutionAttachments) {
         this.solutionAttachments = solutionAttachments;
+    }
+
+    public List<PlanBBean> getPlanB() {
+        return planB;
+    }
+
+    public void setPlanB(List<PlanBBean> planB) {
+        this.planB = planB;
     }
 
     public List<String> getEventTickets() {
@@ -460,10 +460,10 @@ public class ChangeDetailBean {
 
     public static class ContentAttachmentsBean {
         /**
-         * fileName : 1531813824973
-         * filePath : /api/1531813824967.jpg
-         * url : /cdn/dcom/out/api/1531813824967.jpg
-         * createdOn : 1531813824973
+         * fileName : 1531884284855
+         * filePath : /api/1531884284848.jpg
+         * url : /cdn/dcom/out/api/1531884284848.jpg
+         * createdOn : 1531884284855
          */
 
         private String fileName;
@@ -504,12 +504,58 @@ public class ChangeDetailBean {
         }
     }
 
+    public static class SolutionBean {
+        /**
+         * step : 1
+         * detail : 内容1
+         * state : null
+         * type : null
+         */
+
+        private int step;
+        private String detail;
+        private Object state;
+        private Object type;
+
+        public int getStep() {
+            return step;
+        }
+
+        public void setStep(int step) {
+            this.step = step;
+        }
+
+        public String getDetail() {
+            return detail;
+        }
+
+        public void setDetail(String detail) {
+            this.detail = detail;
+        }
+
+        public Object getState() {
+            return state;
+        }
+
+        public void setState(Object state) {
+            this.state = state;
+        }
+
+        public Object getType() {
+            return type;
+        }
+
+        public void setType(Object type) {
+            this.type = type;
+        }
+    }
+
     public static class SolutionAttachmentsBean {
         /**
-         * fileName : 1531813824980
-         * filePath : /api/1531813824974.jpg
-         * url : /cdn/dcom/out/api/1531813824974.jpg
-         * createdOn : 1531813824980
+         * fileName : 1531884284860
+         * filePath : /api/1531884284855.jpg
+         * url : /cdn/dcom/out/api/1531884284855.jpg
+         * createdOn : 1531884284860
          */
 
         private String fileName;
@@ -547,6 +593,52 @@ public class ChangeDetailBean {
 
         public void setCreatedOn(long createdOn) {
             this.createdOn = createdOn;
+        }
+    }
+
+    public static class PlanBBean {
+        /**
+         * step : 1
+         * detail : 回退内容1
+         * state : null
+         * type : null
+         */
+
+        private int step;
+        private String detail;
+        private Object state;
+        private Object type;
+
+        public int getStep() {
+            return step;
+        }
+
+        public void setStep(int step) {
+            this.step = step;
+        }
+
+        public String getDetail() {
+            return detail;
+        }
+
+        public void setDetail(String detail) {
+            this.detail = detail;
+        }
+
+        public Object getState() {
+            return state;
+        }
+
+        public void setState(Object state) {
+            this.state = state;
+        }
+
+        public Object getType() {
+            return type;
+        }
+
+        public void setType(Object type) {
+            this.type = type;
         }
     }
 }
