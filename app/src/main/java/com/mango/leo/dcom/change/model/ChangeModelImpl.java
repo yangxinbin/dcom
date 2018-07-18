@@ -6,9 +6,15 @@ import android.util.Log;
 
 import com.mango.leo.dcom.change.bean.ChangeBean;
 import com.mango.leo.dcom.change.bean.ListChangeBean;
+import com.mango.leo.dcom.change.bean.MethodBeans;
+import com.mango.leo.dcom.change.bean.RevertBeans;
 import com.mango.leo.dcom.change.listener.OnChangeListener;
 import com.mango.leo.dcom.change.util.ChangeJsonUtils;
 import com.mango.leo.dcom.util.HttpUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -104,8 +110,8 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            mapParams.put("solutions", /*changeBean.getSolutions() != null ? changeBean.getSolutions() : ""*/"[{\"step\":\"1\",\"detail\":\"内容1\"},{\"step\":\"2\",\"detail\":\"内容2\"}]");
-            mapParams.put("planBSolutions", /*changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : ""*/"[{\"step\":\"1\",\"detail\":\"回退内容1\"},{\"step\":\"2\",\"detail\":\"回退内容2\"}]");
+            mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
+            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
             mapParams.put("publish", "false");
             HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override
@@ -144,8 +150,8 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            //mapParams.put("solutions", changeBean.getSolutions() != null ? changeBean.getSolutions() : "");
-            //mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? changeBean.getPlanBSolutions() : "");
+            mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
+            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
             mapParams.put("publish", "true");
             HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
                 @Override
@@ -166,7 +172,40 @@ public class ChangeModelImpl implements ChangeModel {
             });
         }
     }
-
+    public String buildArrayJson_Method(MethodBeans methodBeans) {
+        JSONArray json = new JSONArray();
+        try {
+            for (int i = 0; i < methodBeans.getMethodItems().size(); i++) {
+                JSONObject jsonObj = new JSONObject();//一定要new对象
+                jsonObj.put("step", methodBeans.getMethodItems().get(i).getStep()+"");
+                jsonObj.put("detail", methodBeans.getMethodItems().get(i).getDetail().toString());
+                json.put(i, jsonObj);
+                continue;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //把每个数据当作一对象添加到数组里
+        Log.v("uuuuuuuu","-m---"+json.toString());
+        return json.toString();
+    }
+    public String buildArrayJson_Revert(RevertBeans revertBeans) {
+        JSONArray json = new JSONArray();
+        try {
+            for (int i = 0; i < revertBeans.getRevertItems().size(); i++) {
+                JSONObject jsonObj = new JSONObject();//一定要new对象
+                jsonObj.put("step", revertBeans.getRevertItems().get(i).getStep()+"");
+                jsonObj.put("detail", revertBeans.getRevertItems().get(i).getDetail().toString());
+                json.put(i, jsonObj);
+                continue;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //把每个数据当作一对象添加到数组里
+        Log.v("uuuuuuuu","-r---"+json.toString());
+        return json.toString();
+    }
     private String listToString(List<String> stringList) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < stringList.size(); i++) {

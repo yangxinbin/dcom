@@ -1,10 +1,12 @@
 package com.mango.leo.dcom.change.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,6 +92,7 @@ public class MethodItemActivity extends BaseActivity {
                 if (!etMethod.getText().toString().startsWith("请输入") && methodBeans != null) {
                     EventBus.getDefault().postSticky(methodBeans);
                     EventBus.getDefault().unregister(this);
+                    hintKeyBoard();
                     finish();
                 } else {
                     AppUtils.showToast(this, "请描述解决方案");
@@ -97,7 +100,18 @@ public class MethodItemActivity extends BaseActivity {
                 break;
         }
     }
-
+    public void hintKeyBoard() {
+        //拿到InputMethodManager
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //如果window上view获取焦点 && view不为空
+        if (imm.isActive() && getCurrentFocus() != null) {
+            //拿到view的token 不为空
+            if (getCurrentFocus().getWindowToken() != null) {
+                //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
