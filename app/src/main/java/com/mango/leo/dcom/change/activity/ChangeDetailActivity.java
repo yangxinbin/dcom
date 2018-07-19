@@ -9,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
+import com.mango.leo.dcom.base.BaseActivity;
 import com.mango.leo.dcom.change.bean.ChangeDetailBean;
 import com.mango.leo.dcom.change.util.ChangeJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
@@ -34,7 +37,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ChangeDetailActivity extends AppCompatActivity {
+public class ChangeDetailActivity extends BaseActivity {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
@@ -70,10 +73,10 @@ public class ChangeDetailActivity extends AppCompatActivity {
     TextView tContent;
     @Bind(R.id.imageView_p)
     RoundImageView imageViewP;
-    @Bind(R.id.t_solution)
-    TextView tSolution;
-    @Bind(R.id.t_back_solution)
-    TextView tBackSolution;
+    /*    @Bind(R.id.t_solution)
+        TextView tSolution;
+        @Bind(R.id.t_back_solution)
+        TextView tBackSolution;*/
     @Bind(R.id.t_check)
     TextView tCheck;
     @Bind(R.id.t_re_check)
@@ -86,6 +89,10 @@ public class ChangeDetailActivity extends AppCompatActivity {
     TextView tGeneral;
     @Bind(R.id.imageView_c)
     RoundImageView imageViewC;
+    @Bind(R.id.solution)
+    LinearLayout solution;
+    @Bind(R.id.back_solution)
+    LinearLayout backSolution;
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter1, tagAdapter2, tagAdapter3, tagAdapter4;
 
@@ -99,7 +106,7 @@ public class ChangeDetailActivity extends AppCompatActivity {
         loadDetail(getIntent().getStringExtra("id"));
     }
 
-    private final ChangeDetailActivity.MyHandler mHandler = new ChangeDetailActivity.MyHandler(this);
+    private final MyHandler mHandler = new MyHandler(this);
 
     private class MyHandler extends Handler {
         private final WeakReference<ChangeDetailActivity> mActivity;
@@ -188,12 +195,34 @@ public class ChangeDetailActivity extends AppCompatActivity {
             imageViewP.setVisibility(View.VISIBLE);
             Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getContentAttachments().get(0).getUrl()).into(imageViewP);
         }
-        tSolution.setText(changeDetailBean.getSolution()+"");
+        //tSolution.setText(changeDetailBean.getSolution() + "");
+        if (changeDetailBean.getSolution() != null)
+            for (int i = 0; i < changeDetailBean.getSolution().size(); i++) {
+                TextView textView = new TextView(this);
+                textView.setText("方案" + (i + 1) + ":\n" + changeDetailBean.getSolution().get(i).getDetail());
+                textView.setTextColor(getResources().getColor(R.color.white));
+                textView.setTextSize(15);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0, 0, 0, 10);//4个参数按顺序分别是左上右下
+                textView.setLayoutParams(layoutParams);
+                solution.addView(textView, i);
+            }
         if (changeDetailBean.getSolutionAttachments() != null && changeDetailBean.getSolutionAttachments().get(0) != null) {
-            imageViewP.setVisibility(View.VISIBLE);
-            Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getSolutionAttachments().get(0).getUrl()).into(imageViewP1);
+            imageViewC.setVisibility(View.VISIBLE);
+            Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getSolutionAttachments().get(0).getUrl()).into(imageViewC);
         }
-        tBackSolution.setText(changeDetailBean.getPlanBReviews()+"");
+        //tBackSolution.setText(changeDetailBean.getPlanBReviews() + "");
+        if (changeDetailBean.getPlanB() != null)
+            for (int j = 0; j < changeDetailBean.getPlanB().size(); j++) {
+                TextView textView = new TextView(this);
+                textView.setText("计划" + (j + 1) + ":\n" + changeDetailBean.getPlanB().get(j).getDetail());
+                textView.setTextColor(getResources().getColor(R.color.white));
+                textView.setTextSize(15);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0, 0, 0, 10);//4个参数按顺序分别是左上右下
+                textView.setLayoutParams(layoutParams);
+                backSolution.addView(textView, j);
+            }
     }
 
     @OnClick(R.id.imageView_back)

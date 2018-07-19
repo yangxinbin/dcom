@@ -9,41 +9,41 @@ import java.util.List;
 public class ChangeDetailBean {
 
     /**
-     * id : 47
+     * id : 51
      * tenantId : 42
      * stage : 0
-     * title : u的话
-     * tag : 186181124VHC
-     * relatedOa : u发货
-     * impactScope : 中
+     * title : yh
+     * tag : 186191057FJP
+     * relatedOa : hdb
+     * impactScope : 低
      * impactLevel : 1
      * changeType : 紧急变更
-     * riskLevel : B
-     * cause : 更好地
-     * content : 更多
+     * riskLevel : C
+     * cause : gxbsb
+     * content : fhh
      * planBReviews : null
      * expertOpinion : null
      * status : null
-     * contentAttachments : [{"fileName":"1531884284855","filePath":"/api/1531884284848.jpg","url":"/cdn/dcom/out/api/1531884284848.jpg","createdOn":1531884284855}]
-     * solution : [{"step":1,"detail":"内容1","state":null,"type":null},{"step":2,"detail":"内容2","state":null,"type":null}]
-     * solutionAttachments : [{"fileName":"1531884284860","filePath":"/api/1531884284855.jpg","url":"/cdn/dcom/out/api/1531884284855.jpg","createdOn":1531884284860}]
-     * planB : [{"step":1,"detail":"回退内容1","state":null,"type":null},{"step":2,"detail":"回退内容2","state":null,"type":null}]
+     * contentAttachments : [{"fileName":"1531969077979","filePath":"/api/1531969077977.jpg","url":"/cdn/dcom/out/api/1531969077977.jpg","createdOn":1531969077979}]
+     * solution : [{"step":1,"detail":"gxhdh","state":null,"type":null},{"step":2,"detail":"续本","state":null,"type":null}]
+     * solutionAttachments : [{"fileName":"1531969077979","filePath":"/api/1531969077979.jpg","url":"/cdn/dcom/out/api/1531969077979.jpg","createdOn":1531969077979}]
+     * planB : [{"step":1,"detail":"好大的包","state":null,"type":null},{"step":2,"detail":"邓货币兑换","state":null,"type":null}]
      * review1On : null
      * implementedOn : null
      * review2On : null
      * review3On : null
-     * createdOn : 1531884285000
+     * createdOn : 1531969078000
      * closedOn : null
-     * planningTime : 1531884180000
-     * deadline : 1531884180000
+     * planningTime : 1531968900000
+     * deadline : 1531968900000
      * implementedBy : null
      * closedBy : null
      * createdBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * expertUser : null
-     * eventTickets : ["1807131743YJK","1807160933DVR"]
-     * problemTickets : ["186161824RHN","18617158OTN","186161824NFW"]
-     * changeTickets : ["186181115QGZ","186181112GKC","186181118BGV","186181112HJO"]
-     * assetConfigSNs : ["dsgrdg","UI909090","UI9090901","S8989","UI90909011"]
+     * eventTickets : ["1807160933DVR"]
+     * problemTickets : ["18617158OTN","186181154QHH"]
+     * changeTickets : ["186181124VHC","186181115QGZ","186181112HJO"]
+     * assetConfigSNs : ["dsgrdg","UI909090","UI9090901","S8989"]
      */
 
     private int id;
@@ -460,10 +460,10 @@ public class ChangeDetailBean {
 
     public static class ContentAttachmentsBean {
         /**
-         * fileName : 1531884284855
-         * filePath : /api/1531884284848.jpg
-         * url : /cdn/dcom/out/api/1531884284848.jpg
-         * createdOn : 1531884284855
+         * fileName : 1531969077979
+         * filePath : /api/1531969077977.jpg
+         * url : /cdn/dcom/out/api/1531969077977.jpg
+         * createdOn : 1531969077979
          */
 
         private String fileName;
@@ -507,7 +507,7 @@ public class ChangeDetailBean {
     public static class SolutionBean {
         /**
          * step : 1
-         * detail : 内容1
+         * detail : gxhdh
          * state : null
          * type : null
          */
@@ -552,10 +552,10 @@ public class ChangeDetailBean {
 
     public static class SolutionAttachmentsBean {
         /**
-         * fileName : 1531884284860
-         * filePath : /api/1531884284855.jpg
-         * url : /cdn/dcom/out/api/1531884284855.jpg
-         * createdOn : 1531884284860
+         * fileName : 1531969077979
+         * filePath : /api/1531969077979.jpg
+         * url : /cdn/dcom/out/api/1531969077979.jpg
+         * createdOn : 1531969077979
          */
 
         private String fileName;
@@ -599,7 +599,7 @@ public class ChangeDetailBean {
     public static class PlanBBean {
         /**
          * step : 1
-         * detail : 回退内容1
+         * detail : 好大的包
          * state : null
          * type : null
          */

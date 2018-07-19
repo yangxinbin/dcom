@@ -103,7 +103,8 @@
                     android:layout_toEndOf="@+id/textView26"
                     android:layout_toRightOf="@+id/textView26"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -124,7 +125,8 @@
                     android:layout_alignLeft="@+id/t_tag"
                     android:layout_alignStart="@+id/t_tag"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView33"
@@ -156,7 +158,8 @@
                     android:layout_alignLeft="@+id/t_t"
                     android:layout_alignStart="@+id/t_t"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/t_over_time"
@@ -166,7 +169,8 @@
                     android:layout_alignLeft="@+id/t_start_time"
                     android:layout_alignStart="@+id/t_start_time"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <ImageView
                     android:id="@+id/imageView22"
@@ -196,7 +200,8 @@
                     android:layout_alignBottom="@+id/textView38"
                     android:layout_centerHorizontal="true"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView42"
@@ -214,11 +219,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/textView44"
+                    android:layout_marginLeft="8dp"
                     android:layout_toEndOf="@+id/textView42"
                     android:layout_toRightOf="@+id/textView42"
-                    android:layout_marginLeft="8dp"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView44"
@@ -239,7 +245,8 @@
                     android:layout_alignLeft="@+id/t_type"
                     android:layout_alignStart="@+id/t_type"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView47"
@@ -260,7 +267,8 @@
                     android:layout_alignLeft="@+id/t_range"
                     android:layout_alignStart="@+id/t_range"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView49"
@@ -282,7 +290,8 @@
                     android:layout_alignLeft="@+id/t_degree"
                     android:layout_alignStart="@+id/t_degree"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView53"
@@ -321,6 +330,7 @@
                     android:layout_below="@+id/textView553"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="10dp" />
+
                 <TextView
                     android:id="@+id/textView533"
                     android:layout_width="wrap_content"
@@ -339,6 +349,7 @@
                     android:layout_below="@+id/textView533"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="10dp" />
+
                 <TextView
                     android:id="@+id/textView5333"
                     android:layout_width="wrap_content"
@@ -378,7 +389,9 @@
                     android:layout_below="@+id/textView54"
                     android:layout_marginTop="10dp"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
+
                 <TextView
                     android:id="@+id/textView544"
                     android:layout_width="wrap_content"
@@ -399,7 +412,8 @@
                     android:layout_below="@+id/textView544"
                     android:layout_marginTop="10dp"
                     android:text="null"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView56"
@@ -413,13 +427,14 @@
                     android:textSize="@dimen/textSize" />
 
                 <com.mango.leo.dcom.util.RoundImageView
-                    android:visibility="gone"
                     android:id="@+id/imageView_p"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/textView56"
                     android:layout_margin="16dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/textView554"
                     android:layout_width="wrap_content"
@@ -431,35 +446,49 @@
                     android:text="解决方案："
                     android:textSize="@dimen/textSize" />
 
-                <TextView
-                    android:id="@+id/t_solution"
-                    android:layout_width="wrap_content"
+                <!--                <TextView
+                                    android:id="@+id/t_solution"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignLeft="@+id/textView554"
+                                    android:layout_alignStart="@+id/textView554"
+                                    android:layout_below="@+id/textView554"
+                                    android:layout_marginTop="10dp"
+                                                        android:text="null"
+                                    android:textSize="@dimen/sencond_textSize"
+                                    android:textColor="@color/white" />-->
+                <LinearLayout
+                    android:id="@+id/solution"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView554"
                     android:layout_alignStart="@+id/textView554"
                     android:layout_below="@+id/textView554"
-                    android:layout_marginTop="10dp"
-                    android:text="null"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textView6566"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/t_solution"
-                    android:layout_alignStart="@+id/t_solution"
-                    android:layout_below="@+id/t_solution"
+                    android:layout_alignLeft="@+id/solution"
+                    android:layout_alignStart="@+id/solution"
+                    android:layout_below="@+id/solution"
                     android:layout_marginTop="16dp"
                     android:text="已上传文件："
                     android:textSize="@dimen/textSize" />
 
                 <com.mango.leo.dcom.util.RoundImageView
-                    android:visibility="gone"
                     android:id="@+id/imageView_c"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/textView6566"
                     android:layout_margin="16dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/textView564"
                     android:layout_width="wrap_content"
@@ -471,18 +500,27 @@
                     android:text="回退计划："
                     android:textSize="@dimen/textSize" />
 
-                <TextView
-                    android:id="@+id/t_back_solution"
-                    android:layout_width="wrap_content"
+                <!--                <TextView
+                                    android:id="@+id/t_back_solution"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignLeft="@+id/textView564"
+                                    android:layout_alignStart="@+id/textView564"
+                                    android:layout_below="@+id/textView564"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                                        android:text="null"
+                                    android:textSize="@dimen/sencond_textSize"
+                                    android:textColor="@color/white" />-->
+                <LinearLayout
+                    android:id="@+id/back_solution"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView564"
                     android:layout_alignStart="@+id/textView564"
                     android:layout_below="@+id/textView564"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="null"
-                    android:textColor="@color/white" />
-
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"></LinearLayout>
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
@@ -499,6 +537,7 @@
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -547,8 +586,9 @@
                     android:layout_alignStart="@+id/textView57"
                     android:layout_below="@+id/textView57"
                     android:layout_marginTop="10dp"
+                    android:text="null"
                     android:textColor="@color/white"
-                    android:text="null" />
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView577"
@@ -569,8 +609,9 @@
                     android:layout_alignStart="@+id/textView577"
                     android:layout_below="@+id/textView577"
                     android:layout_marginTop="10dp"
+                    android:text="null"
                     android:textColor="@color/white"
-                    android:text="null" />
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView59"
@@ -591,7 +632,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:text="null"
-                    android:textColor="@color/green" />
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/sencond_textSize" />
 
                 <TextView
                     android:id="@+id/textView444"
@@ -612,8 +654,10 @@
                     android:layout_alignStart="@+id/textView444"
                     android:layout_below="@+id/textView444"
                     android:layout_marginTop="10dp"
+                    android:text="null"
                     android:textColor="@color/white"
-                    android:text="null" />
+                    android:textSize="@dimen/sencond_textSize" />
+
                 <TextView
                     android:id="@+id/textView656"
                     android:layout_width="wrap_content"
@@ -626,13 +670,14 @@
                     android:textSize="@dimen/textSize" />
 
                 <com.mango.leo.dcom.util.RoundImageView
-                    android:visibility="gone"
                     android:id="@+id/imageView_p1"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/textView656"
                     android:layout_margin="16dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/textView4444"
                     android:layout_width="wrap_content"
@@ -651,10 +696,11 @@
                     android:layout_alignLeft="@+id/textView4444"
                     android:layout_alignStart="@+id/textView4444"
                     android:layout_below="@+id/textView4444"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
                     android:layout_marginBottom="18dp"
-                    android:text="null" />
+                    android:layout_marginTop="10dp"
+                    android:text="null"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sencond_textSize" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
