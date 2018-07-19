@@ -151,7 +151,7 @@ public class EventDetailActivity extends BaseActivity {
         tCTime.setText(DateUtil.getDateToString(eventDetailBean.getCreatedOn(), "yyyy-MM-dd HH:mm:ss") + "");
         tFrom.setText(eventDetailBean.getOrigin()+"");
         tType.setText(eventDetailBean.getType()+"");
-        tLevel.setText(eventDetailBean.getLevel()+"");
+        tLevel.setText("级别-"+eventDetailBean.getLevel()+"");
         tSe.setText(eventDetailBean.getSeverity()+"");
         tRange.setText(eventDetailBean.getScope()+"");
         tContent.setText(eventDetailBean.getDescription()+"");

@@ -229,10 +229,9 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
                                                 list2 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
                                             } else if (listC.get(i).getContent().get(i).getType().equals("event_level")) {
-/*                                                for (int j = 1; j <= Integer.valueOf(listC.get(i).getContent().get(i).getValue()); j++) {
+                                                for (int j = 1; j <= toList(listC.get(i).getContent().get(i).getValue()).size(); j++) {
                                                     list3.add("级别-" + j);
-                                                }*/
-                                                list3 = toList(listC.get(i).getContent().get(i).getValue());
+                                                }
                                                 continue;
                                             } else if (listC.get(i).getContent().get(i).getType().equals("event_severity")) {
                                                 list4 = toList(listC.get(i).getContent().get(i).getValue());

@@ -9,39 +9,39 @@ import java.util.List;
 public class EventDetailBean {
 
     /**
-     * id : 62
+     * id : 78
      * tenantId : 42
      * stage : 1
-     * level : null
-     * tag : 1807131743YJK
-     * title : yy
-     * origin : 服务中心
+     * level : 4
+     * tag : 1807191710QST
+     * title : IO
+     * origin : 问题监控
      * type : 服务请求
-     * severity : 严重
-     * scope : 77
+     * severity : 中
+     * scope : gdh
      * contactPerson : null
-     * description : gg
+     * description : hdb
      * status : new
      * assignedDesc : null
      * solutionReviews : null
      * eventCause : null
-     * attachments : [{"fileName":"1531475016729","filePath":"/api/1531475016729.jpg","url":"/cdn/dcom/out/api/1531475016729.jpg","createdOn":1531475016729}]
+     * attachments : [{"fileName":"1531991495990","filePath":"/api/1531991495990.jpg","url":"/cdn/dcom/out/api/1531991495990.jpg","createdOn":1531991495990}]
      * solutions : []
      * preMeasures : []
      * claimedOn : null
-     * createdOn : 1531475017000
-     * updatedOn : 1531475017000
+     * createdOn : 1531991496000
+     * updatedOn : 1531991496000
      * solutionOn : null
      * reviewedOn : null
      * assignedOn : null
-     * occurredOn : 1531474980000
+     * occurredOn : 1531991340000
      * assignedBy : null
      * assignedTo : null
      * claimedBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * createdBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * reviewedBy : null
      * solutionBy : null
-     * assetConfigSNs : ["dsgrdg","UI9090901","S8989"]
+     * assetConfigSNs : ["UI9090901","S8989","UI90909011"]
      * eventTickets : []
      * problemTickets : []
      * changeTickets : []
@@ -50,7 +50,7 @@ public class EventDetailBean {
     private int id;
     private int tenantId;
     private int stage;
-    private Object level;
+    private int level;
     private String tag;
     private String title;
     private String origin;
@@ -108,11 +108,11 @@ public class EventDetailBean {
         this.stage = stage;
     }
 
-    public Object getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Object level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -566,10 +566,10 @@ public class EventDetailBean {
 
     public static class AttachmentsBean {
         /**
-         * fileName : 1531475016729
-         * filePath : /api/1531475016729.jpg
-         * url : /cdn/dcom/out/api/1531475016729.jpg
-         * createdOn : 1531475016729
+         * fileName : 1531991495990
+         * filePath : /api/1531991495990.jpg
+         * url : /cdn/dcom/out/api/1531991495990.jpg
+         * createdOn : 1531991495990
          */
 
         private String fileName;

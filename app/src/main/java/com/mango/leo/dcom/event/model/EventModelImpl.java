@@ -127,19 +127,20 @@ public class EventModelImpl implements EventModel {
             final HashMap<String, String> mapParams = new HashMap<String, String>();
             mapParams.clear();
             mapParams.put("token", sharedPreferences.getString("token", ""));
-            mapParams.put("tag", eventBean.getTag());
-            mapParams.put("title", eventBean.getTitle());
-            mapParams.put("complaintBy", eventBean.getComplaintBy());
-            mapParams.put("origin", eventBean.getOrigin());
-            mapParams.put("type", eventBean.getType());
-            mapParams.put("priority", eventBean.getPriority());
-            mapParams.put("severity", eventBean.getSeverity());
-            mapParams.put("eventScope", eventBean.getEventScope());
-            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
+            mapParams.put("tag", eventBean.getTag() != null ?eventBean.getTag():"");
+            mapParams.put("title", eventBean.getTitle() != null ? eventBean.getTitle():"");
+            mapParams.put("occuredOn", eventBean.getOccuredOn() != null ? eventBean.getOccuredOn():"");
+            mapParams.put("complaintBy", eventBean.getComplaintBy() != null ? eventBean.getComplaintBy():"");
+            mapParams.put("origin", eventBean.getOrigin() != null ?eventBean.getOrigin():"");
+            mapParams.put("type", eventBean.getType() != null ? eventBean.getType():"");
+            mapParams.put("priority", eventBean.getPriority() != null? eventBean.getPriority():"");
+            mapParams.put("severity", eventBean.getSeverity() != null?eventBean.getSeverity():"");
+            mapParams.put("eventScope", eventBean.getEventScope() != null?eventBean.getEventScope():"");
+            mapParams.put("relatedConfigSNs", eventBean.getRelatedConfigSNs()!=null&&eventBean.getRelatedConfigSNs().size() != 0?listToString(eventBean.getRelatedConfigSNs()):"");//待定
             mapParams.put("relatedEventTags", "");//待定
             mapParams.put("relatedProblemTags", "");//待定
             mapParams.put("relatedChangeTags", "");//待定
-            mapParams.put("description", eventBean.getDescription());
+            mapParams.put("description", eventBean.getDescription() != null? eventBean.getDescription():"");
             mapParams.put("publish", "true");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
                 @Override
