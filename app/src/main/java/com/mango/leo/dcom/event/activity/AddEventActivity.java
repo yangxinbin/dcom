@@ -159,10 +159,10 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-/*        if (!NetUtil.isNetConnect(this)) {
+        if (!NetUtil.isNetConnect(this)) {
             AppUtils.showToast(this, "请连接网络");
-            return;
-        }*/
+            //return;
+        }
         eventBean = new EventBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);

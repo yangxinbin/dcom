@@ -54,6 +54,7 @@ import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
@@ -210,6 +211,10 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_change);
+        if (!NetUtil.isNetConnect(this)) {
+            AppUtils.showToast(this, "请连接网络");
+            //return;
+        }
         changeBean = new ChangeBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);

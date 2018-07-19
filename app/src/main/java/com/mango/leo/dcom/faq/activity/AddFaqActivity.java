@@ -49,6 +49,7 @@ import com.mango.leo.dcom.faq.view.FaqView;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
@@ -171,6 +172,10 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_faq);
+        if (!NetUtil.isNetConnect(this)) {
+            AppUtils.showToast(this, "请连接网络");
+            //return;
+        }
         faqBean = new FaqBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
