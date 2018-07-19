@@ -49,6 +49,7 @@ import com.mango.leo.dcom.event.view.EventView;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
+import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
@@ -158,6 +159,10 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+/*        if (!NetUtil.isNetConnect(this)) {
+            AppUtils.showToast(this, "请连接网络");
+            return;
+        }*/
         eventBean = new EventBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
@@ -224,9 +229,10 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
                                                 list2 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
                                             } else if (listC.get(i).getContent().get(i).getType().equals("event_level")) {
-                                                for (int j = 1; j <= Integer.valueOf(listC.get(i).getContent().get(i).getValue()); j++) {
+/*                                                for (int j = 1; j <= Integer.valueOf(listC.get(i).getContent().get(i).getValue()); j++) {
                                                     list3.add("级别-" + j);
-                                                }
+                                                }*/
+                                                list3 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
                                             } else if (listC.get(i).getContent().get(i).getType().equals("event_severity")) {
                                                 list4 = toList(listC.get(i).getContent().get(i).getValue());
