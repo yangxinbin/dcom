@@ -7,14 +7,14 @@
     android:scrollbars="none">
 
     <LinearLayout
+        android:id="@+id/all"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/manage_bg"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp">
 
             <TextView
@@ -39,10 +39,31 @@
                 android:layout_marginStart="15dp"
                 android:src="@drawable/back" />
         </RelativeLayout>
+        <LinearLayout
+            android:layout_marginBottom="80dp"
+            android:id="@+id/load_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="0dp">
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:indeterminateDrawable="@drawable/anim_loading" />
+
+            <TextView
+                android:id="@+id/tv_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加载中..." />
+        </LinearLayout>
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView1"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -381,13 +402,13 @@
                     android:textSize="@dimen/textSize" />
 
                 <com.mango.leo.dcom.util.RoundImageView
-                    android:visibility="gone"
                     android:id="@+id/imageView_p"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/textView56"
                     android:layout_margin="16dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -395,19 +416,21 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardView2"
+            android:id="@+id/cardView_stage4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="gone"
             card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -445,8 +468,8 @@
                     android:layout_alignLeft="@+id/imageView0"
                     android:layout_alignStart="@+id/imageView0"
                     android:layout_below="@+id/imageView0"
-                    android:textSize="@dimen/textSize"
-                    android:text="任务描述：" />
+                    android:text="任务描述："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_task"
@@ -456,8 +479,8 @@
                     android:layout_alignStart="@+id/textView57"
                     android:layout_below="@+id/textView57"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:text="null" />
+                    android:text="null"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView59"
@@ -467,8 +490,8 @@
                     android:layout_alignStart="@+id/t_task"
                     android:layout_below="@+id/t_task"
                     android:layout_marginTop="16dp"
-                    android:textSize="@dimen/textSize"
-                    android:text="分配人：" />
+                    android:text="分配人："
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_task_P"
@@ -498,14 +521,414 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/textView61"
                     android:layout_alignBottom="@+id/textView61"
+                    android:layout_marginLeft="8dp"
                     android:layout_toEndOf="@+id/textView61"
                     android:layout_toRightOf="@+id/textView61"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="8dp"
-                    android:text="null" />
+                    android:text="null"
+                    android:textColor="@color/white" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:visibility="gone"
+            android:id="@+id/cardView_stage1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            card_view:cardBackgroundColor="@color/blue_item"
+            card_view:cardCornerRadius="8dp"
+            card_view:contentPadding="8dp"
+            tools:layout_editor_absoluteX="8dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="18dp"
+                    android:text="事件处理信息"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize" />
+
+
+                <ImageView
+                    android:id="@+id/imageView00"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textView00"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
+                <TextView
+                    android:id="@+id/textView570"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/imageView00"
+                    android:layout_alignStart="@+id/imageView00"
+                    android:layout_below="@+id/imageView00"
+                    android:text="任务描述："
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize" />
+
+                <EditText
+                    android:id="@+id/editText_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView570"
+                    android:layout_alignStart="@+id/textView570"
+                    android:layout_below="@+id/textView570"
+                    android:layout_marginTop="10dp"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="请描述..."
+                    android:inputType="textMultiLine"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/sencond_textSize" />
+
+                <LinearLayout
+                    android:id="@+id/zu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_description"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView590"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="分配组："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:id="@+id/t_task_zu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请选择分配组"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/r" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ren"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/zu"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView5900"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="分配人："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:id="@+id/t_task_ren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请选择分配人"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/r" />
+                </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:visibility="gone"
+            android:id="@+id/cardView_stage3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            card_view:cardBackgroundColor="@color/blue_item"
+            card_view:cardCornerRadius="8dp"
+            card_view:contentPadding="8dp"
+            tools:layout_editor_absoluteX="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textView577"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="任务描述："
+                    android:layout_marginLeft="8dp"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_task_description3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="null"
+                    android:textColor="@color/white" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="事件原因"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <ImageView
+                        android:id="@+id/imageView97"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toEndOf="@+id/tc"
+                        android:layout_toRightOf="@+id/tc"
+                        app:srcCompat="@drawable/xingxing" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editText_event_cause"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="请描述..."
+                    android:layout_marginBottom="5dp"
+                    android:inputType="textMultiLine"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/sencond_textSize" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="解决方案："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/title" />
+
+                    <ImageView
+                        android:id="@+id/jia_method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/jia" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView708"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
+                <LinearLayout
+                    android:id="@+id/e_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="预防措施："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/title" />
+
+                    <ImageView
+                        android:id="@+id/jia_measure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/jia" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView7088"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
+                <LinearLayout
+                    android:id="@+id/e_measure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/r"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="解决方案检测"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <ImageView
+                        android:id="@+id/imageView977"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toEndOf="@+id/tc"
+                        android:layout_toRightOf="@+id/tc"
+                        app:srcCompat="@drawable/xingxing" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editText_method_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="请描述..."
+                    android:layout_marginBottom="5dp"
+                    android:inputType="textMultiLine"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/sencond_textSize" />
+                <LinearLayout
+                    android:id="@+id/stage3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/zu"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView59000"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="状态："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <TextView
+                        android:id="@+id/t_task_stage3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="请选择状态"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/sencond_textSize" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/r" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/b_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_blue_background"
+            android:textSize="@dimen/textSize"
+            android:text="提交"
+            android:textColor="@color/white" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/b_assign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_blue_background"
+            android:text="确认指派"
+            android:textColor="@color/white" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/b_accept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_blue_background"
+            android:text="接受任务"
+            android:textColor="@color/white" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/b_dealwith"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_blue_background"
+            android:text="提交处理信息"
+            android:textColor="@color/white" />
     </LinearLayout>
 </ScrollView>

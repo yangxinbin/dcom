@@ -1,11 +1,15 @@
 package com.mango.leo.dcom.event.util;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.mango.leo.dcom.event.bean.ConfigBean;
 import com.mango.leo.dcom.event.bean.EventDetailBean;
 import com.mango.leo.dcom.event.bean.ListEventBean;
+import com.mango.leo.dcom.event.bean.PeopleBean;
+import com.mango.leo.dcom.event.bean.TeamBean;
 import com.mango.leo.dcom.util.JsonUtils;
 
 import java.util.ArrayList;
@@ -53,5 +57,21 @@ public class EventJsonUtils {
         JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
         EventDetailBean eventDetailBean = JsonUtils.deserialize(jsonObject, EventDetailBean.class);
         return eventDetailBean;
+    }
+    public static List<TeamBean> readTeamBean(String res) {
+/*        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        TeamBean teamBean = JsonUtils.deserialize(jsonObject, TeamBean.class);
+        return teamBean;*/
+        Gson gson = new Gson();
+        List<TeamBean> teamBeans = gson.fromJson(res, new TypeToken<List<TeamBean>>(){}.getType());
+        return teamBeans;
+    }
+    public static List<PeopleBean> readPeopleBean(String res) {
+/*        JsonObject jsonObject = new JsonParser().parse(res).getAsJsonObject();
+        TeamBean teamBean = JsonUtils.deserialize(jsonObject, TeamBean.class);
+        return teamBean;*/
+        Gson gson = new Gson();
+        List<PeopleBean> peopleBeans = gson.fromJson(res, new TypeToken<List<PeopleBean>>(){}.getType());
+        return peopleBeans;
     }
 }

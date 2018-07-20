@@ -98,6 +98,7 @@
         <activity android:name=".change.activity.ChangeDetailActivity" />
         <activity android:name=".change.activity.MethodItemActivity"></activity>
         <activity android:name=".change.activity.RevertItemActivity"></activity>
+        <activity android:name=".event.activity.MeasureItemActivity"></activity>
 
     </application>
 

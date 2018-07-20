@@ -105,6 +105,7 @@ public class EventModelImpl implements EventModel {
             mapParams.put("relatedChangeTags", "");//待定
             mapParams.put("description", eventBean.getDescription() != null? eventBean.getDescription():"");
             mapParams.put("publish", "false");
+            Log.v("publish", "^^^^^false^^^^^");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -142,6 +143,7 @@ public class EventModelImpl implements EventModel {
             mapParams.put("relatedChangeTags", "");//待定
             mapParams.put("description", eventBean.getDescription() != null? eventBean.getDescription():"");
             mapParams.put("publish", "true");
+            Log.v("publish", "^^^^^true^^^^^");
             HttpUtils.doPostAll(url, mapParams,eventBean.getFile(),new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
