@@ -87,12 +87,12 @@ public class ChangeDetailActivity extends BaseActivity {
     RoundImageView imageViewP1;
     @Bind(R.id.t_general)
     TextView tGeneral;
-    @Bind(R.id.imageView_c)
+/*    @Bind(R.id.imageView_c)
     RoundImageView imageViewC;
     @Bind(R.id.solution)
     LinearLayout solution;
     @Bind(R.id.back_solution)
-    LinearLayout backSolution;
+    LinearLayout backSolution;*/
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter1, tagAdapter2, tagAdapter3, tagAdapter4;
 
@@ -196,7 +196,7 @@ public class ChangeDetailActivity extends BaseActivity {
             Glide.with(this).load("http://dcom.hopesen.com.cn" + changeDetailBean.getContentAttachments().get(0).getUrl()).into(imageViewP);
         }
         //tSolution.setText(changeDetailBean.getSolution() + "");
-        if (changeDetailBean.getSolution() != null)
+/*        if (changeDetailBean.getSolution() != null)
             for (int i = 0; i < changeDetailBean.getSolution().size(); i++) {
                 TextView textView = new TextView(this);
                 textView.setText("方案" + (i + 1) + ":\n" + changeDetailBean.getSolution().get(i).getDetail());
@@ -222,7 +222,7 @@ public class ChangeDetailActivity extends BaseActivity {
                 layoutParams.setMargins(0, 0, 0, 10);//4个参数按顺序分别是左上右下
                 textView.setLayoutParams(layoutParams);
                 backSolution.addView(textView, j);
-            }
+            }*/
     }
 
     @OnClick(R.id.imageView_back)
