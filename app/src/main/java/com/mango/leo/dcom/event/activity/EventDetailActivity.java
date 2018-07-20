@@ -147,6 +147,7 @@ public class EventDetailActivity extends BaseActivity {
         tT.setText(eventDetailBean.getTitle() + "");
         tP.setText(eventDetailBean.getCreatedBy().getRealName() + "");
         tTime.setText(DateUtil.getDateToString(eventDetailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
+        if(eventDetailBean.getClaimedBy() != null)
         tC.setText(eventDetailBean.getClaimedBy().getRealName() + "");
         tCTime.setText(DateUtil.getDateToString(eventDetailBean.getCreatedOn(), "yyyy-MM-dd HH:mm:ss") + "");
         tFrom.setText(eventDetailBean.getOrigin()+"");

@@ -439,7 +439,21 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSize" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/editText_change_effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/imageView36"
+                    android:layout_alignRight="@+id/imageView36"
+                    android:layout_below="@+id/imageView36"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:hint="请输入影响范围"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/sencond_textSize" />
+<!--                <LinearLayout
                     android:id="@+id/linearLayout_change_effect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -463,7 +477,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/r" />
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <ImageView
                     android:id="@+id/imageView46"
@@ -985,6 +999,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:visibility="gone"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView5"
             android:layout_width="match_parent"
@@ -1105,6 +1120,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:visibility="gone"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView6"
             android:layout_width="match_parent"

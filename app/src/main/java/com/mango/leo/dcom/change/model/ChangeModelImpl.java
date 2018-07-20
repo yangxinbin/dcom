@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -110,10 +112,15 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
-            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
+            //mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
+            //mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
             mapParams.put("publish", "false");
-            HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
+            try {
+                Log.v("pppppppppp",getFileSize(changeBean.getFile())+"--"+getFileSize(changeBean.getSolutionAttachment()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            HttpUtils.doPostAll(url, mapParams, changeBean.getFile()/*,changeBean.getSolutionAttachment()*/, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.v("doPostAll", "^^^^^onFailure^^^^^");
@@ -150,10 +157,10 @@ public class ChangeModelImpl implements ChangeModel {
             mapParams.put("relatedChangeTags", changeBean.getRelatedChangeTags() != null && changeBean.getRelatedChangeTags().size() != 0 ? listToString(changeBean.getRelatedChangeTags()) : "");//待定
             mapParams.put("cause", changeBean.getCause() != null ? changeBean.getCause() : "");
             mapParams.put("content", changeBean.getContent() != null ? changeBean.getContent() : "");
-            mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
-            mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
+            //mapParams.put("solutions", changeBean.getSolutions() != null ? buildArrayJson_Method(changeBean.getSolutions()) : "");
+            //mapParams.put("planBSolutions", changeBean.getPlanBSolutions() != null ? buildArrayJson_Revert(changeBean.getPlanBSolutions()) : "");
             mapParams.put("publish", "true");
-            HttpUtils.doPostTwoPicture(url, mapParams, changeBean.getFile(),changeBean.getSolutionAttachment(), new Callback() {
+            HttpUtils.doPostAll(url, mapParams, changeBean.getFile()/*,changeBean.getSolutionAttachment()*/, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.v("doPostAll", "^^^^^onFailure^^^^^");
@@ -217,5 +224,24 @@ public class ChangeModelImpl implements ChangeModel {
         }
         Log.v("uuuuuuuu","----"+stringBuffer.toString());
         return stringBuffer.toString();
+    }
+    public long getFileSize(File f) throws Exception{
+
+
+        long l = 0;
+        if (f.exists()){
+
+            FileInputStream mFIS = new FileInputStream(f);
+
+            l= mFIS.available();
+
+        } else {
+
+            f.createNewFile();
+
+        }
+
+        return l;
+
     }
 }

@@ -54,7 +54,6 @@ import com.mango.leo.dcom.event.util.EventJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
-import com.mango.leo.dcom.util.NetUtil;
 import com.mango.leo.dcom.util.PhotoUtils;
 import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
@@ -88,7 +87,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class AddChangeActivity extends BaseActivity implements ChangeView, AdapterView.OnItemClickListener,RevertAdapter.OnRevertClickListener, MethodAdapter.OnMethodClickListener {
+public class AddChangeActivity extends BaseActivity implements ChangeView, AdapterView.OnItemClickListener, RevertAdapter.OnRevertClickListener, MethodAdapter.OnMethodClickListener {
 
     @Bind(R.id.imageView_back)
     ImageView imageViewBack;
@@ -110,10 +109,10 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     TextView textViewChangeType;
     @Bind(R.id.linearLayout_change_type)
     LinearLayout linearLayoutChangeType;
-    @Bind(R.id.textView_change_effect)
-    TextView textViewChangeEffect;
-    @Bind(R.id.linearLayout_change_effect)
-    LinearLayout linearLayoutChangeEffect;
+    /*    @Bind(R.id.textView_change_effect)
+        TextView textViewChangeEffect;
+        @Bind(R.id.linearLayout_change_effect)
+        LinearLayout linearLayoutChangeEffect;*/
     @Bind(R.id.textView_change_degree)
     TextView textViewChangeDegree;
     @Bind(R.id.linearLayout_change_degree)
@@ -178,6 +177,8 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     ImageView jiaRevert;
     @Bind(R.id.e_revert)
     LinearLayout eRevert;
+    @Bind(R.id.editText_change_effect)
+    EditText editTextChangeEffect;
     private ChangeBean changeBean;
     private SharedPreferences sharedPreferences;
     private ChangePresenter changePresenter;
@@ -211,10 +212,6 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_change);
-        if (!NetUtil.isNetConnect(this)) {
-            AppUtils.showToast(this, "请连接网络");
-            //return;
-        }
         changeBean = new ChangeBean();
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
@@ -241,11 +238,12 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         changeBean.setContent(editTextContent.getText().toString());
         changeBean.setSolutions(methodBean);
         changeBean.setPlanBSolutions(revertBean);
+        changeBean.setImpactScope(editTextChangeEffect.getText().toString());
     }
 
     private void initDateFromWeb() {
         list1 = new ArrayList<>();
-        list2 = new ArrayList<>();
+        //list2 = new ArrayList<>();
         list3 = new ArrayList<>();
         list4 = new ArrayList<>();
 
@@ -271,13 +269,13 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                                             if (listC.get(i).getContent().get(i).getType().equals("change_type")) {
                                                 list1 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
-                                            } else if (listC.get(i).getContent().get(i).getType().toString().equals("change_impact_level")) {
+                                            } /*else if (listC.get(i).getContent().get(i).getType().toString().equals("change_impact_level")) {
                                                 list2 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
-                                            } else if (listC.get(i).getContent().get(i).getType().equals("change_risk_level")) {
+                                            } */ else if (listC.get(i).getContent().get(i).getType().equals("change_impact_level")) {
                                                 list3 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
-                                            } else if (listC.get(i).getContent().get(i).getType().equals("release_test_status")) {
+                                            } else if (listC.get(i).getContent().get(i).getType().equals("change_risk_level")) {
                                                 list4 = toList(listC.get(i).getContent().get(i).getValue());
                                                 continue;
                                             }
@@ -326,7 +324,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         customDatePicker_2.setIsLoop(true); // 允许循环滚动
     }
 
-    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, R.id.linearLayout_change_effect, R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit, R.id.jia_method, R.id.jia_revert})
+    @OnClick({R.id.imageView_back, R.id.linearLayout_change_time, R.id.linearLayout_change_overtime, R.id.linearLayout_change_type, /*R.id.linearLayout_change_effect, */R.id.linearLayout_change_degree, R.id.linearLayout_change_risk, R.id.linearLayout_event_faqlist, R.id.linearLayout_change_faqlist, R.id.linearLayout_change_changelist, R.id.linearLayout_change_item, R.id.imageView_pic_choose, R.id.imageView_pic, R.id.imageViewP, R.id.imageView_pic_choose1, R.id.imageView_pic1, R.id.imageViewP1, R.id.b_save, R.id.b_save_commit, R.id.jia_method, R.id.jia_revert})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -351,14 +349,14 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                     AppUtils.showToast(this, "配置项为空");
                 }
                 break;
-            case R.id.linearLayout_change_effect:
+/*            case R.id.linearLayout_change_effect:
                 if (list2 != null && list2.size() != 0) {
                     showPopupWindow(this, list2, 2);
                     adapter.setCheckItem(currentPosition2);
                 } else {
                     AppUtils.showToast(this, "配置项为空");
                 }
-                break;
+                break;*/
             case R.id.linearLayout_change_degree:
                 if (list3 != null && list3.size() != 0) {
                     showPopupWindow(this, list3, 3);
@@ -432,7 +430,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 p.setVisibility(View.GONE);
                 imageViewPicChoose.setVisibility(View.VISIBLE);
                 break;
-            case R.id.imageView_pic_choose1:
+/*            case R.id.imageView_pic_choose1:
                 pic = 2;
                 showTypeDialog();
                 break;
@@ -444,7 +442,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 cropImageUri = null;
                 p1.setVisibility(View.GONE);
                 imageViewPicChoose1.setVisibility(View.VISIBLE);
-                break;
+                break;*/
             case R.id.b_save:
                 initView();
                 Log.v("ppppppppppppppp", "===" + changeBean.toString());
@@ -519,6 +517,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         recyclerView.setAdapter(adapter1);
         adapter1.setOnMethodClickListener(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventRevertBeans(RevertBeans bean) {
         eRevert.removeAllViews();
@@ -538,6 +537,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         recyclerView.setAdapter(adapter2);
         adapter2.setOnRevertClickListener(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventBus1(EventChooseBean bean) {
         tagAdapter = new TagAdapter(this);
@@ -699,13 +699,13 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
                 changeBean.setType(list1.get(position));
                 dialog.dismiss();
                 break;
-            case 2:
+/*            case 2:
                 currentPosition2 = position;
                 textViewChangeEffect.setText(list2.get(position));
                 textViewChangeEffect.setTextColor(getResources().getColor(R.color.white));
                 changeBean.setImpactScope(list2.get(position));
                 dialog.dismiss();
-                break;
+                break;*/
             case 3:
                 currentPosition3 = position;
                 textViewChangeDegree.setText(list3.get(position));
