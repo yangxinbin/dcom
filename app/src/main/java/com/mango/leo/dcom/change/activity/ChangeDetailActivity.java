@@ -102,6 +102,7 @@ public class ChangeDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_change_detail);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
+        AppUtils.createLoadDailog(this);
         Log.v("wwwwwwww", "!!!" + getIntent().getStringExtra("id"));
         loadDetail(getIntent().getStringExtra("id"));
     }
@@ -123,6 +124,7 @@ public class ChangeDetailActivity extends BaseActivity {
                 switch (msg.what) {
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
+                        AppUtils.dissmissLoadDailog(activity);
                         ChangeDetailBean changeDetailBean = (ChangeDetailBean) msg.obj;
                         initView(changeDetailBean);
                         break;

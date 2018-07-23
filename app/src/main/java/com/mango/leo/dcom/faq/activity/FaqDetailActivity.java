@@ -89,6 +89,7 @@ public class FaqDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_faq_detail);
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
+        AppUtils.createLoadDailog(this);
         Log.v("wwwwwwww", "!!!" + getIntent().getStringExtra("id"));
         loadDetail(getIntent().getStringExtra("id"));
     }
@@ -109,6 +110,7 @@ public class FaqDetailActivity extends BaseActivity {
                 switch (msg.what) {
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
+                        AppUtils.dissmissLoadDailog(activity);
                         FaqDetailBean faqDetailBean = (FaqDetailBean) msg.obj;
                         initView(faqDetailBean);
                         break;
