@@ -1,77 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
+    android:orientation="vertical"
     tools:context="com.mango.leo.dcom.DcomActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginLeft="24dp"
-        app:srcCompat="@drawable/screen" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/screen" />
 
-    <ImageView
-        android:id="@+id/event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/event" />
+        <ImageView
+            android:id="@+id/event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/event" />
 
-    <ImageView
-        android:id="@+id/faq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/event"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/faq" />
+        <ImageView
+            android:id="@+id/faq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/event"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/faq" />
 
-    <ImageView
-        android:id="@+id/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignTop="@+id/faq"
-        app:srcCompat="@drawable/change" />
+        <ImageView
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignTop="@+id/faq"
+            android:src="@drawable/change" />
+    </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/scan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        app:srcCompat="@drawable/scan"
-        android:layout_above="@+id/rotor"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/rotor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/scan"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/scan"
-        android:layout_marginBottom="30dp"
-        app:srcCompat="@drawable/rotor" />
+        <ImageView
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rotor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/scan" />
 
-    <ImageView
-        android:id="@+id/mine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/scan"
-        android:layout_marginBottom="30dp"
-        android:layout_alignRight="@+id/scan"
-        android:layout_alignTop="@+id/rotor"
-        app:srcCompat="@drawable/mine" />
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/rotor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/scan"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/scan"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/rotor" />
+
+        <ImageView
+            android:id="@+id/mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/scan"
+            android:layout_alignRight="@+id/scan"
+            android:layout_alignTop="@+id/rotor"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/mine" />
+    </RelativeLayout>
+
+</LinearLayout>
