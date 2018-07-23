@@ -43,6 +43,7 @@
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView1"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -527,7 +528,8 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardView2"
+            android:id="@+id/cardView5"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -703,7 +705,5 @@
                     android:textSize="@dimen/sencond_textSize" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-
-
     </LinearLayout>
 </ScrollView>

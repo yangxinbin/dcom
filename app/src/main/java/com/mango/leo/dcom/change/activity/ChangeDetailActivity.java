@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -87,12 +85,16 @@ public class ChangeDetailActivity extends BaseActivity {
     RoundImageView imageViewP1;
     @Bind(R.id.t_general)
     TextView tGeneral;
-/*    @Bind(R.id.imageView_c)
-    RoundImageView imageViewC;
-    @Bind(R.id.solution)
-    LinearLayout solution;
-    @Bind(R.id.back_solution)
-    LinearLayout backSolution;*/
+    @Bind(R.id.cardView1)
+    CardView cardView1;
+    @Bind(R.id.cardView5)
+    CardView cardView5;
+    /*    @Bind(R.id.imageView_c)
+        RoundImageView imageViewC;
+        @Bind(R.id.solution)
+        LinearLayout solution;
+        @Bind(R.id.back_solution)
+        LinearLayout backSolution;*/
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter1, tagAdapter2, tagAdapter3, tagAdapter4;
 
@@ -125,6 +127,7 @@ public class ChangeDetailActivity extends BaseActivity {
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
                         AppUtils.dissmissLoadDailog(activity);
+                        cardView1.setVisibility(View.VISIBLE);
                         ChangeDetailBean changeDetailBean = (ChangeDetailBean) msg.obj;
                         initView(changeDetailBean);
                         break;

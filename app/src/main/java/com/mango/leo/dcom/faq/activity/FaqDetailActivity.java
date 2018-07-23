@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -80,8 +81,12 @@ public class FaqDetailActivity extends BaseActivity {
     TextView tSuggestion;
     @Bind(R.id.t_general)
     TextView tGeneral;
+    @Bind(R.id.cardView1)
+    CardView cardView1;
+    @Bind(R.id.cardView3)
+    CardView cardView3;
     private SharedPreferences sharedPreferences;
-    private TagAdapter tagAdapter1,tagAdapter2,tagAdapter3;
+    private TagAdapter tagAdapter1, tagAdapter2, tagAdapter3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,8 @@ public class FaqDetailActivity extends BaseActivity {
         Log.v("wwwwwwww", "!!!" + getIntent().getStringExtra("id"));
         loadDetail(getIntent().getStringExtra("id"));
     }
-    private final FaqDetailActivity.MyHandler mHandler = new FaqDetailActivity.MyHandler(this);
+
+    private final MyHandler mHandler = new MyHandler(this);
 
     private class MyHandler extends Handler {
         private final WeakReference<FaqDetailActivity> mActivity;
@@ -111,6 +117,7 @@ public class FaqDetailActivity extends BaseActivity {
                     case 0:
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
                         AppUtils.dissmissLoadDailog(activity);
+                        cardView1.setVisibility(View.VISIBLE);
                         FaqDetailBean faqDetailBean = (FaqDetailBean) msg.obj;
                         initView(faqDetailBean);
                         break;
@@ -123,6 +130,7 @@ public class FaqDetailActivity extends BaseActivity {
             }
         }
     }
+
     private void initView(FaqDetailBean faqDetailBean) {
         if (faqDetailBean == null)
             return;
@@ -131,10 +139,10 @@ public class FaqDetailActivity extends BaseActivity {
         tStartTime.setText(DateUtil.getDateToString(faqDetailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
         tOverTime.setText(DateUtil.getDateToString(faqDetailBean.getDeadline(), "yyyy-MM-dd HH:mm:ss") + "");
         tC.setText(faqDetailBean.getCreatedBy().getRealName() + "");
-        tFrom.setText(faqDetailBean.getOrigin()+"");
-        tType.setText(faqDetailBean.getClassification()+"");
-        tState.setText(faqDetailBean.getStage()+"");
-        tPriority.setText(faqDetailBean.getPriority()+"");
+        tFrom.setText(faqDetailBean.getOrigin() + "");
+        tType.setText(faqDetailBean.getClassification() + "");
+        tState.setText(faqDetailBean.getStage() + "");
+        tPriority.setText(faqDetailBean.getPriority() + "");
 
         tagAdapter1 = new TagAdapter(this);
         flowEventLayout.setAdapter(tagAdapter1);
@@ -148,12 +156,13 @@ public class FaqDetailActivity extends BaseActivity {
         flowConfigLayout.setAdapter(tagAdapter3);
         tagAdapter3.onlyAddAll(faqDetailBean.getAssetConfigSNs());
 
-        tContent.setText(faqDetailBean.getDescription()+"");
-        if (faqDetailBean.getAttachments() != null && faqDetailBean.getAttachments().get(0) != null){
+        tContent.setText(faqDetailBean.getDescription() + "");
+        if (faqDetailBean.getAttachments() != null && faqDetailBean.getAttachments().get(0) != null) {
             imageViewP.setVisibility(View.VISIBLE);
             Glide.with(this).load("http://dcom.hopesen.com.cn" + faqDetailBean.getAttachments().get(0).getUrl()).into(imageViewP);
         }
     }
+
     private void loadDetail(String id) {
         Log.v("wwwwwwww", "" + Urls.HOST_QUERY_PROBLEM + "?problemId=" + id + "&token=" + sharedPreferences.getString("token", ""));
         HttpUtils.doGet(Urls.HOST_QUERY_PROBLEM + "?problemId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
@@ -177,6 +186,7 @@ public class FaqDetailActivity extends BaseActivity {
             }
         });
     }
+
     @OnClick(R.id.imageView_back)
     public void onViewClicked() {
         Intent intent = new Intent(this, FaqActivity.class);
