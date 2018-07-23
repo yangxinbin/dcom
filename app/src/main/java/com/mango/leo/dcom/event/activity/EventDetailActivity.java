@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,13 +34,10 @@ import com.mango.leo.dcom.change.adapter.MethodAdapter;
 import com.mango.leo.dcom.change.bean.MethodBeans;
 import com.mango.leo.dcom.event.adapter.MeasureAdapter;
 import com.mango.leo.dcom.event.bean.EventDetailBean;
-import com.mango.leo.dcom.event.bean.ListEventBean;
 import com.mango.leo.dcom.event.bean.MeasureBeans;
 import com.mango.leo.dcom.event.bean.PeopleBean;
 import com.mango.leo.dcom.event.bean.TeamBean;
 import com.mango.leo.dcom.event.util.EventJsonUtils;
-import com.mango.leo.dcom.faq.bean.ListFaqBean;
-import com.mango.leo.dcom.faq.util.FaqJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
 import com.mango.leo.dcom.util.DateUtil;
 import com.mango.leo.dcom.util.HttpUtils;
@@ -49,10 +45,6 @@ import com.mango.leo.dcom.util.RoundImageView;
 import com.mango.leo.dcom.util.Urls;
 import com.mango.leo.dcom.util.flowview.FlowTagLayout;
 import com.mango.leo.dcom.util.flowview.TagAdapter;
-import com.mango.leo.dcom.util.relate.ChangeChooseBean;
-import com.mango.leo.dcom.util.relate.ConfigChooseBean;
-import com.mango.leo.dcom.util.relate.EventChooseBean;
-import com.mango.leo.dcom.util.relate.ProblemChooseBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -162,6 +154,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     CardView cardView1;
     @Bind(R.id.b_commit)
     Button bCommit;
+    @Bind(R.id.title)
+    TextView title;
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter;
     private int eventId;
@@ -688,18 +682,24 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             return;
         if (eventDetailBean.getStage() == 0) {
             bCommit.setVisibility(View.VISIBLE);
+            title.setText("提交事件");
         } else if (eventDetailBean.getStage() == 1) {
             cardViewStage1.setVisibility(View.VISIBLE);
             bAssign.setVisibility(View.VISIBLE);
+            title.setText("指派事件");
         } else if (eventDetailBean.getStage() == 2) {
             bAccept.setVisibility(View.VISIBLE);
+            title.setText("接受事件");
         } else if (eventDetailBean.getStage() == 3) {
             cardViewStage3.setVisibility(View.VISIBLE);
             bDealwith.setVisibility(View.VISIBLE);
+            title.setText("处理事件");
         } else if (eventDetailBean.getStage() == 4) {
 //待处理查看
+            title.setText("预处理查看");
         } else if (eventDetailBean.getStage() == 5) {
             cardViewStage5.setVisibility(View.VISIBLE);
+            title.setText("查看事件");
         }
         eventId = eventDetailBean.getId();
         tTag.setText(eventDetailBean.getTag() + "");
