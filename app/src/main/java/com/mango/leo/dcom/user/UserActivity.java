@@ -65,7 +65,11 @@ public class UserActivity extends BaseActivity {
         editor = sharedPreferences.edit();
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-
+        if (!NetUtil.isNetConnect(this)) {
+            AppUtils.showToast(this, "请连接网络");
+        } else {
+            //loadLast();//其他人更改名字这边不能实时更新，需要重新登陆。
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -166,11 +170,13 @@ public class UserActivity extends BaseActivity {
             }
         }
     }
+
     private void exit() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         AppUtils.finishActivity();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
