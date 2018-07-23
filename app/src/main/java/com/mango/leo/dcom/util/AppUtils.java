@@ -2,6 +2,7 @@ package com.mango.leo.dcom.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,13 +11,18 @@ import android.graphics.Point;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.mango.leo.dcom.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,6 +44,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AppUtils {
 
 
+    private static Dialog dialog_load;
 
     /**
      * 隐藏输入法
@@ -208,5 +215,28 @@ public class AppUtils {
             activity.finish();
         }
         activityList.clear();
+    }
+    /**
+     * 加载中的动画
+     *
+     * @param context 上下文
+     * @return 将对话框对象直接返回
+     */
+    public static void createLoadDailog(final Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.alert_dialog_loading, null);
+        dialog_load = new Dialog(context, R.style.dialog);
+        dialog_load.setContentView(view);
+        Window window = dialog_load.getWindow();
+        //设置弹出窗口大小
+        window.setLayout(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        //设置显示位置
+        window.setGravity(Gravity.CENTER);
+        //设置动画效果
+        //window.setWindowAnimations(R.style.AnimBottom);
+        dialog_load.setCanceledOnTouchOutside(true);
+        dialog_load.show();
+    }
+    public static void dissmissLoadDailog(final Context context) {
+        dialog_load.dismiss();
     }
 }

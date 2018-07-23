@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -111,10 +112,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     TextView tTaskP;
     @Bind(R.id.t_c_time)
     TextView tCTime;
-    @Bind(R.id.load_layout)
-    LinearLayout loadLayout;
-    @Bind(R.id.cardView_stage4)
-    CardView cardViewStage4;
+    @Bind(R.id.cardView_stage5)
+    CardView cardViewStage5;
     @Bind(R.id.editText_description)
     EditText editTextDescription;
     @Bind(R.id.t_task_zu)
@@ -166,8 +165,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter;
     private int eventId;
-    private List<String> list1, list2,list3, listTeamId, listPeopleId;
-    private int currentPosition1 = -1, currentPosition2 = -1,currentPosition3 = -1;
+    private List<String> list1, list2, list3, listTeamId, listPeopleId;
+    private int currentPosition1 = -1, currentPosition2 = -1, currentPosition3 = -1;
     private ListAndGirdDownAdapter adapter;
     private Dialog dialog;
     private String string_zu;
@@ -191,10 +190,12 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         listTeamId = new ArrayList<>();
         listPeopleId = new ArrayList<>();
         ButterKnife.bind(this);
+        AppUtils.createLoadDailog(this);
         Log.v("wwwwwwww", "!!!" + getIntent().getStringExtra("id"));
         loadDetail(getIntent().getStringExtra("id"));
         EventBus.getDefault().register(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventMethodBeans(MethodBeans bean) {
         eMethod.removeAllViews();
@@ -214,6 +215,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         recyclerView.setAdapter(adapter1);
         adapter1.setOnMethodClickListener(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventMeasureBeans(MeasureBeans bean) {
         eMeasure.removeAllViews();
@@ -233,6 +235,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         recyclerView.setAdapter(adapter2);
         adapter2.setOnMeasureClickListener(this);
     }
+
     private void loadDetail(String id) {
         Log.v("wwwwwwww", "" + Urls.HOST_QUERY_EVENT + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""));
         HttpUtils.doGet(Urls.HOST_QUERY_EVENT + "?eventId=" + id + "&token=" + sharedPreferences.getString("token", ""), new Callback() {
@@ -346,7 +349,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        AppUtils.showToast(getBaseContext(), "指派失败");
+                        AppUtils.showToast(getBaseContext(), "事件处理失败");
                     }
                 });
             }
@@ -358,7 +361,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                         @Override
                         public void run() {
                             JumpToList();
-                            AppUtils.showToast(getBaseContext(), "指派成功");
+                            AppUtils.showToast(getBaseContext(), "事件处理成功");
                         }
                     });
                 } else {
@@ -366,13 +369,14 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            AppUtils.showToast(getBaseContext(), "指派失败");
+                            AppUtils.showToast(getBaseContext(), "事件处理失败");
                         }
                     });
                 }
             }
         });
     }
+
     public String buildArrayJson_Method(List<String> list1) {
         JSONArray json = new JSONArray();
         try {
@@ -387,9 +391,10 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             e.printStackTrace();
         }
         //把每个数据当作一对象添加到数组里
-        Log.v("uuuuuuuu","-m---"+json.toString());
+        Log.v("uuuuuuuu", "-m---" + json.toString());
         return json.toString();
     }
+
     public String buildArrayJson_Measure(List<String> list1) {
         JSONArray json = new JSONArray();
         try {
@@ -404,9 +409,10 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             e.printStackTrace();
         }
         //把每个数据当作一对象添加到数组里
-        Log.v("uuuuuuuu","-m---"+json.toString());
+        Log.v("uuuuuuuu", "-m---" + json.toString());
         return json.toString();
     }
+
     private void assignEvent() {
         final HashMap<String, String> mapParams = new HashMap<String, String>();
         mapParams.clear();
@@ -492,7 +498,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         window.setGravity(Gravity.BOTTOM);
         //设置动画效果
         window.setWindowAnimations(R.style.AnimBottom);
-        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
 
@@ -634,7 +640,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                         //AppUtils.showToast(getBaseContext(), "搜索成功");
                         EventDetailBean eventDetailBean = (EventDetailBean) msg.obj;
                         initView(eventDetailBean);
-                        loadLayout.setVisibility(View.GONE);
+                        AppUtils.dissmissLoadDailog(activity);
                         cardView1.setVisibility(View.VISIBLE);
                         break;
                     case 1:
@@ -691,9 +697,9 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             cardViewStage3.setVisibility(View.VISIBLE);
             bDealwith.setVisibility(View.VISIBLE);
         } else if (eventDetailBean.getStage() == 4) {
-
+//待处理查看
         } else if (eventDetailBean.getStage() == 5) {
-
+            cardViewStage5.setVisibility(View.VISIBLE);
         }
         eventId = eventDetailBean.getId();
         tTag.setText(eventDetailBean.getTag() + "");
@@ -739,10 +745,12 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         startActivity(intent);
         finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
         EventBus.getDefault().unregister(this);
     }
+
 }

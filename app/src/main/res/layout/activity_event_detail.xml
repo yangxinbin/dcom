@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/manage_bg"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -39,37 +40,16 @@
                 android:layout_marginStart="15dp"
                 android:src="@drawable/back" />
         </RelativeLayout>
-        <LinearLayout
-            android:layout_marginBottom="80dp"
-            android:id="@+id/load_layout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="0dp">
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:indeterminateDrawable="@drawable/anim_loading" />
-
-            <TextView
-                android:id="@+id/tv_load"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="加载中..." />
-        </LinearLayout>
-
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView1"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="gone"
             card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
@@ -416,7 +396,7 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardView_stage4"
+            android:id="@+id/cardView_stage5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -531,7 +511,6 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:visibility="gone"
             android:id="@+id/cardView_stage1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -540,6 +519,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="gone"
             card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
@@ -670,46 +650,59 @@
                 </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:visibility="gone"
             android:id="@+id/cardView_stage3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
             card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
             tools:layout_editor_absoluteX="8dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/textView577"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="任务描述："
                     android:layout_marginLeft="8dp"
+                    android:text="任务描述："
                     android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/t_task_description3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
                     android:text="null"
                     android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageView708"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -735,15 +728,26 @@
                     android:id="@+id/editText_event_cause"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@null"
                     android:gravity="top"
                     android:hint="请描述..."
-                    android:layout_marginBottom="5dp"
                     android:inputType="textMultiLine"
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/sencond_textSize" />
+
+                <ImageView
+                    android:id="@+id/imageView7888"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -764,11 +768,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/jia" />
-
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:id="@+id/e_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
                 <ImageView
-                    android:id="@+id/imageView708"
+                    android:id="@+id/imageView7088"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
@@ -777,11 +787,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/blue_line" />
 
-                <LinearLayout
-                    android:id="@+id/e_method"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -805,8 +810,14 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/e_measure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
                 <ImageView
-                    android:id="@+id/imageView7088"
+                    android:id="@+id/imageView7988"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
@@ -815,11 +826,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/blue_line" />
 
-                <LinearLayout
-                    android:id="@+id/e_measure"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -850,15 +856,26 @@
                     android:id="@+id/editText_method_check"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@null"
                     android:gravity="top"
                     android:hint="请描述..."
-                    android:layout_marginBottom="5dp"
                     android:inputType="textMultiLine"
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/sencond_textSize" />
+
+                <ImageView
+                    android:id="@+id/imageView7188"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_line" />
+
                 <LinearLayout
                     android:id="@+id/stage3"
                     android:layout_width="match_parent"
@@ -893,42 +910,53 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <Button
-            android:visibility="gone"
             android:id="@+id/b_commit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/button_blue_background"
-            android:textSize="@dimen/textSize"
             android:text="提交"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <Button
-            android:visibility="gone"
             android:id="@+id/b_assign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/button_blue_background"
             android:text="确认指派"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <Button
-            android:visibility="gone"
             android:id="@+id/b_accept"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/button_blue_background"
             android:text="接受任务"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <Button
-            android:visibility="gone"
             android:id="@+id/b_dealwith"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/button_blue_background"
             android:text="提交处理信息"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

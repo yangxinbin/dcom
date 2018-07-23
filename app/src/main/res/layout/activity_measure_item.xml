@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="请输入方案描述"
+            android:hint="请输入预防措施"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
             android:padding="8dp"
