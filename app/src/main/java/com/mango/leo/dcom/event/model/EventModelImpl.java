@@ -78,8 +78,7 @@ public class EventModelImpl implements EventModel {
                         listener.onSuccess(beanList);
                         //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
-                        Log.e("yyyyy", "Exception = " + e);
-                        listener.onSuccessMes("请求失败");
+                        //listener.onSuccessMes("请求失败");//java.lang.IllegalStateException: Not a JSON Object: null
                     }
                 }
             });

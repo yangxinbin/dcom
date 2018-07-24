@@ -151,6 +151,10 @@ class MyEventFragment extends Fragment implements EventView {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (eventBeans == null || eventBeans.size() == 0) {
+                    AppUtils.showToast(getActivity(), "数据全部加载完毕");
+                    return;
+                }
                 if (mData == null && mDataAll == null) {
                     mData = new ArrayList<ListEventBean>();
                     mDataAll = new ArrayList<ListEventBean>();
@@ -166,6 +170,7 @@ class MyEventFragment extends Fragment implements EventView {
                     Log.v("zzzzzzzzz", "----4---------" + mData.size());
                     mAdapter.setmDate(mData);
                 } else {
+                    Log.v("zzzzzzzzz", "---- mDataAll.size()---------" + mDataAll.size());
                     if (mDataAll != null && mDataAll.size() != 0) {
                         //加载更多
                         int i;
@@ -175,8 +180,6 @@ class MyEventFragment extends Fragment implements EventView {
                             }
                             mAdapter.addItem(mDataAll.get(i));//addItem里面记得要notifyDataSetChanged 否则第一次加载不会显示数据
                         }
-                    }else {
-                        AppUtils.showToast(getActivity(), "数据全部加载完毕");
                     }
                 }
             }
