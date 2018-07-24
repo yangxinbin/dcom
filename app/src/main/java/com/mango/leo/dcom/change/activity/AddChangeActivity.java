@@ -207,6 +207,7 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
     private MethodAdapter adapter1;
     private RevertBeans revertBean;
     private RevertAdapter adapter2;
+    private StringBuffer stringBuffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,18 +217,13 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         changePresenter = new ChangePresenterImpl(this);
+        initTag();
         initView();
         initDateFromWeb();
         EventBus.getDefault().register(this);
     }
 
     private void initView() {
-        StringBuffer stringBuffer = new StringBuffer();
-        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
-        stringBuffer.append(s);
-        for (int i = 0; i < 3; i++) {
-            stringBuffer.append((char) (Math.random() * 26 + 'A'));
-        }
         editTextChangeFlag.setText(stringBuffer.toString());
         changeBean.setTag(stringBuffer.toString());
         changeBean.setTitle(editTextChangeTitle.getText().toString());
@@ -240,7 +236,14 @@ public class AddChangeActivity extends BaseActivity implements ChangeView, Adapt
         changeBean.setPlanBSolutions(revertBean);
         changeBean.setImpactScope(editTextChangeEffect.getText().toString());
     }
-
+    private void initTag() {
+        stringBuffer = new StringBuffer();
+        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
+        stringBuffer.append(s);
+        for (int i = 0; i < 3; i++) {
+            stringBuffer.append((char) (Math.random() * 26 + 'A'));
+        }
+    }
     private void initDateFromWeb() {
         list1 = new ArrayList<>();
         //list2 = new ArrayList<>();

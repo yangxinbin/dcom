@@ -167,6 +167,7 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
     private static final int OUTPUT_X = 480;
     private static final int OUTPUT_Y = 380;
     private String TAG = "AddFaqActivity";
+    private StringBuffer stringBuffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +181,7 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         faqPresenter = new FaqPresenterImpl(this);
+        initTag();
         initView();
         initDateFromWeb();
         EventBus.getDefault().register(this);
@@ -245,12 +247,6 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
     }
 
     private void initView() {
-        StringBuffer stringBuffer = new StringBuffer();
-        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
-        stringBuffer.append(s);
-        for (int i = 0; i < 3; i++) {
-            stringBuffer.append((char) (Math.random() * 26 + 'A'));
-        }
         editTextFaqFlag.setText(stringBuffer.toString());
         faqBean.setTag(stringBuffer.toString());
         faqBean.setTitle(editTextFaqTitle.getText().toString());
@@ -258,7 +254,14 @@ public class AddFaqActivity extends BaseActivity implements FaqView, AdapterView
         faqBean.setDeadline(String.valueOf(DateUtil.getStringToDate(textViewFaqOvertime.getText().toString(), "yyyy-MM-dd HH:mm")));
         faqBean.setDescription(editTextDescription.getText().toString());
     }
-
+    private void initTag() {
+        stringBuffer = new StringBuffer();
+        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
+        stringBuffer.append(s);
+        for (int i = 0; i < 3; i++) {
+            stringBuffer.append((char) (Math.random() * 26 + 'A'));
+        }
+    }
     private void initDatePicker() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());

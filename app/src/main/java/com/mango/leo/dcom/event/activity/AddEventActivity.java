@@ -154,6 +154,7 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
     private TagAdapter tagAdapter;
     private ConfigChooseBean bean1 = new ConfigChooseBean();
     private boolean flag = true;
+    private StringBuffer stringBuffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +168,7 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
         sharedPreferences = getSharedPreferences("DCOM", MODE_PRIVATE);
         ButterKnife.bind(this);
         eventPresenter = new EventPresenterImpl(this);
+        initTag();
         initView();
         initDateFromWeb();
         EventBus.getDefault().register(this);
@@ -259,12 +261,6 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
     }
 
     private void initView() {
-        StringBuffer stringBuffer = new StringBuffer();
-        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
-        stringBuffer.append(s);
-        for (int i = 0; i < 3; i++) {
-            stringBuffer.append((char) (Math.random() * 26 + 'A'));
-        }
         editTextEventFlag.setText(stringBuffer.toString());
         eventBean.setTag(stringBuffer.toString());
         editTextEventPeople.setText(sharedPreferences.getString("realname", ""));
@@ -274,6 +270,15 @@ public class AddEventActivity extends BaseActivity implements EventView, Adapter
         eventBean.setComplaintBy(editTextEventPeople.getText().toString());
         eventBean.setEventScope(editTextEventRange.getText().toString());
         eventBean.setDescription(editTextDescription.getText().toString());
+    }
+
+    private void initTag() {
+        stringBuffer = new StringBuffer();
+        String s = DateUtil.getDateToString(System.currentTimeMillis(), "yyyyMMddHHmm").substring(2, 12);
+        stringBuffer.append(s);
+        for (int i = 0; i < 3; i++) {
+            stringBuffer.append((char) (Math.random() * 26 + 'A'));
+        }
     }
 
     private void initDatePicker() {
