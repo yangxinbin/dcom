@@ -68,7 +68,7 @@ public class EventPresenterImpl implements EventPresenter, OnEventListener {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
             case -1:
-                sburl.append(Urls.HOST_DRAFT);
+                sburl.append(Urls.HOST_DRAFTEVENT);
                 break;
             case 0:
                 sburl.append(Urls.HOST_MYEVENT);

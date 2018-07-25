@@ -52,7 +52,7 @@ public class FaqActivity extends BaseActivity {
 
     private void initDatas() {
         //  mDatas = new ArrayList<String>(Arrays.asList("       我的事件       ", "       全部事件       "));
-        mDatas = new ArrayList<String>(Arrays.asList("我的问题", "全部问题"));
+        mDatas = new ArrayList<String>(Arrays.asList("草稿箱","我的问题", "全部问题"));
 
     }
 
@@ -60,6 +60,7 @@ public class FaqActivity extends BaseActivity {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         ViewPageAdapter vp = new ViewPageAdapter(getSupportFragmentManager(), mfragments, mDatas);
         tabLayout.setupWithViewPager(viewPager);
+        mfragments.add(new DraftFaqFragment());
         mfragments.add(new MyFaqFragment());
         mfragments.add(new AllFaqFragment());
         viewPager.setAdapter(vp);
@@ -77,7 +78,7 @@ public class FaqActivity extends BaseActivity {
                     //拿到tabLayout的mTabStrip属性
                     LinearLayout mTabStrip = (LinearLayout) tabLayout.getChildAt(0);
 
-                    int dp50 = dip2px(tabLayout.getContext(), 50);
+                    int dp20 = dip2px(tabLayout.getContext(), 20);
 
                     for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                         View tabView = mTabStrip.getChildAt(i);
@@ -101,8 +102,8 @@ public class FaqActivity extends BaseActivity {
                         //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
                         params.width = width;
-                        params.leftMargin = dp50;
-                        params.rightMargin = dp50;
+                        params.leftMargin = dp20;
+                        params.rightMargin = dp20;
                         tabView.setLayoutParams(params);
 
                         tabView.invalidate();

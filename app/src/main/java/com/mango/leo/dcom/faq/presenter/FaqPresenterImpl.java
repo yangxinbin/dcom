@@ -42,6 +42,8 @@ public class FaqPresenterImpl implements FaqPresenter, OnFaqListener {
             url = getUrl(type, context);
         } else if (type == 3) {
             url = getUrl(type, context);
+        } else if (type == -1) {
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         }
         Log.v("pppppppppppp", "" + url);
         faqModel.visitProjects(context, type, faqBean, url, this);
@@ -65,6 +67,9 @@ public class FaqPresenterImpl implements FaqPresenter, OnFaqListener {
     private String getUrl(int type, Context context) {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
+            case -1:
+                sburl.append(Urls.HOST_DRAFTPROBLEM);
+                break;
             case 0:
                 sburl.append(Urls.HOST_MYPROBLEM);
                 break;

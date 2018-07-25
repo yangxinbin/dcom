@@ -32,6 +32,32 @@ public class FaqModelImpl implements FaqModel {
     @Override
     public void visitProjects(final Context context, final int type, FaqBean faqBean, String url, final OnFaqListener listener) {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
+        if (type == -1) {//草稿箱
+            //Map<String, String> mapParams = new HashMap<>();
+            //mapParams.put("token", sharedPreferences.getString("token", ""));
+            //mapParams.put("pageNum", String.valueOf(page));
+            //mapParams.put("stage", "1");
+
+            HttpUtils.doGet(url, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    listener.onFailure("FAILURE", e);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try {
+                        //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
+                        List<ListFaqBean> beanList = FaqJsonUtils.readListFaqBean(response.body().string(), "list");//data是json字段获得data的值即对象数组
+                        listener.onSuccess(beanList);
+                        //listener.onSuccessMes("请求成功");
+                    } catch (Exception e) {
+                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
+                        listener.onSuccessMes("请求失败");
+                    }
+                }
+            });
+        }
         if (type == 0) {//我的事件
             //Map<String, String> mapParams = new HashMap<>();
             //mapParams.put("token", sharedPreferences.getString("token", ""));

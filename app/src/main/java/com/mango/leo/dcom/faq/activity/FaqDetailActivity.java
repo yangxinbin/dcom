@@ -9,12 +9,14 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
+import com.mango.leo.dcom.event.activity.EventActivity;
 import com.mango.leo.dcom.faq.bean.FaqDetailBean;
 import com.mango.leo.dcom.faq.util.FaqJsonUtils;
 import com.mango.leo.dcom.util.AppUtils;
@@ -27,6 +29,7 @@ import com.mango.leo.dcom.util.flowview.TagAdapter;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,8 +40,6 @@ import okhttp3.Response;
 
 public class FaqDetailActivity extends BaseActivity {
 
-    @Bind(R.id.imageView_back)
-    ImageView imageViewBack;
     @Bind(R.id.t_tag)
     TextView tTag;
     @Bind(R.id.t_t)
@@ -85,8 +86,13 @@ public class FaqDetailActivity extends BaseActivity {
     CardView cardView1;
     @Bind(R.id.cardView3)
     CardView cardView3;
+    @Bind(R.id.imageView_back)
+    ImageView imageViewBack;
+    @Bind(R.id.b_commit)
+    Button bCommit;
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter1, tagAdapter2, tagAdapter3;
+    private int problemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +107,61 @@ public class FaqDetailActivity extends BaseActivity {
 
     private final MyHandler mHandler = new MyHandler(this);
 
+    @OnClick({R.id.imageView_back, R.id.b_commit})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.imageView_back:
+                JumpToList();
+                break;
+            case R.id.b_commit:
+                commitProblem();
+                break;
+        }
+    }
+
+    private void commitProblem() {
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
+        mapParams.clear();
+        mapParams.put("problemId", problemId + "");//待定
+        mapParams.put("token", sharedPreferences.getString("token", ""));
+        HttpUtils.doPost(Urls.HOST + "/api/secure/event/apply", mapParams, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppUtils.showToast(getBaseContext(), "提交失败");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (String.valueOf(response.code()).startsWith("2")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            JumpToList();
+                            AppUtils.showToast(getBaseContext(), "提交成功");
+                        }
+                    });
+                } else {
+                    Log.v("doPostAll", response.body().string() + "^^^^^onFailure^^^^^" + response.code());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppUtils.showToast(getBaseContext(), "提交失败");
+                        }
+                    });
+                }
+            }
+        });
+    }
+    private void JumpToList() {
+        Intent intent = new Intent(this, FaqActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private class MyHandler extends Handler {
         private final WeakReference<FaqDetailActivity> mActivity;
 
@@ -134,6 +195,7 @@ public class FaqDetailActivity extends BaseActivity {
     private void initView(FaqDetailBean faqDetailBean) {
         if (faqDetailBean == null)
             return;
+        problemId = faqDetailBean.getId();
         tTag.setText(faqDetailBean.getTag() + "");
         tT.setText(faqDetailBean.getTitle() + "");
         tStartTime.setText(DateUtil.getDateToString(faqDetailBean.getOccurredOn(), "yyyy-MM-dd HH:mm:ss") + "");
@@ -187,12 +249,6 @@ public class FaqDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.imageView_back)
-    public void onViewClicked() {
-        Intent intent = new Intent(this, FaqActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

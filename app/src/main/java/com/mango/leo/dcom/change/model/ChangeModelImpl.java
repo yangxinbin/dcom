@@ -38,6 +38,32 @@ public class ChangeModelImpl implements ChangeModel {
     @Override
     public void visitProjects(final Context context, final int type, ChangeBean changeBean, String url, final OnChangeListener listener) {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
+        if (type == -1) {//我的事件
+            //Map<String, String> mapParams = new HashMap<>();
+            //mapParams.put("token", sharedPreferences.getString("token", ""));
+            //mapParams.put("pageNum", String.valueOf(page));
+            //mapParams.put("stage", "1");
+
+            HttpUtils.doGet(url, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    listener.onFailure("FAILURE", e);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try {
+                        //Log.v("yyyyyyyyy","*****onResponse******"+response.body().string());
+                        //response.body().string() 只能用一次  java.lang.IllegalStateException异常, 该异常表示，当前对客户端的响应已经结束，不能在响应已经结束（或说消亡）后再向客户端（实际上是缓冲区）输出任何内容。
+                        List<ListChangeBean> beanList = ChangeJsonUtils.readJsonListChangeBean(response.body().string(), "list");//data是json字段获得data的值即对象数组
+                        listener.onSuccess(beanList);
+                        //listener.onSuccessMes("请求成功");
+                    } catch (Exception e) {
+                        listener.onSuccessMes("请求失败");
+                    }
+                }
+            });
+        }
         if (type == 0) {//我的事件
             //Map<String, String> mapParams = new HashMap<>();
             //mapParams.put("token", sharedPreferences.getString("token", ""));

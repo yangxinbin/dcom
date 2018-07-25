@@ -14,11 +14,13 @@ public class Urls {
     public static final String ASSET = "/api/secure/inspection/asset";
     public static final String SAVEPHOTO = "/api/secure/inspection/savePhoto";
     public static final String INSPECT = "/api/secure/inspection/inspect";
-    public static final String DRAFT = "/api/secure/event/list/draft";
+    public static final String DRAFTEVENT = "/api/secure/event/list/draft";
     public static final String MYEVENT = "/api/secure/event/list/my";
     public static final String ALLEVENT = "/api/secure/event/list/all";
+    public static final String DRAFTPROBLEM = "/api/secure/problem/list/draft";
     public static final String MYPROBLEM = "/api/secure/problem/list/my";
     public static final String ALLPROBLEM = "/api/secure/problem/list/all";
+    public static final String DRAFTCHANGE = "/api/secure/change/list/draft";
     public static final String MYCHANGE = "/api/secure/change/list/my";
     public static final String ALLCHANGE = "/api/secure/change/list/all";
     public static final String CREATEEVENT = "/api/secure/event/generate";
@@ -37,11 +39,13 @@ public class Urls {
     public static final String HOST_SAVEPHOTO = HOST + SAVEPHOTO;
     public static final String HOST_INSPECT = HOST + INSPECT;
 
-    public static final String HOST_DRAFT = HOST + DRAFT;
+    public static final String HOST_DRAFTEVENT = HOST + DRAFTEVENT;
     public static final String HOST_MYEVENT = HOST + MYEVENT;
+    public static final String HOST_DRAFTPROBLEM = HOST + DRAFTPROBLEM;
     public static final String HOST_ALLEVENT = HOST + ALLEVENT;
     public static final String HOST_MYPROBLEM = HOST + MYPROBLEM;
     public static final String HOST_ALLPROBLEM = HOST + ALLPROBLEM;
+    public static final String HOST_DRAFTCHANGE = HOST + DRAFTCHANGE;
     public static final String HOST_MYCHANGE = HOST + MYCHANGE;
     public static final String HOST_ALLCHANGE = HOST + ALLCHANGE;
 

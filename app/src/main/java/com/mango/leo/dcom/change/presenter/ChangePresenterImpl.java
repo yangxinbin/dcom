@@ -43,6 +43,8 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
             url = getUrl(type, context);
         } else if (type == 3) {
             url = getUrl(type, context);
+        }else if (type == -1) {
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
         }
         Log.v("pppppppppppp", "" + url);
         changeModel.visitProjects(context, type, changeBean,url, this);
@@ -66,6 +68,9 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
     private String getUrl(int type, Context context) {
         StringBuffer sburl = new StringBuffer();
         switch (type) {
+            case -1:
+                sburl.append(Urls.HOST_DRAFTCHANGE);
+                break;
             case 0:
                 sburl.append(Urls.HOST_MYCHANGE);
                 break;
