@@ -124,7 +124,7 @@ public class FaqDetailActivity extends BaseActivity {
         mapParams.clear();
         mapParams.put("problemId", problemId + "");//待定
         mapParams.put("token", sharedPreferences.getString("token", ""));
-        HttpUtils.doPost(Urls.HOST + "/api/secure/event/apply", mapParams, new Callback() {
+        HttpUtils.doPost(Urls.HOST + "/api/secure/problem/apply", mapParams, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -195,6 +195,9 @@ public class FaqDetailActivity extends BaseActivity {
     private void initView(FaqDetailBean faqDetailBean) {
         if (faqDetailBean == null)
             return;
+        if (faqDetailBean.getStage() == 0) {
+            bCommit.setVisibility(View.VISIBLE);
+        }
         problemId = faqDetailBean.getId();
         tTag.setText(faqDetailBean.getTag() + "");
         tT.setText(faqDetailBean.getTitle() + "");

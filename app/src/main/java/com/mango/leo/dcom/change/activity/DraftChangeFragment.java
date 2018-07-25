@@ -46,9 +46,9 @@ public class DraftChangeFragment extends Fragment implements ChangeView {
     private LinearLayoutManager mLayoutManager;
     private SmartChangeAdapter adapter;
     private ArrayList<ListChangeBean> mData, mDataAll;
-    private int page = -1;
+    private int page = 0;
     private ChangePresenter changePresenter;
-    private final int TYPE = 0;
+    private final int TYPE = -1;
     private ChangeBean changeBean;
     private boolean isFirstEnter = true;
 

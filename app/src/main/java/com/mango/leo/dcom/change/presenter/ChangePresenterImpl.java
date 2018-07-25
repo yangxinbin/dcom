@@ -36,15 +36,15 @@ public class ChangePresenterImpl implements ChangePresenter, OnChangeListener {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
         String url = null;
         if (type == 0) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 1) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         } else if (type == 2) {
             url = getUrl(type, context);
         } else if (type == 3) {
             url = getUrl(type, context);
         }else if (type == -1) {
-            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&page=" + page;
+            url = getUrl(type, context) + "?token=" + sharedPreferences.getString("token", "") + "&pageNum=" + page;
         }
         Log.v("pppppppppppp", "" + url);
         changeModel.visitProjects(context, type, changeBean,url, this);

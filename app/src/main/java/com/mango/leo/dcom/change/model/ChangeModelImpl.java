@@ -38,7 +38,7 @@ public class ChangeModelImpl implements ChangeModel {
     @Override
     public void visitProjects(final Context context, final int type, ChangeBean changeBean, String url, final OnChangeListener listener) {
         sharedPreferences = context.getSharedPreferences("DCOM", MODE_PRIVATE);
-        if (type == -1) {//我的事件
+        if (type == -1) {//草稿箱
             //Map<String, String> mapParams = new HashMap<>();
             //mapParams.put("token", sharedPreferences.getString("token", ""));
             //mapParams.put("pageNum", String.valueOf(page));
@@ -57,8 +57,11 @@ public class ChangeModelImpl implements ChangeModel {
                         //response.body().string() 只能用一次  java.lang.IllegalStateException异常, 该异常表示，当前对客户端的响应已经结束，不能在响应已经结束（或说消亡）后再向客户端（实际上是缓冲区）输出任何内容。
                         List<ListChangeBean> beanList = ChangeJsonUtils.readJsonListChangeBean(response.body().string(), "list");//data是json字段获得data的值即对象数组
                         listener.onSuccess(beanList);
+                        Log.v("yyyyyyyyy",response.code()+"*****onResponse******"+beanList.size());
                         //listener.onSuccessMes("请求成功");
                     } catch (Exception e) {
+                       // Log.v("yyyyyyyyy",response.code()+"*****onResponse******"+response.body().string());
+                        Log.v("yyyyyyyyy",response.code()+"*****Exception******");
                         listener.onSuccessMes("请求失败");
                     }
                 }
@@ -198,7 +201,7 @@ public class ChangeModelImpl implements ChangeModel {
                     if (String.valueOf(response.code()).startsWith("2")) {
                         listener.onSuccessMes("SUCCESS");//异步请求
                     } else {
-                        Log.v("doPostAll", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
+                        Log.v("doPostAll1111", response.body().string() + "^^else^^^onFailure^^^^^" + response.code());
                         listener.onSuccessMes("FAILURE");
                     }
                 }
