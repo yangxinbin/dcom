@@ -728,8 +728,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         if (eventDetailBean == null)
             return;
         if (eventDetailBean.getStage() == 0) {
-        //    bCommit.setVisibility(View.VISIBLE);
-        //    title.setText("提交事件");
+            bCommit.setVisibility(View.VISIBLE);
+            title.setText("提交事件");
         } else if (eventDetailBean.getStage() == 1) {
         //    cardViewStage1.setVisibility(View.VISIBLE);
         //    bAssign.setVisibility(View.VISIBLE);

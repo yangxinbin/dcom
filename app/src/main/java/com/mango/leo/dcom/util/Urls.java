@@ -5,8 +5,8 @@ package com.mango.leo.dcom.util;
  */
 
 public class Urls {
-    //public static final String HOST = "http://192.168.1.120:8080/dcomapi";
-    public static final String HOST = "http://dcom.hopesen.com.cn/dcomapi";
+    public static final String HOST = "http://192.168.1.120:8080/dcomapi";
+    //public static final String HOST = "http://dcom.hopesen.com.cn/dcomapi";
     public static final String AUTH = "/api/auth/auth";
     public static final String LOGINOUT = "/api/auth/logout";
     public static final String CHANGEPASSWORD = "/api/secure/users/changePassword";
@@ -14,6 +14,7 @@ public class Urls {
     public static final String ASSET = "/api/secure/inspection/asset";
     public static final String SAVEPHOTO = "/api/secure/inspection/savePhoto";
     public static final String INSPECT = "/api/secure/inspection/inspect";
+    public static final String DRAFT = "/api/secure/event/list/draft";
     public static final String MYEVENT = "/api/secure/event/list/my";
     public static final String ALLEVENT = "/api/secure/event/list/all";
     public static final String MYPROBLEM = "/api/secure/problem/list/my";
@@ -36,6 +37,7 @@ public class Urls {
     public static final String HOST_SAVEPHOTO = HOST + SAVEPHOTO;
     public static final String HOST_INSPECT = HOST + INSPECT;
 
+    public static final String HOST_DRAFT = HOST + DRAFT;
     public static final String HOST_MYEVENT = HOST + MYEVENT;
     public static final String HOST_ALLEVENT = HOST + ALLEVENT;
     public static final String HOST_MYPROBLEM = HOST + MYPROBLEM;
