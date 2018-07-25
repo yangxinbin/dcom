@@ -156,6 +156,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     TextView tTaskTeam;
     @Bind(R.id.t_task_p)
     TextView tTaskP;
+    @Bind(R.id.b_nrelated)
+    Button bNrelated;
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter;
     private int eventId;
@@ -256,7 +258,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
 
     private final MyHandler mHandler = new MyHandler(this);
 
-    @OnClick({R.id.zu, R.id.ren, R.id.jia_method, R.id.jia_measure, R.id.stage3, R.id.b_assign, R.id.b_accept, R.id.b_dealwith, R.id.b_commit})
+    @OnClick({R.id.zu, R.id.ren, R.id.jia_method, R.id.jia_measure, R.id.stage3, R.id.b_assign, R.id.b_accept, R.id.b_dealwith, R.id.b_commit, R.id.b_nrelated})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -301,6 +303,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                 list3.add("已解决");
                 list3.add("待解决");
                 list3.add("等待批准");
+                list3.add("不相干");
                 if (list3 != null && list3.size() != 0) {
                     showPopupWindow(this, list3, 3);
                     adapter.setCheckItem(currentPosition3);
@@ -322,6 +325,9 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                 acceptEvent();
                 break;
             case R.id.b_dealwith:
+                dealWith();
+                break;
+            case R.id.b_nrelated:
                 dealWith();
                 break;
         }
@@ -416,8 +422,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         try {
             for (int i = 0; i < methodBeans.getMethodItems().size(); i++) {
                 JSONObject jsonObj = new JSONObject();//一定要new对象
-                jsonObj.put("step",i);
-                jsonObj.put("solution", methodBeans.getMethodItems().get(i).getDetail()+"");
+                jsonObj.put("step", i);
+                jsonObj.put("solution", methodBeans.getMethodItems().get(i).getDetail() + "");
                 json.put(i, jsonObj);
                 continue;
             }
@@ -598,6 +604,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                 currentPosition3 = position;
                 tTaskStage3.setText(list3.get(position));
                 tTaskStage3.setTextColor(getResources().getColor(R.color.white));
+                bNrelated.setVisibility(View.VISIBLE);
                 dialog.dismiss();
                 break;
         }
@@ -721,29 +728,29 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         if (eventDetailBean == null)
             return;
         if (eventDetailBean.getStage() == 0) {
-            bCommit.setVisibility(View.VISIBLE);
-            title.setText("提交事件");
+        //    bCommit.setVisibility(View.VISIBLE);
+        //    title.setText("提交事件");
         } else if (eventDetailBean.getStage() == 1) {
-            cardViewStage1.setVisibility(View.VISIBLE);
-            bAssign.setVisibility(View.VISIBLE);
-            title.setText("指派事件");
+        //    cardViewStage1.setVisibility(View.VISIBLE);
+        //    bAssign.setVisibility(View.VISIBLE);
+        //    title.setText("指派事件");
         } else if (eventDetailBean.getStage() == 2) {
-            cardView_assigne.setVisibility(View.VISIBLE);
-            bAccept.setVisibility(View.VISIBLE);
-            title.setText("接受事件");
+        //    cardView_assigne.setVisibility(View.VISIBLE);
+        //    bAccept.setVisibility(View.VISIBLE);
+        //    title.setText("接受事件");
         } else if (eventDetailBean.getStage() == 3) {
-            cardView_assigne.setVisibility(View.VISIBLE);
-            cardViewStage3.setVisibility(View.VISIBLE);
-            bDealwith.setVisibility(View.VISIBLE);
-            title.setText("处理事件");
+        //    cardView_assigne.setVisibility(View.VISIBLE);
+        //    cardViewStage3.setVisibility(View.VISIBLE);
+        //    bDealwith.setVisibility(View.VISIBLE);
+        //    title.setText("处理事件");
         } else if (eventDetailBean.getStage() == 4) {
 //待处理查看
-            cardView_assigne.setVisibility(View.VISIBLE);
-            title.setText("预处理查看");
+        //    cardView_assigne.setVisibility(View.VISIBLE);
+        //    title.setText("预处理查看");
         } else if (eventDetailBean.getStage() == 5) {
-            cardView_assigne.setVisibility(View.VISIBLE);
-            cardView_assigne.setVisibility(View.VISIBLE);
-            title.setText("查看事件");
+        //    cardView_assigne.setVisibility(View.VISIBLE);
+        //    cardView_assigne.setVisibility(View.VISIBLE);
+        //    title.setText("查看事件");
         }
         eventId = eventDetailBean.getId();
         tTag.setText(eventDetailBean.getTag() + "");
@@ -770,14 +777,14 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         }
         tTask.setText(eventDetailBean.getAssignedDesc());
         if (eventDetailBean.getAssignedTo() != null)
-        tTaskTeam.setText(eventDetailBean.getAssignedTo().getName());
+            tTaskTeam.setText(eventDetailBean.getAssignedTo().getName());
         if (eventDetailBean.getAssignedBy() != null)
-        tTaskP.setText(eventDetailBean.getAssignedBy().getRealName());
+            tTaskP.setText(eventDetailBean.getAssignedBy().getRealName());
         tTaskTime.setText(DateUtil.getDateToString(eventDetailBean.getAssignedOn(), "yyyy-MM-dd HH:mm:ss") + "");
 
-        editTextEventCause.setText(eventDetailBean.getEventCause()!=null?eventDetailBean.getEventCause():"");
-        editTextMethodCheck.setText(eventDetailBean.getSolutionReviews()!=null?eventDetailBean.getSolutionReviews():"");
-        tTaskStage3.setText(eventDetailBean.getStatus()!=null?eventDetailBean.getStatus():"请选择状态");
+        editTextEventCause.setText(eventDetailBean.getEventCause() != null ? eventDetailBean.getEventCause() : "");
+        editTextMethodCheck.setText(eventDetailBean.getSolutionReviews() != null ? eventDetailBean.getSolutionReviews() : "");
+        tTaskStage3.setText(eventDetailBean.getStatus() != null ? eventDetailBean.getStatus() : "请选择状态");
         if (eventDetailBean.getSolutions() != null)
             EventBus.getDefault().postSticky(eventDetailBean.getSolutions());
         if (eventDetailBean.getPreMeasures() != null)
