@@ -953,5 +953,16 @@
             android:textSize="@dimen/textSize"
             android:textStyle="bold"
             android:visibility="gone" />
+        <Button
+            android:id="@+id/b_nrelated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_blue_background"
+            android:text="不相干"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
