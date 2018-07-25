@@ -319,11 +319,51 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
                 }
                 break;
             case R.id.b_accept:
+                acceptEvent();
                 break;
             case R.id.b_dealwith:
                 dealWith();
                 break;
         }
+    }
+
+    private void acceptEvent() {
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
+        mapParams.clear();
+        mapParams.put("eventId", eventId + "");//待定
+        mapParams.put("token", sharedPreferences.getString("token", ""));
+        HttpUtils.doPost(Urls.HOST + "/api/secure/event/claim", mapParams, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppUtils.showToast(getBaseContext(), "接受失败");
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (String.valueOf(response.code()).startsWith("2")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            JumpToList();
+                            AppUtils.showToast(getBaseContext(), "接受成功");
+                        }
+                    });
+                } else {
+                    Log.v("doPostAll", response.body().string() + "^^^^^onFailure^^^^^" + response.code());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppUtils.showToast(getBaseContext(), "接受失败");
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void dealWith() {
