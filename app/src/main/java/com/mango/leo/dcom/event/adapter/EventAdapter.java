@@ -138,7 +138,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }else if (mData.get(pos).getList().get(pos % 20).getStage() == 3){
                     ((ItemViewHolder) holder).textView_stage.setText("处理中");
                 }else if (mData.get(pos).getList().get(pos % 20).getStage() == 4){
-                    ((ItemViewHolder) holder).textView_stage.setText("待处理");
+                    ((ItemViewHolder) holder).textView_stage.setText("已处理");
                 }else if (mData.get(pos).getList().get(pos % 20).getStage() == 5){
                     ((ItemViewHolder) holder).textView_stage.setText("关闭");
                 }

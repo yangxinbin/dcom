@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
 import com.mango.leo.dcom.base.BaseActivity;
-import com.mango.leo.dcom.change.bean.MethodBeans;
 import com.mango.leo.dcom.event.bean.MeasureBeans;
 import com.mango.leo.dcom.util.AppUtils;
 
@@ -33,10 +32,10 @@ public class MeasureItemActivity extends BaseActivity {
     ImageView imageViewBack;
     @Bind(R.id.save)
     TextView save;
-    @Bind(R.id.tv_which)
-    TextView tvWhich;
     @Bind(R.id.et_Measure)
     EditText etMeasure;
+    @Bind(R.id.et_pre_measure)
+    EditText etPreMeasure;
     private MeasureBeans measureBeans;
     private MeasureBeans.MeasureItem methodItem;
     private int position;
@@ -60,18 +59,18 @@ public class MeasureItemActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void eventMeasureBeans(MeasureBeans bean) {
         beans = bean.getMeasureItems();
-        Log.v("qqqqqqqqq", beans.size()+"==" + position);
-        tvWhich.setText("措施" + (position+1) + "：");
+        Log.v("qqqqqqqqq", beans.size() + "==" + position);
+        etPreMeasure.setText(bean.getMeasureItems().get(position).getMeasure());
         if (beans.size() == position) {
             return;//创建重新编辑
         }
         StringBuffer stringBufferL = new StringBuffer();
-        etMeasure.setText(bean.getMeasureItems().get(position).getDetail());
+        etMeasure.setText(bean.getMeasureItems().get(position).getMeasure());
     }
 
     private void initDate() {
-        methodItem.setStep(position+1);
-        methodItem.setDetail(etMeasure.getText().toString());
+        methodItem.setThreat(etPreMeasure.getText().toString());
+        methodItem.setMeasure(etMeasure.getText().toString());
         if (beans.size() == position) {
             beans.add(position, methodItem);//第几个修改第几个
         } else {
@@ -100,6 +99,7 @@ public class MeasureItemActivity extends BaseActivity {
                 break;
         }
     }
+
     public void hintKeyBoard() {
         //拿到InputMethodManager
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -112,6 +112,7 @@ public class MeasureItemActivity extends BaseActivity {
             }
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {

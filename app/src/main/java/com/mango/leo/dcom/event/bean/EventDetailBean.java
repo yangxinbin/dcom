@@ -9,38 +9,38 @@ import java.util.List;
 public class EventDetailBean {
 
     /**
-     * id : 78
+     * id : 98
      * tenantId : 42
-     * stage : 1
-     * level : 4
-     * tag : 1807191710QST
-     * title : IO
-     * origin : 问题监控
+     * stage : 4
+     * level : 3
+     * tag : 1807251355HIS
+     * title : oo
+     * origin : 用户报告
      * type : 服务请求
      * severity : 中
-     * scope : gdh
+     * scope : yy
      * contactPerson : null
-     * description : hdb
-     * status : new
-     * assignedDesc : null
-     * solutionReviews : null
-     * eventCause : null
-     * attachments : [{"fileName":"1531991495990","filePath":"/api/1531991495990.jpg","url":"/cdn/dcom/out/api/1531991495990.jpg","createdOn":1531991495990}]
-     * solutions : []
-     * preMeasures : []
-     * claimedOn : null
-     * createdOn : 1531991496000
-     * updatedOn : 1531991496000
-     * solutionOn : null
+     * description : pp
+     * status : fixed
+     * assignedDesc : kk
+     * solutionReviews : 213
+     * eventCause : 大
+     * attachments : [{"fileName":"1532498166154","filePath":"/api/1532498166153.jpg","url":"/cdn/dcom/out/api/1532498166153.jpg","createdOn":1532498166154}]
+     * solutions : null
+     * preMeasures : null
+     * claimedOn : 1532498377000
+     * createdOn : 1532498166000
+     * updatedOn : 1532498462000
+     * solutionOn : 1532498462000
      * reviewedOn : null
-     * assignedOn : null
-     * occurredOn : 1531991340000
-     * assignedBy : null
-     * assignedTo : null
-     * claimedBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
-     * createdBy : {"id":96,"tenantId":42,"realName":"Ali","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
+     * assignedOn : 1532498377000
+     * occurredOn : 1532498100000
+     * assignedBy : {"id":96,"tenantId":42,"realName":"mango1","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
+     * assignedTo : {"id":67,"name":"team A"}
+     * claimedBy : {"id":96,"tenantId":42,"realName":"mango1","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
+     * createdBy : {"id":96,"tenantId":42,"realName":"mango1","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * reviewedBy : null
-     * solutionBy : null
+     * solutionBy : {"id":96,"tenantId":42,"realName":"mango1","username":null,"token":null,"status":null,"roleName":null,"phone":null,"displayPicture":null}
      * assetConfigSNs : ["UI9090901","S8989","UI90909011"]
      * eventTickets : []
      * problemTickets : []
@@ -60,25 +60,25 @@ public class EventDetailBean {
     private Object contactPerson;
     private String description;
     private String status;
-    private Object assignedDesc;
-    private Object solutionReviews;
-    private Object eventCause;
-    private Object claimedOn;
+    private String assignedDesc;
+    private String solutionReviews;
+    private String eventCause;
+    private Object solutions;
+    private Object preMeasures;
+    private long claimedOn;
     private long createdOn;
     private long updatedOn;
-    private Object solutionOn;
+    private long solutionOn;
     private Object reviewedOn;
-    private Object assignedOn;
+    private long assignedOn;
     private long occurredOn;
-    private Object assignedBy;
-    private Object assignedTo;
+    private AssignedByBean assignedBy;
+    private AssignedToBean assignedTo;
     private ClaimedByBean claimedBy;
     private CreatedByBean createdBy;
     private Object reviewedBy;
-    private Object solutionBy;
+    private SolutionByBean solutionBy;
     private List<AttachmentsBean> attachments;
-    private List<?> solutions;
-    private List<?> preMeasures;
     private List<String> assetConfigSNs;
     private List<?> eventTickets;
     private List<?> problemTickets;
@@ -188,35 +188,51 @@ public class EventDetailBean {
         this.status = status;
     }
 
-    public Object getAssignedDesc() {
+    public String getAssignedDesc() {
         return assignedDesc;
     }
 
-    public void setAssignedDesc(Object assignedDesc) {
+    public void setAssignedDesc(String assignedDesc) {
         this.assignedDesc = assignedDesc;
     }
 
-    public Object getSolutionReviews() {
+    public String getSolutionReviews() {
         return solutionReviews;
     }
 
-    public void setSolutionReviews(Object solutionReviews) {
+    public void setSolutionReviews(String solutionReviews) {
         this.solutionReviews = solutionReviews;
     }
 
-    public Object getEventCause() {
+    public String getEventCause() {
         return eventCause;
     }
 
-    public void setEventCause(Object eventCause) {
+    public void setEventCause(String eventCause) {
         this.eventCause = eventCause;
     }
 
-    public Object getClaimedOn() {
+    public Object getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(Object solutions) {
+        this.solutions = solutions;
+    }
+
+    public Object getPreMeasures() {
+        return preMeasures;
+    }
+
+    public void setPreMeasures(Object preMeasures) {
+        this.preMeasures = preMeasures;
+    }
+
+    public long getClaimedOn() {
         return claimedOn;
     }
 
-    public void setClaimedOn(Object claimedOn) {
+    public void setClaimedOn(long claimedOn) {
         this.claimedOn = claimedOn;
     }
 
@@ -236,11 +252,11 @@ public class EventDetailBean {
         this.updatedOn = updatedOn;
     }
 
-    public Object getSolutionOn() {
+    public long getSolutionOn() {
         return solutionOn;
     }
 
-    public void setSolutionOn(Object solutionOn) {
+    public void setSolutionOn(long solutionOn) {
         this.solutionOn = solutionOn;
     }
 
@@ -252,11 +268,11 @@ public class EventDetailBean {
         this.reviewedOn = reviewedOn;
     }
 
-    public Object getAssignedOn() {
+    public long getAssignedOn() {
         return assignedOn;
     }
 
-    public void setAssignedOn(Object assignedOn) {
+    public void setAssignedOn(long assignedOn) {
         this.assignedOn = assignedOn;
     }
 
@@ -268,19 +284,19 @@ public class EventDetailBean {
         this.occurredOn = occurredOn;
     }
 
-    public Object getAssignedBy() {
+    public AssignedByBean getAssignedBy() {
         return assignedBy;
     }
 
-    public void setAssignedBy(Object assignedBy) {
+    public void setAssignedBy(AssignedByBean assignedBy) {
         this.assignedBy = assignedBy;
     }
 
-    public Object getAssignedTo() {
+    public AssignedToBean getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(Object assignedTo) {
+    public void setAssignedTo(AssignedToBean assignedTo) {
         this.assignedTo = assignedTo;
     }
 
@@ -308,11 +324,11 @@ public class EventDetailBean {
         this.reviewedBy = reviewedBy;
     }
 
-    public Object getSolutionBy() {
+    public SolutionByBean getSolutionBy() {
         return solutionBy;
     }
 
-    public void setSolutionBy(Object solutionBy) {
+    public void setSolutionBy(SolutionByBean solutionBy) {
         this.solutionBy = solutionBy;
     }
 
@@ -322,22 +338,6 @@ public class EventDetailBean {
 
     public void setAttachments(List<AttachmentsBean> attachments) {
         this.attachments = attachments;
-    }
-
-    public List<?> getSolutions() {
-        return solutions;
-    }
-
-    public void setSolutions(List<?> solutions) {
-        this.solutions = solutions;
-    }
-
-    public List<?> getPreMeasures() {
-        return preMeasures;
-    }
-
-    public void setPreMeasures(List<?> preMeasures) {
-        this.preMeasures = preMeasures;
     }
 
     public List<String> getAssetConfigSNs() {
@@ -372,11 +372,133 @@ public class EventDetailBean {
         this.changeTickets = changeTickets;
     }
 
+    public static class AssignedByBean {
+        /**
+         * id : 96
+         * tenantId : 42
+         * realName : mango1
+         * username : null
+         * token : null
+         * status : null
+         * roleName : null
+         * phone : null
+         * displayPicture : null
+         */
+
+        private int id;
+        private int tenantId;
+        private String realName;
+        private Object username;
+        private Object token;
+        private Object status;
+        private Object roleName;
+        private Object phone;
+        private Object displayPicture;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getTenantId() {
+            return tenantId;
+        }
+
+        public void setTenantId(int tenantId) {
+            this.tenantId = tenantId;
+        }
+
+        public String getRealName() {
+            return realName;
+        }
+
+        public void setRealName(String realName) {
+            this.realName = realName;
+        }
+
+        public Object getUsername() {
+            return username;
+        }
+
+        public void setUsername(Object username) {
+            this.username = username;
+        }
+
+        public Object getToken() {
+            return token;
+        }
+
+        public void setToken(Object token) {
+            this.token = token;
+        }
+
+        public Object getStatus() {
+            return status;
+        }
+
+        public void setStatus(Object status) {
+            this.status = status;
+        }
+
+        public Object getRoleName() {
+            return roleName;
+        }
+
+        public void setRoleName(Object roleName) {
+            this.roleName = roleName;
+        }
+
+        public Object getPhone() {
+            return phone;
+        }
+
+        public void setPhone(Object phone) {
+            this.phone = phone;
+        }
+
+        public Object getDisplayPicture() {
+            return displayPicture;
+        }
+
+        public void setDisplayPicture(Object displayPicture) {
+            this.displayPicture = displayPicture;
+        }
+    }
+
+    public static class AssignedToBean {
+        /**
+         * id : 67
+         * name : team A
+         */
+
+        private int id;
+        private String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
     public static class ClaimedByBean {
         /**
          * id : 96
          * tenantId : 42
-         * realName : Ali
+         * realName : mango1
          * username : null
          * token : null
          * status : null
@@ -472,7 +594,103 @@ public class EventDetailBean {
         /**
          * id : 96
          * tenantId : 42
-         * realName : Ali
+         * realName : mango1
+         * username : null
+         * token : null
+         * status : null
+         * roleName : null
+         * phone : null
+         * displayPicture : null
+         */
+
+        private int id;
+        private int tenantId;
+        private String realName;
+        private Object username;
+        private Object token;
+        private Object status;
+        private Object roleName;
+        private Object phone;
+        private Object displayPicture;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getTenantId() {
+            return tenantId;
+        }
+
+        public void setTenantId(int tenantId) {
+            this.tenantId = tenantId;
+        }
+
+        public String getRealName() {
+            return realName;
+        }
+
+        public void setRealName(String realName) {
+            this.realName = realName;
+        }
+
+        public Object getUsername() {
+            return username;
+        }
+
+        public void setUsername(Object username) {
+            this.username = username;
+        }
+
+        public Object getToken() {
+            return token;
+        }
+
+        public void setToken(Object token) {
+            this.token = token;
+        }
+
+        public Object getStatus() {
+            return status;
+        }
+
+        public void setStatus(Object status) {
+            this.status = status;
+        }
+
+        public Object getRoleName() {
+            return roleName;
+        }
+
+        public void setRoleName(Object roleName) {
+            this.roleName = roleName;
+        }
+
+        public Object getPhone() {
+            return phone;
+        }
+
+        public void setPhone(Object phone) {
+            this.phone = phone;
+        }
+
+        public Object getDisplayPicture() {
+            return displayPicture;
+        }
+
+        public void setDisplayPicture(Object displayPicture) {
+            this.displayPicture = displayPicture;
+        }
+    }
+
+    public static class SolutionByBean {
+        /**
+         * id : 96
+         * tenantId : 42
+         * realName : mango1
          * username : null
          * token : null
          * status : null
@@ -566,10 +784,10 @@ public class EventDetailBean {
 
     public static class AttachmentsBean {
         /**
-         * fileName : 1531991495990
-         * filePath : /api/1531991495990.jpg
-         * url : /cdn/dcom/out/api/1531991495990.jpg
-         * createdOn : 1531991495990
+         * fileName : 1532498166154
+         * filePath : /api/1532498166153.jpg
+         * url : /cdn/dcom/out/api/1532498166153.jpg
+         * createdOn : 1532498166154
          */
 
         private String fileName;

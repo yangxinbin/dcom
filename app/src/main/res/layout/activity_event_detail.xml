@@ -396,16 +396,15 @@
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardView_stage5"
+            android:id="@+id/cardView_assigne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
             card_view:cardBackgroundColor="@color/blue_item"
             card_view:cardCornerRadius="8dp"
             card_view:contentPadding="8dp"
@@ -470,15 +469,37 @@
                     android:layout_alignStart="@+id/t_task"
                     android:layout_below="@+id/t_task"
                     android:layout_marginTop="16dp"
-                    android:text="分配人："
+                    android:text="分配组："
                     android:textSize="@dimen/textSize" />
 
                 <TextView
-                    android:id="@+id/t_task_P"
+                    android:id="@+id/t_task_team"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/textView59"
                     android:layout_alignBottom="@+id/textView59"
+                    android:layout_alignLeft="@+id/t_task_time"
+                    android:layout_alignStart="@+id/t_task_time"
+                    android:text="null"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/t_task"
+                    android:layout_alignStart="@+id/t_task"
+                    android:layout_below="@+id/t_task_team"
+                    android:layout_marginTop="16dp"
+                    android:text="分配人："
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/t_task_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView60"
+                    android:layout_alignBottom="@+id/textView60"
                     android:layout_alignLeft="@+id/t_task_time"
                     android:layout_alignStart="@+id/t_task_time"
                     android:text="null"
@@ -490,7 +511,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView59"
                     android:layout_alignStart="@+id/textView59"
-                    android:layout_below="@+id/textView59"
+                    android:layout_below="@+id/textView60"
                     android:layout_marginTop="16dp"
                     android:text="分配时间："
                     android:textSize="@dimen/textSize" />
@@ -672,36 +693,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView577"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:text="任务描述："
-                    android:textSize="@dimen/textSize" />
-
-                <TextView
-                    android:id="@+id/t_task_description3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp"
-                    android:text="null"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView708"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/blue_line" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 

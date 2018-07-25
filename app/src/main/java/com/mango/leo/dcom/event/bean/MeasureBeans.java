@@ -18,39 +18,38 @@ public class MeasureBeans {
     }
 
     public static class MeasureItem {
-        private int step;
-        private String detail;
+        private String threat;
+        private String measure;
 
-        public MeasureItem(int step, String detail) {
-            this.step = step;
-            this.detail = detail;
+        public MeasureItem(String threat, String measure) {
+            this.threat = threat;
+            this.measure = measure;
         }
 
         public MeasureItem() {
-
         }
 
-        public int getStep() {
-            return step;
+        public String getThreat() {
+            return threat;
         }
 
-        public void setStep(int step) {
-            this.step = step;
+        public void setThreat(String threat) {
+            this.threat = threat;
         }
 
-        public String getDetail() {
-            return detail;
+        public String getMeasure() {
+            return measure;
         }
 
-        public void setDetail(String detail) {
-            this.detail = detail;
+        public void setMeasure(String measure) {
+            this.measure = measure;
         }
 
         @Override
         public String toString() {
             return "MeasureItem{" +
-                    "step='" + step + '\'' +
-                    ", detail='" + detail + '\'' +
+                    "threat='" + threat + '\'' +
+                    ", measure='" + measure + '\'' +
                     '}';
         }
     }

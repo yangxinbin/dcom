@@ -41,15 +41,14 @@ public class MeasureAdapter extends RecyclerView.Adapter<MeasureAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.textView_title.setText("措施" + (position+1)+ ":");
-        holder.textView_content.setText(list.get(position).getDetail());
+        holder.textView_title.setText(list.get(position).getThreat());
+        holder.textView_content.setText(list.get(position).getMeasure());
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-
     // 添加数据
     public void addData(int position) {
 //   在list中添加数据，并通知条目加入一条

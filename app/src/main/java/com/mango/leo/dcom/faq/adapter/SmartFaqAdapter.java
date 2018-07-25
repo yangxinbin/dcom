@@ -57,30 +57,34 @@ public class SmartFaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_item, parent, false);
-            ItemViewHolder vh = new ItemViewHolder(v);
-            return vh;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item, parent, false);
+        ItemViewHolder vh = new ItemViewHolder(v);
+        return vh;
     }
 
     @Override
     public int getItemViewType(int position) {
-            return TYPE_ITEM;
+        return TYPE_ITEM;
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final int pos = getRealPosition(holder);
-            if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
-                Log.v("yyyyy", "====pos======" + pos % 20);//
-                ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
-                ((ItemViewHolder) holder).textView_time.setText(DateUtil.getDateToString(mData.get(pos).getList().get(pos % 20).getCreatedOn(),"yyyy-MM-dd HH:mm:ss"));
-                if (mData.get(pos).getList().get(pos % 20).getStage() == 0){
-                    ((ItemViewHolder) holder).textView_stage.setText("未提交");
-                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 1){
-                    ((ItemViewHolder) holder).textView_stage.setText("已提交");
-                }
+        if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
+            Log.v("yyyyy", "====pos======" + pos % 20);//
+            ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
+            ((ItemViewHolder) holder).textView_time.setText(DateUtil.getDateToString(mData.get(pos).getList().get(pos % 20).getCreatedOn(), "yyyy-MM-dd HH:mm:ss"));
+            if (mData.get(pos).getList().get(pos % 20).getStage() == 0) {
+                ((ItemViewHolder) holder).textView_stage.setText("未提交");
+            } else if (mData.get(pos).getList().get(pos % 20).getStage() == 1) {
+                ((ItemViewHolder) holder).textView_stage.setText("已提交");
+            } else if (mData.get(pos).getList().get(pos % 20).getStage() == 2) {
+                ((ItemViewHolder) holder).textView_stage.setText("监控中");
+            } else if (mData.get(pos).getList().get(pos % 20).getStage() == 3) {
+                ((ItemViewHolder) holder).textView_stage.setText("已关闭");
             }
+        }
     }
 
     private int getRealPosition(RecyclerView.ViewHolder holder) {

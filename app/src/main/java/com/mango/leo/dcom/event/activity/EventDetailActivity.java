@@ -100,12 +100,10 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     TextView tTask;
     @Bind(R.id.t_task_time)
     TextView tTaskTime;
-    @Bind(R.id.t_task_P)
-    TextView tTaskP;
     @Bind(R.id.t_c_time)
     TextView tCTime;
-    @Bind(R.id.cardView_stage5)
-    CardView cardViewStage5;
+    @Bind(R.id.cardView_assigne)
+    CardView cardView_assigne;
     @Bind(R.id.editText_description)
     EditText editTextDescription;
     @Bind(R.id.t_task_zu)
@@ -118,8 +116,6 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     LinearLayout ren;
     @Bind(R.id.cardView_stage1)
     CardView cardViewStage1;
-    @Bind(R.id.t_task_description3)
-    TextView tTaskDescription3;
     @Bind(R.id.tc)
     TextView tc;
     @Bind(R.id.editText_event_cause)
@@ -156,6 +152,10 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
     Button bCommit;
     @Bind(R.id.title)
     TextView title;
+    @Bind(R.id.t_task_team)
+    TextView tTaskTeam;
+    @Bind(R.id.t_task_p)
+    TextView tTaskP;
     private SharedPreferences sharedPreferences;
     private TagAdapter tagAdapter;
     private int eventId;
@@ -372,8 +372,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         mapParams.put("eventId", eventId + "");//待定
         mapParams.put("token", sharedPreferences.getString("token", ""));
         mapParams.put("cause", editTextEventCause.getText().toString());
-        mapParams.put("solutions", buildArrayJson_Method(list1));
-        mapParams.put("preMeasures", buildArrayJson_Measure(list2));
+        mapParams.put("solutions", buildArrayJson_Method(methodBean));
+        mapParams.put("preMeasures", buildArrayJson_Measure(measureBean));
         mapParams.put("review", editTextMethodCheck.getText().toString());
         mapParams.put("status", tTaskStage3.getText().toString());
 
@@ -411,13 +411,13 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         });
     }
 
-    public String buildArrayJson_Method(List<String> list1) {
+    public String buildArrayJson_Method(MethodBeans methodBeans) {
         JSONArray json = new JSONArray();
         try {
-            for (int i = 0; i < list1.size(); i++) {
+            for (int i = 0; i < methodBeans.getMethodItems().size(); i++) {
                 JSONObject jsonObj = new JSONObject();//一定要new对象
-                //jsonObj.put("step", list1.get(i)+"");
-                //jsonObj.put("detail", methodBeans.getMethodItems().get(i).getDetail().toString());
+                jsonObj.put("step",i);
+                jsonObj.put("solution", methodBeans.getMethodItems().get(i).getDetail()+"");
                 json.put(i, jsonObj);
                 continue;
             }
@@ -425,17 +425,17 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             e.printStackTrace();
         }
         //把每个数据当作一对象添加到数组里
-        Log.v("uuuuuuuu", "-m---" + json.toString());
+        Log.v("uuuuuuuu", "-methodBean---" + json.toString());
         return json.toString();
     }
 
-    public String buildArrayJson_Measure(List<String> list1) {
+    public String buildArrayJson_Measure(MeasureBeans measureBeans) {
         JSONArray json = new JSONArray();
         try {
-            for (int i = 0; i < list1.size(); i++) {
+            for (int i = 0; i < measureBeans.getMeasureItems().size(); i++) {
                 JSONObject jsonObj = new JSONObject();//一定要new对象
-                //jsonObj.put("step", list1.get(i)+"");
-                //jsonObj.put("detail", methodBeans.getMethodItems().get(i).getDetail().toString());
+                jsonObj.put("threat", measureBeans.getMeasureItems().get(i).getThreat().toString());
+                jsonObj.put("measure", measureBeans.getMeasureItems().get(i).getMeasure().toString());
                 json.put(i, jsonObj);
                 continue;
             }
@@ -443,7 +443,7 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             e.printStackTrace();
         }
         //把每个数据当作一对象添加到数组里
-        Log.v("uuuuuuuu", "-m---" + json.toString());
+        Log.v("uuuuuuuu", "-measureBean---" + json.toString());
         return json.toString();
     }
 
@@ -728,17 +728,21 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
             bAssign.setVisibility(View.VISIBLE);
             title.setText("指派事件");
         } else if (eventDetailBean.getStage() == 2) {
+            cardView_assigne.setVisibility(View.VISIBLE);
             bAccept.setVisibility(View.VISIBLE);
             title.setText("接受事件");
         } else if (eventDetailBean.getStage() == 3) {
+            cardView_assigne.setVisibility(View.VISIBLE);
             cardViewStage3.setVisibility(View.VISIBLE);
             bDealwith.setVisibility(View.VISIBLE);
             title.setText("处理事件");
         } else if (eventDetailBean.getStage() == 4) {
 //待处理查看
+            cardView_assigne.setVisibility(View.VISIBLE);
             title.setText("预处理查看");
         } else if (eventDetailBean.getStage() == 5) {
-            cardViewStage5.setVisibility(View.VISIBLE);
+            cardView_assigne.setVisibility(View.VISIBLE);
+            cardView_assigne.setVisibility(View.VISIBLE);
             title.setText("查看事件");
         }
         eventId = eventDetailBean.getId();
@@ -764,6 +768,20 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         } else {
             imageViewP.setVisibility(View.GONE);
         }
+        tTask.setText(eventDetailBean.getAssignedDesc());
+        if (eventDetailBean.getAssignedTo() != null)
+        tTaskTeam.setText(eventDetailBean.getAssignedTo().getName());
+        if (eventDetailBean.getAssignedBy() != null)
+        tTaskP.setText(eventDetailBean.getAssignedBy().getRealName());
+        tTaskTime.setText(DateUtil.getDateToString(eventDetailBean.getAssignedOn(), "yyyy-MM-dd HH:mm:ss") + "");
+
+        editTextEventCause.setText(eventDetailBean.getEventCause()!=null?eventDetailBean.getEventCause():"");
+        editTextMethodCheck.setText(eventDetailBean.getSolutionReviews()!=null?eventDetailBean.getSolutionReviews():"");
+        tTaskStage3.setText(eventDetailBean.getStatus()!=null?eventDetailBean.getStatus():"请选择状态");
+        if (eventDetailBean.getSolutions() != null)
+            EventBus.getDefault().postSticky(eventDetailBean.getSolutions());
+        if (eventDetailBean.getPreMeasures() != null)
+            EventBus.getDefault().postSticky(eventDetailBean.getPreMeasures());
     }
 
     @OnClick(R.id.imageView_back)
@@ -791,6 +809,8 @@ public class EventDetailActivity extends BaseActivity implements AdapterView.OnI
         super.onDestroy();
         ButterKnife.unbind(this);
         EventBus.getDefault().unregister(this);
+        EventBus.getDefault().removeStickyEvent(MethodBeans.class);
+        EventBus.getDefault().removeStickyEvent(MeasureBeans.class);
     }
 
 }
