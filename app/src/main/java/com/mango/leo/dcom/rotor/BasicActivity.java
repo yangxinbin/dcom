@@ -240,8 +240,8 @@ public class BasicActivity extends BaseActivity implements View.OnClickListener 
         textView6.setText(rotorBean.getStorageSize());
         textView7.setText(rotorBean.getUseFor());
         textView8.setText((CharSequence) rotorBean.getOs());
-        Log.v("---",""+"http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl());
         if (rotorBean.getPhoto() != null){
+            Log.v("---",""+"http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl());
             //Glide.with(this).load("http://192.168.1.120:8080" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
             Glide.with(this).load("http://dcom.hopesen.com.cn" + rotorBean.getPhoto().getUrl()).into(imageView_pic);
         }
