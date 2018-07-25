@@ -1,4 +1,4 @@
-package com.mango.leo.dcom.event.adapter;
+package com.mango.leo.dcom.faq.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mango.leo.dcom.R;
-import com.mango.leo.dcom.event.bean.ListEventBean;
-import com.mango.leo.dcom.util.AppUtils;
+import com.mango.leo.dcom.faq.bean.ListFaqBean;
 import com.mango.leo.dcom.util.DateUtil;
 
 import java.util.ArrayList;
@@ -22,27 +21,29 @@ import java.util.List;
  * Created by admin on 2018/5/11.
  */
 
-public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SmartFaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private OnEventClickListener mOnEventClickListener;//自注册的接口给调用者用于点击逻辑
-    private List<ListEventBean> mData = new ArrayList<>();
+    private OnFaqClickListener mOnFaqClickListener;//自注册的接口给调用者用于点击逻辑
+    private List<ListFaqBean> mData = new ArrayList<>();
     public static final int TYPE_ITEM = 0;
     private Handler mHandler = new Handler(Looper.getMainLooper()); //获取主线程的Handler
 
-    public void setmDate(List<ListEventBean> data) {
+    public void setmDate(List<ListFaqBean> data) {
         this.mData = data;
         this.notifyDataSetChanged();
     }
 
     public void reMove() {
-        List<ListEventBean> m = new ArrayList<ListEventBean>();
+        List<ListFaqBean> m = new ArrayList<ListFaqBean>();
         this.mData = m;
         this.notifyDataSetChanged();
     }
+
+
     /**
      * 添加列表项     * @param item
      */
-    public void addItem(ListEventBean bean) {
+    public void addItem(ListFaqBean bean) {
         if (mData != null) {
             mData.add(bean);
         }
@@ -50,7 +51,7 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public SmartEventAdapter(Context context) {
+    public SmartFaqAdapter(Context context) {
         this.context = context;
     }
 
@@ -60,7 +61,6 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .inflate(R.layout.list_item, parent, false);
             ItemViewHolder vh = new ItemViewHolder(v);
             return vh;
-
     }
 
     @Override
@@ -70,8 +70,7 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        final int pos = position;
-        if (holder instanceof ItemViewHolder) {
+        final int pos = getRealPosition(holder);
             if (((ItemViewHolder) holder) != null && mData.get(pos).getList() != null) {
                 Log.v("yyyyy", "====pos======" + pos % 20);//
                 ((ItemViewHolder) holder).textView_title.setText(mData.get(pos).getList().get(pos % 20).getTitle());
@@ -80,26 +79,22 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     ((ItemViewHolder) holder).textView_stage.setText("未提交");
                 }else if (mData.get(pos).getList().get(pos % 20).getStage() == 1){
                     ((ItemViewHolder) holder).textView_stage.setText("已提交");
-                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 2){
-                    ((ItemViewHolder) holder).textView_stage.setText("已指派");
-                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 3){
-                    ((ItemViewHolder) holder).textView_stage.setText("处理中");
-                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 4){
-                    ((ItemViewHolder) holder).textView_stage.setText("待处理");
-                }else if (mData.get(pos).getList().get(pos % 20).getStage() == 5){
-                    ((ItemViewHolder) holder).textView_stage.setText("关闭");
                 }
             }
-
-        }
     }
+
+    private int getRealPosition(RecyclerView.ViewHolder holder) {
+        int position = holder.getLayoutPosition();
+        return position;
+    }
+
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
-    public void setOnEventClickListener(OnEventClickListener onItemnewsClickListener) {
-        this.mOnEventClickListener = onItemnewsClickListener;
+    public void setOnFaqClickListener(OnFaqClickListener onItemnewsClickListener) {
+        this.mOnFaqClickListener = onItemnewsClickListener;
     }
 
     public class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -112,11 +107,11 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public ListEventBean getItem(int position) {
+    public ListFaqBean getItem(int position) {
         return mData == null ? null : mData.get(position);
     }
 
-    public interface OnEventClickListener {
+    public interface OnFaqClickListener {
         public void onItemClick(View view, int position);
     }
 
@@ -134,8 +129,8 @@ public class SmartEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @Override
         public void onClick(View view) {
-            if (mOnEventClickListener != null) {
-                mOnEventClickListener.onItemClick(view, this.getLayoutPosition());
+            if (mOnFaqClickListener != null) {
+                mOnFaqClickListener.onItemClick(view, this.getLayoutPosition());
             }
         }
     }
