@@ -111,7 +111,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="正常"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:textColor="@color/green"
             android:textSize="@dimen/textSize" />
 
@@ -122,7 +122,7 @@
             android:layout_above="@+id/textView12"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:text="正常"
             android:textColor="@color/green"
             android:textSize="@dimen/textSize" />
@@ -135,7 +135,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="正常"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:textColor="@color/green"
             android:textSize="@dimen/textSize" />
 
