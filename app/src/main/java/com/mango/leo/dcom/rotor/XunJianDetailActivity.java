@@ -83,8 +83,8 @@ public class XunJianDetailActivity extends BaseActivity {
         if (bean.getInspectionRemarks() != null){
             editText.setText(bean.getInspectionRemarks().toString());
         }
-        Log.v("dddddddddd",""+"http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl());
         //Glide.with(this).load("http://192.168.1.120:8080" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
+        if (bean.getAttachments() != null)
         Glide.with(this).load("http://dcom.hopesen.com.cn" + bean.getAttachments().get(0).getUrl()).into(imageViewP);
         EventBus.getDefault().removeStickyEvent(RotorBean.LogBean.class);
     }

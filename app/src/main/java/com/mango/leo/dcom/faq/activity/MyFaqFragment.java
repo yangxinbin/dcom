@@ -85,7 +85,7 @@ class MyFaqFragment extends Fragment implements FaqView {
                         faqPresenter.visitProjects(getActivity(), TYPE, faqBean, page);
                         refreshLayout.finishRefresh();
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -100,11 +100,11 @@ class MyFaqFragment extends Fragment implements FaqView {
                         refreshLayout.finishLoadMore();
 
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setRefreshHeader(new ClassicsHeader(getActivity()));
-        refresh.setHeaderHeight(60);
+        refresh.setHeaderHeight(50);
 
         //触发自动刷新
         if (isFirstEnter) {

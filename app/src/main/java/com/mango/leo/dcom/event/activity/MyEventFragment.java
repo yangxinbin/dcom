@@ -84,7 +84,7 @@ class MyEventFragment extends Fragment implements EventView {
                         eventPresenter.visitProjects(getActivity(), TYPE, eventBean, page);//请求刷新
                         refreshLayout.finishRefresh();
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -99,11 +99,11 @@ class MyEventFragment extends Fragment implements EventView {
                         refreshLayout.finishLoadMore();
 
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setRefreshHeader(new ClassicsHeader(getActivity()));
-        refresh.setHeaderHeight(60);
+        refresh.setHeaderHeight(50);
 
         //触发自动刷新
         if (isFirstEnter) {

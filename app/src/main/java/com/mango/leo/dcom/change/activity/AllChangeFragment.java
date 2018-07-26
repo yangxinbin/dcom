@@ -83,7 +83,7 @@ class AllChangeFragment extends Fragment implements ChangeView {
                         changePresenter.visitProjects(getActivity(), TYPE, changeBean, page);
                         refreshLayout.finishRefresh();
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -98,11 +98,11 @@ class AllChangeFragment extends Fragment implements ChangeView {
                         refreshLayout.finishLoadMore();
 
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setRefreshHeader(new ClassicsHeader(getActivity()));
-        refresh.setHeaderHeight(60);
+        refresh.setHeaderHeight(50);
 
         //触发自动刷新
         if (isFirstEnter) {

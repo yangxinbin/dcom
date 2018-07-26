@@ -91,7 +91,7 @@ class AllEventFragment extends android.support.v4.app.Fragment implements EventV
                         eventPresenter.visitProjects(getActivity(), TYPE, eventBean, page);//请求刷新
                         refreshLayout.finishRefresh();
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -106,11 +106,11 @@ class AllEventFragment extends android.support.v4.app.Fragment implements EventV
                         refreshLayout.finishLoadMore();
 
                     }
-                }, 2000);
+                }, 500);
             }
         });
         refresh.setRefreshHeader(new ClassicsHeader(getActivity()));
-        refresh.setHeaderHeight(60);
+        refresh.setHeaderHeight(50);
 
         //触发自动刷新
         if (isFirstEnter) {
