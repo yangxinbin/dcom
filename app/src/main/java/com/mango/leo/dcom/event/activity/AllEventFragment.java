@@ -45,7 +45,7 @@ import butterknife.ButterKnife;
  */
 
 @SuppressLint("ValidFragment")
-class AllEventFragment extends android.support.v4.app.Fragment implements EventView {
+public class AllEventFragment extends android.support.v4.app.Fragment implements EventView {
     @Bind(R.id.recycle)
     RecyclerView recycle;
     @Bind(R.id.refresh)

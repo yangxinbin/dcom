@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
  */
 
 @SuppressLint("ValidFragment")
-class MyChangeFragment extends Fragment implements ChangeView {
+public class MyChangeFragment extends Fragment implements ChangeView {
     @Bind(R.id.recycle)
     RecyclerView recycle;
     @Bind(R.id.refresh)

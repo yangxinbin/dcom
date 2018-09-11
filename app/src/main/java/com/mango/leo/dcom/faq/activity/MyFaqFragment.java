@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
  */
 
 @SuppressLint("ValidFragment")
-class MyFaqFragment extends Fragment implements FaqView {
+public class MyFaqFragment extends Fragment implements FaqView {
     @Bind(R.id.recycle)
     RecyclerView recycle;
     @Bind(R.id.refresh)

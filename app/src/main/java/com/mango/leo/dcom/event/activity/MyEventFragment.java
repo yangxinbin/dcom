@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
  */
 
 @SuppressLint("ValidFragment")
-class MyEventFragment extends Fragment implements EventView {
+public class MyEventFragment extends Fragment implements EventView {
     @Bind(R.id.recycle)
     RecyclerView recycle;
     @Bind(R.id.refresh)
